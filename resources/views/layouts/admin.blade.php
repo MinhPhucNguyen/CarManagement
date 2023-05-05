@@ -10,7 +10,12 @@
 </head>
 
 <body>
-    @yield('content')
+    <div class="container">
+        @include('layouts.includes.navbar')
+        <div>
+            @yield('content')
+        </div>
+    </div>
 
     <script src="{{ asset('assets/js/bootstrap.bundle.min.css') }}"></script>
     <script src="{{ asset('assets/js/jquery-3.6.4.min.js') }}"></script>
