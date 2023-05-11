@@ -21,8 +21,7 @@
 
                                 <div class="col-md-12 ">
                                     <input id="username" type="text"
-                                        class="form-control  @error('username') is-invalid @enderror" name="email"
-                                        required placeholder="Enter Username">
+                                        class="form-control  @error('username') is-invalid @enderror" name="username"  placeholder="Enter Username">
 
                                     @error('username')
                                         <span class="invalid-feedback" role="alert">
@@ -38,8 +37,7 @@
 
                                 <div class="col-md-12">
                                     <input id="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
-                                        required placeholder="Enter Password">
+                                        class="form-control @error('password') is-invalid @enderror" name="password"  placeholder="Enter Password">
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -58,7 +56,7 @@
                                 </div>
                             </div>
                             <div class="form-group row mb-0">
-                                <p class="text-secondary">Are you not a member yet?<a href=""
+                                <p class="text-secondary">Are you not a member yet?<a href="{{ route('register') }}"
                                         class="fw-bold text-decoration-none text-dark"> Sign up now!</a></p>
                                 <hr>
                             </div>

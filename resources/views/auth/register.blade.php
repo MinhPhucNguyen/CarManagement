@@ -20,9 +20,12 @@
                                     class="col-md-3 col-form-label text-md-right fw-bold">{{ __('Username') }}</label>
 
                                 <div class="col-md-12 ">
-                                    <input id="username" type="username"
-                                        class="form-control" name="username"
-                                        required placeholder="Enter Username">
+                                    <input id="username" type="username" class="form-control  @error('username') is-invalid @enderror" name="username"  placeholder="Enter Username">
+                                    @error('username')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -31,9 +34,12 @@
                                     class="col-md-3 col-form-label text-md-right fw-bold">{{ __('Email') }}</label>
 
                                 <div class="col-md-12 ">
-                                    <input id="email" type="email"
-                                        class="form-control" name="email"
-                                        required placeholder="e.g abc@example.com">
+                                    <input id="email" type="email" class="form-control  @error('email') is-invalid @enderror" name="email" placeholder="e.g abc@example.com">
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -42,20 +48,26 @@
                                     class="col-md-3 col-form-label text-md-right fw-bold">{{ __('Password') }}</label>
 
                                 <div class="col-md-12">
-                                    <input id="password" type="password"
-                                        class="form-control" name="password"
-                                        required placeholder="Enter Password">
+                                    <input id="password" type="password" class="form-control  @error('password') is-invalid @enderror" name="password" placeholder="Enter Password">
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
 
                             <div class="form-group row mb-4">
-                                <label for="confirm-password"
+                                <label for="confirm_password"
                                     class="col-md-6 col-form-label text-md-right fw-bold">{{ __('Confirm Password') }}</label>
 
                                 <div class="col-md-12">
-                                    <input id="confirm-password" type="password"
-                                        class="form-control" name="confirm-password"
-                                        required placeholder="Confirm Password">
+                                    <input id="confirm_password" type="password" class="form-control  @error('confirm_password') is-invalid @enderror" name="confirm_password" placeholder="Confirm Password">
+                                    @error('confirm_password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
 
