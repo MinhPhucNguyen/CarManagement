@@ -10,8 +10,6 @@
 
     <!-- Content Row -->
     <div class="row">
-
-
     </div>
 
 </div>
