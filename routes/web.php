@@ -28,3 +28,7 @@ Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::prefix('admin')->group(function() {
     Route::get('dashboard', [DashboardController::class, 'index']);
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
