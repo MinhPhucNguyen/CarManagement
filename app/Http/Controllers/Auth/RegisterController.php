@@ -27,10 +27,11 @@ class RegisterController extends Controller
         $user = User::create([
             'username' => $request->input('username'),
             'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
             'password' => Hash::make($request->input('password')),
             'confirm_password' => $request->input('confirm_password') == $request->input('password') ? 'true' : 'false',
         ]);
 
-        return redirect('/login');
+        return redirect('/login')->with('success', 'Register successfully! Please login');
     }
 }

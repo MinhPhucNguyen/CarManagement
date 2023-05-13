@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class UserFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,6 +21,8 @@ class RegisterRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route('user');
+
         return [
             'username' => [
                 'required',
@@ -30,29 +32,37 @@ class RegisterRequest extends FormRequest
                 'regex:/^[^0-9][a-zA-Z0-9\s]+$/'
             ],
             'email' => [
+                'sometimes',
                 'required',
                 'string',
                 'email',
                 'max:50',
-                'unique:users,email',
+                'unique:users,email,' . $id
             ],
             'phone' => [
+                'sometimes',
                 'required',
                 'min:10',
                 'max:10',
-                'unique:users,phone',
+                'unique:users,phone,' . $id
             ],
             'password' => [
+                'sometimes',
                 'required',
                 'string',
                 'min:8',
                 'regex:/^(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/',
-                'unique:users,password',
+                'unique:users,password,'
             ],
             'confirm_password' => [
+                'sometimes',
                 'required',
                 'string',
-                'same:password'
+                'same:password,'
+            ],
+            'role_as' => [
+                'required',
+                'in:admin,user'
             ]
         ];
     }
@@ -70,8 +80,9 @@ class RegisterRequest extends FormRequest
             'email.max' => '*Email must be at most 50 characters',
             'email.unique' => '*Email already exists',
             'phone.required' => '*Please enter your phone number',
-            'phone.min' => '*Phone number must be at least 10 characters',
-            'phone.max' => '*Phone number must be at most 10 characters',
+            'phone.integer' => '*Phone number not valid',
+            'phone.min' => '*Phone number must be 10 numbers',
+            'phone.max' => '*Phone number must be 10 numbers',
             'phone.unique' => '*Phone number already exists',
             'password.required' => '*Please enter your password',
             'password.min' => '*Password must be at least 8 characters',
@@ -79,6 +90,7 @@ class RegisterRequest extends FormRequest
             'password.regex' => '*Password must contain at least one uppercase letter, one lowercase letter, one number and one special character',
             'confirm_password.required' => '*Please confirm your password',
             'confirm_password.same:password' => '*Password confirmation does not match',
+            'role_as.required' => "*Please select a role",
         ];
     }
 }

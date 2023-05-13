@@ -26,8 +26,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-dark shadow-sm">
             <div class="container text-white">
-                <a class="navbar-brand text-white fw-bold text-uppercase" href="{{ url('/') }}">
-                    MyOTO
+                <a class="navbar-brand text-white fw-bold text-uppercase" href="{{ url('/home') }}">
+                    MYOTO
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -44,7 +44,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto w-25">
+                    <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -70,15 +70,16 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         {{ __('Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+
                                 </div>
+                                @include('auth.logoutModal')
                             </li>
                         @endguest
                     </ul>
