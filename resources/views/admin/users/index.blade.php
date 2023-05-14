@@ -11,7 +11,9 @@
         @endif
         <div class="card">
             <div class="card-header bg-dark">
-                <h3 class="fw-bold text-white d-inline-block">Users List</h3>
+                <div class="d-inline-block fw-bold text-white fs-4" >
+                    Users List
+                </div>
                 <a href="{{ url('admin/users/create') }}" class="btn btn-success fw-bold float-right ">
                     <i class="fa-solid fa-plus"></i>
                     Add New User
@@ -36,8 +38,10 @@
                                 <td>{{ $user->username }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone }}</td>
+
                                 <td class="{{ $user->role_as == '1' ? 'text-danger fw-bold' : '' }}">
                                     {{ $user->role_as == '1' ? 'Admin' : 'User' }}</td>
+
                                 <td class="d-flex">
                                     <a href="{{ url('admin/users/' . $user->id . '/edit') }}" class="btn btn-primary mr-2">
                                         <i class="fa-solid fa-pen-to-square"></i>
@@ -65,6 +69,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 @endsection

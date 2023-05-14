@@ -4,7 +4,9 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header bg-dark">
-                <h3 class="fw-bold text-white d-inline-block">Edit user</h3>
+                <div class="d-inline-block fw-bold text-white fs-4">
+                    Edit User
+                </div>
                 <a href="{{ url('admin/users') }}" class="btn btn-danger fw-bold float-right ">
                     <i class="fa-solid fa-arrow-left"></i>
                     BACK
@@ -43,7 +45,8 @@
                         <div class="col-md-6 mb-3">
                             <label for="password">Password</label>
                             <input type="password" name="password"
-                                class="form-control @error('password') is-invalid  @enderror" placeholder="*Leave blank if you dont want to change password">
+                                class="form-control @error('password') is-invalid  @enderror"
+                                placeholder="*Leave blank if you dont want to change password">
                             @error('password')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -51,7 +54,8 @@
                         <div class="col-md-6 mb-3">
                             <label for="confirm_password">Confirm Password</label>
                             <input type="password" name="confirm_password"
-                                class="form-control @error('confirm_password') is-invalid  @enderror" placeholder="*Leave blank if you dont want to change password">
+                                class="form-control @error('confirm_password') is-invalid  @enderror"
+                                placeholder="*Leave blank if you dont want to change password">
                             @error('confirm_password')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
