@@ -3,14 +3,22 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+<<<<<<< HEAD
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+=======
+use App\Http\Requests\Auth\RegisterRequest;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+>>>>>>> 00f7521d751d71004bc09b188ebd2429f6cd563a
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
+<<<<<<< HEAD
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -36,10 +44,13 @@ class RegisterController extends Controller
      *
      * @return void
      */
+=======
+>>>>>>> 00f7521d751d71004bc09b188ebd2429f6cd563a
     public function __construct()
     {
         $this->middleware('guest');
     }
+<<<<<<< HEAD
 
     /**
      * Get a validator for an incoming registration request.
@@ -69,5 +80,24 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+=======
+    public function showRegisterForm()
+    {
+        return view('auth.register');
+    }
+
+    public function register(RegisterRequest $request)
+    {
+        
+        $user = User::create([
+            'username' => $request->input('username'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+            'password' => Hash::make($request->input('password')),
+            'confirm_password' => $request->input('confirm_password') == $request->input('password') ? 'true' : 'false',
+        ]);
+
+        return redirect('/login')->with('success', 'Register successfully! Please login');
+>>>>>>> 00f7521d751d71004bc09b188ebd2429f6cd563a
     }
 }

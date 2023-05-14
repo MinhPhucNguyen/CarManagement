@@ -1,16 +1,16 @@
 <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-text mx-3">Cars Management</div>
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('admin/dashboard') }}">
+        <div class="sidebar-brand-text">Cars Management</div>
     </a>
 
     <!-- Divider -->
-    <hr class="sidebar-divider my-0">
+    <hr class="sidebar-divider my-0 ">
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ url('admin/dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -18,9 +18,28 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
+    <div class="sidebar-heading">
+        User Management
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+            aria-expanded="true" aria-controls="collapseOne">
+            <i class="fas fa-fw fa-user"></i>
+            <span>User</span>
+        </a>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Action</h6>
+                <a class="collapse-item" href="{{ url('admin/users') }}">View Users List</a>
+                <a class="collapse-item" href="{{ url('admin/users/create') }}">Add New User</a>
+            </div>
+        </div>
+    </li>
+
     <!-- Heading -->
     <div class="sidebar-heading">
-        Car
+        Car Management
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
@@ -33,11 +52,16 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Action</h6>
-                <a class="collapse-item" href="buttons.html">Buttons</a>
-                <a class="collapse-item" href="cards.html">Cards</a>
+                <a class="collapse-item" href="{{ url('admin/dashboard') }}">View Cars List</a>
+                <a class="collapse-item" href="">Edit Car</a>
+                <a class="collapse-item" href="">Add New Car</a>
             </div>
         </div>
     </li>
+
+    <div class="sidebar-heading">
+        Staff Management
+    </div>
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
@@ -46,8 +70,7 @@
             <i class="fas fa-fw fa-user"></i>
             <span>Staff</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Action</h6>
                 <a class="collapse-item" href="utilities-color.html">Colors</a>
