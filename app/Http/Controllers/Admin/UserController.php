@@ -5,13 +5,25 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserFormRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $usersList = User::orderBy('id', 'desc')->simplePaginate(15);
+
+        $role = $request->input('role_as');
+
+        if ($role == '1') {
+            $usersList = User::where('role_as', $role)->orderBy('id', 'desc')->simplePaginate(15);
+        } else if ($role == '0') {
+            $usersList = User::where('role_as', $role)->orderBy('id', 'desc')->simplePaginate(15);
+        }
+        else{
+            $usersList = User::orderBy('id', 'desc')->simplePaginate(15);
+        }
         return view('admin.users.index', compact('usersList'));
     }
 

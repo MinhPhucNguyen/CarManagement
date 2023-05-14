@@ -20,7 +20,7 @@
                         <div class="col-md-12 ">
                             <input id="username" type="username"
                                 class="form-control  @error('username') is-invalid @enderror" name="username"
-                                placeholder="Enter Username">
+                                placeholder="Enter Username"  value="{{ !$errors->has('username') ? old('username') : '' }}">
                             @error('username')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -35,7 +35,7 @@
 
                         <div class="col-md-12 ">
                             <input id="email" type="email" class="form-control  @error('email') is-invalid @enderror"
-                                name="email" placeholder="e.g abc@example.com">
+                                name="email" placeholder="e.g abc@example.com"  value="{{ !$errors->has('email') ? old('email') : '' }}">
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -50,7 +50,7 @@
 
                         <div class="col-md-12 ">
                             <input id="phone" type="text" class="form-control  @error('phone') is-invalid @enderror"
-                                name="phone" placeholder="Enter your phone number">
+                                name="phone" placeholder="Enter your phone number" value="{{ !$errors->has('phone') ? old('phone') : '' }}">
                             @error('phone')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -66,7 +66,7 @@
                         <div class="col-md-12">
                             <input id="password" type="password"
                                 class="form-control  @error('password') is-invalid @enderror" name="password"
-                                placeholder="Enter Password">
+                                placeholder="Enter Password"  value="{{ !$errors->has('password') ? old('password') : '' }}">
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -82,7 +82,7 @@
                         <div class="col-md-12">
                             <input id="confirm_password" type="password"
                                 class="form-control  @error('confirm_password') is-invalid @enderror"
-                                name="confirm_password" placeholder="Confirm Password">
+                                name="confirm_password" placeholder="Confirm Password"  value="{{ !$errors->has('confirm_password') ? old('confirm_password') : '' }}">
                             @error('confirm_password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

@@ -11,7 +11,7 @@
         @endif
         <div class="card">
             <div class="card-header bg-dark">
-                <div class="d-inline-block fw-bold text-white fs-4" >
+                <div class="d-inline-block fw-bold text-white fs-4">
                     Users List
                 </div>
                 <a href="{{ url('admin/users/create') }}" class="btn btn-success fw-bold float-right ">
@@ -20,6 +20,22 @@
                 </a>
             </div>
             <div class="card-body">
+                <form action="{{ url('admin/users') }}" method="GET" class="w-25 m-0">
+                    <div class="mb-3 d-flex w-100 align-items-center">
+                        <div class="d-flex align-items-center w-25">
+                            <label for="role_as" class="form-label mb-0 fw-bolder">Filter by:</label>
+                        </div>
+                        <select name="role_as" id="role_as" class="form-select w-75">
+                            <option value="">All</option>
+                            <option value='1' {{ request('role_as') == '1' ? 'selected' : '' }}>Admin</option>
+                            <option value='0' {{ request('role_as') == '0' ? 'selected' : '' }}>User</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary float-end mb-0 w-25 ml-2">Filter</button>
+
+                    </div>
+                </form>
+
+
                 <table class="table table-bordered table-striped text-dark fw-bold">
                     <thead>
                         <tr class="text-dark">
