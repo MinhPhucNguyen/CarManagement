@@ -23,7 +23,7 @@ class UserFormRequest extends FormRequest
     {
         $id = $this->route('user');
 
-        return [
+        $rules = [
             'username' => [
                 'required',
                 'string',
@@ -46,25 +46,22 @@ class UserFormRequest extends FormRequest
                 'max:10',
                 'unique:users,phone,' . $id
             ],
-            'password' => [
-                'sometimes',
-                'required',
-                'string',
-                'min:8',
-                'regex:/^(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/',
-                'unique:users,password,'
-            ],
-            'confirm_password' => [
-                'sometimes',
-                'required',
-                'string',
-                'same:password,'
-            ],
             'role_as' => [
                 'required',
                 'in:admin,user'
             ]
         ];
+
+        if($this->getMethod() == 'PUT'){
+            $rules['password'] = 'nullable|string|min:8|regex:/^(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/|unique:users'; 
+            $rules['confirm_password'] = 'nullable|string|same:password';
+        }
+        else{
+            $rules['password'] = 'required|string|min:8|regex:/^(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/|unique:users'; 
+            $rules['confirm_password'] = 'required|string|same:password';
+        }
+
+        return $rules;
     }
 
     public function messages()

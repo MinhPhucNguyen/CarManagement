@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Login
@@ -43,5 +44,6 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::post('users', 'store')->name('users.store');
         Route::get('users/{user}/edit', 'edit');
         Route::put('users/{user}', 'update');
+        Route::delete('users/{user}/delete', 'destroy');
     });
 });

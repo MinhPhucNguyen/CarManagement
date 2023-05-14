@@ -27,7 +27,7 @@ class LoginController extends Controller
             }
             return redirect('/home')->with('success', 'Welcome to Home Page');
         } else {
-            return redirect('/login')->withErrors(['login_error' => 'Username or password is incorrect!'])->withInput();
+            return redirect('/login')->withErrors(['login_error' => 'Username or password is incorrect!']);
         }
     }
 }

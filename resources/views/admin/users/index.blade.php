@@ -38,26 +38,33 @@
                                 <td>{{ $user->phone }}</td>
                                 <td class="{{ $user->role_as == '1' ? 'text-danger fw-bold' : '' }}">
                                     {{ $user->role_as == '1' ? 'Admin' : 'User' }}</td>
-                                <td>
-                                    <a href="{{ url('admin/users/' . $user->id . '/edit') }}" class="btn btn-primary">
+                                <td class="d-flex">
+                                    <a href="{{ url('admin/users/' . $user->id . '/edit') }}" class="btn btn-primary mr-2">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                         <span>Edit</span>
                                     </a>
-                                    <a href="" class="btn btn-danger">
-                                        <i class="fa-solid fa-trash"></i>
-                                        <span>Delete</span>
-                                    </a>
-
+                                    <form action="{{ url('admin/users/' . $user->id . '/delete') }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fa-solid fa-trash"></i>
+                                            <span>Delete</span>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @empty
-                        <tr>
-                            <td colspan="6">No User Available</td>
-                        </tr>
+                            <tr>
+                                <td colspan="6">No User Available</td>
+                            </tr>
                         @endforelse
                     </tbody>
                 </table>
+                <div>
+                    {!! $usersList->links() !!}
+                </div>
             </div>
         </div>
+
     </div>
 @endsection
