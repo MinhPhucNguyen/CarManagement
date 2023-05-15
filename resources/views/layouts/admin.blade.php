@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Car Management</title>
-
     <!-- Custom fonts for this template-->
     {{-- <link href="{{ asset('admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css"> --}}
     <link
@@ -44,6 +43,7 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
+    <script src="{{ asset('assets/js/adminHandle.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery-3.6.4.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>

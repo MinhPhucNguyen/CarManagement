@@ -7,23 +7,26 @@ use App\Http\Requests\UserFormRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserController extends Controller
 {
     public function index(Request $request)
     {
+        $filterBy = $request->input('filterBy'); //chèn biến role_as vào parameter của hàm simplePaginate để phân trang
+        // dd(gettype($filterBy));
 
-        $role = $request->input('role_as');
+        if ($filterBy != NULL) {
+            if($filterBy == '0' || $filterBy == '1'){
+                $usersList = User::where('role_as', $filterBy)->simplePaginate(15);
+            }
+            else if($filterBy == 'desc' || $filterBy == 'asc'){
+                $usersList = User::orderBy('id', $filterBy)->simplePaginate(15);
+            }
+        }  else {
+            $usersList = User::orderBy('id', 'asc')->simplePaginate(15);
+        }
 
-        if ($role == '1') {
-            $usersList = User::where('role_as', $role)->orderBy('id', 'desc')->simplePaginate(15);
-        } else if ($role == '0') {
-            $usersList = User::where('role_as', $role)->orderBy('id', 'desc')->simplePaginate(15);
-        }
-        else{
-            $usersList = User::orderBy('id', 'desc')->simplePaginate(15);
-        }
+        $usersList->appends(['filterBy' => $filterBy]); //Thêm các tham số vào quá trình phân trang, khi chuyển trang thì tham số vẫn giữ nguyên để lọc danh sách user theo role
         return view('admin.users.index', compact('usersList'));
     }
 
@@ -42,7 +45,7 @@ class UserController extends Controller
         $user->username = $validatedInputs['username'];
         $user->email = $validatedInputs['email'];
         $user->phone = $validatedInputs['phone'];
-        $user->password = Hash::make($validatedInputs['password']);
+        $user->password = Hash::make(trim($validatedInputs['password']));
         $user->confirm_password = $validatedInputs['password'] == $validatedInputs['confirm_password'] ? 'true' : 'false';
         $user->role_as = $validatedInputs['role_as'] == 'admin' ? '1' : '0';
 

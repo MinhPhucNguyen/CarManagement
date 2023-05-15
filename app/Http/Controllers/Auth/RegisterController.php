@@ -23,13 +23,14 @@ class RegisterController extends Controller
 
     public function register(RegisterRequest $request)
     {
+        $validatedData = $request->validated();
         
         $user = User::create([
-            'username' => $request->input('username'),
-            'email' => $request->input('email'),
-            'phone' => $request->input('phone'),
-            'password' => Hash::make($request->input('password')),
-            'confirm_password' => $request->input('confirm_password') == $request->input('password') ? 'true' : 'false',
+            'username' => $validatedData['username'],
+            'email' => $validatedData['email'],
+            'phone' => $validatedData['phone'],
+            'password' => Hash::make(trim($validatedData['password'])),
+            'confirm_password' => $validatedData['confirm_password'] == $validatedData['password'] ? 'true' : 'false',
         ]);
 
         return redirect('/login')->with('success', 'Register successfully! Please login');

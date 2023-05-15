@@ -8,6 +8,7 @@
         </div>
         @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fa-sharp fa-solid fa-circle-check"></i>
                 <strong>{{ session('success') }}</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
                     style="padding: 1.05rem 1rem"></button>
@@ -22,12 +23,11 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Earnings (Monthly)</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Users</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $userNumber }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                <i class="fa-solid fa-users fa-2x text-gray-300"></i>
                             </div>
                         </div>
                     </div>

@@ -25,9 +25,11 @@ class LoginController extends Controller
             if (Auth::user()->role_as == '1') {
                 return redirect('/admin/dashboard')->with('success', 'Welcome to Dashboard Page');
             }
-            return redirect('/home')->with('success', 'Welcome to Home Page');
+            else if(Auth::user()->role_as == '0'){
+                return redirect('/home')->with('success', 'Welcome to Home Page');
+            }
         } else {
-            return redirect('/login')->withErrors(['login_error' => 'Username or password is incorrect!']);
+            return redirect('/login')->withErrors(['login_error' => 'Username or password is incorrect!'])->withInput();
         }
     }
 }

@@ -24,6 +24,7 @@ class RegisterRequest extends FormRequest
         return [
             'username' => [
                 'required',
+                'unique:users,username',
                 'string',
                 'min:5',
                 'max:30',
@@ -62,6 +63,7 @@ class RegisterRequest extends FormRequest
         return [
             'username.required' => '*Please enter your username',
             'username.string' => '*Username must be a string',
+            'username.unique' => '*Username already exists. Please choose another username',
             'username.min' => '*Username must be at least 5 and at most 30 characters',
             'username.max' => '*Username must be at least 5 and at most 30 characters',
             'username.regex' => '*Username must start with a letter, not start with a number and not contain special characters',

@@ -4,6 +4,7 @@
     <div class="col-md-12">
         @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fa-sharp fa-solid fa-circle-check"></i>
                 <strong>{{ session('success') }}</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
                     style="padding: 1.05rem 1rem"></button>
@@ -20,21 +21,23 @@
                 </a>
             </div>
             <div class="card-body">
+
+                {{-- Filter Role As --}}
                 <form action="{{ url('admin/users') }}" method="GET" class="w-25 m-0">
                     <div class="mb-3 d-flex w-100 align-items-center">
                         <div class="d-flex align-items-center w-25">
-                            <label for="role_as" class="form-label mb-0 fw-bolder">Filter by:</label>
+                            <label for="filterBy" class="form-label mb-0 fw-bolder">Filter by:</label>
                         </div>
-                        <select name="role_as" id="role_as" class="form-select w-75">
+                        <select name="filterBy" id="filter-by" class="form-select w-75">
                             <option value="">All</option>
-                            <option value='1' {{ request('role_as') == '1' ? 'selected' : '' }}>Admin</option>
-                            <option value='0' {{ request('role_as') == '0' ? 'selected' : '' }}>User</option>
+                            <option value='0' {{ request('filterBy') == '0' ? 'selected' : '' }}>Role as User</option>
+                            <option value='1' {{ request('filterBy') == '1' ? 'selected' : '' }}>Role as Admin</option>
+                            <option value='desc' {{ request('filterBy') == 'desc' ? 'selected' : '' }}>Descending by ID</option>
+                            <option value='asc' {{ request('filterBy') == 'asc' ? 'selected' : '' }}>Ascending by ID</option>
                         </select>
-                        <button type="submit" class="btn btn-primary float-end mb-0 w-25 ml-2">Filter</button>
-
                     </div>
                 </form>
-
+                {{-- End Filter Role As --}}
 
                 <table class="table table-bordered table-striped text-dark fw-bold">
                     <thead>
@@ -47,7 +50,7 @@
                             <td>Action</td>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="body-table">
                         @forelse ($usersList as $user)
                             <tr>
                                 <td>{{ $user->id }}</td>
@@ -80,7 +83,7 @@
                         @endforelse
                     </tbody>
                 </table>
-                <div>
+                <div class="pagination">
                     {!! $usersList->links() !!}
                 </div>
             </div>
