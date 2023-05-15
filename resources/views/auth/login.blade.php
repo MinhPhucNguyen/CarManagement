@@ -10,6 +10,18 @@
             </div>
 
             <div class="card-body mx-auto p-4 " style="width: 500px;">
+                @error('login_error')
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong> {{ $message }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @enderror
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong> {{ session('success') }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>        
+                @endif
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
 
@@ -37,7 +49,7 @@
                         <div class="col-md-12">
                             <input id="password" type="password"
                                 class="form-control @error('password') is-invalid @enderror" name="password"
-                                placeholder="Enter Password">
+                                placeholder="Enter Password" autofocus>
 
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
