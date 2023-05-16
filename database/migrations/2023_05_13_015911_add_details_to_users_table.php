@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->tinyText('phone')->after('email');
+            $table->string('address')->after('phone');
+            $table->tinyInteger('status')->default('0')->comment('0=inactive, 1=active');
             $table->tinyInteger('role_as')->default('0')->comment('0=user, 1=admin');
             $table->string('confirm_password')->after('password');
         });

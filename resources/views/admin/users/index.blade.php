@@ -32,8 +32,8 @@
                             <option value="">All</option>
                             <option value='0' {{ request('filterBy') == '0' ? 'selected' : '' }}>Role as User</option>
                             <option value='1' {{ request('filterBy') == '1' ? 'selected' : '' }}>Role as Admin</option>
-                            <option value='desc' {{ request('filterBy') == 'desc' ? 'selected' : '' }}>Descending by ID</option>
-                            <option value='asc' {{ request('filterBy') == 'asc' ? 'selected' : '' }}>Ascending by ID</option>
+                            <option value='desc' {{ request('filterBy') == 'desc' ? 'selected' : '' }}>Descending by ID
+                            </option>
                         </select>
                     </div>
                 </form>
@@ -46,7 +46,9 @@
                             <td>Username</td>
                             <td>Email</td>
                             <td>Phone</td>
+                            <td>Address</td>
                             <td>Role as</td>
+                            <td>Status</td>
                             <td>Action</td>
                         </tr>
                     </thead>
@@ -54,26 +56,44 @@
                         @forelse ($usersList as $user)
                             <tr>
                                 <td>{{ $user->id }}</td>
-                                <td>{{ $user->username }}</td>
+                                <td><a href="#">{{ $user->username }}</a></td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone }}</td>
+                                <td>{{ $user->address }}</td>
 
                                 <td class="{{ $user->role_as == '1' ? 'text-danger fw-bold' : '' }}">
                                     {{ $user->role_as == '1' ? 'Admin' : 'User' }}</td>
 
+                                <td class="{{ $user->status == '1' ? 'text-success fw-bold' : '' }}">
+                                    <i class="fa-solid fa-circle-dot" style="font-size: 14px"></i>
+                                    {{ $user->status == '1' ? 'Active' : 'Inactive' }}
+                                </td>
+
                                 <td class="d-flex">
-                                    <a href="{{ url('admin/users/' . $user->id . '/edit') }}" class="btn btn-primary mr-2">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                        <span>Edit</span>
-                                    </a>
-                                    <form action="{{ url('admin/users/' . $user->id . '/delete') }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">
-                                            <i class="fa-solid fa-trash"></i>
-                                            <span>Delete</span>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Action
                                         </button>
-                                    </form>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item mb-2"
+                                                    href="{{ url('admin/users/' . $user->id . '/edit') }}"> <i
+                                                        class="fa-solid fa-pen-to-square"></i>
+                                                    <span>Edit</span></a></li>
+                                            <li>
+                                                <form action="{{ url('admin/users/' . $user->id . '/delete') }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a type="submit" class="dropdown-item">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                        <span>Delete</span>
+                                                    </a>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+
                                 </td>
                             </tr>
                         @empty
