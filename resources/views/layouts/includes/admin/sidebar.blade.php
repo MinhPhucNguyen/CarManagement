@@ -31,8 +31,7 @@
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Action</h6>
-                <a class="collapse-item" href="{{ url('admin/users') }}">View Users List</a>
-                <a class="collapse-item" href="{{ url('admin/users/create') }}">Add New User</a>
+                <a class="collapse-item" href="{{ url('admin/users') }}">Manage Users</a>
             </div>
         </div>
     </li>

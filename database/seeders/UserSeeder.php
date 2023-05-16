@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
                 'username' => $faker->userName,
                 'email' => $faker->unique()->safeEmail(),
                 'phone' => $faker->phoneNumber,
+                'address'=>$faker->country(),
                 'password' => Hash::make('password'),
                 'confirm_password' => $passwordMatch ? 'true' : 'false',
             ]);

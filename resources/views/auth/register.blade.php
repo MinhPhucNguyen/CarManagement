@@ -58,6 +58,20 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="form-group row mb-4">
+                        <label for="address"
+                            class="col-md-3 col-form-label text-md-right fw-bold">{{ __('Address') }}</label>
+
+                        <div class="col-md-12 ">
+                            <input id="address" type="text" class="form-control  @error('address') is-invalid @enderror"
+                                name="address" placeholder="Enter your address" value="{{ !$errors->has('address') ? old('address') : '' }}">
+                            @error('address')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
 
                     <div class="form-group row mb-4">
                         <label for="password"

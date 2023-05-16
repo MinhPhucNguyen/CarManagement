@@ -39,6 +39,11 @@ class UserFormRequest extends FormRequest
                 'max:50',
                 'unique:users,email,' . $id
             ],
+            'address' => [
+                'required',
+                'string',
+                'regex:/^(\\d{1,}) [a-zA-Z0-9\\s]+(\\,)? [a-zA-Z]+$/'
+            ],
             'phone' => [
                 'sometimes',
                 'required',
@@ -81,6 +86,8 @@ class UserFormRequest extends FormRequest
             'phone.min' => '*Phone number must be 10 numbers',
             'phone.max' => '*Phone number must be 10 numbers',
             'phone.unique' => '*Phone number already exists',
+            'address.required' => '*Please enter your address',
+            'address.regex' => '*Please enter a valid address',
             'password.required' => '*Please enter your password',
             'password.min' => '*Password must be at least 8 characters',
             'password.unique' => '*Password already exists',

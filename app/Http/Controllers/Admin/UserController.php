@@ -19,7 +19,7 @@ class UserController extends Controller
             if($filterBy == '0' || $filterBy == '1'){
                 $usersList = User::where('role_as', $filterBy)->simplePaginate(15);
             }
-            else if($filterBy == 'desc' || $filterBy == 'asc'){
+            else if($filterBy == 'desc'){
                 $usersList = User::orderBy('id', $filterBy)->simplePaginate(15);
             }
         }  else {

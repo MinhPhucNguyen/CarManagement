@@ -43,6 +43,14 @@
                             @enderror
                         </div>
                         <div class="col-md-6 mb-3">
+                            <label for="address">Address</label>
+                            <input type="text" name="address" class="form-control @error('address') is-invalid  @enderror"
+                                value="{{ $user->address }}">
+                            @error('address')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 mb-3">
                             <label for="password">Password</label>
                             <input type="password" name="password"
                                 class="form-control @error('password') is-invalid  @enderror"

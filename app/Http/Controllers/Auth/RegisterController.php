@@ -24,11 +24,12 @@ class RegisterController extends Controller
     public function register(RegisterRequest $request)
     {
         $validatedData = $request->validated();
-        
+
         $user = User::create([
             'username' => $validatedData['username'],
             'email' => $validatedData['email'],
             'phone' => $validatedData['phone'],
+            'address' => $validatedData['address'],
             'password' => Hash::make(trim($validatedData['password'])),
             'confirm_password' => $validatedData['confirm_password'] == $validatedData['password'] ? 'true' : 'false',
         ]);
