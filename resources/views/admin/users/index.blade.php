@@ -15,13 +15,6 @@
                 <div class="d-inline-block fw-bold text-white fs-4 flex-grow-1">
                     Users List
                 </div>
-                <div class="input-group border border-0" style="width: 300px">
-                    <span class="input-group-text bg-success text-white" id="basic-addon1">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </span>
-                    <input type="text" class="form-control" placeholder="Search for user" aria-label="Search"
-                        aria-describedby="basic-addon1">
-                </div>
                 <div>
                     <a href="{{ url('admin/users/create') }}" class="btn btn-success fw-bold float-right ml-3">
                         <i class="fa-solid fa-plus"></i>
