@@ -41,12 +41,12 @@ class UserFormRequest extends FormRequest
             'address' => [
                 'required',
                 'string',
-                'regex:/^\d{1,}\/[a-zA-Z0-9\s]+(\/[a-zA-Z]|[a-zA-Z]+)?$/'
+                'max:50',
+                'regex:/^(\\d{1,}) [a-zA-Z0-9\\s]+(\\,)? [a-zA-Z]|[a-zA-Z]+$/'
             ],
             'phone' => [
                 'sometimes',
                 'required',
-                'numeric',
                 'min:10',
                 'max:10',
                 'unique:users,phone,' . $id
@@ -57,12 +57,11 @@ class UserFormRequest extends FormRequest
             ]
         ];
 
-        if($this->getMethod() == 'PUT'){
-            $rules['password'] = 'nullable|string|min:8|regex:/^(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/|unique:users'; 
+        if ($this->getMethod() == 'PUT') {
+            $rules['password'] = 'nullable|string|min:8|regex:/^(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/|unique:users';
             $rules['confirm_password'] = 'nullable|string|same:password';
-        }
-        else{
-            $rules['password'] = 'required|string|min:8|regex:/^(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/|unique:users'; 
+        } else {
+            $rules['password'] = 'required|string|min:8|regex:/^(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/|unique:users';
             $rules['confirm_password'] = 'required|string|same:password';
         }
 
@@ -81,12 +80,12 @@ class UserFormRequest extends FormRequest
             'email.email' => '*Please enter a valid email',
             'email.unique' => '*Email already exists',
             'phone.required' => '*Please enter your phone number',
-            'phone.numberic' => '*Phone number not valid',
             'phone.min' => '*Phone number must be 10 numbers',
             'phone.max' => '*Phone number must be 10 numbers',
             'phone.unique' => '*Phone number already exists',
             'address.required' => '*Please enter your address',
             'address.regex' => '*Please enter a valid address',
+            'address.max' => '*Address must be at most 50 characters',
             'password.required' => '*Please enter your password',
             'password.min' => '*Password must be at least 8 characters',
             'password.unique' => '*Password already exists',

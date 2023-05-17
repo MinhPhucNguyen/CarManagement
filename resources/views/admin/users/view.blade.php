@@ -11,7 +11,7 @@
 
         <div class="view-container w-100 bg-dark-subtle d-flex rounded">
             <div class="view-left w-50 d-flex">
-                <div class="image">
+                <div class="image w-25">
                     <img src="/admin/img/pexels-eberhard-grossgasteiger-1367192.jpg" alt="avatar" class="rounded-circle"
                         width="200px" height="200px">
                     <div class="fw-bolder text-center mt-4">

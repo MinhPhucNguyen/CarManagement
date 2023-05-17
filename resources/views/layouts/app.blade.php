@@ -61,7 +61,7 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown fw-bold">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#"
                                     role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                     v-pre>
@@ -69,14 +69,20 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <a class="dropdown-item fw-bold mb-2 text-danger" href="{{ route('logout') }}"
+                                        class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#logoutModal">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+                                    @if (Auth::user()->role_as == '1')
+                                        <a class="dropdown-item fw-bold  mb-2" href="{{ url('admin/dashboard') }}"
+                                            class="btn btn-secondary">
+                                            {{ __('Back to Dashboard') }}
+                                        </a>
+                                    @endif
+
 
                                 </div>
                                 @include('auth.logoutModal')

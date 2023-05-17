@@ -81,15 +81,18 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <form action="{{ url('admin/users/' . $user->id . '/delete') }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="dropdown-item fs-6 text-danger bg-white">
-                                                        <i class="fa-solid fa-trash"></i>
-                                                        <span>Delete</span>
-                                                    </button>
-                                                </form>
+                                                @if ($user->role_as != '1')
+                                                    <form action="{{ url('admin/users/' . $user->id . '/delete') }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit"
+                                                            class="dropdown-item fs-6 text-danger bg-white">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                            <span>Delete</span>
+                                                        </button>
+                                                    </form>
+                                                @endif
                                             </li>
                                         </ul>
                                     </div>
