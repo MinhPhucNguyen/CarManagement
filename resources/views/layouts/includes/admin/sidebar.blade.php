@@ -10,20 +10,21 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="{{ url('admin/dashboard') }}">
+        <a class="nav-link text-success" href="{{ url('admin/dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
+            <span>Dashboard</span>
+        </a>
     </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <div class="sidebar-heading">
+    <div class="sidebar-heading text-success">
         User Management
     </div>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+        <a class="nav-link collapsed fw-bold" href="#" data-toggle="collapse" data-target="#collapseOne"
             aria-expanded="true" aria-controls="collapseOne">
             <i class="fas fa-fw fa-user"></i>
             <span>User</span>
@@ -37,13 +38,13 @@
     </li>
 
     <!-- Heading -->
-    <div class="sidebar-heading">
+    <div class="sidebar-heading text-success">
         Car Management
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+        <a class="nav-link collapsed fw-bold" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-car"></i>
             <span>Car</span>
@@ -58,13 +59,13 @@
         </div>
     </li>
 
-    <div class="sidebar-heading">
+    <div class="sidebar-heading text-success">
         Staff Management
     </div>
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+        <a class="nav-link collapsed fw-bold" href="#" data-toggle="collapse" data-target="#collapseUtilities"
             aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-user"></i>
             <span>Staff</span>

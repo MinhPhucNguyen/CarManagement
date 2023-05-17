@@ -18,8 +18,10 @@
         </div>
     </form>
 
+    <a class="btn btn-success float-right fw-bolder" href="{{url("/home")}}">Visit Website</a>
+
     <!-- Topbar Navbar -->
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ml-3">
 
         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
         <li class="nav-item dropdown no-arrow d-sm-none">

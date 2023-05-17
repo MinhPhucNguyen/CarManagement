@@ -27,18 +27,18 @@ class RegisterRequest extends FormRequest
                 'unique:users,username',
                 'string',
                 'min:5',
-                'max:30',
-                'regex:/^[^0-9][a-zA-Z0-9\s]+$/'
+                'max:20',
+                'regex:/^[a-zA-Z][a-zA-Z0-9]*$/'
             ],
             'email' => [
                 'required',
                 'string',
                 'email',
-                'max:50',
                 'unique:users,email',
             ],
             'phone' => [
                 'required',
+                'numeric',
                 'min:10',
                 'max:10',
                 'unique:users,phone',
@@ -46,7 +46,7 @@ class RegisterRequest extends FormRequest
             'address' => [
                 'required',
                 'string',
-                'regex:/^(\\d{1,}) [a-zA-Z0-9\\s]+(\\,)? [a-zA-Z]|[a-zA-Z]+$/'
+                'regex:/^\d{1,}\/[a-zA-Z0-9\s]+(\/[a-zA-Z]|[a-zA-Z]+)?$/'
             ],
             'password' => [
                 'required',
@@ -71,10 +71,9 @@ class RegisterRequest extends FormRequest
             'username.unique' => '*Username already exists. Please choose another username',
             'username.min' => '*Username must be at least 5 and at most 30 characters',
             'username.max' => '*Username must be at least 5 and at most 30 characters',
-            'username.regex' => '*Username must start with a letter, not start with a number and not contain special characters',
+            'username.regex' => '*Username must start with a letter, not start with a number and special characters and not contain special characters',
             'email.required' => '*Please enter your email',
             'email.email' => '*Please enter a valid email',
-            'email.max' => '*Email must be at most 50 characters',
             'email.unique' => '*Email already exists',
             'phone.required' => '*Please enter your phone number',
             'phone.min' => '*Phone number must be at least 10 characters',

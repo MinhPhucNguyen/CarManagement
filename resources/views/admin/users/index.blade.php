@@ -11,14 +11,23 @@
             </div>
         @endif
         <div class="card">
-            <div class="card-header bg-dark">
-                <div class="d-inline-block fw-bold text-white fs-4">
+            <div class="card-header bg-dark d-flex align-items-center">
+                <div class="d-inline-block fw-bold text-white fs-4 flex-grow-1">
                     Users List
                 </div>
-                <a href="{{ url('admin/users/create') }}" class="btn btn-success fw-bold float-right ">
-                    <i class="fa-solid fa-plus"></i>
-                    Add New User
-                </a>
+                <div class="input-group border border-0" style="width: 300px">
+                    <span class="input-group-text bg-success text-white" id="basic-addon1">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Search for user" aria-label="Search"
+                        aria-describedby="basic-addon1">
+                </div>
+                <div>
+                    <a href="{{ url('admin/users/create') }}" class="btn btn-success fw-bold float-right ml-3">
+                        <i class="fa-solid fa-plus"></i>
+                        Add New User
+                    </a>
+                </div>
             </div>
             <div class="card-body">
 
@@ -48,7 +57,6 @@
                             <td>Phone</td>
                             <td>Address</td>
                             <td>Role as</td>
-                            <td>Status</td>
                             <td>Action</td>
                         </tr>
                     </thead>
@@ -56,7 +64,8 @@
                         @forelse ($usersList as $user)
                             <tr>
                                 <td>{{ $user->id }}</td>
-                                <td><a href="#">{{ $user->username }}</a></td>
+                                <td><a href="{{ url('admin/users/' . $user->id . '/view') }}"
+                                        class="text-success  ">{{ $user->username }}</a></td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone }}</td>
                                 <td>{{ $user->address }}</td>
@@ -64,36 +73,33 @@
                                 <td class="{{ $user->role_as == '1' ? 'text-danger fw-bold' : '' }}">
                                     {{ $user->role_as == '1' ? 'Admin' : 'User' }}</td>
 
-                                <td class="{{ $user->status == '1' ? 'text-success fw-bold' : '' }}">
-                                    <i class="fa-solid fa-circle-dot" style="font-size: 14px"></i>
-                                    {{ $user->status == '1' ? 'Active' : 'Inactive' }}
-                                </td>
-
                                 <td class="d-flex">
                                     <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        <button class="btn btn-success dropdown-toggle" type="button"
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             Action
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item mb-2"
-                                                    href="{{ url('admin/users/' . $user->id . '/edit') }}"> <i
-                                                        class="fa-solid fa-pen-to-square"></i>
-                                                    <span>Edit</span></a></li>
+                                            <li>
+                                                <a class="dropdown-item mb-3 fs-6 text-success bg-white"
+                                                    href="{{ url('admin/users/' . $user->id . '/edit') }}">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                    <span>Edit</span>
+                                                </a>
+                                            </li>
                                             <li>
                                                 <form action="{{ url('admin/users/' . $user->id . '/delete') }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <a type="submit" class="dropdown-item">
+                                                    <button type="submit" class="dropdown-item fs-6 text-danger bg-white">
                                                         <i class="fa-solid fa-trash"></i>
                                                         <span>Delete</span>
-                                                    </a>
+                                                    </button>
                                                 </form>
                                             </li>
                                         </ul>
                                     </div>
-
                                 </td>
                             </tr>
                         @empty
