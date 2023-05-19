@@ -5,14 +5,33 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserFormRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $usersList = User::orderBy('id', 'desc')->simplePaginate(15);
+        $filterBy = $request->input('filterBy'); //chèn biến role_as vào parameter của hàm simplePaginate để phân trang
+        if ($filterBy != NULL) {
+            if($filterBy == '0' || $filterBy == '1'){
+                $usersList = User::where('role_as', $filterBy)->simplePaginate(15);
+            }
+            else if($filterBy == 'desc'){
+                $usersList = User::orderBy('id', $filterBy)->simplePaginate(15);
+            }
+        }  else {
+            $usersList = User::orderBy('id', 'asc')->simplePaginate(15);
+        }
+
+        $usersList->appends(['filterBy' => $filterBy]); //Thêm các tham số vào quá trình phân trang, khi chuyển trang thì tham số vẫn giữ nguyên để lọc danh sách user theo role
         return view('admin.users.index', compact('usersList'));
+    }
+
+    public function show(int $userID){
+        // dd($userID);
+        $user = User::findOrFail($userID);
+        return view('admin.users.view', compact('user'));
     }
 
     public function create()
@@ -30,7 +49,8 @@ class UserController extends Controller
         $user->username = $validatedInputs['username'];
         $user->email = $validatedInputs['email'];
         $user->phone = $validatedInputs['phone'];
-        $user->password = Hash::make($validatedInputs['password']);
+        $user->address = $validatedInputs['address'];
+        $user->password = Hash::make(trim($validatedInputs['password']));
         $user->confirm_password = $validatedInputs['password'] == $validatedInputs['confirm_password'] ? 'true' : 'false';
         $user->role_as = $validatedInputs['role_as'] == 'admin' ? '1' : '0';
 

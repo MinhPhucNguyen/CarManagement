@@ -24,16 +24,16 @@ class RegisterRequest extends FormRequest
         return [
             'username' => [
                 'required',
+                'unique:users,username',
                 'string',
                 'min:5',
-                'max:30',
-                'regex:/^[^0-9][a-zA-Z0-9\s]+$/'
+                'max:20',
+                'regex:/^[a-zA-Z][a-zA-Z0-9]*$/'
             ],
             'email' => [
                 'required',
                 'string',
                 'email',
-                'max:50',
                 'unique:users,email',
             ],
             'phone' => [
@@ -41,6 +41,12 @@ class RegisterRequest extends FormRequest
                 'min:10',
                 'max:10',
                 'unique:users,phone',
+            ],
+            'address' => [
+                'required',
+                'string',
+                'max:50',
+                'regex:/^(\\d{1,}) [a-zA-Z0-9\\s]+(\\,)? [a-zA-Z]|[a-zA-Z]+$/',
             ],
             'password' => [
                 'required',
@@ -62,16 +68,19 @@ class RegisterRequest extends FormRequest
         return [
             'username.required' => '*Please enter your username',
             'username.string' => '*Username must be a string',
+            'username.unique' => '*Username already exists. Please choose another username',
             'username.min' => '*Username must be at least 5 and at most 30 characters',
             'username.max' => '*Username must be at least 5 and at most 30 characters',
-            'username.regex' => '*Username must start with a letter, not start with a number and not contain special characters',
+            'username.regex' => '*Username must start with a letter, not start with a number and special characters and not contain special characters',
             'email.required' => '*Please enter your email',
             'email.email' => '*Please enter a valid email',
-            'email.max' => '*Email must be at most 50 characters',
             'email.unique' => '*Email already exists',
             'phone.required' => '*Please enter your phone number',
             'phone.min' => '*Phone number must be at least 10 characters',
             'phone.max' => '*Phone number must be at most 10 characters',
+            'address.required' => '*Please enter your address',
+            'address.regex' => '*Please enter a valid address',
+            'address.max' => '*Address must be at most 50 characters',
             'phone.unique' => '*Phone number already exists',
             'password.required' => '*Please enter your password',
             'password.min' => '*Password must be at least 8 characters',

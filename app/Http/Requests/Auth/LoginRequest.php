@@ -26,8 +26,8 @@ class LoginRequest extends FormRequest
                 'required',
                 'string',
                 'min:5',
-                'max:30',
-                'regex:/^[a-zA-Z0-9\s]+$/'
+                'max:20',
+                'regex:/^[a-zA-Z][a-zA-Z0-9]*$/'
             ],
             'password' => [
                 'required',
@@ -45,7 +45,7 @@ class LoginRequest extends FormRequest
                 'username.string' => '*Username must be a string and not contain special characters',
                 'username.min' => '*Username must be at least 5 and at most 30 characters',
                 'username.max' => '*Username must be at least 5 and at most 30 characters',
-                'username.regex' => '*Username must start with a letter and not contain special characters',
+                'username.regex' => '*Username must start with a letter, not start with a number and special characters and not contain special characters',
                 'password.required' => '*Please enter your password',
                 'password.min' => '*Password must be at least 8 characters',
                 'password.regex' => '*Password must contain at least one uppercase letter, one lowercase letter, one number and one special character',

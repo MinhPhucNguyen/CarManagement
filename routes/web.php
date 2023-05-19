@@ -39,6 +39,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index']);
 
     Route::controller(UserController::class)->group(function () {
+        Route::get('users/{users}/view', 'show');
         Route::get('users', 'index');
         Route::get('users/create', 'create');
         Route::post('users', 'store')->name('users.store');
