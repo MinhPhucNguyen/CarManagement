@@ -31,10 +31,10 @@
                             <label for="filterBy" class="form-label mb-0 fw-bolder">Filter by:</label>
                         </div>
                         <select name="filterBy" id="filter-by" class="form-select w-75">
-                            <option value="">All</option>
+                            <option value="all">All</option>
                             <option value='0' {{ request('filterBy') == '0' ? 'selected' : '' }}>Role as User</option>
                             <option value='1' {{ request('filterBy') == '1' ? 'selected' : '' }}>Role as Admin</option>
-                            <option value='desc' {{ request('filterBy') == 'desc' ? 'selected' : '' }}>Descending by ID
+                            <option value='asc' {{ request('filterBy') == 'asc' ? 'selected' : '' }}>Ascending by ID
                             </option>
                         </select>
                     </div>
@@ -54,6 +54,7 @@
                         </tr>
                     </thead>
                     <tbody id="body-table">
+                        
                         @forelse ($usersList as $user)
                             <tr>
                                 <td>{{ $user->id }}</td>
@@ -100,13 +101,14 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6">No User Available</td>
+                                <td colspan="7">No User Available</td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
                 <div class="pagination">
                     {!! $usersList->links() !!}
+                    {{-- {!! $usersList->appends(request()->except('search'))->links() !!} --}}
                 </div>
             </div>
         </div>
