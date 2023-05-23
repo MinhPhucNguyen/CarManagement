@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -47,5 +48,14 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::put('users/{user}', 'update');
         Route::delete('users/{user}/delete', 'destroy');
         Route::get('users/', 'search');
+    });
+
+    Route::controller(CarController::class)->group(function() {
+        Route::get('cars', 'index');
+        // Route::get('cars/create', 'create');
+        // Route::post('cars', 'store')->name('cars.store');
+        // Route::get('cars/{car}/edit', 'edit');
+        // Route::put('cars/{car}', 'update');
+        // Route::delete('cars/{car}/delete', 'destroy');
     });
 });
