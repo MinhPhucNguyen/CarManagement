@@ -40,12 +40,14 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index']);
 
     Route::controller(UserController::class)->group(function () {
+        Route::get('users/{users}/view', 'show');
         Route::get('users', 'index');
         Route::get('users/create', 'create');
         Route::post('users', 'store')->name('users.store');
         Route::get('users/{user}/edit', 'edit');
         Route::put('users/{user}', 'update');
         Route::delete('users/{user}/delete', 'destroy');
+        Route::get('users/', 'search');
     });
 
     Route::controller(CarController::class)->group(function() {

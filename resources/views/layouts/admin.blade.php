@@ -19,7 +19,7 @@
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="{{ asset('admin/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/css/sb-admin-2.min.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('assets/css/admin_styles.css') }}">
 </head>
 
 <body id="page-top">

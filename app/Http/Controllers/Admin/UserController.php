@@ -13,21 +13,29 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $filterBy = $request->input('filterBy'); //chèn biến role_as vào parameter của hàm simplePaginate để phân trang
-        // dd(gettype($filterBy));
 
-        if ($filterBy != NULL) {
-            if($filterBy == '0' || $filterBy == '1'){
-                $usersList = User::where('role_as', $filterBy)->simplePaginate(15);
+        $usersList = User::query();
+
+        if ($filterBy != 'all') {
+            if ($filterBy == '0' || $filterBy == '1') {
+                $usersList = User::where('role_as', $filterBy);
+            } else if ($filterBy == 'asc') {
+                $usersList = User::orderBy('id', $filterBy);
             }
-            else if($filterBy == 'desc'){
-                $usersList = User::orderBy('id', $filterBy)->simplePaginate(15);
-            }
-        }  else {
-            $usersList = User::orderBy('id', 'asc')->simplePaginate(15);
+        } else {
+            $usersList = User::orderBy('id', 'desc');
         }
 
-        $usersList->appends(['filterBy' => $filterBy]); //Thêm các tham số vào quá trình phân trang, khi chuyển trang thì tham số vẫn giữ nguyên để lọc danh sách user theo role
+        $usersList = $usersList->simplePaginate(15)
+            ->appends(['filterBy' => $filterBy]); //Thêm các tham số vào quá trình phân trang, khi chuyển trang thì tham số vẫn giữ nguyên để lọc danh sách user theo role
         return view('admin.users.index', compact('usersList'));
+    }
+
+    public function show(int $userID)
+    {
+        // dd($userID);
+        $user = User::findOrFail($userID);
+        return view('admin.users.view', compact('user'));
     }
 
     public function create()
@@ -45,6 +53,7 @@ class UserController extends Controller
         $user->username = $validatedInputs['username'];
         $user->email = $validatedInputs['email'];
         $user->phone = $validatedInputs['phone'];
+        $user->address = $validatedInputs['address'];
         $user->password = Hash::make(trim($validatedInputs['password']));
         $user->confirm_password = $validatedInputs['password'] == $validatedInputs['confirm_password'] ? 'true' : 'false';
         $user->role_as = $validatedInputs['role_as'] == 'admin' ? '1' : '0';
@@ -89,11 +98,37 @@ class UserController extends Controller
             return  redirect('admin/users')->with('message', 'User not found');
         }
     }
-
     public function destroy(int $user_id)
     {
         $user = User::findOrFail($user_id);
         $user->delete();
         return redirect()->back()->with('success', 'Delete user successfully');
+    }
+
+    public function search(Request $request)
+    {
+        $filterBy = $request->input('filterBy'); //chèn biến filterBy vào parameter của hàm simplePaginate để phân trang
+        $valueSearch = $request->input('search');
+
+        $usersList = User::query();
+
+        if ($filterBy != 'all') {
+            if ($filterBy == '1' || $filterBy == '0') {
+                $usersList->where('role_as', $filterBy);
+            } else if ($filterBy == 'asc') {
+                $usersList->orderBy('id', $filterBy);
+            }
+        } else if ($filterBy == 'all') {
+            $usersList->orderBy('id', 'desc');
+        }
+
+        if ($valueSearch) {
+            $usersList->where('username', 'like', "$valueSearch%");
+        }
+
+        $usersList = $usersList->simplePaginate(15)
+            ->appends(['filterBy' => $filterBy, 'valueSearch' => $valueSearch]); //Thêm các tham số vào quá trình phân trang, khi chuyển trang thì tham số vẫn giữ nguyên để lọc danh sách user theo role
+
+        return view('admin.users.index', compact('usersList'));
     }
 }

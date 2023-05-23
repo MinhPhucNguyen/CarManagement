@@ -28,21 +28,21 @@ class UserFormRequest extends FormRequest
                 'required',
                 'string',
                 'min:5',
-                'max:30',
-                'regex:/^[^0-9][a-zA-Z0-9\s]+$/'
+                'max:20',
+                'regex:/^[a-zA-Z][a-zA-Z0-9]*$/'
             ],
             'email' => [
                 'sometimes',
                 'required',
                 'string',
                 'email',
-                'max:50',
                 'unique:users,email,' . $id
             ],
             'address' => [
                 'required',
                 'string',
-                'regex:/^(\\d{1,}) [a-zA-Z0-9\\s]+(\\,)? [a-zA-Z]+$/'
+                'max:50',
+                'regex:/^(\\d{1,}) [a-zA-Z0-9\\s]+(\\,)? [a-zA-Z]|[a-zA-Z]+$/'
             ],
             'phone' => [
                 'sometimes',
@@ -57,12 +57,11 @@ class UserFormRequest extends FormRequest
             ]
         ];
 
-        if($this->getMethod() == 'PUT'){
-            $rules['password'] = 'nullable|string|min:8|regex:/^(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/|unique:users'; 
+        if ($this->getMethod() == 'PUT') {
+            $rules['password'] = 'nullable|string|min:8|regex:/^(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/|unique:users';
             $rules['confirm_password'] = 'nullable|string|same:password';
-        }
-        else{
-            $rules['password'] = 'required|string|min:8|regex:/^(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/|unique:users'; 
+        } else {
+            $rules['password'] = 'required|string|min:8|regex:/^(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/|unique:users';
             $rules['confirm_password'] = 'required|string|same:password';
         }
 
@@ -74,20 +73,19 @@ class UserFormRequest extends FormRequest
         return [
             'username.required' => '*Please enter your username',
             'username.string' => '*Username must be a string',
-            'username.min' => '*Username must be at least 5 and at most 30 characters',
-            'username.max' => '*Username must be at least 5 and at most 30 characters',
-            'username.regex' => '*Username must start with a letter, not start with a number and not contain special characters',
+            'username.min' => '*Username must be at least 5 and at most 20 characters',
+            'username.max' => '*Username must be at least 5 and at most 20 characters',
+            'username.regex' => '*Username must start with a letter, not start with a number and special characters and not contain special characters',
             'email.required' => '*Please enter your email',
             'email.email' => '*Please enter a valid email',
-            'email.max' => '*Email must be at most 50 characters',
             'email.unique' => '*Email already exists',
             'phone.required' => '*Please enter your phone number',
-            'phone.integer' => '*Phone number not valid',
             'phone.min' => '*Phone number must be 10 numbers',
             'phone.max' => '*Phone number must be 10 numbers',
             'phone.unique' => '*Phone number already exists',
             'address.required' => '*Please enter your address',
             'address.regex' => '*Please enter a valid address',
+            'address.max' => '*Address must be at most 50 characters',
             'password.required' => '*Please enter your password',
             'password.min' => '*Password must be at least 8 characters',
             'password.unique' => '*Password already exists',
