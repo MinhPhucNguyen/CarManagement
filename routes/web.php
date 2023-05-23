@@ -46,5 +46,6 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('users/{user}/edit', 'edit');
         Route::put('users/{user}', 'update');
         Route::delete('users/{user}/delete', 'destroy');
+        Route::get('users/', 'search');
     });
 });
