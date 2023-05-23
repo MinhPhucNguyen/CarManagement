@@ -51,9 +51,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Action</h6>
-                <a class="collapse-item" href="{{ url('admin/dashboard') }}">View Cars List</a>
-                <a class="collapse-item" href="">Edit Car</a>
-                <a class="collapse-item" href="">Add New Car</a>
+                <a class="collapse-item" href="{{ url('admin/cars') }}">Manage Users</a>
             </div>
         </div>
     </li>
