@@ -21,9 +21,9 @@
         @endif
 
         <div class="row mt-4">
-            <div class="col-md-3 mr-3 bg-success bg-gradient rounded-4" style="height: 220px">
-                <a href="{{ url('admin/users') }}" class="h-100 d-block text-decoration-none ">
-                    <div class="h-100 w-100 d-flex justify-content-center align-items-center text-white flex-column"
+            <div class="  mr-3 bg-success bg-gradient rounded-4" style="height: 220px; width: 378px;" >
+                <a href="{{ url('admin/users') }}" class="dashboard-card h-100 d-block text-decoration-none ">
+                    <div class="h-100 w-100 d-flex justify-content-center align-items-center text-white flex-column fw-bolder"
                         style="font-size: 60px;">
                         <i class="fa-solid fa-users"></i>
                         <h5 class="mt-3">Users: {{ $userNumber }}</h5>
@@ -31,8 +31,8 @@
                 </a>
             </div>
 
-            <div class="col-md-3 mr-3 bg-success bg-gradient rounded-4" style="height: 220px">
-                <a href="{{ url('admin/users') }}" class="h-100 d-block text-decoration-none ">
+            <div class="mr-3 bg-success bg-gradient rounded-4" style="height: 220px; width: 378px;">
+                <a href="{{ url('admin/users') }}" class=" dashboard-card h-100 d-block text-decoration-none ">
                     <div class="h-100 w-100 d-flex justify-content-center align-items-center text-white flex-column"
                         style="font-size: 60px;">
                         <i class="fa-solid fa-car"></i>
@@ -41,16 +41,15 @@
                 </a>
             </div>
 
-            <div class="col-md-3 mr-3 bg-success bg-gradient rounded-4" style="height: 220px">
-                <a href="{{ url('admin/users') }}" class="h-100 d-block text-decoration-none ">
+            <div class="mr-3 bg-success bg-gradient rounded-4" style="height: 220px; width: 378px;">
+                <a href="{{ url('admin/users') }}" class=" dashboard-card h-100 d-block text-decoration-none ">
                     <div class="h-100 w-100 d-flex justify-content-center align-items-center text-white flex-column"
                         style="font-size: 60px;">
-                        <i class="fa-solid fa-users"></i>
+                        <i class="fa-solid fa-file"></i>
                         <h5 class="mt-3">Users: {{ $userNumber }}</h5>
                     </div>
                 </a>
             </div>
-
         </div>
     </div>
 @endsection

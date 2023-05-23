@@ -22,3 +22,12 @@
 .info-title{
     width: 120px;
 }
+
+.dashboard-card{
+    transition: all .2s ease-in-out;
+}
+
+.dashboard-card:hover {
+    
+    transform: scale(1.2);
+}
