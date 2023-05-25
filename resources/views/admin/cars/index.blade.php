@@ -6,7 +6,7 @@
                 <div class="d-inline-block fw-bold text-white fs-4">
                     Cars List
                 </div>
-                <a class="btn btn-success fw-bold float-right ">
+                <a href="{{ url('admin/cars/create') }}" class="btn btn-success fw-bold float-right ml-3">
                     <i class="fa-solid fa-plus"></i>
                     Add New Car
                 </a>
@@ -27,23 +27,42 @@
                         @forelse ($carsList as $car)
                             <tr>
                                 <td>{{ $car->id }}</td>
-                                <td><a href="#">{{ $car->name }}</a></td>
+                                <td><a href="{{ url('admin/cars/' . $car->id . '/view') }}">{{ $car->name }}</a></td>
                                 <td>{{ $car->price }}</td>
                                 <td>{{ $car->image }}</td>
-
                                 <td class="d-flex">
                                     <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        <button class="btn btn-success dropdown-toggle" type="button"
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             Action
                                         </button>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item mb-3 fs-6 text-success bg-white"
+                                                    href="{{ url('admin/cars/' . $car->id . '/edit') }}">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                    <span>Edit</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <form action="{{ url('admin/cars/' . $car->id . '/delete') }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="dropdown-item fs-6 text-danger bg-white">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                        <span>Delete</span>
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        </ul>
                                     </div>
-
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5">No User Available</td>
+                                <td colspan="5">No Car Available</td>
                             </tr>
                         @endforelse
                     </tbody>
