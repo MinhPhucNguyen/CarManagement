@@ -51,11 +51,12 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     });
 
     Route::controller(CarController::class)->group(function() {
+        Route::get('cars/{cars}/view', 'show');
         Route::get('cars', 'index');
-        // Route::get('cars/create', 'create');
-        // Route::post('cars', 'store')->name('cars.store');
-        // Route::get('cars/{car}/edit', 'edit');
-        // Route::put('cars/{car}', 'update');
-        // Route::delete('cars/{car}/delete', 'destroy');
+        Route::get('cars/create', 'create');
+        Route::post('cars', 'store')->name('cars.store');
+        Route::get('cars/{car}/edit', 'edit');
+        Route::put('cars/{car}', 'update');
+        Route::delete('cars/{car}/delete', 'destroy');
     });
 });
