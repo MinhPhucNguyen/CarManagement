@@ -32,7 +32,7 @@
             </div>
 
             <div class="col-md-3 mr-3 bg-success bg-gradient rounded-4" style="height: 220px">
-                <a href="{{ url('admin/users') }}" class="h-100 d-block text-decoration-none ">
+                <a href="{{ url('admin/cars') }}" class="h-100 d-block text-decoration-none ">
                     <div class="h-100 w-100 d-flex justify-content-center align-items-center text-white flex-column"
                         style="font-size: 60px;">
                         <i class="fa-solid fa-car"></i>

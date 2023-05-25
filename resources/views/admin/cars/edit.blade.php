@@ -17,11 +17,29 @@
                     @csrf
                     @method('PUT')
                     <div class="row">
-                        <input type="hidden" name="user_id" value="{{ $car->id }}">
+                        <input type="hidden" name="car_id" value="{{ $car->id }}">
                         <div class="col-md-6 mb-3">
                             <label for="name">Name</label>
-                            <input type="text" name="name" class="form-control"
-                                value={{ $car->name }}
+                            <input type="text" name="carName" class="form-control"
+                                value="{{ $car->carName }}"
+                            >
+                            {{-- @error('username')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror --}}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="name">CarLicensePlate</label>
+                            <input type="text" name="CarLicensePlate" class="form-control"
+                                value="{{ $car->CarLicensePlate }}"
+                            >
+                            {{-- @error('username')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror --}}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="name">Color</label>
+                            <input type="text" name="color" class="form-control"
+                                value="{{ $car->color }}"
                             >
                             {{-- @error('username')
                                 <small class="text-danger">{{ $message }}</small>
@@ -37,7 +55,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="phone">Image</label>
-                            <input type="text" name="image" class="form-control"
+                            <input type="file" name="image" class="form-control"
                                 value="{{ $car->image }}">
                             {{-- @error('phone')
                                 <small class="text-danger">{{ $message }}</small>

@@ -9,7 +9,9 @@ class Car extends Model
 {
     protected $fillable = [
         'id',
-        'name',
+        'carName',
+        'CarLicensePlate',
+        'color',
         'price',
         'image',
     ];

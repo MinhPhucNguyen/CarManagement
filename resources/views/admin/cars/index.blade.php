@@ -19,6 +19,8 @@
                         <tr class="text-dark">
                             <td>ID</td>
                             <td>name</td>
+                            <td>CarLicensePlate</td>
+                            <td>Color</td>
                             <td>price</td>
                             <td>image</td>
                         </tr>
@@ -27,9 +29,12 @@
                         @forelse ($carsList as $car)
                             <tr>
                                 <td>{{ $car->id }}</td>
-                                <td><a href="{{ url('admin/cars/' . $car->id . '/view') }}">{{ $car->name }}</a></td>
+                                <td><a href="{{ url('admin/cars/' . $car->id . '/view') }}">{{ $car->carName }}</a></td>
+                                <td>{{ $car->CarLicensePlate}}</td>
+                                <td>{{ $car->color}}</td>
                                 <td>{{ $car->price }}</td>
-                                <td>{{ $car->image }}</td>
+                                <td><img src="{{ asset('/upload/cars/' . $car->image) }}" width="60px"
+                                        height="30px"></td>
                                 <td class="d-flex">
                                     <div class="dropdown">
                                         <button class="btn btn-success dropdown-toggle" type="button"

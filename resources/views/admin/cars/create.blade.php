@@ -13,14 +13,28 @@
                     </a>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('admin/cars') }}" method="POST">
+                    <form action="{{ url('admin/cars') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="name">Name</label>
-                                <input type="text" name="name"
-                                    {{-- class="form-control @error('username') is-invalid  @enderror"
-                                    value="{{ !$errors->has('username') ? old('username') : '' }}" --}}
+                                <input type="text" name="carName"
+                                >
+                                {{-- @error('username')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror --}}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="name">CarLicensePlate</label>
+                                <input type="text" name="CarLicensePlate"
+                                >
+                                {{-- @error('username')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror --}}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="name">color</label>
+                                <input type="text" name="color"
                                 >
                                 {{-- @error('username')
                                     <small class="text-danger">{{ $message }}</small>
@@ -29,8 +43,6 @@
                             <div class="col-md-6 mb-3">
                                 <label for="price">Price</label>
                                 <input type="text" name="price"
-                                    {{-- class="form-control @error('email') is-invalid  @enderror"
-                                    value="{{ !$errors->has('email') ? old('email') : '' }}" --}}
                                     >
                                 {{-- @error('email')
                                     <small class="text-danger">{{ $message }}</small>
@@ -38,9 +50,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="image">Image</label>
-                                <input type="text" name="image"
-                                    {{-- class="form-control @error('phone') is-invalid  @enderror"
-                                    value="{{ !$errors->has('phone') ? old('phone') : '' }}" --}}
+                                <input type="file" name="image"
                                 >
                                 {{-- @error('phone')
                                     <small class="text-danger">{{ $message }}</small>

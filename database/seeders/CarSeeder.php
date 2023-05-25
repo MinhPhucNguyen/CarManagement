@@ -20,9 +20,11 @@ class CarSeeder extends Seeder
 
         foreach (range(1, 50) as $index) {
             DB::table('cars')->insert([
-                'name' => $faker->name,
-                'price' => $faker->boolean,
-                'image' => $faker->sentence,
+                'carName' => $faker->name,
+                'CarLicensePlate' => $faker->regexify('[A-Z]{2}[0-9]{2}-[A-Z]{2}-[0-9]{2}'),
+                'color' => $faker->safeColorName,
+                'price' => $faker->randomFloat,
+                'image' => $faker->imageUrl(300,300,'cars'),
             ]);
         }
     }

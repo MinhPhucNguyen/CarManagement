@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
-
+use App\Http\Requests\CarFormRequest;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Hash;
 class CarController extends Controller
 {
     public function index(Request $request) {
@@ -32,10 +32,18 @@ class CarController extends Controller
         // dd($validatedInputs);
 
         $car = new Car();
-        $car->name = $request['name'];
-        $car->price = $request['price'];
-        $car->image = $request['image'];
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $ext = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $ext;
 
+            $file->move('upload/cars/', $filename);
+            $car->image = $filename;
+        }
+        $car->carName = $request['carName'];
+        $car->price = $request['price'];
+        $car->color = $request['color'];
+        $car->CarLicensePlate = $request['CarLicensePlate'];
         $car->save();
 
         return redirect('admin/cars')->with('success', 'Create car successfully');
@@ -46,21 +54,25 @@ class CarController extends Controller
         return view('admin.cars.edit', compact('car'));
     }
 
-    public function update(int $car_id, Request $request)
+    public function update(int $car_id, CarFormRequest $request)
     {
-        // $validatedData = $request->validated();
+        $validatedData = $request->validated();
         // dd($user_id);
         // dd($request);
 
         $car = Car::findOrFail($car_id);
 
         if ($car) {
-            $car->name = $request['name'];
+            $car->carName = $request['carName'];
+            $car->CarLicensePlate = $request['CarLicensePlate'];
+            $car->color = $request['color'];
             $car->price = $request['price'];
             $car->image = $request['image'];
-
             $car->update();
-            return redirect('admin/cars')->with('success', "User updated successfully");
+            return redirect('admin/cars')->with('success', "Car updated successfully");
+        }
+        else{
+            return  redirect('admin/cars')->with('message', 'Car not found');
         }
     }
 
