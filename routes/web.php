@@ -50,12 +50,21 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('users/', 'search');
     });
 
-    Route::controller(CarController::class)->group(function() {
+    Route::controller(CarController::class)->group(function () {
         Route::get('cars', 'index');
         // Route::get('cars/create', 'create');
         // Route::post('cars', 'store')->name('cars.store');
         // Route::get('cars/{car}/edit', 'edit');
         // Route::put('cars/{car}', 'update');
         // Route::delete('cars/{car}/delete', 'destroy');
+    });
+
+    //category Route
+    Route::controller(App\Http\Controllers\Admin\CategoryController::class)->group(function () {
+        Route::get('/category', 'index');
+        Route::get('/category/create', 'create');
+        Route::post('/category', 'store');
+        Route::get('/category/{category}/edit', 'edit');
+        Route::put('/category/{category}', 'update');
     });
 });

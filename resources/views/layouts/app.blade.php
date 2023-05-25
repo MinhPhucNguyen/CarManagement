@@ -20,6 +20,7 @@
     {{-- Styles --}}
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/app_styles.css') }}">
+    @livewireStyles
 </head>
 
 <body>
@@ -104,6 +105,7 @@
 
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery-3.6.4.min.js') }}"></script>
+    @livewireScripts
 </body>
 
 </html>

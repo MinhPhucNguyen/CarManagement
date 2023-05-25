@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{ asset('admin/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/css/sb-admin-2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/admin_styles.css') }}">
+    @livewireStyles
 </head>
 
 <body id="page-top">
@@ -61,6 +62,7 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('admin/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('admin/js/demo/chart-pie-demo.js') }}"></script>
+    @livewireScripts
 </body>
 
 </html>
