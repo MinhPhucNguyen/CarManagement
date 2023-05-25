@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Route::get('/home', [CarController::class, 'index'])->name('home');
 
 // Login
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

@@ -14,6 +14,12 @@ class CarController extends Controller
         return view('admin.cars.index', compact('carsList'))->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
+    // public function showListCar(Request $request) {
+    //     $carsList = Car::latest()->simplePaginate(10);
+
+    //     return view('layouts.home.blade.php', compact('carsList'))->with('i', (request()->input('page', 1) - 1) * 10);
+    // }
+
     public function show(int $carId)
     {
         $car = Car::findOrFail($carId);
