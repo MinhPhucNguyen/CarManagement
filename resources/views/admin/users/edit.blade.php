@@ -16,7 +16,7 @@
                 <form action="{{ url('admin/users/' . $user->id) }}" method="POST">
                     @csrf
                     @method('PUT')
-                    <div class="row">
+                    <div class="row"> 
                         <input type="hidden" name="user_id" value="{{ $user->id }}">
                         <div class="col-md-6 mb-3">
                             <label for="username">Username</label>
@@ -54,7 +54,7 @@
                             <label for="password">Password</label>
                             <input type="password" name="password"
                                 class="form-control @error('password') is-invalid  @enderror"
-                                placeholder="*Leave blank if you dont want to change password">
+                                placeholder="*Leave blank if you don't want to change password">
                             @error('password')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -63,7 +63,7 @@
                             <label for="confirm_password">Confirm Password</label>
                             <input type="password" name="confirm_password"
                                 class="form-control @error('confirm_password') is-invalid  @enderror"
-                                placeholder="*Leave blank if you dont want to change password">
+                                placeholder="*Leave blank if you don't want to change password">
                             @error('confirm_password')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror

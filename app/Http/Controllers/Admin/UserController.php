@@ -18,7 +18,7 @@ class UserController extends Controller
 
         if ($filterBy != 'all') {
             if ($filterBy == '0' || $filterBy == '1') {
-                $usersList = User::where('role_as', $filterBy);
+                $usersList = User::where('role_as', $filterBy); 
             } else if ($filterBy == 'asc') {
                 $usersList = User::orderBy('id', $filterBy);
             }
@@ -71,9 +71,11 @@ class UserController extends Controller
 
     public function update(int $user_id, UserFormRequest $request)
     {
+        
         $validatedData = $request->validated();
         // dd($user_id);
         // dd($request);
+
 
         $user = User::findOrFail($user_id);
 
@@ -105,10 +107,13 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Delete user successfully');
     }
 
+    
     public function search(Request $request)
     {
-        $filterBy = $request->input('filterBy'); //chèn biến filterBy vào parameter của hàm simplePaginate để phân trang
-        $valueSearch = $request->input('search');
+        $filterBy = $request->input('filterBy'); //lấy giá trị của tham số filterBy
+        // dd($filterBy);
+        $searchValue = $request->input('search');
+        // dd($valueSearch);
 
         $usersList = User::query();
 
@@ -122,12 +127,14 @@ class UserController extends Controller
             $usersList->orderBy('id', 'desc');
         }
 
-        if ($valueSearch) {
-            $usersList->where('username', 'like', "$valueSearch%");
+        if ($searchValue) {
+            $usersList->where('username', 'like', "$searchValue%");
+        }
+        else{
+            $usersList->orderBy('id', 'desc');
         }
 
-        $usersList = $usersList->simplePaginate(15)
-            ->appends(['filterBy' => $filterBy, 'valueSearch' => $valueSearch]); //Thêm các tham số vào quá trình phân trang, khi chuyển trang thì tham số vẫn giữ nguyên để lọc danh sách user theo role
+        $usersList = $usersList->simplePaginate(15)->appends(['filterBy' => $filterBy, 'valueSearch' => $searchValue]); //Thêm các tham số vào quá trình phân trang, khi chuyển trang thì tham số vẫn giữ nguyên để lọc danh sách user theo role
 
         return view('admin.users.index', compact('usersList'));
     }

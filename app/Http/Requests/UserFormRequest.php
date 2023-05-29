@@ -42,7 +42,6 @@ class UserFormRequest extends FormRequest
                 'required',
                 'string',
                 'max:50',
-                'regex:/^(\\d{1,}) [a-zA-Z0-9\\s]+(\\,)? [a-zA-Z]|[a-zA-Z]+$/'
             ],
             'phone' => [
                 'sometimes',
@@ -76,23 +75,29 @@ class UserFormRequest extends FormRequest
             'username.min' => '*Username must be at least 5 and at most 20 characters',
             'username.max' => '*Username must be at least 5 and at most 20 characters',
             'username.regex' => '*Username must start with a letter, not start with a number and special characters and not contain special characters',
+
             'email.required' => '*Please enter your email',
             'email.email' => '*Please enter a valid email',
             'email.unique' => '*Email already exists',
+
             'phone.required' => '*Please enter your phone number',
             'phone.min' => '*Phone number must be 10 numbers',
             'phone.max' => '*Phone number must be 10 numbers',
             'phone.unique' => '*Phone number already exists',
+
             'address.required' => '*Please enter your address',
             'address.regex' => '*Please enter a valid address',
             'address.max' => '*Address must be at most 50 characters',
+
+            'role_as.required' => "*Please select a role",
+
             'password.required' => '*Please enter your password',
             'password.min' => '*Password must be at least 8 characters',
             'password.unique' => '*Password already exists',
             'password.regex' => '*Password must contain at least one uppercase letter, one lowercase letter, one number and one special character',
+            
             'confirm_password.required' => '*Please confirm your password',
             'confirm_password.same:password' => '*Password confirmation does not match',
-            'role_as.required' => "*Please select a role",
         ];
     }
 }
