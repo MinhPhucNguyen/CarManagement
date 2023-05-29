@@ -4,7 +4,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Category delete</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Contract delete</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -41,9 +41,9 @@
                 @endif
                 <div class="card">
                     <div class="card-header">
-                        <h4>Category
+                        <h4>Contract
                             <a href="{{ url('admin/category/create') }}" class="btn btn-primary btn-sm float-end">Add
-                                category</a>
+                                Contract</a>
                         </h4>
                     </div>
                     <div class="card-body">
@@ -52,7 +52,10 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
+                                    <th>Lincense plates</th>
                                     <th>Status</th>
+
+
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -61,7 +64,8 @@
                                     <tr>
                                         <td>{{ $category->id }}</td>
                                         <td>{{ $category->name }}</td>
-                                        <td>{{ $category->Status == '1' ? 'Hidden' : 'Visible' }}</td>
+                                        <td>{{ $category->lincense_plates }}</td>
+                                        <td>{{ $category->status == '1' ? 'complete' : 'unfinished' }}</td>
                                         <td><a href="{{ url('admin/category/' . $category->id . '/edit') }}"
                                                 class="btn btn-success">Edit</a>
                                             <a href="#" wire:click="deleteCategory({{ $category->id }})"

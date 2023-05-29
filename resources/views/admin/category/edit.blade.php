@@ -9,7 +9,7 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h3>Edit Category
+                        <h3>Edit Contract
                             <a href="{{ url('admin/category') }}" class="btn btn-primary btn-sm text-white float-end">Back</a>
                         </h3>
                     </div>
@@ -44,10 +44,11 @@
                                         height="60px">
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="">Status</label>
+                                    <label for="">Payment status</label>
                                     <input type="checkbox" name="status"{{ $category->status == '1' ? 'checked' : '' }} />
 
                                 </div>
+
                                 <div class="col-md-12">
                                     <h4>Car</h4>
                                     <div class="col-md-12 mb-3">

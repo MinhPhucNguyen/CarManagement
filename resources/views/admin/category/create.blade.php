@@ -9,7 +9,7 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h3>Add Category
+                        <h3>Add Contract
                             <a href="{{ url('admin/category') }}" class="btn btn-primary btn-sm text-white float-end">Back</a>
                         </h3>
                     </div>
@@ -28,14 +28,23 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="">Phone</label>
                                     <input type="text" name="phone" class="form-control" />
+                                    @error('phone')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label for="">Address</label>
                                     <textarea name="address" class="form-control" rows="3"></textarea>
+                                    @error('address')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="">Image</label><br />
                                     <input type="file" name="image" class="form-control" />
+                                    @error('image')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="">Status</label>
@@ -47,6 +56,9 @@
                                     <div class="col-md-12 mb-3">
                                         <label for="">lincense_plates</label>
                                         <textarea name="lincense_plates" class="form-control" rows="3"></textarea>
+                                        @error('lincense_plates')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                     <div cla <div class="col-md-12 mb-3">
                                         <label for="">Note</label>

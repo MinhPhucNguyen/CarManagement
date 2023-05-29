@@ -22,16 +22,16 @@ class CategoryFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string'],
+            'name' => ['required', 'string', 'regex:/^[a-zA-Z\s]+$/', 'max:255'],
 
-            'phone' => ['required', 'string'],
+            'phone' => ['required', 'string', 'min:10', 'max:15', 'regex:/^(08|09|03)\d{8}$/'],
 
-            'address' => ['required',],
+            'address' => ['required', 'max:255', 'regex:/^[\p{L}\d\s,]+$/u'],
 
             'image' => ['nullable', 'mimes:jpg,jpeg,png'],
 
 
-            'lincense_plates' => ['required', 'string'],
+            'lincense_plates' => ['required', 'string', 'max:20', 'regex:/^\d{2}[A-Z]-\d{4,5}$/u'],
 
             'note' => ['required', 'string'],
         ];
