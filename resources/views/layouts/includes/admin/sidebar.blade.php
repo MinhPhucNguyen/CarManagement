@@ -58,6 +58,25 @@
     </li>
 
     <div class="sidebar-heading text-success">
+        Contract Management
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed fw-bold" href="#" data-toggle="collapse" data-target="#collapseThree"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fa-sharp fa-solid fa-file-signature"></i>
+            <span>Contract</span>
+        </a>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Action</h6>
+                <a class="collapse-item" href="/admin/category">Manage Contract</a>
+            </div>
+        </div>
+    </li>
+
+    <div class="sidebar-heading text-success">
         Staff Management
     </div>
 

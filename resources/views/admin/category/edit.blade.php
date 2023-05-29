@@ -41,8 +41,6 @@
                                     <label for="">Image</label><br />
                                     <input type="file" name="image" class="form-control" /><img
                                         src="{{ asset('/upload/category/' . $category->image) }}" width="60px"
-                                        height="60px" alt=""><img
-                                        src="{{ asset('/upload/category/' . $category->image) }}" width="60px"
                                         height="60px">
                                 </div>
                                 <div class="col-md-6 mb-3">
