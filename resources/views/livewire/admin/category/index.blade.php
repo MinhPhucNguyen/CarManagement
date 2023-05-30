@@ -10,11 +10,11 @@
 
                 <form wire:submit.prevent="destroyCategory">
                     <div class="modal-body">
-                        <h6>sure delete</h6>
+                        <h6>Are yoy sure you want to delete ?</h6>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Yes</button>
+                        <button type="submit" class="btn btn-primary">Yes. Delete</button>
                     </div>
                 </form>
             </div>
@@ -36,20 +36,23 @@
         <div class="row">
             <div class="col-md-12">
 
-                @if (session('messages'))
+                @if (session('message'))
                     <div class="alert alert-success">{{ session('message') }}</div>
                 @endif
                 <div class="card">
-                    <div class="card-header">
-                        <h4>Contract
-                            <a href="{{ url('admin/category/create') }}" class="btn btn-primary btn-sm float-end">Add
-                                Contract</a>
-                        </h4>
+                    <div class="card-header bg-dark">
+                        <div class="d-inline-block fw-bold text-white fs-4">Contract
+
+                        </div>
+                        <a href="{{ url('admin/category/create') }}" class="btn btn-success fw-bold float-right">
+                            <i class="fa-solid fa-plus"></i> Add
+                            Contract</a>
+
                     </div>
                     <div class="card-body">
-                        <table class="table table-borded table-striped">
+                        <table class="table table-bordered table-striped text-dark fw-bold">
                             <thead>
-                                <tr>
+                                <tr class="text-dark">
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Lincense plates</th>
@@ -84,3 +87,12 @@
         </div>
     </div>
 </div>
+
+@push('script')
+    <script>
+        window.addEventListener('close-modal', event => {
+            $('#deleteModal').modal('hide');
+
+        });
+    </script>
+@endpush

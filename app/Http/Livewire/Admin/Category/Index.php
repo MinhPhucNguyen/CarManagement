@@ -27,9 +27,12 @@ class Index extends Component
         $path = 'uploads/category/' . $category->image;
         if (File::exists($path)) {
             File::delete($path);
+        } else {
+            session()->flash('message', 'File not found');
         }
         $category->delete();
         session()->flash('message', 'Category deleted successfully');
+        $this->dispatchBrowserEvent('close-modal');
     }
 
     public function render()

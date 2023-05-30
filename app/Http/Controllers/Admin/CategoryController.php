@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\CategoryFormRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CategoryController extends Controller
 {
@@ -56,7 +57,11 @@ class CategoryController extends Controller
         $validateData = $request->validated();
 
 
-        $category = Category::findOrFail($category);
+        try {
+            $category = Category::findOrFail($category);
+        } catch (ModelNotFoundException $e) {
+            return response()->view('errors.404', [], 404); // Custom error view
+        }
 
 
         $category->name = $validateData['name'];
@@ -67,9 +72,11 @@ class CategoryController extends Controller
 
 
         if ($request->hasFile('image')) {
-            $path = 'uploads/category/' . $category->image;
+            $path = 'upload/category/' . $category->image;
             if (File::exists($path)) {
                 File::delete($path);
+            } else {
+                session()->flash('message', 'File not found');
             }
 
             $file = $request->file('image');
@@ -78,6 +85,8 @@ class CategoryController extends Controller
 
             $file->move('upload/category/', $filename);
             $category->image = $filename;
+        } else {
+            session()->flash('message', 'No image file uploaded');
         };
 
 
