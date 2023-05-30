@@ -94,8 +94,6 @@ class UserController extends Controller
                 $user->confirm_password = $validatedData['confirm_password'] == $validatedData['password'] ? 'true' : 'false';
             }
 
-            
-
             $user->update();
             return redirect('admin/users')->with('success', "User updated successfully");
         } else {
