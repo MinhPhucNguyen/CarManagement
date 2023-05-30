@@ -78,11 +78,13 @@ class UserController extends Controller
 
 
         $user = User::findOrFail($user_id);
+        // dd(!$user);
 
         if ($user) {
             $user->username = $validatedData['username'];
             $user->email = $validatedData['email'];
             $user->phone = $validatedData['phone'];
+            $user->role_as = $validatedData['role_as'] == 'admin' ? '1' : '0';
 
             if (empty($validatedData['password']) && empty($validatedData['confirm_password'])) {
                 unset($validatedData['password']);
@@ -92,7 +94,7 @@ class UserController extends Controller
                 $user->confirm_password = $validatedData['confirm_password'] == $validatedData['password'] ? 'true' : 'false';
             }
 
-            $user->role_as = $validatedData['role_as'] == 'admin' ? '1' : '0';
+            
 
             $user->update();
             return redirect('admin/users')->with('success', "User updated successfully");
