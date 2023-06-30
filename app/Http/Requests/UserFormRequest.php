@@ -42,6 +42,7 @@ class UserFormRequest extends FormRequest
                 'required',
                 'string',
                 'max:50',
+                'regex:/^(\\d{1,}) [a-zA-Z0-9\\s]+(\\,)? [a-zA-Z]|[a-zA-Z]+$/',
             ],
             'phone' => [
                 'sometimes',
@@ -72,8 +73,8 @@ class UserFormRequest extends FormRequest
         return [
             'username.required' => '*Please enter your username',
             'username.string' => '*Username must be a string',
-            'username.min' => '*Username must be at least 5 and at most 20 characters',
-            'username.max' => '*Username must be at least 5 and at most 20 characters',
+            'username.min' => '*Username must be at least 5 and at most 30 characters',
+            'username.max' => '*Username must be at least 5 and at most 30 characters',
             'username.regex' => '*Username must start with a letter, not start with a number and special characters and not contain special characters',
 
             'email.required' => '*Please enter your email',

@@ -34,7 +34,7 @@
                             class="col-md-3 col-form-label text-md-right fw-bold">{{ __('Email') }}</label>
 
                         <div class="col-md-12 ">
-                            <input id="email" type="email" class="form-control  @error('email') is-invalid @enderror"
+                            <input id="email" type="text" class="form-control  @error('email') is-invalid @enderror"
                                 name="email" placeholder="e.g abc@example.com"  value="{{ !$errors->has('email') ? old('email') : '' }}">
                             @error('email')
                                 <span class="invalid-feedback" role="alert">

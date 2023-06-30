@@ -82,8 +82,6 @@
                                             {{ __('Back to Dashboard') }}
                                         </a>
                                     @endif
-
-
                                 </div>
                                 @include('auth.logoutModal')
                             </li>

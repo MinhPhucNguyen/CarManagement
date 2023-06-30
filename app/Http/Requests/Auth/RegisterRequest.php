@@ -41,6 +41,7 @@ class RegisterRequest extends FormRequest
                 'min:10',
                 'max:10',
                 'unique:users,phone',
+                'regex:/[0-9]/'
             ],
             'address' => [
                 'required',
@@ -74,9 +75,10 @@ class RegisterRequest extends FormRequest
             'username.regex' => '*Username must start with a letter, not start with a number and special characters and not contain special characters',
             'email.required' => '*Please enter your email',
             'email.email' => '*Please enter a valid email',
-            'email.unique' => '*Email already exists',
+            'email.unique' => '*Email already exists. Please enter another email',
             'phone.required' => '*Please enter your phone number',
-            'phone.min' => '*Phone number must be at least 10 characters',
+            'phone.regex' => '*Please enter a valid phone number',
+            'phone.min' => '*Phone number must be 10 characters',
             'phone.max' => '*Phone number must be at most 10 characters',
             'address.required' => '*Please enter your address',
             'address.regex' => '*Please enter a valid address',
