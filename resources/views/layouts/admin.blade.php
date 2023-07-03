@@ -16,13 +16,12 @@
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-   
-
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="{{ asset('admin/css/bootstrap.min.css') }}"> 
     <link rel="stylesheet" href="{{ asset('admin/css/sb-admin-2.min.css') }}"> 
     <link rel="stylesheet" href="{{ asset('assets/css/admin_styles.css') }}">
 
+    @livewireStyles
 </head>
 
 <body id="page-top">
@@ -46,12 +45,9 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->    
-
     <script src="{{ asset('assets/js/adminHandle.js') }}"></script>
-
     <script src="{{ asset('assets/js/jquery-3.6.4.min.js') }}"></script> 
     <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
-
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
@@ -60,6 +56,8 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('admin/js/sb-admin-2.min.js') }}"></script>
+    @livewireScripts
+    @stack('scripts')
 </body>
 
 </html>

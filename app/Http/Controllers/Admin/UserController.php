@@ -12,22 +12,8 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $filterBy = $request->input('filterBy'); //chèn biến role_as vào parameter của hàm simplePaginate để phân trang
-
-        $usersList = User::query();
-
-        if ($filterBy != 'all') {
-            if ($filterBy == '0' || $filterBy == '1') {
-                $usersList = User::where('role_as', $filterBy); 
-            } else if ($filterBy == 'asc') {
-                $usersList = User::orderBy('id', $filterBy);
-            }
-        } else {
-            $usersList = User::orderBy('id', 'desc');
-        }
-
-        $usersList = $usersList->simplePaginate(15)
-            ->appends(['filterBy' => $filterBy]); //Thêm các tham số vào quá trình phân trang, khi chuyển trang thì tham số vẫn giữ nguyên để lọc danh sách user theo role
+        $usersList = User::all()->reverse();
+        $usersList = $usersList->simplePaginate(15);
         return view('admin.users.index', compact('usersList'));
     }
 
@@ -71,12 +57,7 @@ class UserController extends Controller
 
     public function update(int $user_id, UserFormRequest $request)
     {
-        
         $validatedData = $request->validated();
-        // dd($user_id);
-        // dd($request);
-
-
         $user = User::findOrFail($user_id);
         // dd(!$user);
 
@@ -84,6 +65,7 @@ class UserController extends Controller
             $user->username = $validatedData['username'];
             $user->email = $validatedData['email'];
             $user->phone = $validatedData['phone'];
+            $user->address = $validatedData['address'];
             $user->role_as = $validatedData['role_as'] == 'admin' ? '1' : '0';
 
             if (empty($validatedData['password']) && empty($validatedData['confirm_password'])) {

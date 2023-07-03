@@ -16,14 +16,13 @@
                     Users List
                 </div>
                 <div>
-                    <a href="{{ url('admin/users/create') }}" class="btn btn-success fw-bold float-right ml-3">
+                    <a href="{{ route('users.create') }}" class="btn btn-success fw-bold float-right ml-3">
                         <i class="fa-solid fa-plus"></i>
                         Add New User
                     </a>
                 </div>
             </div>
             <div class="card-body">
-
                 {{-- Filter Role As --}}
                 <form action="{{ url('admin/users') }}" method="GET" class="w-25 m-0">
                     <div class="mb-3 d-flex w-100 align-items-center">
@@ -58,8 +57,8 @@
                         @forelse ($usersList as $user)
                             <tr>
                                 <td>{{ $user->id }}</td>
-                                <td><a href="{{ url('admin/users/' . $user->id . '/view') }}"
-                                        class="text-success  ">{{ $user->username }}</a></td>
+                                <td><a href="{{ route('users.show', $user->id) }}"
+                                        class="text-success">{{ $user->username }}</a></td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone }}</td>
                                 <td>{{ $user->address }}</td>
@@ -76,53 +75,52 @@
                                         <ul class="dropdown-menu">
                                             <li>
                                                 <a class="dropdown-item mb-3 fs-6 text-success bg-white"
-                                                    href="{{ url('admin/users/' . $user->id . '/edit') }}">
+                                                    href="{{ route('users.edit', $user->id) }}">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                     <span>Edit</span>
                                                 </a>
                                             </li>
                                             <li>
                                                 @if ($user->role_as != '1')
-                                                    <form action="{{ url('admin/users/' . $user->id . '/delete') }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit"
-                                                            class="dropdown-item fs-6 text-danger bg-white">
-                                                            <i class="fa-solid fa-trash"></i>
-                                                            <span>Delete</span>
-                                                        </button>
-                                                    </form>
-                                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-                                                        aria-labelledby="myModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="myModalLabel">Modal Title
-                                                                    </h5>
-                                                                    <button type="button" class="close"
-                                                                        data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <p>Modal content goes here.</p>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-dismiss="modal">Close</button>
-                                                                    <button type="button" class="btn btn-primary">Save
-                                                                        changes</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <button type="button" class="dropdown-item fs-6 text-danger bg-white"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#deleteConfirmModal{{ $user->id }}">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                        <span>Delete</span>
+                                                    </button>
                                                 @endif
                                             </li>
                                         </ul>
                                     </div>
                                 </td>
                             </tr>
+
+                            <!-- Modal Delete Confirm -->
+                            <div class="modal fade" id="deleteConfirmModal{{ $user->id }}" tabindex="-1"
+                                aria-labelledby="deleteConfirmModalLabel{{ $user->id }}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteConfirmModalLabel{{ $user->id }}">
+                                                Delete Confirmation</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure you want to delete this user?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                            <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @empty
                             <tr>
                                 <td colspan="7">No User Available</td>

@@ -7,11 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Car extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
-        'id',
-        'name',
+        'car_id',
+        'car_name',
         'price',
         'image',
     ];
-    use HasFactory;
+
+    protected $table = 'cars';
+    public $timestamps = false;
+
+    public function brand() {
+        return $this->belongsTo(Brand::class, 'brand_id');
+    }
 }

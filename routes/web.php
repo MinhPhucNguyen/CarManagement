@@ -5,10 +5,9 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\SignUpController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,8 +28,8 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
 //Register
-Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
-Route::post('/register', [RegisterController::class, 'register']);
+Route::get('/register', [SignUpController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [SignUpController::class, 'register']);
 
 //Logout
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
@@ -39,23 +38,24 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index']);
 
+    // User Routes
     Route::controller(UserController::class)->group(function () {
-        Route::get('users/{users}/view', 'show');
-        Route::get('users', 'index');
-        Route::get('users/create', 'create');
+        Route::get('users', 'index')->name('users.index');
+        Route::get('users/{users}/view', 'show')->name('users.show');
+        Route::get('users/create', 'create')->name('users.create');
         Route::post('users', 'store')->name('users.store');
-        Route::get('users/{user}/edit', 'edit');
-        Route::put('users/{user}', 'update');
-        Route::delete('users/{user}/delete', 'destroy');
+        Route::get('users/{user}/edit', 'edit')->name('users.edit');
+        Route::put('users/{user}', 'update')->name('users.update');
+        Route::delete('users/{user}', 'destroy')->name('users.destroy');
         Route::get('users/', 'search');
     });
 
+    // Brand Routes
+    Route::get('brand', App\Http\Livewire\Admin\Brand\Index::class)->name('brand');
+
+    // Car Routes
     Route::controller(CarController::class)->group(function() {
-        Route::get('cars', 'index');
-        // Route::get('cars/create', 'create');
-        // Route::post('cars', 'store')->name('cars.store');
-        // Route::get('cars/{car}/edit', 'edit');
-        // Route::put('cars/{car}', 'update');
-        // Route::delete('cars/{car}/delete', 'destroy');
+        Route::get('cars', 'index')->name('cars.index');
+        Route::get('cars/create', 'create')->name('cars.create');
     });
 });

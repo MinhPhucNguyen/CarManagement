@@ -32,31 +32,35 @@
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Action</h6>
-                <a class="collapse-item" href="{{ url('admin/users') }}">Manage Users</a>
+                <a class="collapse-item" href="{{ url('admin/users') }}">View Users</a>
+                <a class="collapse-item" href="{{ route('users.create') }}">Add New User</a>
             </div>
         </div>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link fw-bold" href="{{route('brand')}}">
+            <i class="fa-sharp fa-solid fa-bars"></i>
+            <span>Brand</span>
+        </a>
+    </li>
+
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed fw-bold" href="#" data-toggle="collapse" data-target="#collapseTwo"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed fw-bold" href="#" data-toggle="collapse" data-target="#collapseThree"
+            aria-expanded="true" aria-controls="collapseThree">
             <i class="fas fa-fw fa-car"></i>
             <span>Car</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Action</h6>
-                <a class="collapse-item" href="{{ url('admin/cars') }}">Manage Cars</a>
+                <a class="collapse-item" href="{{ url('admin/cars') }}">View Cars</a>
+                <a class="collapse-item" href="{{ route('cars.create') }}">Create New Car</a>
             </div>
         </div>
     </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
-
-    <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
 </ul>

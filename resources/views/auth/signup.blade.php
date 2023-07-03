@@ -5,15 +5,14 @@
         <div class="card">
             <div class="card-header text-center bg-dark">
                 <h2 class="text-white">
-                    {{ __('Register') }}
+                    {{ __('Sign Up') }}
                 </h2>
             </div>
 
-            <div class="card-body mx-auto p-4 " style="width: 500px;">
+            <div class="card-body mx-auto" style="width: 500px;">
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
-
-                    <div class="form-group row mb-4">
+                    <div class="form-group row mb-2">
                         <label for="username"
                             class="col-md-3 col-form-label text-md-right fw-bold">{{ __('Username') }}</label>
 
@@ -29,7 +28,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row mb-4">
+                    <div class="form-group row mb-2">
                         <label for="email"
                             class="col-md-3 col-form-label text-md-right fw-bold">{{ __('Email') }}</label>
 
@@ -44,7 +43,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row mb-4">
+                    <div class="form-group row mb-2">
                         <label for="phone"
                             class="col-md-3 col-form-label text-md-right fw-bold">{{ __('Phone') }}</label>
 
@@ -58,7 +57,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="form-group row mb-4">
+                    <div class="form-group row mb-2">
                         <label for="address"
                             class="col-md-3 col-form-label text-md-right fw-bold">{{ __('Address') }}</label>
 
@@ -73,7 +72,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row mb-4">
+                    <div class="form-group row mb-2">
                         <label for="password"
                             class="col-md-3 col-form-label text-md-right fw-bold">{{ __('Password') }}</label>
 
@@ -105,11 +104,11 @@
                         </div>
                     </div>
 
-                    <div class="form-group row mb-4">
+                    <div class="form-group row mb-2">
                         <div class="col-md-12">
                             <button type="submit" class="btn btn-success btn-lg fw-bold" name="register-btn"
                                 style="width: 100%;">
-                                {{ __('Register') }}
+                                {{ __('Sign Up') }}
                             </button>
                         </div>
                     </div>

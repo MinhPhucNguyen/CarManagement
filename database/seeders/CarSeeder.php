@@ -16,14 +16,6 @@ class CarSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-       
-
-        foreach (range(1, 50) as $index) {
-            DB::table('cars')->insert([
-                'name' => $faker->name,
-                'price' => $faker->boolean,
-                'image' => $faker->sentence,
-            ]);
-        }
+    
     }
 }

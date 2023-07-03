@@ -1,16 +1,24 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Car;
 
 use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
-    public function index(Request $request) {
-        $carsList = Car::latest()->simplePaginate(10);
+    public function index(Request $request)
+    {
+        $carsList = Car::all()->reverse();
+        return view('admin.cars.index', compact('carsList'));
+    }
 
-        return view('admin.cars.index', compact('carsList'))->with('i', (request()->input('page', 1) - 1) * 10);
+    public function create()
+    {
+        $brands = Brand::all();
+        return view('admin.cars.create', compact('brands'));
     }
 }

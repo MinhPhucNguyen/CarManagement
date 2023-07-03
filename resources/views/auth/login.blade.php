@@ -9,7 +9,7 @@
                 </h2>
             </div>
 
-            <div class="card-body mx-auto p-4 " style="width: 500px;">
+            <div class="card-body mx-auto" style="width: 500px;">
                 @error('login_error')
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <i class="fa-solid fa-triangle-exclamation"></i>
@@ -27,7 +27,7 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
 
-                    <div class="form-group row mb-4">
+                    <div class="form-group row mb-2">
                         <label for="username"
                             class="col-md-3 col-form-label text-md-right fw-bold">{{ __('Username') }}</label>
 

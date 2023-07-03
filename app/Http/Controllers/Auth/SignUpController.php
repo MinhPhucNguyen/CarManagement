@@ -1,16 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\Auth\SignUpRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
-class RegisterController extends Controller
+class SignUpController extends Controller
 {
     public function __construct()
     {
@@ -18,10 +14,10 @@ class RegisterController extends Controller
     }
     public function showRegisterForm()
     {
-        return view('auth.register');
+        return view('auth.signup');
     }
 
-    public function register(RegisterRequest $request)
+    public function register(SignUpRequest $request)
     {
         $validatedData = $request->validated();
 
