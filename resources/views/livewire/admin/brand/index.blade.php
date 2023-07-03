@@ -33,41 +33,43 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ( $brands as $brand )
-                        <tr>
-                            <td>{{ $brand->brand_id }}</td>
-                            <td>{{ Str::upper($brand->brand_name) }}</td>
-                            <td>{{ $brand->status == '1' ? 'Hidden' : 'Visible' }}</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="btn btn-success dropdown-toggle" type="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Action
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <button type="button"
-                                                class="dropdown-item mb-3 fs-6 text-success bg-white"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                                <span>Edit</span>
-                                            </button>
-                                        </li>
-                                        <li>
-                                            <button type="button" class="dropdown-item fs-6 text-danger bg-white"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                <i class="fa-solid fa-trash"></i>
-                                                <span>Delete</span>
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
+                        @forelse ($brands as $brand)
+                            <tr>
+                                <td>{{ $brand->brand_id }}</td>
+                                <td>{{ Str::upper($brand->brand_name) }}</td>
+                                <td>{{ $brand->status == '1' ? 'Hidden' : 'Visible' }}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-success dropdown-toggle" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Action
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <button type="button"
+                                                    class="dropdown-item mb-3 fs-6 text-success bg-white"
+                                                    data-bs-toggle="modal" data-bs-target="#editBrandModal"
+                                                    wire:click="editBrand({{ $brand->brand_id }})">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                    <span>Edit</span>
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button type="button" class="dropdown-item fs-6 text-danger bg-white"
+                                                    data-bs-toggle="modal" data-bs-target="#deleteConfirmModal"
+                                                    wire:click="deleteBrand({{ $brand->brand_id }})">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                    <span>Delete</span>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
                         @empty
-                        <tr>
-                            <td colspan="4">No User Available</td>
-                        </tr>
+                            <tr>
+                                <td colspan="4">No User Available</td>
+                            </tr>
                         @endforelse
                     </tbody>
                 </table>
@@ -80,6 +82,8 @@
     <script>
         window.addEventListener('close-modal', e => {
             $('#createBrandModal').modal('hide');
+            $('#editBrandModal').modal('hide');
+            $('#deleteConfirmModal').modal('hide');
 
             // Auto close alert when add brand success
             setTimeout(() => {
