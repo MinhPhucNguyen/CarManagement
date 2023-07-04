@@ -40,7 +40,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 
     // User Routes
     Route::controller(UserController::class)->group(function () {
-        Route::get('users', 'index')->name('users.index');
+        Route::get('users', 'index');
         Route::get('users/{users}/view', 'show')->name('users.show');
         Route::get('users/create', 'create')->name('users.create');
         Route::post('users', 'store')->name('users.store');
@@ -57,5 +57,6 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::controller(CarController::class)->group(function() {
         Route::get('cars', 'index')->name('cars.index');
         Route::get('cars/create', 'create')->name('cars.create');
+        Route::post('cars', 'store')->name('cars.store');
     });
 });

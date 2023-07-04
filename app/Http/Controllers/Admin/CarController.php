@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CarFormRequest;
 use App\Models\Brand;
 use App\Models\Car;
 
@@ -20,5 +21,29 @@ class CarController extends Controller
     {
         $brands = Brand::all();
         return view('admin.cars.create', compact('brands'));
+    }
+
+    public function store(CarFormRequest $request)
+    {
+        $validatedData = $request->validated();
+
+        $brand = Brand::find($validatedData['brand']);
+
+        $car = $brand->cars()->create([
+            'car_name' => $validatedData['car_name'],
+            'price' => $validatedData['price'],
+            'seats' => $validatedData['seats'],
+            'fuel' => $validatedData['fuel'],
+            'year' => $validatedData['year'],
+            'speed' => $validatedData['speed'],
+            'capacity' => $validatedData['capacity'],
+            'brand_id' => $validatedData['brand'],
+        ]);
+
+        if($request->hasFile('image')){
+            $uploadsPath = 'uploads/products/';
+        }
+
+        return redirect('admin/cars')->with('success', 'Car Created Successfully');
     }
 }

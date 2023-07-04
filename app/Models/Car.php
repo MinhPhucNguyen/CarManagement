@@ -13,7 +13,12 @@ class Car extends Model
         'car_id',
         'car_name',
         'price',
-        'image',
+        'seats',
+        'fuel',
+        'year',
+        'speed',
+        'capacity',
+        'brand_id',
     ];
 
     protected $table = 'cars';

@@ -99,24 +99,7 @@ class UserController extends Controller
 
         $usersList = User::query();
 
-        if ($filterBy != 'all') {
-            if ($filterBy == '1' || $filterBy == '0') {
-                $usersList->where('role_as', $filterBy);
-            } else if ($filterBy == 'asc') {
-                $usersList->orderBy('id', $filterBy);
-            }
-        } else if ($filterBy == 'all') {
-            $usersList->orderBy('id', 'desc');
-        }
-
-        if ($searchValue) {
-            $usersList->where('username', 'like', "$searchValue%");
-        }
-        else{
-            $usersList->orderBy('id', 'desc');
-        }
-
-        $usersList = $usersList->simplePaginate(15)->appends(['filterBy' => $filterBy, 'valueSearch' => $searchValue]); //Thêm các tham số vào quá trình phân trang, khi chuyển trang thì tham số vẫn giữ nguyên để lọc danh sách user theo role
+        $usersList = $usersList->simplePaginate(15); //Thêm các tham số vào quá trình phân trang, khi chuyển trang thì tham số vẫn giữ nguyên để lọc danh sách user theo role
 
         return view('admin.users.index', compact('usersList'));
     }

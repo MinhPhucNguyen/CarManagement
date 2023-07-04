@@ -13,28 +13,31 @@
                 </a>
             </div>
             <div class="card-body">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link text-success fw-bold active" id="home-tab" data-bs-toggle="tab"
-                            data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane"
-                            aria-selected="true">
-                            <i class="fa-solid fa-circle-info mr-1"></i>
-                            Car Detail  
-                        </button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link text-success fw-bold" id="profile-tab" data-bs-toggle="tab"
-                            data-bs-target="#profile-tab-pane" type="button" role="tab"
-                            aria-controls="profile-tab-pane" aria-selected="false">
-                            <i class="fa-solid fa-image mr-1"></i>
-                            Car Images</button>
-                    </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show mt-3 active" id="home-tab-pane" role="tabpanel"
-                        aria-labelledby="home-tab" tabindex="0">
-                        <form action="{{ url('admin/users') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
+                <form action="{{ route('cars.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link text-success fw-bold active" id="home-tab" data-bs-toggle="tab"
+                                data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane"
+                                aria-selected="true">
+                                <i class="fa-solid fa-circle-info mr-1"></i>
+                                Car Detail
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link text-success fw-bold" id="profile-tab" data-bs-toggle="tab"
+                                data-bs-target="#profile-tab-pane" type="button" role="tab"
+                                aria-controls="profile-tab-pane" aria-selected="false">
+                                <i class="fa-solid fa-image mr-1"></i>
+                                Car Images</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+
+                        {{-- Tab Add Car Detail --}}
+                        <div class="tab-pane fade show mt-3 active" id="home-tab-pane" role="tabpanel"
+                            aria-labelledby="home-tab" tabindex="0">
+
                             <div class="row">
                                 <div class="col-md-12 mb-3 ">
                                     <label for="car_name">Car Name</label>
@@ -47,7 +50,7 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="brand">Brand</label>
-                                    <select name="brand" class="form-control">
+                                    <select name="brand" class="form-control @error('brand') is-invalid  @enderror"">
                                         <option value="">--Select Brand--</option>
                                         @foreach ($brands as $brand)
                                             <option value="{{ $brand->brand_id }}">{{ Str::upper($brand->brand_name) }}
@@ -61,7 +64,8 @@
                                 <div class="col-md-4 mb-3">
                                     <label for="year">Year</label>
                                     <input type="text" name="year"
-                                        class="form-control @error('year') is-invalid  @enderror">
+                                        class="form-control @error('year') is-invalid  @enderror"
+                                        value="{{ !$errors->has('year') ? old('year') : '' }}">
                                     @error('year')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
@@ -77,7 +81,7 @@
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label for="description">Description</label>
-                                    <textarea type="text" name="description" rows="5"
+                                    <textarea type="text" name="description" rows="3"
                                         class="form-control @error('description') is-invalid  @enderror">{{ !$errors->has('description') ? old('description') : '' }}</textarea>
                                     @error('description')
                                         <small class="text-danger">{{ $message }}</small>
@@ -94,15 +98,17 @@
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="fuel">Fuel</label>
-                                    <input type="text" name="fuel"
-                                        class="form-control @error('fuel') is-invalid  @enderror"
-                                        value="{{ !$errors->has('fuel') ? old('fuel') : '' }}">
+                                    <select name="fuel" class="form-control  @error('fuel') is-invalid  @enderror">
+                                        <option value="">--Select Type Of Fuel-- </option>
+                                        <option value="gasoline">Gasoline</option>
+                                        <option value="diesel">Diesel</option>
+                                    </select>
                                     @error('fuel')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    <label for="speed">Speed</label>
+                                    <label for="speed">Speed (Km/h)</label>
                                     <input type="text" name="speed"
                                         class="form-control @error('speed') is-invalid  @enderror"
                                         value="{{ !$errors->has('speed') ? old('speed') : '' }}">
@@ -111,7 +117,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    <label for="capacity">Capacity</label>
+                                    <label for="capacity">Capacity (cc)</label>
                                     <input type="text" name="capacity"
                                         class="form-control @error('capacity') is-invalid  @enderror"
                                         value="{{ !$errors->has('capacity') ? old('capacity') : '' }}">
@@ -119,15 +125,12 @@
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div>
-                                    <button name="create_btn" class="btn btn-success">Submit</button>
-                                </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="tab-pane fade mt-3" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
-                        tabindex="0">
-                        <form action="">
+                        </div>
+
+                        {{-- Tab Add Car Images --}}
+                        <div class="tab-pane fade mt-3" id="profile-tab-pane" role="tabpanel"
+                            aria-labelledby="profile-tab" tabindex="0">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="image">Upload Car Images</label>
@@ -141,14 +144,13 @@
 
                                     </div>
                                 </div>
-                                <div>
-                                    <button class="btn btn-success" type="submit">Submit</button>
-                                </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
-
+                    <div>
+                        <button class="btn btn-success pl-4 pr-4 fw-bold" type="submit">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

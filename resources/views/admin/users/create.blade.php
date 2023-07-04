@@ -7,7 +7,7 @@
                     <div class="d-inline-block fw-bold text-white fs-4">
                         Create New User
                     </div>
-                    <a href="{{url('users/index')}}" class="btn btn-danger fw-bold float-right ">
+                    <a href="{{url('admin/users/')}}" class="btn btn-danger fw-bold float-right ">
                         <i class="fa-solid fa-arrow-left"></i>
                         BACK
                     </a>
@@ -85,7 +85,7 @@
                                 @enderror
                             </div>
                             <div>
-                                <button name="create_btn" class="btn btn-success">Create User</button>
+                                <button name="create_btn" class="btn btn-success pr-4 pl-4 fw-bold">Create User</button>
                             </div>
                         </div>
                     </form>
