@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
@@ -19,7 +20,7 @@ class UserSeeder extends Seeder
         $passwordMatch = Hash::check('password', Hash::make('password'));
 
         for ($i = 0; $i < 25; $i++) {
-            DB::table('users')->insert([
+            User::create([
                 'username' => $faker->userName,
                 'email' => $faker->unique()->safeEmail(),
                 'phone' => $faker->phoneNumber,

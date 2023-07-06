@@ -31,8 +31,8 @@
                 </a>
             </div>
 
-            {{-- <div class="mr-3 bg-success bg-gradient rounded-4" style="height: 220px; width: 378px;">
-                <a href="{{ url('admin/users') }}" class=" dashboard-card h-100 d-block text-decoration-none ">
+            <div class="mr-3 bg-success bg-gradient rounded-4" style="height: 220px; width: 378px;">
+                <a href="{{ route('cars.index') }}" class=" dashboard-card h-100 d-block text-decoration-none ">
                     <div class="h-100 w-100 d-flex justify-content-center align-items-center text-white flex-column"
                         style="font-size: 60px;">
                         <i class="fa-solid fa-car"></i>
@@ -41,7 +41,7 @@
                 </a>
             </div>
 
-            <div class="mr-3 bg-success bg-gradient rounded-4" style="height: 220px; width: 378px;">
+            {{-- <div class="mr-3 bg-success bg-gradient rounded-4" style="height: 220px; width: 378px;">
                 <a href="{{ url('admin/users') }}" class=" dashboard-card h-100 d-block text-decoration-none ">
                     <div class="h-100 w-100 d-flex justify-content-center align-items-center text-white flex-column"
                         style="font-size: 60px;">
@@ -53,3 +53,4 @@
         </div>
     </div>
 @endsection
+

@@ -24,6 +24,7 @@ class CarFormRequest extends FormRequest
         return [
             'car_name' => 'required',
             'price' => 'required',
+            'description' => 'nullable',
             'seats' => 'required',
             'fuel' => 'required',
             'year' => 'required',

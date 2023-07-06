@@ -47,7 +47,6 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('users/{user}/edit', 'edit')->name('users.edit');
         Route::put('users/{user}', 'update')->name('users.update');
         Route::delete('users/{user}', 'destroy')->name('users.destroy');
-        Route::get('users/', 'search');
     });
 
     // Brand Routes
@@ -58,5 +57,9 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('cars', 'index')->name('cars.index');
         Route::get('cars/create', 'create')->name('cars.create');
         Route::post('cars', 'store')->name('cars.store');
+        Route::get('cars/{id}/edit', 'edit')->name('cars.edit');
+        Route::put('cars/{id}', 'update')->name('cars.update');
+        Route::get('car_image/{id}/delete', 'destroyImage')->name('destroyImage');
+        Route::delete('cars/{id}/delete', 'destroy')->name('cars.destroy');
     });
 });

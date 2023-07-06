@@ -73,9 +73,6 @@
                                         class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#logoutModal">
                                         {{ __('Logout') }}
                                     </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
                                     @if (Auth::user()->role_as == '1')
                                         <a class="dropdown-item fw-bold  mb-2" href="{{ url('admin/dashboard') }}"
                                             class="btn btn-secondary">

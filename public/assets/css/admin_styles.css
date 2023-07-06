@@ -1,43 +1,76 @@
-.view-container{
+.view-container {
     padding: 20px;
     margin-top: 16px;
 }
 
-.view-border{
+.view-border {
     margin: 35px 15px;
 }
 
-.image{
+.image {
     width: 120px;
     height: 120px;
     margin-right: 50px;
 }
 
-.info-title ul, .info ul{
+.info-title ul,
+.info ul {
     list-style: none;
     padding: 0;
     font-size: 17px;
 }
 
-.info-title{
+.info-title {
     width: 120px;
 }
 
-.dashboard-card{
-    transition: all .2s ease-in-out;
+.dashboard-card {
+    transition: all 0.2s ease-in-out;
 }
 
 .dashboard-card:hover {
-    
     transform: scale(1.2);
 }
 
-.car_image{
-    object-fit: cover;
+.display_image{
+    display: flex;
+    align-items: center;
 }
 
-.car_image_input{
-    width: 150px;
-    height: 150px;
-    background: black;
+.car_image_input {
+    border-radius: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-left: 12px;
+    display: inline-block;
+    text-align: center;
+}
+
+.car_image_input>.image_input {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+}
+
+.remove_btn{
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.filter-down-up-icon{
+    cursor: pointer;
+    margin-left: 2px;
+}
+
+.filter-down-up-icon>i{
+    font-size: 14px;
+}
+
+.filter-down-up-icon>i:hover{
+    color: #1cc88a!important;
+    transition: all 0.2s ease-in-out;
 }

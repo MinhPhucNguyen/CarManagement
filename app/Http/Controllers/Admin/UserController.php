@@ -12,8 +12,18 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $usersList = User::all()->reverse();
-        $usersList = $usersList->simplePaginate(15);
+        $usersList = User::orderBy('id', 'DESC')
+            ->when($request->filterBy != NULL, function ($q) use ($request) {
+                if ($request->filterBy == "all") {
+                    return $q->orderBy('id', 'DESC');
+                } else {
+                    return $q->where('role_as', $request->filterBy);
+                }
+            })
+            ->simplePaginate(10);
+
+        $usersList->appends(['filterBy' => $request->filterBy]); //Thêm một mảng các tham số truy vấn vào URL của liên kết phân trang
+
         return view('admin.users.index', compact('usersList'));
     }
 
@@ -46,7 +56,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect('admin/users')->with('success', 'Create user successfully');
+        return redirect('admin/users')->with('message', 'Create user successfully');
     }
 
     public function edit(User $user)
@@ -77,7 +87,7 @@ class UserController extends Controller
             }
 
             $user->update();
-            return redirect('admin/users')->with('success', "User updated successfully");
+            return redirect('admin/users')->with('message', "User updated successfully");
         } else {
             return  redirect('admin/users')->with('message', 'User not found');
         }
@@ -86,10 +96,10 @@ class UserController extends Controller
     {
         $user = User::findOrFail($user_id);
         $user->delete();
-        return redirect()->back()->with('success', 'Delete user successfully');
+        return redirect()->back()->with('message', 'Delete user successfully');
     }
 
-    
+
     public function search(Request $request)
     {
         $filterBy = $request->input('filterBy'); //lấy giá trị của tham số filterBy

@@ -1,15 +1,10 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="col-md-12">
-        @if (session()->has('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="fa-sharp fa-solid fa-circle-check"></i>
-                <strong>{{ session('success') }}</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
-                    style="padding: 1.05rem 1rem"></button>
-            </div>
-        @endif
+    <div class="col-md-12 mb-4">
+
+        @include('layouts.includes.alert.alert_message')
+
         <div class="card">
             <div class="card-header bg-dark d-flex align-items-center">
                 <div class="d-inline-block fw-bold text-white fs-4 flex-grow-1">
@@ -24,16 +19,15 @@
             </div>
             <div class="card-body">
                 {{-- Filter Role As --}}
-                <form action="{{ url('admin/users') }}" method="GET" class="w-25 m-0">
-                    <div class="mb-3 d-flex w-100 align-items-center">
-                        <div class="d-flex align-items-center w-25">
-                            <label for="filterBy" class="form-label mb-0 fw-bolder">Filter by:</label>
+                <form action="" method="GET" class="w-25 m-0">
+                    <div class="mb-3 w-100 align-items-center">
+                        <div class="d-flex align-items-center w-50">
+                            <label for="filterBy" class="form-label mb-0 fw-bolder">Filter by Role As:</label>
                         </div>
-                        <select name="filterBy" id="filter-by" class="form-select w-75">
+                        <select name="filterBy" class="form-select w-50 mt-2 filter-by ">
                             <option value="all">All</option>
-                            <option value='0' {{ request('filterBy') == '0' ? 'selected' : '' }}>Role as User</option>
-                            <option value='1' {{ request('filterBy') == '1' ? 'selected' : '' }}>Role as Admin</option>
-                            <option value='asc' {{ request('filterBy') == 'asc' ? 'selected' : '' }}>Ascending by ID
+                            <option value='0' {{ request('filterBy') == '0' ? 'selected' : '' }}>User</option>
+                            <option value='1' {{ request('filterBy') == '1' ? 'selected' : '' }}>Admin</option>
                             </option>
                         </select>
                     </div>
@@ -43,13 +37,13 @@
                 <table class="table table-bordered table-striped text-dark fw-bold">
                     <thead>
                         <tr class="text-dark">
-                            <td>ID</td>
-                            <td>Username</td>
-                            <td>Email</td>
-                            <td>Phone</td>
-                            <td>Address</td>
-                            <td>Role as</td>
-                            <td>Action</td>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th>Role as</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="body-table">
@@ -129,8 +123,7 @@
                     </tbody>
                 </table>
                 <div class="pagination">
-                    {!! $usersList->links() !!}
-                    {{-- {!! $usersList->appends(request()->except('search'))->links() !!} --}}
+                    {{ $usersList->links() }}
                 </div>
             </div>
         </div>

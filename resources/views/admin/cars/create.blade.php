@@ -26,8 +26,8 @@
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link text-success fw-bold" id="profile-tab" data-bs-toggle="tab"
-                                data-bs-target="#profile-tab-pane" type="button" role="tab"
-                                aria-controls="profile-tab-pane" aria-selected="false">
+                                data-bs-target="#image-tab-pane" type="button" role="tab"
+                                aria-controls="image-tab-pane" aria-selected="false">
                                 <i class="fa-solid fa-image mr-1"></i>
                                 Car Images</button>
                         </li>
@@ -53,8 +53,10 @@
                                     <select name="brand" class="form-control @error('brand') is-invalid  @enderror"">
                                         <option value="">--Select Brand--</option>
                                         @foreach ($brands as $brand)
-                                            <option value="{{ $brand->brand_id }}">{{ Str::upper($brand->brand_name) }}
-                                            </option>
+                                            @if ($brand->status == '0')
+                                                <option value="{{ $brand->brand_id }}">{{ Str::upper($brand->brand_name) }}
+                                                </option>
+                                            @endif
                                         @endforeach
                                     </select>
                                     @error('brand')
@@ -100,8 +102,8 @@
                                     <label for="fuel">Fuel</label>
                                     <select name="fuel" class="form-control  @error('fuel') is-invalid  @enderror">
                                         <option value="">--Select Type Of Fuel-- </option>
-                                        <option value="gasoline">Gasoline</option>
-                                        <option value="diesel">Diesel</option>
+                                        <option value="Petrol">Petrol</option>
+                                        <option value="Diesel">Diesel</option>
                                     </select>
                                     @error('fuel')
                                         <small class="text-danger">{{ $message }}</small>
@@ -129,27 +131,23 @@
                         </div>
 
                         {{-- Tab Add Car Images --}}
-                        <div class="tab-pane fade mt-3" id="profile-tab-pane" role="tabpanel"
-                            aria-labelledby="profile-tab" tabindex="0">
+                        <div class="tab-pane fade mt-3" id="image-tab-pane" role="tabpanel" aria-labelledby="image-tab"
+                            tabindex="0">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="image">Upload Car Images</label>
-                                    <input type="file" name="image"
-                                        class="form-control @error('image') is-invalid  @enderror"
-                                        value="{{ !$errors->has('image') ? old('image') : '' }}">
+                                    <input type="file" multiple name="image[]"
+                                        class="form-control file-input @error('image') is-invalid  @enderror">
                                     @error('image')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
-                                    <div class="car_image_input mt-3 rounded-4">
-
+                                    <div class="display_image">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <button class="btn btn-success pl-4 pr-4 fw-bold" type="submit">Submit</button>
-                    </div>
+                    <button class="btn btn-success pl-4 pr-4 fw-bold" type="submit">Submit</button>
                 </form>
             </div>
         </div>

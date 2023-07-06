@@ -6,13 +6,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-dark">
-                <h5>Are you sure you want to logout ?</h5>
+                <h6 class="text-dark fw-bold">Are you sure you want to logout ?</h6>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger fw-bold"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Submit
-                    Logout</button>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger fw-bold">Submit Logout</button>
+                </form>
             </div>
         </div>
     </div>
