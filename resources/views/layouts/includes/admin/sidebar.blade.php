@@ -37,7 +37,7 @@
                     <span class="ml-3">View Users</span></a>
                 <a class="collapse-item" href="{{ route('users.create') }}">
                     <i class="fa-solid fa-plus"></i>
-                    <span class="ml-3"> Create New User</span>
+                    <span class="ml-3"> Add New User</span>
                 </a>
             </div>
         </div>
@@ -66,7 +66,7 @@
                 </a>
                 <a class="collapse-item" href="{{ route('cars.create') }}">
                     <i class="fa-solid fa-plus"></i>
-                    <span class="ml-3"> Create New Car</span>
+                    <span class="ml-3"> Add New Car</span>
                 </a>
             </div>
         </div>

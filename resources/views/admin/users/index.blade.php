@@ -83,7 +83,7 @@
                                             <li>
                                                 <a class="dropdown-item mb-3 fs-6 text-success bg-white"
                                                     href="{{ route('users.edit', $user->id) }}">
-                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                    <i class="fa-solid fa-user-pen"></i>
                                                     <span>Edit</span>
                                                 </a>
                                             </li>

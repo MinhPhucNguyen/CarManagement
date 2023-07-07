@@ -1,16 +1,35 @@
 .view-container {
     padding: 20px;
     margin-top: 16px;
+    background-color: #fff;
 }
 
-.view-border {
-    margin: 35px 15px;
+.view-left {
+    width: 10%;
+    display: inline-block;
+    margin-right: 20px;
 }
 
-.image {
+.view-right-container {
+    width: 90%;
+    margin-left: 20px;
+}
+
+.view-right-item {
+    padding: 18px 0;
+}
+
+.image-avatar {
     width: 120px;
     height: 120px;
-    margin-right: 50px;
+    margin: 0 20px;
+    display: inline-block;
+}
+
+.image-avatar > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .info-title ul,
@@ -24,6 +43,23 @@
     width: 120px;
 }
 
+.edit-btn-in-view {
+    border: 2px solid #919191;
+    border-radius: 20px;
+    opacity: 0.5;
+    text-decoration: none;
+    color: #303030;
+    padding: 8px 18px;
+}
+
+.edit-btn-in-view:hover {
+    color: #555555;
+    border: 2px solid #1cc88a;
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+    text-decoration: none;
+}
+
 .dashboard-card {
     transition: all 0.2s ease-in-out;
 }
@@ -32,7 +68,7 @@
     transform: scale(1.2);
 }
 
-.display_image{
+.display_image {
     display: flex;
     align-items: center;
 }
@@ -46,7 +82,7 @@
     text-align: center;
 }
 
-.car_image_input>.image_input {
+.car_image_input > .image_input {
     width: 120px;
     height: 120px;
     object-fit: cover;
@@ -54,35 +90,35 @@
     display: block;
 }
 
-.remove_btn{
+.remove_btn {
     font-size: 12px;
     font-weight: bold;
     margin-top: 10px;
     display: inline-block;
 }
 
-.sort-id-icon{
+.sort-id-icon {
     cursor: pointer;
     margin-left: 2px;
 }
 
-.sort-id-icon>i{
+.sort-id-icon > i {
     font-size: 14px;
     margin-right: 3px;
 }
 
-.sort-id-icon>i:hover{
-    color: #1cc88a!important;
+.sort-id-icon > i:hover {
+    color: #1cc88a !important;
     transition: all 0.2s ease-in-out;
 }
 
-.search-container{ 
+.search-container {
     background-color: #f8f9fc;
     display: flex;
     border-radius: 20px;
 }
 
-.search-container .search-input{ 
+.search-container .search-input {
     border: none;
     background-color: transparent;
     outline: none;
@@ -90,9 +126,16 @@
     border-right: 2px solid #ccc;
 }
 
-.search-container .select-table-search{ 
+.search-container .select-table-search {
     border: none;
     outline: none;
     background-color: transparent;
     font-size: 14px;
+}
+
+.spinner-border {
+    margin: 0 auto;
+    width: 40px;
+    height: 40px;
+    position: relative;
 }

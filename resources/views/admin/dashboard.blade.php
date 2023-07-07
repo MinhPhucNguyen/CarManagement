@@ -26,7 +26,7 @@
                     <div class="h-100 w-100 d-flex justify-content-center align-items-center text-white flex-column fw-bolder"
                         style="font-size: 60px;">
                         <i class="fa-solid fa-users"></i>
-                        <h5 class="mt-3">Users: {{ $userNumber }}</h5>
+                        <h5 class="mt-3">Users: {{ $usersNumber }}</h5>
                     </div>
                 </a>
             </div>
@@ -36,7 +36,7 @@
                     <div class="h-100 w-100 d-flex justify-content-center align-items-center text-white flex-column"
                         style="font-size: 60px;">
                         <i class="fa-solid fa-car"></i>
-                        <h5 class="mt-3">Cars: {{ $userNumber }}</h5>
+                        <h5 class="mt-3">Cars: {{ $carsNumber }}</h5>
                     </div>
                 </a>
             </div>
