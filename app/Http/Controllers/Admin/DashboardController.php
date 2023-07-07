@@ -11,6 +11,7 @@ class DashboardController extends Controller
     public function index()
     {
         $userNumber = User::count();
-        return view('admin.dashboard', compact('userNumber'));
+        $usersList = User::orderBy('id', 'desc')->simplePaginate(5);
+        return view('admin.dashboard', compact('userNumber', 'usersList'));
     }
 }

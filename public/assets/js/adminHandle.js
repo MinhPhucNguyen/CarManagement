@@ -32,17 +32,16 @@ if (filterByFuel) {
 }
 
 //Handle sort by ID
-var filterIcons = document.querySelectorAll(".filter-down-up-icon");
+const sortIdIcon = document.querySelectorAll(".sort-id-icon i");
 
-for (let i = 0; i < filterIcons.length; i++) {
-    filterIcons[i].addEventListener("click", function () {
-        console.log(filterIcons[i]);
-        // const sortDirection = this.classList.contains("sort-up")
-        //     ? "asc"
-        //     : "desc";
-        // console.log(sortDirection);
-        // const sortField = this.closest("th").getAttribute("data-sort"); //tìm phần tử cha gần nhất và lấy attribute
-        // // window.location.href = '?sort=' + sortField + '&direction=' + sortDirection;
+for (let i = 0; i < sortIdIcon.length; i++) {
+    sortIdIcon[i].addEventListener("click", function () {
+        const sortColumn = this.closest("th").getAttribute("data-sort");
+        const sortDirection = this.classList.contains("fa-arrow-down")
+            ? "asc"
+            : "desc";
+        window.location.href =
+            "?sort=" + sortColumn + "&direction=" + sortDirection;
     });
 }
 

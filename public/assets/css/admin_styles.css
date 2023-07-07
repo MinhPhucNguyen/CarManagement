@@ -61,16 +61,38 @@
     display: inline-block;
 }
 
-.filter-down-up-icon{
+.sort-id-icon{
     cursor: pointer;
     margin-left: 2px;
 }
 
-.filter-down-up-icon>i{
+.sort-id-icon>i{
     font-size: 14px;
+    margin-right: 3px;
 }
 
-.filter-down-up-icon>i:hover{
+.sort-id-icon>i:hover{
     color: #1cc88a!important;
     transition: all 0.2s ease-in-out;
+}
+
+.search-container{ 
+    background-color: #f8f9fc;
+    display: flex;
+    border-radius: 20px;
+}
+
+.search-container .search-input{ 
+    border: none;
+    background-color: transparent;
+    outline: none;
+    font-size: 14px;
+    border-right: 2px solid #ccc;
+}
+
+.search-container .select-table-search{ 
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 14px;
 }

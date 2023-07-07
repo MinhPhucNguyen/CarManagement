@@ -6,18 +6,29 @@
     </button>
 
     <!-- Topbar Search -->
-    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-2 my-2 my-md-0 mw-100 navbar-search">
-        <div class="input-group">
-            <form action="{{ url('admin/users') }}" method="GET">
-                <input type="text" name="search" class="form-control bg-light border-0 small"
-                    placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                <div class="search-btn input-group-append">
-                    <button class="btn btn-dark" type="submit">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
-                </div>
-            </form>
+    <form action="{{ route('admin.search') }}" method="GET"
+        class="d-none d-sm-inline-block form-inline mr-auto ml-md-2 my-2 my-md-0 mw-100 navbar-search">
+        <div class="input-group ">
+            <div class="search-container">
+                <input type="text" name="search" class="form-control bg-light border-0 small search-input"
+                    placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2"
+                    value="{{ request('search') != null ? request('search') : '' }}">
+                <div class="border border-start-1"></div>
+                <select name="table" class="form-select select-table-search">
+                    <option value="">--Select Table--</option>
+                    <option value="users" {{ request('table') == 'users' ? 'selected' : '' }}>Users</option>
+                    <option value="cars" {{ request('table') == 'cars' ? 'selected' : '' }}>Cars</option>
+                </select>
+            </div>
+            <div class="search-btn input-group-append">
+                <button class="btn btn-dark" type="submit">
+                    <i class="fas fa-search fa-sm"></i>
+                </button>
+            </div>
         </div>
+        @if (session()->has('search_message'))
+            <small class="text-warning fw-bold">{{ session('search_message') }}</small>
+        @endif
     </form>
 
     <a class="btn btn-success float-right fw-bolder" href="{{ url('/home') }}">Visit Website</a>
@@ -63,7 +74,7 @@
                 </h6>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">
+                        <img class="rounded-circle" src="" alt="...">
                         <div class="status-indicator bg-success"></div>
                     </div>
                     <div class="font-weight-bold">
@@ -74,7 +85,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="...">
+                        <img class="rounded-circle" src="" alt="...">
                         <div class="status-indicator"></div>
                     </div>
                     <div>
@@ -85,7 +96,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="...">
+                        <img class="rounded-circle" src="" alt="...">
                         <div class="status-indicator bg-warning"></div>
                     </div>
                     <div>
@@ -96,7 +107,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
+                        <img class="rounded-circle" src="" alt="...">
                         <div class="status-indicator bg-success"></div>
                     </div>
                     <div>
@@ -113,10 +124,10 @@
 
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow pr-5">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->username }}</span>
-                <img class="img-profile rounded-circle" src="img/pexels-eberhard-grossgasteiger-1367192.jpg">
+                <img class="img-profile rounded-circle" src="">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

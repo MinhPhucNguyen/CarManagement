@@ -12,17 +12,24 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $usersList = User::orderBy('id', 'DESC')
-            ->when($request->filterBy != NULL, function ($q) use ($request) {
-                if ($request->filterBy == "all") {
-                    return $q->orderBy('id', 'DESC');
-                } else {
-                    return $q->where('role_as', $request->filterBy);
-                }
-            })
+        $sortDirection = $request->input('direction');
+        $sortColumn = $request->input('sort');
+
+        $usersList = User::when($request->filterBy != NULL, function ($q) use ($request) {
+            if ($request->filterBy == "all") {
+                return $q->orderBy($sortColumn ?? 'id', $sortDirection ?? 'desc');
+            } else {
+                return $q->where('role_as', $request->filterBy);
+            }
+        })
+            ->orderBy($sortColumn ?? 'id', $sortDirection ?? 'desc')
             ->simplePaginate(10);
 
-        $usersList->appends(['filterBy' => $request->filterBy]); //Thêm một mảng các tham số truy vấn vào URL của liên kết phân trang
+        $usersList->appends([
+            'filterBy' => $request->filterBy,
+            'sort' => $sortColumn,
+            'direction' => $sortDirection,
+        ]); //Thêm một mảng các tham số truy vấn vào URL của liên kết phân trang
 
         return view('admin.users.index', compact('usersList'));
     }

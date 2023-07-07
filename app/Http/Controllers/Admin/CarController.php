@@ -17,12 +17,11 @@ class CarController extends Controller
         $brands = Brand::all();
         $fuels = Car::select('fuel')->groupBy('fuel')->get();
         $sortDirection = $request->input('direction');
-        $sortField = $request->input('sort');
+        $sortColumn = $request->input('sort');
 
-        $carsList = Car::orderBy('car_id', 'DESC')
-            ->when($request->filterByBrand != NULL, function ($q) use ($request) {
+        $carsList = Car::when($request->filterByBrand != NULL, function ($q) use ($request,  $sortDirection,  $sortColumn) {
                 if ($request->filterByBrand == 'all') {
-                    return $q->orderBy('car_id', 'DESC');
+                    return $q->orderBy($sortColumn ?? 'car_id', $sortDirection ?? 'desc');
                 } else {
                     return $q->where('brand_id', $request->filterByBrand);
                 }
@@ -34,9 +33,15 @@ class CarController extends Controller
                     return $q;
                 }
             })
+            ->orderBy($sortColumn ?? 'car_id', $sortDirection ?? 'desc')
             ->simplePaginate(10);
 
-        $carsList->appends(['filterByBrand' => $request->filterByBrand]);
+        $carsList->appends([
+            'filterByBrand' => $request->filterByBrand,
+            'filterByFuel' => $request->filterByFuel,
+            'sort' => $sortColumn,
+            'direction' => $sortDirection,
+        ]);
 
         return view('admin.cars.index', compact('carsList', 'brands', 'fuels'));
     }

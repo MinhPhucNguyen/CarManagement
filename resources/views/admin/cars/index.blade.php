@@ -4,81 +4,87 @@
 
         @include('layouts.includes.alert.alert_message')
 
+        <form action="" method="GET" class="m-0 w-50">
+            <div class="mb-3 align-items-center d-inline-block mr-4 w-25">
+                <div class="d-flex align-items-center">
+                    <label for="filterByBrand" class="form-label mb-0 fw-bolder">Filter by Brand:</label>
+                </div>
+                <select name="filterByBrand" class="form-select mt-2 filter-by ">
+                    <option value="all">All</option>
+                    @foreach ($brands as $brand)
+                        <option value='{{ $brand->brand_id }}'
+                            {{ request('filterByBrand') == $brand->brand_id ? 'selected' : '' }}>
+                            {{ $brand->brand_name }}</option>
+                    @endforeach
+                    </option>
+                </select>
+            </div>
+
+            <div class="mb-3 align-items-center  d-inline-block ml-2 w-25">
+                <div class="d-flex align-items-center">
+                    <label for="filterByFuel" class="form-label mb-0 fw-bolder">Filter by Fuel:</label>
+                </div>
+                <select name="filterByFuel" class="form-select mt-2 filter-by-fuel">
+                    <option value="all">All fuels</option>
+                    @foreach ($fuels as $fuel)
+                        <option value='{{ $fuel->fuel }}' {{ request('filterByFuel') == $fuel->fuel ? 'selected' : '' }}>
+                            {{ $fuel->fuel }}</option>
+                    @endforeach
+                    </option>
+                </select>
+            </div>
+        </form>
+
         <div class="card">
             <div class="card-header bg-dark">
                 <div class="d-inline-block fw-bold text-white fs-4">
                     Cars List
                 </div>
-                <a class="btn btn-success fw-bold float-right" href="{{ route('cars.create') }}">
-                    <i class="fa-solid fa-plus"></i>
-                    Add New Car
-                </a>
+                @if (route('admin.search') == request()->url())
+                    <a href="{{ url('admin/cars/') }}" class="btn btn-danger fw-bold float-right ml-3">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        BACK
+                    </a>
+                @else
+                    <a class="btn btn-success fw-bold float-right" href="{{ route('cars.create') }}">
+                        <i class="fa-solid fa-plus"></i>
+                        Add New Car
+                    </a>
+                @endif
             </div>
             <div class="card-body">
-
-                <form action="" method="GET" class="m-0">
-                    <div class="mb-3 align-items-center d-inline-block mr-4">
-                        <div class="d-flex align-items-center">
-                            <label for="filterByBrand" class="form-label mb-0 fw-bolder">Filter by Brand:</label>
-                        </div>
-                        <select name="filterByBrand" class="form-select mt-2 filter-by ">
-                            <option value="all">All</option>
-                            @foreach ($brands as $brand)
-                                <option value='{{ $brand->brand_id }}'
-                                    {{ request('filterByBrand') == $brand->brand_id ? 'selected' : '' }}>
-                                    {{ $brand->brand_name }}</option>
-                            @endforeach
-                            </option>
-                        </select>
-                    </div>
-
-                    <div class="mb-3 align-items-center  d-inline-block ml-4">
-                        <div class="d-flex align-items-center">
-                            <label for="filterByFuel" class="form-label mb-0 fw-bolder">Filter by Fuel:</label>
-                        </div>
-                        <select name="filterByFuel" class="form-select mt-2 filter-by-fuel">
-                            <option value="all">All fuels</option>
-                            @foreach ($fuels as $fuel)
-                                <option value='{{ $fuel->fuel }}'
-                                    {{ request('filterByFuel') == $fuel->fuel ? 'selected' : '' }}>
-                                    {{ $fuel->fuel }}</option>
-                            @endforeach
-                            </option>
-                        </select>
-                    </div>
-                </form>
-
                 <table class="table table-bordered table-striped text-dark fw-bold">
                     <thead>
                         <tr class="text-dark">
                             <th data-sort="car_id">
                                 ID
-                                <span class="filter-down-up-icon float-end">
-                                    <i class="fa-solid fa-arrow-down "></i>
-                                    <i class="fa-solid fa-arrow-up text-muted sort-up"></i>
+                                <span class="sort-id-icon float-end">
+                                    <i class="fa-solid fa-arrow-down"></i>
+                                    <i class="fa-solid fa-arrow-up text-muted "></i>
                                 </span>
                             </th>
-                            <th>Brand</th>
-                            <th>Name</th>
-                            <th>Price (per day)</th>
-                            <th>Seats</th>
-                            <th>Fuel</th>
-                            <th>Capacity</th>
-                            <th>Action</th>
+                            <th class="text-center">Brand</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Price (per day)</th>
+                            <th class="text-center">Seats</th>
+                            <th class="text-center">Fuel</th>
+                            <th class="text-center">Capacity</th>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody id="body-table">
                         @forelse ($carsList as $car)
                             <tr>
-                                <td>{{ $car->car_id }}</td>
-                                <td>{{ Str::upper($car->brand->brand_name) }}</td> {{-- Str::upper() is uppercase --}}
-                                <td><a href="" class="text-success text-decoration-none">{{ $car->car_name }}</a>
+                                <td class="text-center">{{ $car->car_id }}</td>
+                                <td class="text-center">{{ Str::upper($car->brand->brand_name) }}</td> {{-- Str::upper() is uppercase --}}
+                                <td class="text-center"><a href=""
+                                        class="text-success text-decoration-none">{{ $car->car_name }}</a>
                                 </td>
-                                <td>{{ $car->price }}</td>
-                                <td>{{ $car->seats }}</td>
-                                <td>{{ $car->fuel }}</td>
-                                <td>{{ $car->capacity }}</td>
-                                <td>
+                                <td class="text-center">{{ $car->price }}</td>
+                                <td class="text-center">{{ $car->seats }}</td>
+                                <td class="text-center">{{ $car->fuel }}</td>
+                                <td class="text-center">{{ $car->capacity }}</td>
+                                <td class="text-center">
                                     <div class="dropdown">
                                         <button class="btn btn-success dropdown-toggle" type="button"
                                             data-bs-toggle="dropdown" aria-expanded="false">

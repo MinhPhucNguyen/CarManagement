@@ -37,7 +37,6 @@
                         {{-- Tab Add Car Detail --}}
                         <div class="tab-pane fade show mt-3 active" id="home-tab-pane" role="tabpanel"
                             aria-labelledby="home-tab" tabindex="0">
-
                             <div class="row">
                                 <div class="col-md-12 mb-3 ">
                                     <label for="car_name">Car Name</label>

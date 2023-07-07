@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CarController;
+use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignUpController;
@@ -37,6 +38,7 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 //Admin Route
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index']);
+    Route::get('search', [SearchController::class, 'search'])->name('admin.search');
 
     // User Routes
     Route::controller(UserController::class)->group(function () {
@@ -62,4 +64,5 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('car_image/{id}/delete', 'destroyImage')->name('destroyImage');
         Route::delete('cars/{id}/delete', 'destroy')->name('cars.destroy');
     });
+
 });

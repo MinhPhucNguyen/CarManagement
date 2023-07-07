@@ -26,19 +26,19 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr class="text-dark">
-                            <th>ID</th>
-                            <th>Brand Name</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Brand Name</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($brands as $brand)
                             <tr>
-                                <td>{{ $brand->brand_id }}</td>
-                                <td>{{ Str::upper($brand->brand_name) }}</td>
-                                <td>{{ $brand->status == '1' ? 'Hidden' : 'Visible' }}</td>
-                                <td>
+                                <td class="text-center">{{ $brand->brand_id }}</td>
+                                <td class="text-center">{{ Str::upper($brand->brand_name) }}</td>
+                                <td class="text-center">{{ $brand->status == '1' ? 'Hidden' : 'Visible' }}</td>
+                                <td class="text-center">
                                     <div class="dropdown">
                                         <button class="btn btn-success dropdown-toggle" type="button"
                                             data-bs-toggle="dropdown" aria-expanded="false">
