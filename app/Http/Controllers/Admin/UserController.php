@@ -144,18 +144,4 @@ class UserController extends Controller
             return redirect()->back()->with('message', 'Remove avatar successfully');
         }
     }
-
-    public function search(Request $request)
-    {
-        $filterBy = $request->input('filterBy'); //lấy giá trị của tham số filterBy
-        // dd($filterBy);
-        $searchValue = $request->input('search');
-        // dd($valueSearch);
-
-        $usersList = User::query();
-
-        $usersList = $usersList->simplePaginate(15); //Thêm các tham số vào quá trình phân trang, khi chuyển trang thì tham số vẫn giữ nguyên để lọc danh sách user theo role
-
-        return view('admin.users.index', compact('usersList'));
-    }
 }
