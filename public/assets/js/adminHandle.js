@@ -45,6 +45,22 @@ for (let i = 0; i < sortIdIcon.length; i++) {
     });
 }
 
+//Handle selected view left item in view a user
+const itemSelect = document.querySelectorAll(".view-left-item");
+const email = document.querySelector("#email");
+const profile = document.querySelector("#profile");
+
+itemSelect.forEach((item) => {
+    item.addEventListener("click", function () {
+        itemSelect.forEach((otherItem) => {
+            otherItem.classList.toggle("selected", otherItem === item);
+        });
+
+        profile.classList.toggle("active", this === itemSelect[0]);
+        email.classList.toggle("active", this !== itemSelect[0]);
+    });
+});
+
 //Handle display image when input
 const fileInput = document.querySelector(".file-input");
 const displayImage = document.querySelector(".display_image");

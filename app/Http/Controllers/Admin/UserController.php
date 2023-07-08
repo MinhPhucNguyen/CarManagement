@@ -15,9 +15,9 @@ class UserController extends Controller
         $sortDirection = $request->input('direction');
         $sortColumn = $request->input('sort');
 
-        $usersList = User::when($request->filterBy != NULL, function ($q) use ($request) {
+        $usersList = User::when($request->filterBy != NULL, function ($q) use ($request,  $sortDirection,  $sortColumn) {
             if ($request->filterBy == "all") {
-                return $q->orderBy($sortColumn ?? 'id', $sortDirection ?? 'desc');
+                return $q->orderBy($sortColumn ?? 'id', $sortColumn ?? 'desc');
             } else {
                 return $q->where('role_as', $request->filterBy);
             }
@@ -103,7 +103,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($user_id);
         $user->delete();
-        return redirect()->back()->with('message', 'Delete user successfully');
+        return redirect('admin/users')->with('message', 'Delete user successfully');
     }
 
 

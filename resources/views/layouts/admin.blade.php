@@ -17,8 +17,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Custom styles for this template-->
-    <link rel="stylesheet" href="{{ asset('admin/css/bootstrap.min.css') }}"> 
-    <link rel="stylesheet" href="{{ asset('admin/css/sb-admin-2.min.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('admin/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/css/sb-admin-2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/admin_styles.css') }}">
 
     @livewireStyles
@@ -44,9 +44,9 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->    
+    <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('assets/js/adminHandle.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery-3.6.4.min.js') }}"></script> 
+    <script src="{{ asset('assets/js/jquery-3.6.4.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

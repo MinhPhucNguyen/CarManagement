@@ -1,13 +1,33 @@
 .view-container {
-    padding: 20px;
+    padding: 30px 20px;
     margin-top: 16px;
     background-color: #fff;
 }
 
-.view-left {
+.view-left-container {
     width: 10%;
     display: inline-block;
     margin-right: 20px;
+}
+
+.view-left-list{
+    list-style: none;
+    padding: 0;
+}
+
+.view-left-list li{
+    padding: 10px 0;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 6px;
+    user-select: none;
+}
+
+.selected{
+    color: rgb(28, 200, 138) ;
+    background-color: rgb(222, 222, 222, 0.5);
+    border-radius: 40px;
 }
 
 .view-right-container {
@@ -16,13 +36,23 @@
 }
 
 .view-right-item {
-    padding: 18px 0;
+    padding: 16px 20px;
 }
 
+.user-info-title{
+    font-size: 14px;
+    font-weight: bold;
+    color: #bbb;
+}
+.user-info{
+    font-size: 16px;
+    font-weight: bold;
+    color: #303030;
+}
 .image-avatar {
     width: 120px;
     height: 120px;
-    margin: 0 20px;
+    margin-right: 20px;
     display: inline-block;
 }
 
@@ -45,7 +75,7 @@
 
 .edit-btn-in-view {
     border: 2px solid #919191;
-    border-radius: 20px;
+    border-radius: 10px;
     opacity: 0.5;
     text-decoration: none;
     color: #303030;
@@ -58,6 +88,10 @@
     transition: all 0.2s ease-in-out;
     opacity: 1;
     text-decoration: none;
+}
+
+.delete-user-btn{
+    border: none;
 }
 
 .dashboard-card {
@@ -133,9 +167,14 @@
     font-size: 14px;
 }
 
-.spinner-border {
-    margin: 0 auto;
-    width: 40px;
-    height: 40px;
-    position: relative;
+#contact{
+    display: none;
+}
+
+.section{
+    display: none;
+}
+
+.section.active{
+    display: block;
 }
