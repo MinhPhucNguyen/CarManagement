@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
 {
-    protected $uploadsAvatarPath = 'uploads/avatar/'; 
+    protected $uploadsAvatarPath = 'uploads/avatar/';
     protected $defaultImage = 'default.jpg';
 
     public function index(Request $request)
@@ -144,7 +144,6 @@ class UserController extends Controller
             return redirect()->back()->with('message', 'Remove avatar successfully');
         }
     }
-
 
     public function search(Request $request)
     {

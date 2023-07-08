@@ -57,7 +57,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('brand', App\Http\Livewire\Admin\Brand\Index::class)->name('brand');
 
     // Car Routes
-    Route::controller(CarController::class)->group(function() {
+    Route::controller(CarController::class)->group(function () {
         Route::get('cars', 'index')->name('cars.index');
         Route::get('cars/create', 'create')->name('cars.create');
         Route::post('cars', 'store')->name('cars.store');
@@ -66,5 +66,4 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('car_image/{id}/delete', 'destroyImage')->name('destroyImage');
         Route::delete('cars/{id}/delete', 'destroy')->name('cars.destroy');
     });
-
 });

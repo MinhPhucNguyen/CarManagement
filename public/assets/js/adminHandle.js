@@ -62,25 +62,23 @@ itemSelect.forEach((item) => {
 });
 
 //Handle change avatar
-const changeAvatarBtn = document.querySelector('.change-avatar-btn');
-const changeAvatarInput = document.querySelector('#avatar-file-input');
-const imageAvatarLoading = document.querySelector('.image-avatar img');
-const overlay = document.querySelector('.overlay');
+const changeAvatarBtn = document.querySelector(".change-avatar-btn");
+const changeAvatarInput = document.querySelector("#avatar-file-input");
+const imageAvatarLoading = document.querySelector(".image-avatar img");
+const overlay = document.querySelector(".overlay");
 
-changeAvatarBtn.addEventListener('click', function(){
+changeAvatarBtn.addEventListener("click", function () {
     changeAvatarInput.click();
-})
+});
 
-changeAvatarInput.addEventListener('change', function(){
-    overlay.style.display = 'block';
+changeAvatarInput.addEventListener("change", function () {
+    overlay.style.display = "block";
     this.form.submit();
-})
+});
 
-imageAvatarLoading.addEventListener('load', function(){
-    overlay.style.display = 'none';
-    
-})
-
+imageAvatarLoading.addEventListener("load", function () {
+    overlay.style.display = "none";
+});
 
 //Handle display image when input
 const fileInput = document.querySelector(".file-input");
