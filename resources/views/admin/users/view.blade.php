@@ -26,20 +26,11 @@
         </div>
     </div>
 
-    <div class="overlay">
-        <div class="loading-message bg-white d-inline-block">
-            <div class="spinner-border text-success" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <span class="ml-3 fw-bold fs-5">
-                Please wait...
-            </span>
-        </div>
-    </div>
-
-    @include('layouts.includes.alert.alert_message')
+    @include('layouts.includes.overlay_loading.overlay_loading')
 
     <div>
+        @include('layouts.includes.alert.alert_message')
+
         <a href="{{ url('admin/users') }}" class="btn btn-danger fw-bold">
             <i class="fa-solid fa-arrow-left"></i>
             BACK
@@ -223,3 +214,26 @@
             </div>
         </div>
     @endsection
+
+    @push('scripts')
+        <script>
+            //Handle change avatar
+            const changeAvatarBtn = document.querySelector(".change-avatar-btn");
+            const changeAvatarInput = document.querySelector("#avatar-file-input");
+            const imageAvatarLoading = document.querySelector(".image-avatar img");
+            const overlay = document.querySelector(".overlay");
+
+            changeAvatarBtn.addEventListener("click", function() {
+                changeAvatarInput.click();
+            });
+
+            changeAvatarInput.addEventListener("change", function() {
+                overlay.style.display = "block";
+                this.form.submit();
+            });
+
+            imageAvatarLoading.addEventListener("load", function() {
+                overlay.style.display = "none";
+            });
+        </script>
+    @endpush
