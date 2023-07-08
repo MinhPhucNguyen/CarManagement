@@ -5,13 +5,13 @@ const alertDanger = document.querySelector(".alert-danger");
 if (alertSuccess) {
     setTimeout(function () {
         alertSuccess.remove();
-    }, 2500);
+    }, 5000);
 }
 
 if (alertDanger) {
     setTimeout(function () {
         alertDanger.remove();
-    }, 3000);
+    }, 5000);
 }
 // End Auto Close Alert
 
@@ -60,6 +60,27 @@ itemSelect.forEach((item) => {
         email.classList.toggle("active", this !== itemSelect[0]);
     });
 });
+
+//Handle change avatar
+const changeAvatarBtn = document.querySelector('.change-avatar-btn');
+const changeAvatarInput = document.querySelector('#avatar-file-input');
+const imageAvatarLoading = document.querySelector('.image-avatar img');
+const overlay = document.querySelector('.overlay');
+
+changeAvatarBtn.addEventListener('click', function(){
+    changeAvatarInput.click();
+})
+
+changeAvatarInput.addEventListener('change', function(){
+    overlay.style.display = 'block';
+    this.form.submit();
+})
+
+imageAvatarLoading.addEventListener('load', function(){
+    overlay.style.display = 'none';
+    
+})
+
 
 //Handle display image when input
 const fileInput = document.querySelector(".file-input");

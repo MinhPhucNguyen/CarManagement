@@ -41,7 +41,7 @@ class UserFormRequest extends FormRequest
             'address' => [
                 'required',
                 'string',
-                'max:50',
+                // 'max:150',
                 'regex:/^(\\d{1,}) [a-zA-Z0-9\\s]+(\\,)? [a-zA-Z]|[a-zA-Z]+$/',
             ],
             'phone' => [
@@ -88,7 +88,7 @@ class UserFormRequest extends FormRequest
 
             'address.required' => '*Please enter your address',
             'address.regex' => '*Please enter a valid address',
-            'address.max' => '*Address must be at most 50 characters',
+            'address.max' => '*Address must be at most 150 characters',
 
             'role_as.required' => "*Please select a role",
 

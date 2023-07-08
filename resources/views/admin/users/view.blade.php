@@ -26,15 +26,25 @@
         </div>
     </div>
 
-    <div>
-        <div class="d-inline-block ">
-            <a href="{{ url('admin/users') }}" class="btn btn-danger fw-bold float-right ">
-                <i class="fa-solid fa-arrow-left"></i>
-                BACK
-            </a>
+    <div class="overlay">
+        <div class="loading-message bg-white d-inline-block">
+            <div class="spinner-border text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <span class="ml-3 fw-bold fs-5">
+                Please wait...
+            </span>
         </div>
+    </div>
 
-        <div class="view-container w-100 shadow d-flex  justify-content-between rounded" style="margin-bottom: 65px">
+    @include('layouts.includes.alert.alert_message')
+
+    <div>
+        <a href="{{ url('admin/users') }}" class="btn btn-danger fw-bold">
+            <i class="fa-solid fa-arrow-left"></i>
+            BACK
+        </a>
+        <div class="view-container w-100 shadow d-flex  justify-content-between rounded">
             <div class="view-left-container">
                 <ul class="view-left-list">
 
@@ -42,9 +52,9 @@
                     <li class="view-left-item">Email</li>
 
                     @if ($user->role_as != '1')
-                        <li class="text-danger mt-4">
-                            <button type="button" class="delete-user-btn fw-bold fs-6 text-danger bg-white"
-                                data-bs-toggle="modal" data-bs-target="#deleteConfirmModal{{ $user->id }}">
+                        <li class="text-danger mt-4 view-left-item-delete">
+                            <button type="button" class="delete-user-btn fw-bold fs-6 text-danger" data-bs-toggle="modal"
+                                data-bs-target="#deleteConfirmModal{{ $user->id }}">
                                 <span>Delete User</span>
                             </button>
                         </li>
@@ -58,18 +68,46 @@
                 <div id="profile" class="section active">
                     <div class="view-right-item rounded-3 border d-flex justify-content-between">
                         <div class="d-flex">
-                            <div class="image-avatar">
-                                <img src="{{ asset('uploads/avatar/default.jpg') }}" alt="avatar" class="rounded-circle">
+                            <div class="image-avatar-container text-center">
+                                <div class="image-avatar">
+                                    <img src="{{ asset('uploads/avatar/' . $user->avatar) }}" alt="avatar default"
+                                        class="rounded-circle" style="object-fit: cover">
+                                </div>
+                                @if ($user->role_as == '1' && Auth::user()->username == $user->username)
+                                    <div class="image-avatar-upload">
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-outline-success fw-bold mt-2 " type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                Avatar
+                                            </button>
+                                            <ul class="dropdown-menu"">
+                                                <li><button
+                                                        class="dropdown-item btn change-avatar-btn fw-bolder">Change</button>
+                                                </li>
+                                                <li><a href="{{ route('users.destroyAvatar', $user->id) }}"
+                                                        class="dropdown-item btn remove-avatar-btn text-danger fw-bolder">Remove</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <form action="{{ route('users.updateAvatar', $user->id) }}" method="POST"
+                                            enctype="multipart/form-data" class="form-avatar-input">
+                                            @csrf
+                                            @method('PUT')
+                                            <input id="avatar-file-input" name="avatar-input" type="file"
+                                                style="display: none" />
+                                        </form>
+                                    </div>
+                                @endif
                             </div>
-                            <div class="info">
+                            <div class="info ml-4">
                                 <p class="fs-4 fw-bolder text-dark mb-1"> {{ $user->username }}</p>
                                 <p class="fw-bolder mb-1 {{ $user->role_as == '1' ? 'text-danger' : 'text-success' }}">
                                     {{ $user->role_as == '1' ? 'Admin' : 'User' }}</p>
                                 <p class="fs-6 fw-bolder text-secondary"> {{ $user->address }}</p>
-                                <button type="button" class="btn btn-success fw-bold" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-success fw-bold mt-3" data-bs-toggle="modal"
                                     data-bs-target="#sendEmailModal">
                                     <i class="fa-solid fa-envelope"></i>
-                                    <span class="ml-2">SEND EMAIL</span>
+                                    <span class="ml-2" style="font-size: 14px">SEND EMAIL</span>
                                 </button>
 
                                 {{-- SEND EMAIL MODAL --}}
@@ -83,7 +121,7 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <form action="" method="POST">
-                                                <div class="modal-body">
+                                                <div class="modal-body pl-4 pr-4">
                                                     <div class="form-group mb-4">
                                                         <label class="fw-bold mb-0" for="">Form</label>
                                                         <input type="text" name="email-form" placeholder="Enter Email"
@@ -150,10 +188,8 @@
                                         <p class="user-info">{{ $user->phone }}</p>
                                     </div>
                                     <div class="user-info-item-right w-50">
-                                        <div class="user-info-item-left pr-4 w-50">
-                                            <p class="mb-1 user-info-title">Address</p>
-                                            <p class="user-info">{{ $user->address }}</p>
-                                        </div>
+                                        <p class="mb-1 user-info-title">Address</p>
+                                        <p class="user-info">{{ $user->address }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -179,7 +215,7 @@
                 <div id="email" class="section">
                     <div class="view-right-item rounded-3 border d-flex justify-content-between">
                         <div class="w-50">
-                            <p class="fw-bolder text-dark mb-4">This is email</p>
+                            <p class="fw-bolder text-dark mb-4">This is the email sent</p>
 
                         </div>
                     </div>

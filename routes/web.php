@@ -48,6 +48,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::post('users', 'store')->name('users.store');
         Route::get('users/{user}/edit', 'edit')->name('users.edit');
         Route::put('users/{user}', 'update')->name('users.update');
+        Route::put('users/{user}/update-avatar', 'updateAvatar')->name('users.updateAvatar');
+        Route::get('users/{id}/delete-avatar', 'destroyAvatar')->name('users.destroyAvatar');
         Route::delete('users/{user}', 'destroy')->name('users.destroy');
     });
 

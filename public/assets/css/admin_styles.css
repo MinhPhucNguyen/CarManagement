@@ -10,24 +10,18 @@
     margin-right: 20px;
 }
 
-.view-left-list{
+.view-left-list {
     list-style: none;
     padding: 0;
 }
 
-.view-left-list li{
+.view-left-list li {
     padding: 10px 0;
     font-weight: bold;
     text-align: center;
     cursor: pointer;
     margin-bottom: 6px;
     user-select: none;
-}
-
-.selected{
-    color: rgb(28, 200, 138) ;
-    background-color: rgb(222, 222, 222, 0.5);
-    border-radius: 40px;
 }
 
 .view-right-container {
@@ -39,12 +33,36 @@
     padding: 16px 20px;
 }
 
-.user-info-title{
+.view-left-item:hover {
+    color: rgb(28, 200, 138);
+    background-color: rgb(222, 222, 222, 0.5);
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.selected {
+    color: rgb(28, 200, 138);
+    background-color: rgb(222, 222, 222, 0.5);
+    border-radius: 10px;
+}
+
+.delete-user-btn {
+    border: none;
+    background: transparent;
+}
+
+.view-left-item-delete:hover {
+    background-color: rgba(255, 198, 198, 0.6);
+    border-radius: 40px;
+    transition: all 0.2s ease-in-out;
+}
+
+.user-info-title {
     font-size: 14px;
     font-weight: bold;
     color: #bbb;
 }
-.user-info{
+.user-info {
     font-size: 16px;
     font-weight: bold;
     color: #303030;
@@ -52,8 +70,10 @@
 .image-avatar {
     width: 120px;
     height: 120px;
-    margin-right: 20px;
+    margin: 0 10px;
     display: inline-block;
+    cursor: pointer;
+    position: relative;
 }
 
 .image-avatar > img {
@@ -88,10 +108,6 @@
     transition: all 0.2s ease-in-out;
     opacity: 1;
     text-decoration: none;
-}
-
-.delete-user-btn{
-    border: none;
 }
 
 .dashboard-card {
@@ -167,14 +183,36 @@
     font-size: 14px;
 }
 
-#contact{
+#contact {
     display: none;
 }
 
-.section{
+.section {
     display: none;
 }
 
-.section.active{
+.section.active {
     display: block;
+}
+
+.overlay {
+    position: fixed;
+    background: rgb(48, 48, 48, 0.5);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 999; 
+    display: none;
+}
+
+.loading-message {
+    background-color: white;
+    padding: 15px 30px;
+    text-align: center;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

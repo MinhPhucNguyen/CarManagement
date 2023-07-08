@@ -42,8 +42,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div wire:loading class="p-2">
-                <div class="spinner-border text-primary" role="status">
+            <div wire:loading class="p-2 text-center">
+                <div class="spinner-border text-success" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
             </div>

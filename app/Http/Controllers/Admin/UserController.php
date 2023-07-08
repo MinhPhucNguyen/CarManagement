@@ -7,9 +7,15 @@ use App\Http\Requests\UserFormRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
+
 
 class UserController extends Controller
 {
+    protected $uploadsAvatarPath = 'uploads/avatar/'; 
+    protected $defaultImage = 'default.jpg';
+
     public function index(Request $request)
     {
         $sortDirection = $request->input('direction');
@@ -92,18 +98,51 @@ class UserController extends Controller
                 $user->password = Hash::make($validatedData['password']);
                 $user->confirm_password = $validatedData['confirm_password'] == $validatedData['password'] ? 'true' : 'false';
             }
-
             $user->update();
             return redirect('admin/users')->with('message', "User updated successfully");
         } else {
             return  redirect('admin/users')->with('message', 'User not found');
         }
     }
+
+    public function updateAvatar(int $user_id, Request $request)
+    {
+        $user = User::findOrFail($user_id);
+
+        if ($user) {
+            if ($request->hasFile('avatar-input')) {
+                if ($user->avatar && $user->avatar != $this->defaultImage) {
+                    File::delete($this->uploadsAvatarPath . $user->avatar); //Xóa ảnh avatar cũ trước đó
+                }
+
+                $extension = $request->file('avatar-input')->getClientOriginalExtension();
+                $filename = time() . '_avatar_' . $user->id . '.' . $extension;
+                Image::make($request->file('avatar-input'))->resize(120, 120)->save($this->uploadsAvatarPath . $filename); //Sử dụng Intervention Image để quản lý ảnh, resize() kích thước của ảnh nếu ảnh có độ phân giải quá lớn
+                $user->avatar = $filename;
+                $user->save();
+            }
+            return redirect()->back()->with('message', "Change avatar successfully");
+        } else {
+            return  redirect()->back()->with('message', 'Something went wrong');
+        }
+    }
+
     public function destroy(int $user_id)
     {
         $user = User::findOrFail($user_id);
         $user->delete();
         return redirect('admin/users')->with('message', 'Delete user successfully');
+    }
+
+    public function destroyAvatar(int $user_id)
+    {
+        $user = User::findOrFail($user_id);
+        if ($user->avatar && $user->avatar != 'default.jpg') {
+            File::delete($this->uploadsAvatarPath . $user->avatar);
+            $user->avatar = $this->defaultImage;
+            $user->save();
+            return redirect()->back()->with('message', 'Remove avatar successfully');
+        }
     }
 
 
