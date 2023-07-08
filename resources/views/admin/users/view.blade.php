@@ -28,7 +28,7 @@
 
     @include('layouts.includes.overlay_loading.overlay_loading')
 
-    <div>
+    <div style="margin-bottom: 56px">
         @include('layouts.includes.alert.alert_message')
 
         <a href="{{ url('admin/users') }}" class="btn btn-danger fw-bold">

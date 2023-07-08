@@ -46,7 +46,7 @@ class SignUpRequest extends FormRequest
             'address' => [
                 'required',
                 'string',
-                'max:50',
+                'max:150',
                 'regex:/^(\\d{1,}) [a-zA-Z0-9\\s]+(\\,)? [a-zA-Z]|[a-zA-Z]+$/',
             ],
             'password' => [
