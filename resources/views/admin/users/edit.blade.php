@@ -13,11 +13,48 @@
                 </a>
             </div>
             <div class="card-body">
-                <form action="{{ route('users.update' , $user->id) }}" method="POST">
+                <form action="{{ route('users.update', $user->id) }}" method="POST">
                     @csrf
                     @method('PUT')
-                    <div class="row"> 
+                    <div class="row">
                         <input type="hidden" name="user_id" value="{{ $user->id }}">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstname">Firstname</label>
+                            <input type="text" name="firstname"
+                                class="form-control @error('firstname') is-invalid  @enderror"
+                                value="{{ $user->firstname }}">
+                            @error('firstname')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastname">Lastname</label>
+                            <input type="text" name="lastname"
+                                class="form-control @error('lastname') is-invalid  @enderror" value="{{ $user->lastname }}">
+                            @error('lastname')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="">Gender</label>
+                            <div>
+                                <div class="form-check d-inline-block">
+                                    <input class="form-check-input " type="radio" name="gender" id="male"
+                                        value="1" {{ $user->gender == '1' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="male">
+                                        Male
+                                    </label>
+                                </div>
+                                <div style="width: 10px; display: inline-block"></div>
+                                <div class="form-check d-inline-block">
+                                    <input class="form-check-input" name="gender" type="radio" id="female"
+                                        value="0" {{ $user->gender == '0' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="female">
+                                        Female
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-6 mb-3">
                             <label for="username">Username</label>
                             <input type="text" name="username"
@@ -44,8 +81,8 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="address">Address</label>
-                            <input type="text" name="address" class="form-control @error('address') is-invalid  @enderror"
-                                value="{{ $user->address }}">
+                            <input type="text" name="address"
+                                class="form-control @error('address') is-invalid  @enderror" value="{{ $user->address }}">
                             @error('address')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror

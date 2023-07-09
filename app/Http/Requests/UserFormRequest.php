@@ -24,6 +24,19 @@ class UserFormRequest extends FormRequest
         $id = $this->route('user');
 
         $rules = [
+            'firstname' => [
+                'required',
+                'string',
+                'regex:/^[a-zA-Z\s]+$/'
+            ],
+            'lastname' => [
+                'required',
+                'string',
+                'regex:/^[a-zA-Z\s]+$/'
+            ],
+            'gender' => [
+                'required',
+            ],
             'username' => [
                 'required',
                 'string',
@@ -71,6 +84,14 @@ class UserFormRequest extends FormRequest
     public function messages()
     {
         return [
+            'firstname.required' => '*Please enter your firstname',
+            'firstname.string' => '*Firstname must be a string',
+            'firstname.regex' => '*Firstname must not contain special characters',
+
+            'lastname.required' => '*Please enter your lastname',
+            'lastname.string' => '*Lastname must be a string',
+            'lastname.regex' => '*Lastname must not contain special characters',
+
             'username.required' => '*Please enter your username',
             'username.string' => '*Username must be a string',
             'username.min' => '*Username must be at least 5 and at most 30 characters',
@@ -96,7 +117,7 @@ class UserFormRequest extends FormRequest
             'password.min' => '*Password must be at least 8 characters',
             'password.unique' => '*Password already exists',
             'password.regex' => '*Password must contain at least one uppercase letter, one lowercase letter, one number and one special character',
-            
+
             'confirm_password.required' => '*Please confirm your password',
             'confirm_password.same:password' => '*Password confirmation does not match',
         ];

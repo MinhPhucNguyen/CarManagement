@@ -28,7 +28,7 @@
 
     @include('layouts.includes.overlay_loading.overlay_loading')
 
-    <div style="margin-bottom: 56px">
+    <div>
         @include('layouts.includes.alert.alert_message')
 
         <a href="{{ url('admin/users') }}" class="btn btn-danger fw-bold">
@@ -71,7 +71,7 @@
                                                 data-bs-toggle="dropdown" aria-expanded="false">
                                                 Avatar
                                             </button>
-                                            <ul class="dropdown-menu"">
+                                            <ul class="dropdown-menu">
                                                 <li><button
                                                         class="dropdown-item btn change-avatar-btn fw-bolder">Change</button>
                                                 </li>
@@ -91,7 +91,7 @@
                                 @endif
                             </div>
                             <div class="info ml-4">
-                                <p class="fs-4 fw-bolder text-dark mb-1"> {{ $user->username }}</p>
+                                <p class="fs-4 fw-bolder text-dark mb-1"> {{ $user->firstname . ' ' . $user->lastname }}</p>
                                 <p class="fw-bolder mb-1 {{ $user->role_as == '1' ? 'text-danger' : 'text-success' }}">
                                     {{ $user->role_as == '1' ? 'Admin' : 'User' }}</p>
                                 <p class="fs-6 fw-bolder text-secondary"> {{ $user->address }}</p>
@@ -100,55 +100,8 @@
                                     <i class="fa-solid fa-envelope"></i>
                                     <span class="ml-2" style="font-size: 14px">SEND EMAIL</span>
                                 </button>
-
                                 {{-- SEND EMAIL MODAL --}}
-                                <div class="modal fade" id="sendEmailModal" tabindex="-1" aria-labelledby="sendEmailLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="sendEmailLabel">New Email</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <form action="" method="POST">
-                                                <div class="modal-body pl-4 pr-4">
-                                                    <div class="form-group mb-4">
-                                                        <label class="fw-bold mb-0" for="">Form</label>
-                                                        <input type="text" name="email-form" placeholder="Enter Email"
-                                                            value="{{ Auth::user()->role_as == '1' ? Auth::user()->email : '' }}"
-                                                            class="form-control">
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="fw-bold mb-0" for="">To</label>
-                                                        <input type="text" name="email-to" placeholder="Enter Email"
-                                                            class="form-control">
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="fw-bold mb-0" for="">Name</label>
-                                                        <input type="text" name="name" placeholder="Enter Name"
-                                                            class="form-control">
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label class="fw-bold mb-0" for="">Title</label>
-                                                        <input type="text" name="title" placeholder="Enter Title"
-                                                            class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="fw-bold mb-0" for="">Message</label>
-                                                        <textarea type="text" name="username" placeholder="Enter username" class="form-control" cols="1"
-                                                            rows="5"></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-success">SEND</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+                                @include('layouts.includes.modal.modal_send_email')
                             </div>
                         </div>
                         <div class="edit-user-btn d-flex align-items-center">
@@ -165,20 +118,36 @@
                             <div class="user-info-container">
                                 <div class="row  d-flex w-100 mb-2">
                                     <div class="user-info-item-left pr-4 w-50">
-                                        <p class="mb-1 user-info-title">Username</p>
-                                        <p class="user-info">{{ $user->username }}</p>
+                                        <p class="mb-1 user-info-title">Firstname</p>
+                                        <p class="user-info">{{ $user->firstname }}</p>
                                     </div>
                                     <div class="user-info-item-right w-50">
-                                        <p class="mb-1 user-info-title">Email Address</p>
-                                        <p class="user-info">{{ $user->email }}</p>
+                                        <p class="mb-1 user-info-title">Lastname</p>
+                                        <p class="user-info">{{ $user->lastname }}</p>
                                     </div>
                                 </div>
                                 <div class="row  d-flex w-100 mb-2">
                                     <div class="user-info-item-left pr-4 w-50">
+                                        <p class="mb-1 user-info-title">Username</p>
+                                        <p class="user-info">{{ $user->username }}</p>
+                                    </div>
+                                    <div class="user-info-item-right w-50">
+                                        <p class="mb-1 user-info-title">Gender</p>
+                                        <p class="user-info">{{ $user->gender == '1' ? 'Male' : 'Female' }}</p>
+                                    </div>
+                                </div>
+                                <div class="row  d-flex w-100 mb-2">
+                                    <div class="user-info-item-left pr-4 w-50">
+                                        <p class="mb-1 user-info-title">Email Address</p>
+                                        <p class="user-info">{{ $user->email }}</p>
+                                    </div>
+                                    <div class="user-info-item-right w-50">
                                         <p class="mb-1 user-info-title">Phone Number</p>
                                         <p class="user-info">{{ $user->phone }}</p>
                                     </div>
-                                    <div class="user-info-item-right w-50">
+                                </div>
+                                <div class="row  d-flex w-100 mb-2">
+                                    <div class="user-info-item-left pr-4 w-50">
                                         <p class="mb-1 user-info-title">Address</p>
                                         <p class="user-info">{{ $user->address }}</p>
                                     </div>

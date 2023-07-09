@@ -43,7 +43,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     // User Routes
     Route::controller(UserController::class)->group(function () {
         Route::get('users', 'index');
-        Route::get('users/{users}/view', 'show')->name('users.show');
+        Route::get('users/{users}', 'show')->name('users.show');
         Route::get('users/create', 'create')->name('users.create');
         Route::post('users', 'store')->name('users.store');
         Route::get('users/{user}/edit', 'edit')->name('users.edit');

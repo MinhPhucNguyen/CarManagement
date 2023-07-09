@@ -59,7 +59,10 @@ class UserController extends Controller
         // dd($validatedInputs);
 
         $user = new User();
+        $user->firstname = $validatedInputs['firstname'];
+        $user->lastname = $validatedInputs['lastname'];
         $user->username = $validatedInputs['username'];
+        $user->gender = $validatedInputs['gender'];
         $user->email = $validatedInputs['email'];
         $user->phone = $validatedInputs['phone'];
         $user->address = $validatedInputs['address'];
@@ -85,6 +88,9 @@ class UserController extends Controller
         // dd(!$user);
 
         if ($user) {
+            $user->firstname = $validatedData['firstname'];
+            $user->lastname = $validatedData['lastname'];
+            $user->gender = $validatedData['gender'];
             $user->username = $validatedData['username'];
             $user->email = $validatedData['email'];
             $user->phone = $validatedData['phone'];

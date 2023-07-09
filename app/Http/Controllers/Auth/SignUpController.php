@@ -22,7 +22,10 @@ class SignUpController extends Controller
         $validatedData = $request->validated();
 
         $user = User::create([
+            'firstname' => $validatedData['firstname'],
+            'lastname' => $validatedData['lastname'],
             'username' => $validatedData['username'],
+            'gender' => $validatedData['gender'],
             'email' => $validatedData['email'],
             'phone' => $validatedData['phone'],
             'address' => $validatedData['address'],

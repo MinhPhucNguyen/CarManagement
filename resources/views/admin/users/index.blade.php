@@ -52,6 +52,7 @@
                                 </span>
                             </th>
                             <th class="text-center">Username</th>
+                            <th class="text-center">Gender</th>
                             <th class="text-center">Email</th>
                             <th class="text-center">Phone</th>
                             <th class="text-center">Address</th>
@@ -66,6 +67,7 @@
                                 <td class="text-center">{{ $user->id }}</td>
                                 <td class="text-center"><a href="{{ route('users.show', $user->id) }}"
                                         class="text-success">{{ $user->username }}</a></td>
+                                <td class="text-center">{{ $user->gender == '1' ? 'Male' : 'Female' }}</td>
                                 <td class="text-center">{{ $user->email }}</td>
                                 <td class="text-center">{{ $user->phone }}</td>
                                 <td class="text-center">{{ $user->address }}</td>
@@ -80,6 +82,13 @@
                                             Action
                                         </button>
                                         <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item mb-3 fs-6 text-warning bg-white"
+                                                    href="{{ route('users.show', $user->id) }}">
+                                                    <i class="fa-solid fa-eye"></i>
+                                                    <span>View Profile</span>
+                                                </a>
+                                            </li>
                                             <li>
                                                 <a class="dropdown-item mb-3 fs-6 text-success bg-white"
                                                     href="{{ route('users.edit', $user->id) }}">

@@ -22,6 +22,16 @@ class SignUpRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'firstname' => [
+                'required',
+                'string',
+                'regex:/^[a-zA-Z\s]+$/'
+            ],
+            'lastname' => [
+                'required',
+                'string',
+                'regex:/^[a-zA-Z\s]+$/'
+            ],
             'username' => [
                 'required',
                 'unique:users,username',
@@ -29,6 +39,9 @@ class SignUpRequest extends FormRequest
                 'min:5',
                 'max:20',
                 'regex:/^[a-zA-Z][a-zA-Z0-9]*$/'
+            ],
+            'gender' => [
+                'required',
             ],
             'email' => [
                 'required',
@@ -67,12 +80,19 @@ class SignUpRequest extends FormRequest
     public function messages()
     {
         return [
+            'firstname.required' => '*Please enter your firstname',
+            'firstname.string' => '*Firstname must be a string',
+            'firstname.regex' => '*Firstname must not contain special characters',
+            'lastname.required' => '*Please enter your lastname',
+            'lastname.string' => '*Lastname must be a string',
+            'lastname.regex' => '*Lastname must not contain special characters',
             'username.required' => '*Please enter your username',
             'username.string' => '*Username must be a string',
             'username.unique' => '*Username already exists. Please choose another username',
             'username.min' => '*Username must be at least 5 and at most 30 characters',
             'username.max' => '*Username must be at least 5 and at most 30 characters',
             'username.regex' => '*Username must start with a letter, not start with a number and special characters and not contain special characters',
+            'gender.required' => '*Please select your gender',
             'email.required' => '*Please enter your email',
             'email.email' => '*Please enter a valid email',
             'email.unique' => '*Email already exists. Please enter another email',

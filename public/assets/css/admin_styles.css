@@ -216,3 +216,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+input[type="radio"]:checked {
+    background-color: #1cc88a !important;
+    border: #1cc88a;
+    outline: none;
+}

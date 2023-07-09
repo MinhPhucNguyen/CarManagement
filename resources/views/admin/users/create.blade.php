@@ -17,6 +17,44 @@
                     @csrf
                     <div class="row">
                         <div class="col-md-6 mb-3">
+                            <label for="firstname">Firstname</label>
+                            <input type="text" name="firstname"
+                                class="form-control @error('firstname') is-invalid  @enderror"
+                                value="{{ !$errors->has('firstname') ? old('firstname') : '' }}">
+                            @error('firstname')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastname">Lastname</label>
+                            <input type="text" name="lastname"
+                                class="form-control @error('lastname') is-invalid  @enderror"
+                                value="{{ !$errors->has('lastname') ? old('lastname') : '' }}">
+                            @error('lastname')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="">Gender</label>
+                            <div>
+                                <div class="form-check d-inline-block">
+                                    <input class="form-check-input " type="radio" name="gender" id="male"
+                                        value="1">
+                                    <label class="form-check-label" for="male">
+                                        Male
+                                    </label>
+                                </div>
+                                <div style="width: 10px; display: inline-block"></div>
+                                <div class="form-check d-inline-block">
+                                    <input class="form-check-input" name="gender" type="radio" id="female"
+                                        value="0">
+                                    <label class="form-check-label" for="female">
+                                        Female
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
                             <label for="username">Username</label>
                             <input type="text" name="username"
                                 class="form-control @error('username') is-invalid  @enderror"

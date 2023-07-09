@@ -21,10 +21,13 @@ class UserSeeder extends Seeder
 
         for ($i = 0; $i < 25; $i++) {
             User::create([
-                'username' => $faker->userName,
+                'firstname' => $faker->firstName(),
+                'lastname' => $faker->lastName(),
+                'username' => $faker->userName(),
+                'gender' => $faker->numberBetween(0,1),
                 'email' => $faker->unique()->safeEmail(),
-                'phone' => $faker->phoneNumber,
-                'address'=>$faker->country(),
+                'phone' => $faker->numerify('##########'),
+                'address'=>$faker->address(),
                 'password' => Hash::make('password'),
                 'confirm_password' => $passwordMatch ? 'true' : 'false',
             ]);
