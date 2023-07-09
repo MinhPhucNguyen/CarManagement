@@ -95,13 +95,12 @@
                                 <p class="fw-bolder mb-1 {{ $user->role_as == '1' ? 'text-danger' : 'text-success' }}">
                                     {{ $user->role_as == '1' ? 'Admin' : 'User' }}</p>
                                 <p class="fs-6 fw-bolder text-secondary"> {{ $user->address }}</p>
-                                <button type="button" class="btn btn-success fw-bold mt-3" data-bs-toggle="modal"
+                                <a class="btn btn-success fw-bold mt-3" data-bs-toggle="modal"
                                     data-bs-target="#sendEmailModal">
                                     <i class="fa-solid fa-envelope"></i>
                                     <span class="ml-2" style="font-size: 14px">SEND EMAIL</span>
-                                </button>
-                                {{-- SEND EMAIL MODAL --}}
-                                @include('layouts.includes.modal.modal_send_email')
+                                </a>
+                                @include('livewire.admin.emails.send-email')
                             </div>
                         </div>
                         <div class="edit-user-btn d-flex align-items-center">

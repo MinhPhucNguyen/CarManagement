@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignUpController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Mail\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,8 @@ Route::post('/register', [SignUpController::class, 'register']);
 
 //Logout
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+
+//Email
 
 //Admin Route
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
