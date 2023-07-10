@@ -46,6 +46,10 @@
     border-radius: 10px;
 }
 
+.section.active {
+    display: block;
+}
+
 .delete-user-btn {
     border: none;
     background: transparent;
@@ -191,10 +195,6 @@
     display: none;
 }
 
-.section.active {
-    display: block;
-}
-
 .overlay {
     position: fixed;
     background: rgb(48, 48, 48, 0.5);
@@ -221,4 +221,24 @@ input[type="radio"]:checked {
     background-color: #1cc88a !important;
     border: #1cc88a;
     outline: none;
+}
+
+.nav-link.active,
+.nav-link.active:focus {
+    color: #1cc88a;
+}
+
+.nav-link:not(.active),
+.nav-link:not(.active):focus {
+    color: #494949;
+}
+
+/* Alert */
+.toast {
+    position: fixed;
+    right: 30px;
+    top: 100px;
+    padding: 20px 0px 20px 30px;
+    background-color: #1cc889bd;
+    font-size: 17px;
 }

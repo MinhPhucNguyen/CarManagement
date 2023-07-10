@@ -40,10 +40,10 @@ class UserController extends Controller
         return view('admin.users.index', compact('usersList'));
     }
 
-    public function show(int $userID)
+    public function show(int $id)
     {
         // dd($userID);
-        $user = User::findOrFail($userID);
+        $user = User::findOrFail($id);
         return view('admin.users.view', compact('user'));
     }
 

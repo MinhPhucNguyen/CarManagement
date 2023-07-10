@@ -33,6 +33,8 @@ class User extends Authenticatable
         'role_as'
     ];
 
+    protected $primaryKey = 'id';
+
     /**
      * The attributes that should be hidden for serialization.
      *

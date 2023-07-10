@@ -3,21 +3,33 @@
 namespace App\Http\Controllers\Mail;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendEmails;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class MailController extends Controller
 {
-    public function index(){
+    public function sendEmail(Request $request)
+    {
+        $validatedEmailData = $request->validate([
+            'emailFrom' => 'required|email',
+            'emailTo' => 'required|email',
+        ]);
+
         $emailData = [
-            'title' => "Testing Email",
-            'body' =>   "ABC",
+            'emailFrom' => $validatedEmailData['emailFrom'],
+            'emailTo' => $validatedEmailData['emailTo'],
+            'name' => $request->name,
+            'subject' => $request->subject,
+            'message' => $request->message,
         ];
 
-        Mail::send('emails.email_template', $emailData, function($email) use ($emailData){
-            $email->to('johnnynguyen1619@gmail.com')->from('johnnynguyen1619@gmail.com');
-        });
-
-        dd('send email successfully');
+        try {
+            Mail::to($emailData['emailTo'])->send(new SendEmails($emailData));
+            return redirect()->back()->with('message', 'Send Email Successfully');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', "Send Email Failed");
+        }
     }
 }

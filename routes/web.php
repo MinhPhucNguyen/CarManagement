@@ -42,13 +42,13 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index']);
     Route::get('search', [SearchController::class, 'search'])->name('admin.search');
-    Route::get('send_email', [MailController::class, 'index'])->name('sendEmail');
+    Route::post('send_email', [MailController::class, 'sendEmail'])->name('sendEmail');
 
 
     // User Routes
     Route::controller(UserController::class)->group(function () {
         Route::get('users', 'index');
-        Route::get('users/{users}', 'show')->name('users.show');
+        Route::get('users/{users}/show', 'show')->name('users.show');
         Route::get('users/create', 'create')->name('users.create');
         Route::post('users', 'store')->name('users.store');
         Route::get('users/{user}/edit', 'edit')->name('users.edit');
