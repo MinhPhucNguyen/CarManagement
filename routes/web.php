@@ -42,6 +42,8 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index']);
     Route::get('search', [SearchController::class, 'search'])->name('admin.search');
+    Route::get('send_email', [MailController::class, 'index'])->name('sendEmail');
+
 
     // User Routes
     Route::controller(UserController::class)->group(function () {

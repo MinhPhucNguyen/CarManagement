@@ -26,7 +26,17 @@
         </div>
     </div>
 
+
     @include('layouts.includes.overlay_loading.overlay_loading')
+
+    @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fa-sharp fa-solid fa-circle-check"></i>
+            <strong>{{ session('success') }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                style="padding: 1.05rem 1rem"></button>
+        </div>
+    @endif
 
     <div>
         @include('layouts.includes.alert.alert_message')
@@ -91,7 +101,8 @@
                                 @endif
                             </div>
                             <div class="info ml-4">
-                                <p class="fs-4 fw-bolder text-dark mb-1"> {{ $user->firstname . ' ' . $user->lastname }}</p>
+                                <p class="fs-4 fw-bolder text-dark mb-1"> {{ $user->firstname . ' ' . $user->lastname }}
+                                </p>
                                 <p class="fw-bolder mb-1 {{ $user->role_as == '1' ? 'text-danger' : 'text-success' }}">
                                     {{ $user->role_as == '1' ? 'Admin' : 'User' }}</p>
                                 <p class="fs-6 fw-bolder text-secondary"> {{ $user->address }}</p>
@@ -100,7 +111,7 @@
                                     <i class="fa-solid fa-envelope"></i>
                                     <span class="ml-2" style="font-size: 14px">SEND EMAIL</span>
                                 </a>
-                                @include('livewire.admin.emails.send-email')
+                                @include('livewire.emails.send-email')
                             </div>
                         </div>
                         <div class="edit-user-btn d-flex align-items-center">

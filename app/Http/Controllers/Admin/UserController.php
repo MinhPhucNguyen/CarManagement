@@ -23,7 +23,7 @@ class UserController extends Controller
 
         $usersList = User::when($request->filterBy != NULL, function ($q) use ($request,  $sortDirection,  $sortColumn) {
             if ($request->filterBy == "all") {
-                return $q->orderBy($sortColumn ?? 'id', $sortColumn ?? 'desc');
+                return $q->orderBy($sortColumn ?? 'id', $sortDirection ?? 'desc');
             } else {
                 return $q->where('role_as', $request->filterBy);
             }
@@ -114,19 +114,15 @@ class UserController extends Controller
     public function updateAvatar(int $user_id, Request $request)
     {
         $user = User::findOrFail($user_id);
-
-        if ($user) {
-            if ($request->hasFile('avatar-input')) {
-                if ($user->avatar && $user->avatar != $this->defaultImage) {
-                    File::delete($this->uploadsAvatarPath . $user->avatar); //Xóa ảnh avatar cũ trước đó
-                }
-
-                $extension = $request->file('avatar-input')->getClientOriginalExtension();
-                $filename = time() . '_avatar_' . $user->id . '.' . $extension;
-                Image::make($request->file('avatar-input'))->resize(120, 120)->save($this->uploadsAvatarPath . $filename); //Sử dụng Intervention Image để quản lý ảnh, resize() kích thước của ảnh nếu ảnh có độ phân giải quá lớn
-                $user->avatar = $filename;
-                $user->save();
+        if ($user && $request->hasFile('avatar-input')) {
+            if ($user->avatar && $user->avatar != $this->defaultImage) {
+                File::delete($this->uploadsAvatarPath . $user->avatar); //Xóa ảnh avatar cũ trước đó
             }
+            $extension = $request->file('avatar-input')->getClientOriginalExtension();
+            $filename = time() . '_avatar_' . $user->id . '.' . $extension;
+            Image::make($request->file('avatar-input'))->resize(120, 120)->save($this->uploadsAvatarPath . $filename); //Sử dụng Intervention Image để quản lý ảnh, resize() kích thước của ảnh nếu ảnh có độ phân giải quá lớn
+            $user->avatar = $filename;
+            $user->save();
             return redirect()->back()->with('message', "Change avatar successfully");
         } else {
             return  redirect()->back()->with('message', 'Something went wrong');
