@@ -103,9 +103,9 @@
                                     <label for="fuel">Fuel</label>
                                     <select name="fuel" class="form-control  @error('fuel') is-invalid  @enderror">
                                         <option value="">--Select Type Of Fuel-- </option>
-                                        <option {{ $car->fuel == 'gasoline' ? 'selected' : '' }} value="gasoline">Gasoline
+                                        <option {{ $car->fuel == 'Petrol' ? 'selected' : '' }} value="Petrol">Petrol
                                         </option>
-                                        <option {{ $car->fuel == 'diesel' ? 'selected' : '' }} value="diesel">Diesel
+                                        <option {{ $car->fuel == 'Diesel' ? 'selected' : '' }} value="Diesel">Diesel
                                         </option>
                                     </select>
                                     @error('fuel')

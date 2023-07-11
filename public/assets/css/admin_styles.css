@@ -238,7 +238,32 @@ input[type="radio"]:checked {
     position: fixed;
     right: 30px;
     top: 100px;
-    padding: 20px 0px 20px 30px;
-    background-color: #1cc889bd;
-    font-size: 17px;
+    padding: 18px 30px 18px 15px;
+    background-color: #1cc8898f;
+    font-size: 16px;
+    border-radius: 8px;
+    color: #fff;
+    animation: slideInLeft ease 0.3s;
+}
+
+.hide-toast {
+    animation: slideOutLeft ease 0.3s;
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(calc(100% + 30px));
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(calc(100% + 30px));
+    }
 }

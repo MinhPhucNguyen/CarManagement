@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mail;
 
 use App\Http\Controllers\Controller;
 use App\Mail\SendEmails;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -27,7 +28,7 @@ class MailController extends Controller
 
         try {
             Mail::to($emailData['emailTo'])->send(new SendEmails($emailData));
-            return redirect()->back()->with('message', 'Send Email Successfully');
+            return redirect()->back()->with('message', 'Mail has been sent to ' . $emailData['emailTo']);
         } catch (Exception $e) {
             return redirect()->back()->with('error', "Send Email Failed");
         }

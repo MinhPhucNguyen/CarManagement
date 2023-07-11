@@ -3,14 +3,18 @@
 @section('content')
     @include('layouts.includes.overlay_loading.overlay_loading')
 
-    @if (session()->has('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <i class="fa-sharp fa-solid fa-circle-check"></i>
-            <strong>{{ session('success') }}</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
-                style="padding: 1.05rem 1rem"></button>
+    <div class="toast align-items-center shadow" role="toast" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex p-0">
+            <div class="toast-body p-0 fw-bold d-flex">
+                <div class="d-inline-block pr-3 fs-4 d-flex align-items-center">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <p class="m-0">Hello, world! This is a toast message.</p>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                aria-label="Close"></button>
         </div>
-    @endif
+    </div>
 
     @if (session()->has('error'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -22,19 +26,6 @@
     @endif
 
     <div>
-        @include('layouts.includes.alert.alert_message')
-
-        <div class="toast align-items-center border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body text-light fw-bold">
-                    <i class="fa-solid fa-circle-check"></i>
-                    <span class="ms-2">Send email successfully</span>
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                    aria-label="Close"></button>
-            </div>
-        </div>
-
         <a href="{{ url('admin/users') }}" class="btn btn-danger fw-bold">
             <i class="fa-solid fa-arrow-left"></i>
             BACK
@@ -42,8 +33,15 @@
         <div class="view-container w-100 shadow d-flex  justify-content-between rounded">
             <div class="view-left-container">
                 <ul class="view-left-list">
-                    <li class="view-left-item selected">Profile</li>
-                    <li class="view-left-item">Email</li>
+                    <li class="view-left-item selected">
+                        <i class="fa-solid fa-user"></i>
+                        <span class="ml-1">Profile</span>
+
+                    </li>
+                    <li class="view-left-item">
+                        <i class="fa-solid fa-pen"></i>
+                        <span class="ml-1">Compose</span>
+                    </li>
                     @if ($user->role_as != '1')
                         <li class="text-danger mt-4 view-left-item-delete">
                             <button type="button" class="delete-user-btn fw-bold fs-6 text-danger" data-bs-toggle="modal"
@@ -177,83 +175,60 @@
                 <div id="email" class="section">
                     <div class="view-right-item rounded-3 border d-flex justify-content-between">
                         <div class="w-100">
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link fw-bold active" id="compose-tab" data-bs-toggle="tab"
-                                        data-bs-target="#compose-tab-pane" type="button" role="tab"
-                                        aria-controls="compose-tab-pane" aria-selected="true">
-                                        <i class="fa-solid fa-pen"></i>
-                                        <span>Compose</span></button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link fw-bold" id="sent-tab" data-bs-toggle="tab"
-                                        data-bs-target="#sent-tab-pane" type="button" role="tab"
-                                        aria-controls="sent-tab-pane" aria-selected="false">
-                                        <i class="fa-solid fa-envelope-circle-check"></i>
-                                        <span class="ml-1">Sent</span></button>
-                                </li>
-                            </ul>
-                            <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="compose-tab-pane" role="tabpanel"
-                                    aria-labelledby="home-tab" tabindex="0">
-                                    <div class="w-50 mx-auto mt-4">
-                                        <form action="{{ route('sendEmail') }}" method="POST" class="emailFrom">
-                                            @csrf
-                                            <div class="form-group mb-4">
-                                                <label class="fw-bold mb-0" for="">From</label>
-                                                <input type="text" name="emailFrom" placeholder="Enter Email"
-                                                    class="form-control" value="{{ Auth::user()->email }}">
-                                                @error('emailFrom')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                @enderror
-                                            </div>
-
-                                            <div class="form-group mb-4">
-                                                <label class="fw-bold mb-0" for="">Name</label>
-                                                <input type="text" name="name" placeholder="Enter Name"
-                                                    class="form-control"
-                                                    value="{{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}">
-                                                @error('name')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                @enderror
-                                            </div>
-
-                                            <div class="form-group mb-4">
-                                                <label class="fw-bold mb-0" for="">To</label>
-                                                <input type="text" name="emailTo" placeholder="Enter Email"
-                                                    class="form-control" value="{{ $user->email }}">
-                                                @error('emailTo')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                @enderror
-                                            </div>
-
-                                            <div class="form-group mb-4">
-                                                <label class="fw-bold mb-0" for="">Subject</label>
-                                                <input type="text" name="subject" placeholder="Enter Subject"
-                                                    class="form-control">
-                                                @error('subject')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                @enderror
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="fw-bold mb-0" for="">Message</label>
-                                                <textarea name="message" placeholder="Enter username" class="form-control" cols="1" rows="8"></textarea>
-                                                @error('message')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                @enderror
-                                            </div>
-                                            <div class="float-end">
-                                                <button type="submit" class="btn btn-success fw-bold pl-4 pr-4 send-btn">
-                                                    <i class="fa-regular fa-paper-plane"></i>
-                                                    <span class="ml-1">Send</span>
-                                                </button>
-                                            </div>
-                                        </form>
+                            <div class="w-50 mx-auto mt-4">
+                                <form action="{{ route('sendEmail') }}" method="POST" class="emailFrom">
+                                    @csrf
+                                    <div class="form-group mb-4">
+                                        <label class="fw-bold mb-0" for="">From</label>
+                                        <input type="text" name="emailFrom" placeholder="Enter Email"
+                                            class="form-control" value="{{ Auth::user()->email }}">
+                                        @error('emailFrom')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
-                                </div>
-                                <div class="tab-pane fade" id="sent-tab-pane" role="tabpanel"
-                                    aria-labelledby="profile-tab" tabindex="0">...</div>
+
+                                    <div class="form-group mb-4">
+                                        <label class="fw-bold mb-0" for="">Name</label>
+                                        <input type="text" name="name" placeholder="Enter Name"
+                                            class="form-control"
+                                            value="{{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}">
+                                        @error('name')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label class="fw-bold mb-0" for="">To</label>
+                                        <input type="text" name="emailTo" placeholder="Enter Email"
+                                            class="form-control" value="{{ $user->email }}">
+                                        @error('emailTo')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label class="fw-bold mb-0" for="">Subject</label>
+                                        <input type="text" name="subject" placeholder="Enter Subject"
+                                            class="form-control">
+                                        @error('subject')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="fw-bold mb-0" for="">Message</label>
+                                        <textarea name="message" placeholder="Enter Message" class="form-control" cols="1" rows="8"></textarea>
+                                        @error('message')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="float-end">
+                                        <button type="submit" class="btn btn-success fw-bold pl-4 pr-4 send-btn">
+                                            <i class="fa-regular fa-paper-plane"></i>
+                                            <span class="ml-1">Send</span>
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -320,17 +295,25 @@
             sendBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 emailForm.submit();
+
+                // Vô hiệu hóa nút send email
                 this.setAttribute('disabled');
                 this.innerHTML = `
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                <span class="ml-1">Loading...</span>`
-               ;
-              
+                <span class="ml-1">Sending...</span>`;
             })
+        </script>
 
-            window.addEventListener('load', function() {
-                const toast = new bootstrap.Toast('.toast');
+        <script>
+            const toastBody = document.querySelector('.toast-body p');
+            const toast = new bootstrap.Toast('.toast');
+            @if (Session::has('message'))
+                toastBody.innerText = "{{ session('message') }}";
                 toast.show();
-            })
+                setTimeout(() => {
+                    const toastt = document.querySelector('.toast');
+                    toastt.classList.add('hide-toast');
+                }, 5200);
+            @endif
         </script>
     @endpush
