@@ -19,8 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-// Route::get('/cars', [CarController::class, 'index'] );
-// Route::get('/cars/{id}', [CarController::class, 'show'] );
-
-Route::apiResource('cars', CarController::class);
+Route::apiResource('cars', CarController::class)->only(['index', 'show', 'store', 'update', 'destroy']);

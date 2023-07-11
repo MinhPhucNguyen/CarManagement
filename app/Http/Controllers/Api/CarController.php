@@ -65,6 +65,7 @@ class CarController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        $car = Car::find($id);
+        $car->delete();
     }
 }
