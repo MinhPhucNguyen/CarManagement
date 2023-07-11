@@ -4,15 +4,17 @@
     @include('layouts.includes.overlay_loading.overlay_loading')
 
     <div class="toast align-items-center shadow" role="toast" aria-live="assertive" aria-atomic="true">
-        <div class="d-flex p-0">
-            <div class="toast-body p-0 fw-bold d-flex">
-                <div class="d-inline-block pr-3 fs-4 d-flex align-items-center">
-                    <i class="fa-solid fa-circle-check"></i>
-                </div>
-                <p class="m-0">Hello, world! This is a toast message.</p>
+        <div class="toast-content d-flex p-0 ">
+            <div class="d-flex align-items-center mr-3 fs-5">
+                <i class="fa-solid fa-circle-check"></i>
             </div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                aria-label="Close"></button>
+            <div class="toast-body p-0 fw-bold mw-50">
+                <p class="m-0">Mail has been sent to minhphuc.nguyen1609@gmail.com</p>
+            </div>
+            <div class="close-btn">
+                <button type="button" class="btn-close btn-close-white me-2 m-auto pl-3 pr-3" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
+            </div>
         </div>
     </div>
 
@@ -307,6 +309,7 @@
         <script>
             const toastBody = document.querySelector('.toast-body p');
             const toast = new bootstrap.Toast('.toast');
+
             @if (Session::has('message'))
                 toastBody.innerText = "{{ session('message') }}";
                 toast.show();
