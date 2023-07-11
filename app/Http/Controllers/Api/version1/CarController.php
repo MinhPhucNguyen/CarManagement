@@ -1,23 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\version1;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Http\Requests\CarFormRequest;
-use App\Http\Resources\CarCollection;
-use App\Http\Resources\CarResource;
+use App\Http\Resources\version1\CarCollection;
+use App\Http\Resources\version1\CarResource;
 use App\Models\Brand;
 use App\Models\Car;
-use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
-
     public function index()
     {
         return new CarCollection(Car::all());
     }
-
 
     public function create()
     {
@@ -49,11 +47,11 @@ class CarController extends Controller
     {
         return new CarResource(Car::findOrFail($id));
     }
+
     public function edit(string $id)
     {
         //
     }
-
 
     public function update(Request $request, string $id)
     {
@@ -61,7 +59,6 @@ class CarController extends Controller
         $car->update($request->all());
         return new CarResource($car);
     }
-
 
     public function destroy(string $id)
     {
