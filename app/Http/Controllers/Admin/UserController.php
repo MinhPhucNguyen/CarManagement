@@ -124,7 +124,9 @@ class UserController extends Controller
             $user->avatar = $filename;
             $user->save();
             return redirect()->back()->with('message', "Change avatar successfully");
-        } else {
+        } else if ($user) {
+            $user->avatar = $this->defaultImage;
+            $user->save();
             return  redirect()->back()->with('message', 'Something went wrong');
         }
     }

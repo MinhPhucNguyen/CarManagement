@@ -20,12 +20,12 @@ class CarController extends Controller
         $sortColumn = $request->input('sort');
 
         $carsList = Car::when($request->filterByBrand != NULL, function ($q) use ($request,  $sortDirection,  $sortColumn) {
-                if ($request->filterByBrand == 'all') {
-                    return $q->orderBy($sortColumn ?? 'car_id', $sortDirection ?? 'desc');
-                } else {
-                    return $q->where('brand_id', $request->filterByBrand);
-                }
-            })
+            if ($request->filterByBrand == 'all') {
+                return $q->orderBy($sortColumn ?? 'car_id', $sortDirection ?? 'desc');
+            } else {
+                return $q->where('brand_id', $request->filterByBrand);
+            }
+        })
             ->when($request->filterByBrand != NULL && $request->filterByFuel != NULL, function ($q) use ($request) {
                 if ($request->filterByFuel != 'all') {
                     return $q->where('fuel', $request->filterByFuel);
@@ -88,7 +88,7 @@ class CarController extends Controller
                     'image' => $finalImagePathName,
                 ]);
             }
-        }
+        } 
         return redirect('admin/cars')->with('message', 'Car Created Successfully');
     }
 
