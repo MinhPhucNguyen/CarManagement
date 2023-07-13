@@ -13,8 +13,7 @@
             <div class="car-list">
             </div>
         </div>
-    </div>
-
+    </div>  
 
     @include('layouts.includes.client.slider_featured_places')
 
