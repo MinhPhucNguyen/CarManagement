@@ -1,8 +1,9 @@
 <ul class="navbar-nav bg-light sidebar sidebar-light accordion border-end" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center border-bottom" href="{{ url('admin/dashboard') }}">
-        <div class="sidebar-brand-text">MIOTO MANAGEMENT</div>
+    <a class="sidebar-brand d-flex align-items-center justify-content-center border-bottom"
+        href="{{ url('admin/dashboard') }}">
+        <div class="sidebar-brand-text">CA<span style="color: #1cc88f">R</span>ENTAL</div>
     </a>
 
     <!-- Divider -->
