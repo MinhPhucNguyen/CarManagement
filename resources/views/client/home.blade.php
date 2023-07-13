@@ -9,15 +9,36 @@
                 Cars for you
             </p>
             <div class="car-list">
-                <div class="car-item">
-                    <div class="card ">
+            </div>
+        </div>
+    </div>
+
+    <div id="featured-places-section">
+
+    </div>
+@endsection
+
+@push('app-scripts')
+    <script>
+        const getRandomCars = async () => {
+            let response = await fetch("http://127.0.0.1:8000/api/version2/cars/randomCars");
+            let data = await response.json();
+            return data;
+        }
+
+        getRandomCars()
+            .then((response) => {
+                const carList = document.querySelector('.car-list');
+                const carItemHTML = response.data.map((item) => {
+                    return `<div class="car-item">
+                    <div class="card">
                         <img src="{{ asset('../../image/car/car_image_test.jpg') }}" class="card-img-top" alt="car_image">
                         <div class="card-body">
                             <div class="d-flex">
-                                <p class="card-text_transmission">Auto</p>
+                                <p class="card-text_transmission">Automatic</p>
                                 <p class="card-text_delivery">Delivery</p>
                             </div>
-                            <h5 class="card-title">HONDA CITY 2014</h5>
+                            <h5 class="card-title">${item.carname}</h5>
                             <p class="info">
                                 <i class="fa-solid fa-suitcase-rolling"></i>
                                 <span>53 trip</span>
@@ -29,14 +50,17 @@
                                     <span>Hanoi</span>
                                 </div>
                                 <div class="desc-price">
-                                    650K</div>
+                                    ${item.price}K</div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-
-            </div>
-        </div>
-    </div>
-@endsection
+                </div>`;
+                });
+                console.log(carItemHTML);
+                carList.innerHTML = carItemHTML.join('');
+            })
+            .catch((err) => {
+                alert(err)
+            });
+    </script>
+@endpush

@@ -18,6 +18,7 @@ class CarResource extends JsonResource
         return [
             'carname' => $this->car_name . ' ' . $this->year,
             'yearofcar' => $this->year,
+            'price' => $this->price,
         ];
     }
 }

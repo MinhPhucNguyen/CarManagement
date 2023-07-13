@@ -300,6 +300,10 @@ body {
     font-weight: bold;
 }
 
+.car-item .card{
+    height: 410px;
+}
+
 .car-list .car-item:first-child, .car-list .car-item:nth-child(5) {
     padding-left: 0;
 }

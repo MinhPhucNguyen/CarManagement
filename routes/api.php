@@ -25,5 +25,5 @@ Route::prefix('version1')->group(function () {
 });
 
 Route::prefix('version2')->group(function () {
-    Route::apiResource('cars', Version2CarController::class)->only(['show']);
+    Route::get('cars/randomCars', [Version2CarController::class, 'getRandomCars']);
 });
