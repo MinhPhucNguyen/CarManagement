@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col-md-6 mx-auto">
+    <div class="col-md-4 mx-auto">
         <div class="card">
-            <div class="card-header text-center bg-dark">
-                <h2 class="text-white">
+            <div class="card-header text-center bg-white">
+                <h3 class="text-dark">
                     {{ __('Sign Up') }}
-                </h2>
+                </h3>
             </div>
             <div class="card-body">
                 <form method="POST" action="{{ route('register') }}" class="row">
@@ -152,15 +152,15 @@
                             @enderror
                         </div>
                     </div>
-
                     <div class="form-group  mb-2">
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-success btn-lg fw-bold" name="register-btn"
-                                style="width: 100%;">
+                            <button type="submit" class="btn btn-lg fw-bold text-white mb-4" name="register-btn"
+                                style="width: 100%; background: #1cc88a">
                                 {{ __('Sign Up') }}
                             </button>
                         </div>
                     </div>
+
                     <hr>
                 </form>
             </div>

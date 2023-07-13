@@ -252,15 +252,14 @@
             });
 
             changeAvatarInput.addEventListener("change", function() {
-                overlay.style.display = "block";
                 this.form.submit();
+                overlay.style.display = "block";
             });
 
             imageAvatarLoading.addEventListener("load", function() {
                 overlay.style.display = "none";
             });
         </script>
-
 
         <script>
             //Handle selected view left item in view a user

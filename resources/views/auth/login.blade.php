@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col-md-6 mx-auto">
-        <div class="card">
-            <div class="card-header text-center bg-dark">
-                <h2 class="text-white">
+    <div class="col-md-4 mx-auto">
+        <div class="card" style="margin-top: 100px">
+            <div class="card-header text-center bg-white">
+                <h3 class="text-dark">
                     {{ __('Login') }}
-                </h2>
+                </h3>
             </div>
 
             <div class="card-body mx-auto" style="width: 500px;">
@@ -44,7 +44,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row mb-4">
+                    <div class="form-group row mb-1">
                         <label for="password"
                             class="col-md-3 col-form-label text-md-right fw-bold">{{ __('Password') }}</label>
 
@@ -61,20 +61,24 @@
                         </div>
                     </div>
 
-                    <div class="form-group row mb-4">
+                    <p class="" style="text-align: right"><a href="" style="color: #1cc88a; text-decoration: none">Forgot Password?</a></p>
+
+                    <div class="form-group row mb-3">
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-success btn-lg fw-bold" name="login-btn"
-                                style="width: 100%;">
+                            <button type="submit" class="btn btn-lg fw-bold text-white" name="login-btn"
+                                style="width: 100%; background: #1cc88a">
                                 {{ __('Login') }}
                             </button>
                         </div>
                     </div>
                 </form>
-                <div class="form-group row mb-0">
-                    <p class="text-secondary">Are you not a member yet?<a href="{{ route('register') }}"
-                            class="fw-bold text-decoration-none text-dark"> Sign up now!</a></p>
-                    <hr>
+                <div class="form-group mb-0 d-flex justify-content-center">
+                    <p class="text-secondary">Are you not a member yet?
+                        <a href="{{ route('register') }}" class="fw-bold text-decoration-none" style="color: #1cc88a"> Sign
+                            up now!</a>
+                    </p>
                 </div>
+                <hr>
             </div>
         </div>
     </div>

@@ -40,7 +40,8 @@ body {
 }
 
 .nav-item .nav-link {
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .nav-item .nav-link:hover {
@@ -120,15 +121,15 @@ body {
     border-radius: 0 20px 0 0;
 }
 
-.active {
+.option-item.active {
     background: #1cc88a;
     color: white;
 }
 
 .search-option .search {
     background-color: white;
-    margin: 0 200px;
-    padding: 26px;
+    margin: 0 90px;
+    padding: 22px;
     border-radius: 20px;
     display: flex;
     justify-content: center;
@@ -147,7 +148,7 @@ body {
 .search-form-choose {
     width: calc(100% - 20px);
     margin-left: 20px;
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 .search-form-choose .address-input,
@@ -173,7 +174,7 @@ body {
 
 .search .search-form-item_divider {
     width: 1px;
-    height: 60px;
+    max-height: 76px;
     display: flex;
     align-items: center;
     background: #ccc;
@@ -199,10 +200,17 @@ body {
 }
 
 /* Car for you section */
-#car-for-you-section {
+#car-for-you-section,
+#featured-places-section,
+#advantages-section,
+#service-section, #explorer-section, #footer {
     width: 100%;
-    background: #f0f0f0;
+    background: #f7f7f7;
     padding: 60px 0;
+}
+
+#service-section {
+    padding-bottom: 120px;
 }
 
 .section-container {
@@ -212,13 +220,37 @@ body {
 
 .section-container .section-title {
     text-align: center;
-    font-size: 30px;
+    font-size: 40px;
     font-weight: bold;
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-bottom: 50px;
 }
 
+/* Slider */
+.promotion-item-image,
+.places-item-image {
+    width: calc(100% / 3);
+    height: 300px;
+    margin-right: 20px;
+    cursor: pointer;
+    height: 300px;
+}
+
+.places-item-image {
+    width: calc(100% / 4);
+    height: 500px;
+}
+
+.places-item-image img,
+.promotion-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+/*  */
 .car-list {
     display: flex;
     flex-wrap: wrap;
@@ -290,7 +322,7 @@ body {
     letter-spacing: 1px;
 }
 
-.desc-address i{
+.desc-address i {
     margin: 0 4px;
 }
 
@@ -300,14 +332,163 @@ body {
     font-weight: bold;
 }
 
-.car-item .card{
+.car-item .card {
     height: 410px;
 }
 
-.car-list .car-item:first-child, .car-list .car-item:nth-child(5) {
+.car-list .car-item:first-child,
+.car-list .car-item:nth-child(5) {
     padding-left: 0;
 }
 
-.car-list .car-item:nth-child(4), .car-list .car-item:last-child {
+.car-list .car-item:nth-child(4),
+.car-list .car-item:last-child {
     padding-right: 0;
+}
+
+#featured-places-section,
+#advantages-section, #explorer-section {
+    background: white;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 20px;
+    color: #8f8e8e;
+    margin-bottom: 50px;
+}
+
+.advantages-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    grid-gap: 40px;
+}
+
+.advantages-item {
+    width: calc(100% / 3 - 56px / 2);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.advantages-item h5 {
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+.advantages-item p {
+    text-align: center;
+    max-width: 400px;
+    font-size: 18px;
+    color: #8f8e8e;
+}
+
+.service-container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+#service-section .section-container .section-title {
+    text-align: left;
+}
+
+.service-item_img {
+    position: relative;
+}
+
+.service-item_img .content {
+    position: absolute;
+    bottom: 36px;
+    left: 36px;
+}
+
+.service-item_img .content h2 {
+    color: white;
+    font-size: 40px;
+    margin-bottom: 8px;
+}
+
+.service-item_img .content p {
+    color: white;
+}
+
+.service-item_img .content .btn {
+    padding: 20px 40px;
+    background: #1cc88a;
+    border-radius: 12px;
+    color: white;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.right {
+    position: absolute;
+    right: 0;
+    top: 56px;
+}
+
+.right .service-item_img .content {
+    text-align: right;
+    position: absolute;
+    right: 36px;
+}
+
+/* Explorer Section */
+#explorer-section .section-container{
+    background-color: #1cc88923;
+    padding: 40px;
+    border-radius: 20px;
+    display: flex;
+}
+
+.explorer-section_img, .explorer-section_content{
+    width: 50%;
+}
+
+.explorer-section_content{
+    padding: 0 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.explorer-section_content h3, .explorer-section_content p{
+    text-align: center;
+}
+
+.findout-btn{
+    text-align: center;
+}
+
+.explorer-section_content .logo{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+
+}
+
+.explorer-section_content .btn{
+    background: #1cc88a;
+    color: white;
+    padding: 20px 50px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 50px;
+}
+
+#footer{
+    background-color: white;
+}
+
+.footer-container{
+    width: 80%;
+    margin: 0 auto;
 }

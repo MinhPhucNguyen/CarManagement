@@ -26,7 +26,7 @@
                 <!-- Authentication Links -->
                 @guest
                     @if (Route::has('login'))
-                        <li class="nav-item">
+                        <li class="nav-item m-0">
                             <a class="nav-link text-dark btn" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                     @endif

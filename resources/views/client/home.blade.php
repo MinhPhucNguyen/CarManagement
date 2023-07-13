@@ -3,6 +3,8 @@
 @section('content')
     @include('layouts.includes.client.banner')
 
+    @include('layouts.includes.client.slider')
+
     <div id="car-for-you-section">
         <div class="section-container">
             <p class="section-title">
@@ -13,9 +15,18 @@
         </div>
     </div>
 
-    <div id="featured-places-section">
 
-    </div>
+    @include('layouts.includes.client.slider_featured_places')
+
+    @include('layouts.includes.client.advantages-section')
+
+    @include('layouts.includes.client.service-section')
+
+    @include('layouts.includes.client.explorer-section')
+
+    @include('layouts.includes.client.blog-section')
+
+    @include('layouts.includes.client.footer')
 @endsection
 
 @push('app-scripts')
@@ -38,7 +49,7 @@
                                 <p class="card-text_transmission">Automatic</p>
                                 <p class="card-text_delivery">Delivery</p>
                             </div>
-                            <h5 class="card-title">${item.carname}</h5>
+                            <h5 class="card-title">${item.carname} <i class="fa-solid fa-shield"></i></h5>
                             <p class="info">
                                 <i class="fa-solid fa-suitcase-rolling"></i>
                                 <span>53 trip</span>

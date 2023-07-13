@@ -4,7 +4,7 @@
             CARENTAL-WITH YOU ON YOUR JOURNEY
         </div>
         <div class="search-option">
-            <div class="option d-flex justify-content-center">
+            <div class="option d-flex justify-content-center shadow">
                 <div class="option-item active">
                     <i class="fa-solid fa-car-side"></i>
                     <span> Self-driving car</span>

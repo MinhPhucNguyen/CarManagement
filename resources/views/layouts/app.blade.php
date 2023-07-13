@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Carental</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -22,7 +22,6 @@
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
 
-
     {{-- Styles --}}
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/app_styles.css') }}">
@@ -32,8 +31,6 @@
 <body>
     {{-- Top bar --}}
     @include('layouts.includes.client.topbar')
-
-    {{-- Side bar --}}
 
     {{-- Content --}}
     <main class="main">
