@@ -10,7 +10,9 @@ use App\Models\Car;
 class CarController extends Controller
 {
     public function index()
-    {}
+    {
+        return new CarCollection(Car::all());
+    }
 
     public function getRandomCars(){
         return new CarCollection(Car::inRandomOrder()->take(8)->get());

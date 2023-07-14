@@ -25,5 +25,6 @@ Route::prefix('version1')->group(function () {
 });
 
 Route::prefix('version2')->group(function () {
+    Route::get('cars', [Version2CarController::class, 'index']);
     Route::get('cars/randomCars', [Version2CarController::class, 'getRandomCars']);
 });

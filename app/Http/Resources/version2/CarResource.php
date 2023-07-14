@@ -16,6 +16,7 @@ class CarResource extends JsonResource
     {
         // return parent::toArray($request);
         return [
+            'car_id' => $this->car_id,
             'carname' => $this->car_name . ' ' . $this->year,
             'yearofcar' => $this->year,
             'price' => $this->price,

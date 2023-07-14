@@ -66,7 +66,6 @@
                     </div>
                 </div>`;
                 });
-                console.log(carItemHTML);
                 carList.innerHTML = carItemHTML.join('');
             })
             .catch((err) => {
