@@ -462,7 +462,7 @@ body {
 
 /* Explorer Section */
 #explorer-section .section-container {
-    background-color: #1cc88923;
+    background-color: #41c0911e;
     padding: 40px;
     border-radius: 20px;
     display: flex;
@@ -509,6 +509,7 @@ body {
 /* Blog */
 #blog-section{
     background: white;
+    border-bottom: 1px solid #ccc;
 }
 
 .blog-section-container {
@@ -595,7 +596,6 @@ body {
 /* Footer */
 #footer {
     background-color: white;
-    border-top: 1px solid #ccc;
 }
 
 .footer-container {

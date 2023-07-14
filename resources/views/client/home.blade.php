@@ -25,7 +25,6 @@
 
     @include('layouts.includes.client.blog-section')
 
-    @include('layouts.includes.client.footer')
 @endsection
 
 @push('app-scripts')

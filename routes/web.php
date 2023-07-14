@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CarController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignUpController;
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Mail\MailController;
@@ -36,14 +38,15 @@ Route::post('/register', [SignUpController::class, 'register']);
 //Logout
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
-//Email
+//Client Route
+Route::get('about', [AboutController::class, 'index'])->name('client.about');
+Route::get('blogs', [BlogController::class, 'index'])->name('client.blogs');
 
 //Admin Route
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index']);
     Route::get('search', [SearchController::class, 'search'])->name('admin.search');
     Route::post('send_email', [MailController::class, 'sendEmail'])->name('sendEmail');
-
 
     // User Routes
     Route::controller(UserController::class)->group(function () {

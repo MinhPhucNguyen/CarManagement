@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/app_styles.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="{{ asset('client/css/about_styles.css') }}">
 </head>
 
 <body>
@@ -38,6 +39,8 @@
             @yield('content')
         </div>
     </main>
+
+    @include('layouts.includes.client.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>

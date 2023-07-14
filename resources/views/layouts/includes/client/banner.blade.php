@@ -73,7 +73,7 @@
         arrowDownIcons.forEach(icon => {
             icon.addEventListener('click', function() {
                 calendarInput.forEach(input => {
-                    if(icon.parentElement === input.parentElement){
+                    if (icon.parentElement === input.parentElement && !input._flatpickr.isOpen) {
                         input._flatpickr.open();
                     }
                 })

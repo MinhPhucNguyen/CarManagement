@@ -12,13 +12,13 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link text-dark btn" href="">About</a>
+                    <a class="nav-link text-dark btn" href="{{ route('client.about') }}">About</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark btn" href="">Become a car owner</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark btn" href="">Blog</a>
+                    <a class="nav-link text-dark btn" href="{{ route('client.blogs') }}">Blog</a>
                 </li>
                 <li class="nav-item">
                     <span class="nav-item-border "></span>
