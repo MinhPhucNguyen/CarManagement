@@ -34,6 +34,7 @@
                         </div>
                         <div class="search-form-choose">
                             <input class="calendar-input">
+                            <i class="fa-solid fa-chevron-down"></i>
                         </div>
                     </div>
                     <div class="search-form-item_divider"></div>
@@ -44,6 +45,7 @@
                         </div>
                         <div class="search-form-choose">
                             <input class="calendar-input">
+                            <i class="fa-solid fa-chevron-down"></i>
                         </div>
                     </div>
                 </div>
@@ -65,6 +67,17 @@
             altFormat: "d/m/Y   H:i",
             allowInput: true,
             defaultDate: `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}   ${new Date().getHours()}:${new Date().getMinutes()}`,
+        });
+
+        const arrowDownIcons = document.querySelectorAll('.search-form-choose i');
+        arrowDownIcons.forEach(icon => {
+            icon.addEventListener('click', function() {
+                calendarInput.forEach(input => {
+                    if(icon.parentElement === input.parentElement){
+                        input._flatpickr.open();
+                    }
+                })
+            })
         });
     </script>
 @endpush
