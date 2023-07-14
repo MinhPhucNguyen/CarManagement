@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api\version2;
+namespace App\Http\Controllers\Api\v2;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\version2\CarCollection;
-use App\Http\Resources\version2\CarResource;
+use App\Http\Resources\v2\CarCollection;
+use App\Http\Resources\v2\CarResource;
 use App\Models\Car;
 
 class CarController extends Controller

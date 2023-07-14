@@ -147,5 +147,8 @@ class UserController extends Controller
             $user->save();
             return redirect()->back()->with('message', 'Remove avatar successfully');
         }
+        else{
+            return redirect()->back();
+        }
     }
 }

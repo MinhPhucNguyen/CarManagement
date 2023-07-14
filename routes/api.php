@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\version1\CarController;
-use App\Http\Controllers\Api\version2\CarController as Version2CarController;
+use App\Http\Controllers\Api\v1\CarController;
+use App\Http\Controllers\Api\v2\CarController as Version2CarController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,11 +20,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('version1')->group(function () {
+Route::prefix('v1')->group(function () {
     Route::apiResource('cars', CarController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
 });
 
-Route::prefix('version2')->group(function () {
+Route::prefix('v2')->group(function () {
     Route::get('cars', [Version2CarController::class, 'index']);
     Route::get('cars/randomCars', [Version2CarController::class, 'getRandomCars']);
 });

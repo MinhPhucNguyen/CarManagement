@@ -64,7 +64,7 @@
                         <div class="d-flex">
                             <div class="image-avatar-container text-center">
                                 <div class="image-avatar">
-                                    <img src="{{ asset('uploads/avatar/' . $user->avatar) }}" alt="avatar default"
+                                    <img src="{{ asset('uploads/avatar/' . $user->avatar ?? 'uploads/avatar/default.jpg')   }}" alt="avatar default"
                                         class="rounded-circle" style="object-fit: cover">
                                 </div>
                                 @if ($user->role_as == '1' && Auth::user()->username == $user->username)

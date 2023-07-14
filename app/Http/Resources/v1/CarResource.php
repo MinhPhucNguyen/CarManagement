@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\version2;
+namespace App\Http\Resources\v1;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -14,12 +14,6 @@ class CarResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // return parent::toArray($request);
-        return [
-            'car_id' => $this->car_id,
-            'carname' => $this->car_name . ' ' . $this->year,
-            'yearofcar' => $this->year,
-            'price' => $this->price,
-        ];
+        return parent::toArray($request);
     }
 }

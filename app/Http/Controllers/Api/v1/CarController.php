@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api\version1;
+namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\CarFormRequest;
-use App\Http\Resources\version1\CarCollection;
-use App\Http\Resources\version1\CarResource;
+use App\Http\Resources\v1\CarCollection;
+use App\Http\Resources\v1\CarResource;
 use App\Models\Brand;
 use App\Models\Car;
 

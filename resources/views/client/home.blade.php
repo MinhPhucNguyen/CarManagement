@@ -31,7 +31,7 @@
 @push('app-scripts')
     <script>
         const getRandomCars = async () => {
-            let response = await fetch("http://127.0.0.1:8000/api/version2/cars/randomCars");
+            let response = await fetch("http://127.0.0.1:8000/api/v2/cars/randomCars");
             let data = await response.json();
             return data;
         }
