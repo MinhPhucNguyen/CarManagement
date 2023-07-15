@@ -40,7 +40,10 @@
         </div>
     </main>
 
-    @include('layouts.includes.client.footer')
+    {{-- Footer --}}
+    @if (strpos(Request::url(), 'login') === false && strpos(Request::url(), 'register') === false)
+        @include('layouts.includes.client.footer')
+    @endif
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
