@@ -280,3 +280,27 @@ input[type="radio"]:checked {
         transform: translateX(calc(100% + 30px));
     }
 }
+
+/* CKEditor */
+.ck-editor__editable_inline{
+    height: 450px !important;
+}
+
+/* blog image */
+.blog-image-container{
+    width: 400px;
+    height: 200px;
+    background: #f1f1f1;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 18px;
+ }
+
+ .blog-image-container .blog-image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+ }

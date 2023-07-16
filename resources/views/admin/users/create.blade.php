@@ -121,7 +121,7 @@
                             @enderror
                         </div>
                         <div>
-                            <button name="create_btn" class="btn btn-success pr-4 pl-4 fw-bold">Create User</button>
+                            <button name="create_btn" class="btn btn-success pr-4 pl-4 fw-bold">Create</button>
                         </div>
                     </div>
                 </form>

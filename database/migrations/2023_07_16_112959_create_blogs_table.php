@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('content');
             $table->string('slug');
-            $table->string('image');
-            $table->string('status');
+            $table->string('image')->nullable();
+            $table->tinyInteger('status')->default(0)->comment('0=unpublish; 1=publish');
             $table->timestamps();
         });
     }

@@ -13,12 +13,82 @@
                 </a>
             </div>
             <div class="card-body">
-             
+                <form action="{{ route('blogs.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="fw-bold">Title</label>
+                            <input type="text" name="title"
+                                class="form-control  @error('title') is-invalid  @enderror">
+                            @error('title')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group  col-md-6">
+                            <label class="fw-bold">Slug</label>
+                            <input type="text" name="slug" class="form-control  @error('slug') is-invalid  @enderror">
+                            @error('slug')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="fw-bold">Image</label>
+                            <input type="file" name="image" class="blog-image-input form-control">
+                            <div class="blog-image-container">
+                                <i class="fa-solid fa-image fs-2"></i>
+                            </div>
+                        </div>
+                        <div class="form-group mt-4  col-md-6">
+                            <label class="fw-bold mr-2">Publish</label>
+                            <input type="checkbox" name="status">
+                        </div>
+                    </div>
+                    <div class="form-group border-dark border-top mt-4">
+                        <label class="mt-4 fw-bold">Blog Content</label>
+                        <textarea name="content" id="blog-content"></textarea>
+                        @error('content')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="create-btn">
+                        <button type="submit" class="btn btn-success fw-bold">Create</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 @endsection
 
 @push('scripts')
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#blog-content'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 
+    <script>
+        const blogImage = document.querySelector('.blog-image-container');
+        const blogImageInput = document.querySelector('.blog-image-input');
+        const blogImageIcon = document.querySelector('.blog-image-container i');
+
+        blogImageInput.addEventListener('change', function() {
+            const file = this.files[0];
+            const imageURL = URL.createObjectURL(file);
+
+            // Check if image exsist\
+            if (blogImage.querySelector('img')) {
+                blogImage.querySelector('img').remove();
+            }
+
+            const image = new Image();
+            image.classList.add('blog-image');
+            image.src = imageURL;
+            blogImage.appendChild(image);
+            blogImageIcon.style.display = 'none';
+        })
+    </script>
 @endpush

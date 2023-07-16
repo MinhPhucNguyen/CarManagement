@@ -33,11 +33,12 @@
                         </tr>
                     </thead>
                     <tbody id="body-table">
+                        @foreach ($blogs as $blog)
                         <tr>
-                            <td class="text-center">1</td>
-                            <td class="text-center">2</td>
-                            <td class="text-center">2</td>
-                            <td class="text-center">4</td>
+                            <td class="text-center">{{ $blog->blog_id }}</td>
+                            <td class="text-center">{{ $blog->title }}</td>
+                            <td class="text-center">{{ $blog->slug }}</td>
+                            <td class="text-center">{{ $blog->created_at }}</td>
                             <td class="text-center">
                                 <div class="dropdown">
                                     <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -61,6 +62,7 @@
                                 </div>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -175,7 +175,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-success pl-4 pr-4 fw-bold" type="submit">Submit</button>
+                    <button class="btn btn-success pl-4 pr-4 fw-bold" type="submit">Create</button>
                 </form>
             </div>
         </div>
