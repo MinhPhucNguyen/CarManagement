@@ -3,6 +3,19 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
+.signup-btn,
+.login-btn {
+    width: 100%; 
+    background: #1cc88a;
+}
+
+.signup-btn:hover,
+.login-btn:hover{
+    background: #26b480;
+}
+
+
+
 .main.content-container {
     width: 80%;
     margin: 0 auto;

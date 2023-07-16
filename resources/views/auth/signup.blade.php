@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col-md-4 mx-auto">
+    <div class="col-md-4 mx-auto mb-4">
         <div class="card">
             <div class="card-header text-center bg-white">
                 <h3 class="text-dark">
@@ -154,8 +154,8 @@
                     </div>
                     <div class="form-group  mb-2">
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-lg fw-bold text-white mb-4" name="register-btn"
-                                style="width: 100%; background: #1cc88a">
+                            <button type="submit" class="btn btn-lg fw-bold text-white mb-4 signup-btn" name="register-btn"
+                             >
                                 {{ __('Sign Up') }}
                             </button>
                         </div>

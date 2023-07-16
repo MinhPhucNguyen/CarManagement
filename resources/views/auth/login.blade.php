@@ -65,8 +65,8 @@
 
                     <div class="form-group row mb-3">
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-lg fw-bold text-white" name="login-btn"
-                                style="width: 100%; background: #1cc88a">
+                            <button type="submit" class="btn btn-lg fw-bold text-white login-btn" name="login-btn"
+                               >
                                 {{ __('Login') }}
                             </button>
                         </div>
