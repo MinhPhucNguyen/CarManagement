@@ -67,6 +67,9 @@ class CarController extends Controller
             'year' => $validatedData['year'],
             'speed' => $validatedData['speed'],
             'capacity' => $validatedData['capacity'],
+            'transmission' => $validatedData['transmission'],
+            'location' => $validatedData['location'],
+            'number_of_trip' => $validatedData['trip'],
             'brand_id' => $validatedData['brand'],
         ]);
 
@@ -115,6 +118,9 @@ class CarController extends Controller
                 'year' => $validatedData['year'],
                 'speed' => $validatedData['speed'],
                 'capacity' => $validatedData['capacity'],
+                'transmission' => $validatedData['transmission'],
+                'location' => $validatedData['location'],
+                'number_of_trip' => $validatedData['trip'],
                 'brand_id' => $validatedData['brand'],
             ]);
 

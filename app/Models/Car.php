@@ -19,6 +19,9 @@ class Car extends Model
         'year',
         'speed',
         'capacity',
+        'transmission',
+        'location',
+        'number_of_trip',
         'brand_id',
     ];
 

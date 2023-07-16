@@ -1,6 +1,7 @@
 <div>
     @include('livewire.admin.brand.modal_form')
-    <div class="col-md-12">
+
+    <div class="col-md-12 p-0">
         @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <i class="fa-sharp fa-solid fa-circle-check"></i>

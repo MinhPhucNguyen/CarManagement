@@ -126,6 +126,35 @@
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="transmission">Transmission</label>
+                                    <select name="transmission" class="form-control  @error('transmission') is-invalid  @enderror">
+                                        <option value="">--Select Transmission-- </option>
+                                        <option value="0">Automatic</option>
+                                        <option value="1">Manual</option>
+                                    </select>
+                                    @error('transmission')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="trip">Number of trip</label>
+                                    <input type="text" name="trip"
+                                        class="form-control @error('trip') is-invalid  @enderror"
+                                        value="{{ !$errors->has('trip') ? old('trip') : '' }}">
+                                    @error('trip')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="location">Location</label>
+                                    <input type="text" name="location"
+                                        class="form-control @error('location') is-invalid  @enderror"
+                                        value="{{ !$errors->has('location') ? old('location') : '' }}">
+                                    @error('location')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
 
@@ -191,7 +220,7 @@
                     for (let i = 0; i < fileInput.files.length; i++) {
                         if (i !== index) {
                             newFileList.items.add(fileInput.files[
-                            i]); //Add new file (not remove) to newFileList
+                                i]); //Add new file (not remove) to newFileList
                         }
                     }
                     fileInput.files = newFileList.files;

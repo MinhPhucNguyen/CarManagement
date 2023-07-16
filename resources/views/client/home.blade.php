@@ -13,7 +13,7 @@
             <div class="car-list">
             </div>
         </div>
-    </div>  
+    </div>
 
     @include('layouts.includes.client.slider_featured_places')
 
@@ -24,7 +24,6 @@
     @include('layouts.includes.client.explorer-section')
 
     @include('layouts.includes.client.blog-section')
-
 @endsection
 
 @push('app-scripts')
@@ -35,28 +34,35 @@
             return data;
         }
 
+        const getImageUrl = (item) => {
+            if (item.car_images.length > 0) {
+                return `{{ asset('${item.car_images[0]}') }}`;
+            }
+            return "{{ asset('../../image/car/car_image_test.jpg') }}";
+        }
+
         getRandomCars()
             .then((response) => {
                 const carList = document.querySelector('.car-list');
                 const carItemHTML = response.data.map((item) => {
                     return `<div class="car-item">
                     <div class="card">
-                        <img src="{{ asset('../../image/car/car_image_test.jpg') }}" class="card-img-top" alt="car_image">
+                        <img src="${getImageUrl(item)}" class="card-img-top" alt="car_image">
                         <div class="card-body">
-                            <div class="d-flex">
-                                <p class="card-text_transmission">Automatic</p>
-                                <p class="card-text_delivery">Delivery</p>
+                            <div class="d-flex align-items-center">
+                                <p class="card-text_transmission">${item.transmission == 0 ? 'Automatic' : 'Manual'}</p>
+                                <p class="card-text_delivery">${item.status == 0 ? 'Free Delivery' : 'Car delivery to the place'}</p>
                             </div>
                             <h5 class="card-title">${item.carname} <i class="fa-solid fa-shield"></i></h5>
                             <p class="info">
                                 <i class="fa-solid fa-suitcase-rolling"></i>
-                                <span>53 trip</span>
+                                <span>${item.number_of_trip} trip</span>
                             </p>
                             <div class="car-item-divider"></div>
                             <div class="desc-address-price d-flex justify-content-between align-items-center mt-3">
                                 <div class="desc-address">
                                     <i class="fa-solid fa-location-dot"></i>
-                                    <span>Hanoi</span>
+                                    <span>${item.location}</span>
                                 </div>
                                 <div class="desc-price">
                                     ${item.price}K</div>

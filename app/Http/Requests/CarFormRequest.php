@@ -30,6 +30,9 @@ class CarFormRequest extends FormRequest
             'year' => 'required',
             'speed' => 'required',
             'capacity' => 'required',
+            'transmission' => 'required',
+            'location' => 'required',
+            'trip' => 'required',
             'brand' => 'required',
             'image' => 'nullable',
         ];

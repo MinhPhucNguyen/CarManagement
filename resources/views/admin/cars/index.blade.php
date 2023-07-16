@@ -69,6 +69,9 @@
                             <th class="text-center">Seats</th>
                             <th class="text-center">Fuel</th>
                             <th class="text-center">Capacity</th>
+                            <th class="text-center">Transmission</th>
+                            <th class="text-center">Location</th>
+                            <th class="text-center">Trip</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -76,7 +79,8 @@
                         @forelse ($carsList as $car)
                             <tr>
                                 <td class="text-center">{{ $car->car_id }}</td>
-                                <td class="text-center">{{ Str::upper($car->brand->brand_name) }}</td> {{-- Str::upper() is uppercase --}}
+                                <td class="text-center">{{ Str::upper($car->brand->brand_name) }}</td>
+                                {{-- Str::upper() is uppercase --}}
                                 <td class="text-center"><a href=""
                                         class="text-success text-decoration-none">{{ $car->car_name }}</a>
                                 </td>
@@ -84,6 +88,9 @@
                                 <td class="text-center">{{ $car->seats }}</td>
                                 <td class="text-center">{{ $car->fuel }}</td>
                                 <td class="text-center">{{ $car->capacity }}</td>
+                                <td class="text-center">{{ $car->transmission == 0 ? 'Automatic' : 'Manual' }}</td>
+                                <td class="text-center">{{ $car->location }}</td>
+                                <td class="text-center">{{ $car->number_of_trip }}</td>
                                 <td class="text-center">
                                     <div class="dropdown">
                                         <button class="btn btn-success dropdown-toggle" type="button"

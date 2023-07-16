@@ -34,12 +34,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Action</h6>
                 <a class="collapse-item" href="{{ url('admin/users') }}">
-                    <i class="fa-solid fa-eye"></i>
-                    <span class="ml-3">View Users</span></a>
-                <a class="collapse-item" href="{{ route('users.create') }}">
-                    <i class="fa-solid fa-plus"></i>
-                    <span class="ml-3"> Add New User</span>
-                </a>
+                    <span class="ml-3">User List</span></a>
             </div>
         </div>
     </li>
@@ -61,13 +56,8 @@
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Action</h6>
-                <a class="collapse-item" href="{{ url('admin/cars') }}">
-                    <i class="fa-solid fa-eye"></i>
-                    <span class="ml-3">View Cars</span>
-                </a>
-                <a class="collapse-item" href="{{ route('cars.create') }}">
-                    <i class="fa-solid fa-plus"></i>
-                    <span class="ml-3"> Add New Car</span>
+                    <a class="collapse-item" href="{{ url('admin/cars') }}">
+                    <span class="ml-3">Car List</span>
                 </a>
             </div>
         </div>

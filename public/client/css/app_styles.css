@@ -291,6 +291,7 @@ body {
 
 .card-img-top {
     border-radius: 10px;
+    height: 206px;
 }
 
 .card-body {
@@ -303,20 +304,20 @@ body {
     font-weight: 500;
 }
 
+.card-text_delivery ,
 .card-text_transmission {
     font-size: 11px;
     padding: 5px 10px;
     border-radius: 20px;
     background: #eef7ff;
     margin: 0 10px 8px 0;
+    line-height: 1.2;
+    
 }
 
-.card-text_delivery {
-    font-size: 11px;
-    padding: 5px 10px;
-    border-radius: 20px;
+.card-text_delivery 
+{
     background: #fce0d3;
-    margin: 0 10px 6px 0;
 }
 
 .car-item-divider {
