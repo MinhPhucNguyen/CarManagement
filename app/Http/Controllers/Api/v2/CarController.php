@@ -14,7 +14,8 @@ class CarController extends Controller
         return new CarCollection(Car::all());
     }
 
-    public function getRandomCars(){
+    public function getRandomCars()
+    {
         return new CarCollection(Car::inRandomOrder()->take(8)->get());
     }
 
@@ -22,5 +23,19 @@ class CarController extends Controller
     {
         $car = Car::find($id);
         return new CarResource($car);
+    }
+
+    public function store()
+    {
+    }
+
+
+    public function  update()
+    {
+    }
+
+
+    public function destroy()
+    {
     }
 }
