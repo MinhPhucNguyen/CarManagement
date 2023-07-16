@@ -5,10 +5,10 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\SearchController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignUpController;
-use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Mail\MailController;
@@ -40,7 +40,7 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 //Client Route
 Route::get('about', [AboutController::class, 'index'])->name('client.about');
-Route::get('blogs', [BlogController::class, 'index'])->name('client.blogs');
+Route::get('blogs', [App\Http\Controllers\BlogController::class, 'index'])->name('client.blogs');
 
 //Admin Route
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
@@ -73,5 +73,11 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::put('cars/{id}', 'update')->name('cars.update');
         Route::get('car_image/{id}/delete', 'destroyImage')->name('destroyImage');
         Route::delete('cars/{id}/delete', 'destroy')->name('cars.destroy');
+    });
+
+    // Blog Routes
+    Route::controller(BlogController::class)->group(function(){
+        Route::get('blogs', 'index')->name('blogs.index');
+        Route::get('blogs/create', 'create')->name('blogs.create');
     });
 });

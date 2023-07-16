@@ -39,13 +39,6 @@
         </div>
     </li>
 
-    <li class="nav-item border-bottom">
-        <a class="nav-link fw-bold text-dark" href="{{ route('brand') }}">
-            <i class="fa-sharp fa-solid fa-bars"></i>
-            <span>Brand</span>
-        </a>
-    </li>
-
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item border-bottom">
         <a class="nav-link collapsed fw-bold text-dark" href="#" data-toggle="collapse"
@@ -61,6 +54,20 @@
                 </a>
             </div>
         </div>
+    </li>
+
+    <li class="nav-item border-bottom">
+        <a class="nav-link fw-bold text-dark" href="{{ route('brand') }}">
+            <i class="fa-sharp fa-solid fa-bars"></i>
+            <span>Brand</span>
+        </a>
+    </li>
+
+    <li class="nav-item border-bottom">
+        <a class="nav-link fw-bold text-dark" href="{{route('blogs.index')}}">
+            <i class="fa-solid fa-square-rss"></i>
+            <span>Blog</span>
+        </a>
     </li>
 
     <!-- Divider -->
