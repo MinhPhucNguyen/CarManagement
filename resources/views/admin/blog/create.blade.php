@@ -43,7 +43,7 @@
                         </div>
                         <div class="form-group mt-4  col-md-6">
                             <label class="fw-bold mr-2">Publish</label>
-                            <input type="checkbox" name="status"  {{ old('status') ? 'checked' : '' }}>
+                            <input type="checkbox" name="status" {{ old('status') ? 'checked' : '' }}>
                         </div>
                     </div>
                     <div class="form-group border-dark border-top mt-4">
@@ -85,4 +85,13 @@
         })
     </script>
 
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#blog-content'), {
+                
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    </script>
 @endpush

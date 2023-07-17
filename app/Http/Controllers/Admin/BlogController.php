@@ -20,13 +20,24 @@ class BlogController extends Controller
     public function uploadImage(Request $request)
     {
         if ($request->hasFile('upload')) {
-            $uploadPath = 'uploads/blogs/blog-content-image/';
-            $extension = $request->file('upload')->getClientOriginalExtension();
-
-            $fileName =  time() . '.' . $extension;
-            $request->file('upload')->move($uploadPath, $fileName);
-            $url = asset($uploadPath . $fileName);
-            return response()->json(['filename' => $fileName, 'uploaded' => 1, 'url' => $url]);
+            $uploadPath = 'uploads/blogs/blog-image-content/';
+            $extension = $request->file('upload')->getClientoriginalExtension();
+            $fileNameToStore =  time() . '.' . $extension;
+            
+            //upload File
+            $request->file('upload')->storeAs($uploadPath , $fileNameToStore);
+            $request->file('upload')->storeAs($uploadPath . 'thumbnail/'  , $fileNameToStore);
+           
+            //Resize image here
+            $thumbnailPath = public_path('storage/uploads/thumbnail/' . $fileNameToStore);
+            $img = Image::make($thumbnailPath)->resize(400, 200, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save($thumbnailPath);
+            echo json_encode([
+                "default" => asset('storage/uploads/' . $fileNameToStore),
+                '500' => asset('storage/uploads/thumbnail/' . $fileNameToStore),
+            ]);
         }
     }
 
@@ -87,7 +98,7 @@ class BlogController extends Controller
         if ($request->hasFile('image')) {
             $uploadPath = 'uploads/blogs/blog-image-header/';
 
-            if($blog->image && File::exists(public_path($uploadPath . $blog->image))) {
+            if ($blog->image && File::exists(public_path($uploadPath . $blog->image))) {
                 File::delete(public_path($uploadPath . $blog->image));
             }
 

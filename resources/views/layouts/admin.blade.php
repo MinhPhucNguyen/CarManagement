@@ -59,9 +59,7 @@
     <script src="{{ asset('admin/js/sb-admin-2.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/super-build/ckeditor.js"></script>
-    <script src="{{ asset('assets/js/ckeditor5/ckeditor5.js') }}"></script>
-
+    <script src="{{ asset('/ckeditor5/ckeditor.js') }}"></script>
     @livewireScripts
     @stack('scripts')
 
