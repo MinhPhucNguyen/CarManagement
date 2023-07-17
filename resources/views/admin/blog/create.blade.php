@@ -63,14 +63,6 @@
 
 @push('scripts')
     <script>
-        ClassicEditor
-            .create(document.querySelector('#blog-content'))
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
-
-    <script>
         const blogImage = document.querySelector('.blog-image-container');
         const blogImageInput = document.querySelector('.blog-image-input');
         const blogImageIcon = document.querySelector('.blog-image-container i');
@@ -90,5 +82,17 @@
             blogImage.appendChild(image);
             blogImageIcon.style.display = 'none';
         })
+    </script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#blog-content'), {
+                ckfinder: {
+                    uploadUrl: '{{ route('ckeditor.upload') . '?_token=' . csrf_token() }}'
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 @endpush

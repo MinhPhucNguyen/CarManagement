@@ -15,7 +15,7 @@
                         BACK
                     </a>
                 @else
-                    <a class="btn btn-success fw-bold float-right" href="{{route('blogs.create')}}">
+                    <a class="btn btn-success fw-bold float-right" href="{{ route('blogs.create') }}">
                         <i class="fa-solid fa-plus"></i>
                         Add New Blog
                     </a>
@@ -33,36 +33,40 @@
                         </tr>
                     </thead>
                     <tbody id="body-table">
-                        @foreach ($blogs as $blog)
-                        <tr>
-                            <td class="text-center">{{ $blog->blog_id }}</td>
-                            <td class="text-center">{{ $blog->title }}</td>
-                            <td class="text-center">{{ $blog->slug }}</td>
-                            <td class="text-center">{{ $blog->created_at }}</td>
-                            <td class="text-center">
-                                <div class="dropdown">
-                                    <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        Action
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a class="dropdown-item mb-3 fs-6 text-primary bg-white" href="">
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                                <span>Edit</span>
-                                            </a>
-                                        </li>
-                                        <button type="button" class="dropdown-item fs-6 text-danger bg-white"
-                                            data-bs-toggle="modal" data-bs-target="#deleteCarModal">
-                                            <i class="fa-solid fa-trash"></i>
-                                            <span>Delete</span>
+                        @forelse($blogs as $blog)
+                            <tr>
+                                <td class="text-center">{{ $blog->blog_id }}</td>
+                                <td class="text-center">{{ $blog->title }}</td>
+                                <td class="text-center">{{ $blog->slug }}</td>
+                                <td class="text-center">{{ $blog->created_at }}</td>
+                                <td class="text-center">
+                                    <div class="dropdown">
+                                        <button class="btn btn-success dropdown-toggle" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Action
                                         </button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforeach
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item mb-3 fs-6 text-primary bg-white" href="">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                    <span>Edit</span>
+                                                </a>
+                                            </li>
+                                            <button type="button" class="dropdown-item fs-6 text-danger bg-white"
+                                                data-bs-toggle="modal" data-bs-target="#deleteCarModal">
+                                                <i class="fa-solid fa-trash"></i>
+                                                <span>Delete</span>
+                                            </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5">No Blog Available</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
