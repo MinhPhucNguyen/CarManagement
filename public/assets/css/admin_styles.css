@@ -283,7 +283,7 @@ input[type="radio"]:checked {
 
 /* CKEditor */
 .ck-editor__editable_inline{
-    height: 450px !important;
+    height: 500px !important;
 }
 
 /* blog image */

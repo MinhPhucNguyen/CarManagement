@@ -81,5 +81,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('blogs/create', 'create')->name('blogs.create');
         Route::post('blogs', 'store')->name('blogs.store');
         Route::post('/upload', 'uploadImage')->name('ckeditor.upload'); // ckeditor upload image into content
+        Route::get('blogs/{id}/edit', 'edit')->name('blogs.edit');
+        Route::put('blogs/{id}', 'update')->name('blogs.update');
+        Route::delete('/blogs/{id}', 'destroy')->name('blogs.destroy');
     });
 });
