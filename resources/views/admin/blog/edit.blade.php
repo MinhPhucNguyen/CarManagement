@@ -93,4 +93,9 @@
             blogImageIcon.style.display = 'none';
         })
     </script>
+
+    <script>
+        var editor = CKEDITOR.replace('blog-content');
+        CKFinder.setupCKEditor(editor);
+    </script>
 @endpush

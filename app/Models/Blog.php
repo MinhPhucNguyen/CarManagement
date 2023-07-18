@@ -17,4 +17,8 @@ class Blog extends Model
         'image',
         'status'
     ];
+
+    public function getRouteKeyName(){
+        return 'slug';
+    }
 }

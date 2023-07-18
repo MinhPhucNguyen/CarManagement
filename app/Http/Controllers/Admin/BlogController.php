@@ -16,6 +16,11 @@ class BlogController extends Controller
         return view('admin.blog.index', compact('blogs'));
     }
 
+    public function show(Blog $slug)
+    {
+        return $slug;
+    }
+
     public function create()
     {
         return view('admin.blog.create');

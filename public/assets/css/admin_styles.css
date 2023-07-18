@@ -282,8 +282,8 @@ input[type="radio"]:checked {
 }
 
 /* CKEditor */
-.ck-editor__editable_inline{
-    height: 500px !important;
+.cke_contents{
+    height: 600px !important;
 }
 
 /* blog image */
