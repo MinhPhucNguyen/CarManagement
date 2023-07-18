@@ -16,31 +16,6 @@ class BlogController extends Controller
         return view('admin.blog.index', compact('blogs'));
     }
 
-    // Upload image into blog content
-    public function uploadImage(Request $request)
-    {
-        if ($request->hasFile('upload')) {
-            $uploadPath = 'uploads/blogs/blog-image-content/';
-            $extension = $request->file('upload')->getClientoriginalExtension();
-            $fileNameToStore =  time() . '.' . $extension;
-            
-            //upload File
-            $request->file('upload')->storeAs($uploadPath , $fileNameToStore);
-            $request->file('upload')->storeAs($uploadPath . 'thumbnail/'  , $fileNameToStore);
-           
-            //Resize image here
-            $thumbnailPath = public_path('storage/uploads/thumbnail/' . $fileNameToStore);
-            $img = Image::make($thumbnailPath)->resize(400, 200, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            $img->save($thumbnailPath);
-            echo json_encode([
-                "default" => asset('storage/uploads/' . $fileNameToStore),
-                '500' => asset('storage/uploads/thumbnail/' . $fileNameToStore),
-            ]);
-        }
-    }
-
     public function create()
     {
         return view('admin.blog.create');
