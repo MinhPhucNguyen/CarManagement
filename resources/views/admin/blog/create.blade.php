@@ -87,9 +87,7 @@
 
     <script>
         ClassicEditor
-            .create(document.querySelector('#blog-content'), {
-                
-            })
+            .create(document.querySelector('#blog-content'))
             .catch(error => {
                 console.log(error);
             });
