@@ -26,7 +26,7 @@
                     <thead>
                         <tr class="text-dark">
                             <th>ID</th>
-                            <th>Title</th>
+                            <th style="width: 30%;">Title</th>
                             <th>Slug</th>
                             <th>Status</th>
                             <th>Create At</th>
