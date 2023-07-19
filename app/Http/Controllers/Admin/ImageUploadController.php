@@ -10,7 +10,7 @@ class ImageUploadController extends Controller
 {
     public function uploadImage(Request $request)
     {
-        $uploadPath = 'uploads/blogs/blog-image-content/';
+        $uploadURL = 'uploads/blogs/blog-image-content/';
         if ($request->hasFile('upload')) {
             $file = $request->file('upload');
             $extension = $file->getClientOriginalExtension();
@@ -21,10 +21,10 @@ class ImageUploadController extends Controller
             // Custom file name to store
             $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
 
-            $file->move($uploadPath, $fileNameToStore);
+            $file->move($uploadURL, $fileNameToStore);
 
             // Get to show in ckeditor
-            $url = asset($uploadPath . $fileNameToStore);
+            $url = asset($uploadURL . $fileNameToStore);
             return response()->json(['url' => $url, 'uploaded' => 1, 'fileName' => $fileNameToStore]);
         }
     }
