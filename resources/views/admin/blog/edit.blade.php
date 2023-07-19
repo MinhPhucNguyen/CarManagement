@@ -66,36 +66,48 @@
 
 @push('scripts')
     <script>
-        const blogImage = document.querySelector('.blog-image-container');
+        const blogImageContainer = document.querySelector('.blog-image-container');
         const blogImageInput = document.querySelector('.blog-image-input');
         const blogImageIcon = document.querySelector('.blog-image-container i');
+
         const image = new Image();
         image.classList.add('blog-image');
 
         //Hiện ảnh đã thêm vào csdl
         @if ($blog->image)
             image.src = '{{ asset('uploads/blogs/blog-image-header/' . $blog->image) }}';
-            blogImage.appendChild(image);
+            blogImageContainer.appendChild(image);
             blogImageIcon.style.display = 'none';
         @endif
+
+        blogImageContainer.addEventListener('click', function() {
+            blogImageInput.click();
+        })
 
         blogImageInput.addEventListener('change', function() {
             const file = this.files[0];
             const imageURL = URL.createObjectURL(file);
 
             // Check if image exsist
-            if (blogImage.querySelector('img')) {
-                blogImage.querySelector('img').remove();
+            if (blogImageContainer.querySelector('img')) {
+                blogImageContainer.querySelector('img').remove();
             }
 
             image.src = imageURL;
-            blogImage.appendChild(image);
+            blogImageContainer.appendChild(image);
             blogImageIcon.style.display = 'none';
         })
     </script>
 
     <script>
-        var editor = CKEDITOR.replace('blog-content');
-        CKFinder.setupCKEditor(editor);
+        ClassicEditor
+            .create(document.querySelector('#blog-content'), {
+                ckfinder: {
+                    uploadUrl: '{{ route('ckeditor.upload') . '?_token=' . csrf_token() }}',
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 @endpush

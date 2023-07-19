@@ -247,11 +247,11 @@ input[type="radio"]:checked {
     width: 700px;
 }
 
-.toast-body{
+.toast-body {
     max-width: 280px;
 }
 
-.close-btn{
+.close-btn {
     position: absolute;
     top: 20px;
     right: -5px;
@@ -282,12 +282,13 @@ input[type="radio"]:checked {
 }
 
 /* CKEditor */
-.cke_contents, .ck-editor__editable {
+.cke_contents,
+.ck-editor__editable {
     height: 600px !important;
 }
 
 /* blog image */
-.blog-image-container{
+.blog-image-container {
     width: 400px;
     height: 200px;
     background: #f1f1f1;
@@ -296,11 +297,17 @@ input[type="radio"]:checked {
     align-items: center;
     justify-content: center;
     margin-top: 18px;
- }
+    cursor: pointer;
+}
 
- .blog-image-container .blog-image{
+.blog-image-container:hover {
+    background: #dbdbdb;
+    transition: all 0.2s ease-in-out;
+}
+
+.blog-image-container .blog-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 20px;
- }
+}

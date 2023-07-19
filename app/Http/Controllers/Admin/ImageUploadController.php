@@ -12,8 +12,10 @@ class ImageUploadController extends Controller
         $uploadPath = public_path('uploads/blogs/blog-image-content/');
         if ($request->hasFile('upload')) {
             $file = $request->file('upload');
-            $fileName = $file->getClientOriginalName();
             $extension = $file->getClientOriginalExtension();
+
+            //get filename, not get extension
+            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
 
             // Custom file name to store
             $fileNameToStore = $fileName . '_' . time() . '.' . $extension;
