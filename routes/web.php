@@ -42,6 +42,7 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 //Client Route
 Route::get('about', [AboutController::class, 'index'])->name('client.about');
 Route::get('blogs', [App\Http\Controllers\BlogController::class, 'index'])->name('client.blogs');
+Route::get('blogs/{slug}', [App\Http\Controllers\BlogController::class, 'show'])->name('client.blogs.show');
 
 //Admin Route
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
