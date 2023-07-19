@@ -85,8 +85,20 @@
         })
     </script>
 
-    <script>
+    {{-- <script>
         var editor = CKEDITOR.replace('blog-content');
         CKFinder.setupCKEditor(editor);
+    </script> --}}
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#blog-content'), {
+                ckfinder: {
+                    uploadUrl: '{{ route('ckeditor.upload') . '?_token=' . csrf_token() }}',
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 @endpush

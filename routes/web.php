@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers\Admin\BlogController;
-use App\Http\Controllers\Admin\UploadImageController;
+use App\Http\Controllers\Admin\ImageUploadController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignUpController;
@@ -77,16 +77,16 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     });
 
     // ckeditor upload image into content
-    Route::post('/upload', [UploadImageController::class, 'uploadImage'])->name('ckeditor.upload');
+    Route::post('/upload', [ImageUploadController::class, 'uploadImage'])->name('ckeditor.upload');
 
     // Blog Routes
     Route::controller(BlogController::class)->group(function () {
         Route::get('blogs', 'index')->name('blogs.index');
-        Route::get('blogs/{slug}', 'show')->name('blogs.show');
+        Route::get('blog/{slug}', 'show')->name('blog.show');
         Route::get('blogs/create', 'create')->name('blogs.create');
         Route::post('blogs', 'store')->name('blogs.store');
         Route::get('blogs/{id}/edit', 'edit')->name('blogs.edit');
         Route::put('blogs/{id}', 'update')->name('blogs.update');
-        Route::delete('/blogs/{id}', 'destroy')->name('blogs.destroy');
+        Route::delete('/blogs/{id}', 'destroy')->name('blogs.destroy'); 
     });
 });
