@@ -68,7 +68,7 @@
         const blogImageInput = document.querySelector('.blog-image-input');
         const blogImageIcon = document.querySelector('.blog-image-container i');
 
-        blogImageContainer.addEventListener('click', function(){
+        blogImageContainer.addEventListener('click', function() {
             blogImageInput.click();
         })
 
@@ -94,7 +94,7 @@
             .create(document.querySelector('#blog-content'), {
                 ckfinder: {
                     uploadUrl: '{{ route('ckeditor.upload') . '?_token=' . csrf_token() }}',
-                }
+                },
             })
             .catch(error => {
                 console.error(error);
