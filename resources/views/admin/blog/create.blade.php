@@ -95,6 +95,9 @@
                 ckfinder: {
                     uploadUrl: '{{ route('ckeditor.upload') . '?_token=' . csrf_token() }}',
                 },
+                fileTools_requestHeaders: {
+                    'X-CSRF-Token': '{{ csrf_token() }}'
+                }
             })
             .catch(error => {
                 console.error(error);
