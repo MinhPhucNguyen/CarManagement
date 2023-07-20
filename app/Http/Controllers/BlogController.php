@@ -12,8 +12,8 @@ class BlogController extends Controller
         return view('client.blog.blog');
     }
 
-    public function show(Blog $slug)
+    public function show($slug)
     {
-        // return view('client.blog.show', compact('slug'));
+        return view('client.blog.blog-detail', compact('slug'));
     }
 }

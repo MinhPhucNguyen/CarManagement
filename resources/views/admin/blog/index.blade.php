@@ -27,7 +27,7 @@
                         <tr class="text-dark">
                             <th>ID</th>
                             <th style="width: 30%;">Title</th>
-                            <th>Slug</th>
+                            <th style="width: 30%;">Slug</th>
                             <th>Status</th>
                             <th>Create At</th>
                             <th>Action</th>

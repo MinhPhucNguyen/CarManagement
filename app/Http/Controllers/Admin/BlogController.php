@@ -7,6 +7,7 @@ use App\Models\Blog;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -14,11 +15,6 @@ class BlogController extends Controller
     {
         $blogs = Blog::orderBy('created_at', 'DESC')->get();
         return view('admin.blog.index', compact('blogs'));
-    }
-
-    public function show(Blog $slug)
-    {
-        return $slug;
     }
 
     public function create()
@@ -37,7 +33,7 @@ class BlogController extends Controller
 
         $blog = new Blog();
         $blog->title = $validatedData['title'];
-        $blog->slug = $validatedData['slug'];
+        $blog->slug = Str::slug($validatedData['slug']);
         $blog->content = $validatedData['content'];
         $blog->status = $request->status ? '1' : '0';
 
@@ -71,7 +67,7 @@ class BlogController extends Controller
 
         $blog = Blog::find($id);
         $blog->title = $validatedData['title'];
-        $blog->slug = $validatedData['slug'];
+        $blog->slug = Str::slug($validatedData['slug']);
         $blog->content = $validatedData['content'];
         $blog->status = $request->status ? '1' : '0';
 

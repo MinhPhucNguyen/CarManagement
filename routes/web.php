@@ -83,7 +83,6 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     // Blog Routes
     Route::controller(BlogController::class)->group(function () {
         Route::get('blogs', 'index')->name('blogs.index');
-        Route::get('blog/{slug}', 'show')->name('blog.show');
         Route::get('blogs/create', 'create')->name('blogs.create');
         Route::post('blogs', 'store')->name('blogs.store');
         Route::get('blogs/{id}/edit', 'edit')->name('blogs.edit');

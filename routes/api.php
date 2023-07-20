@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\v1\CarController;
-use App\Http\Controllers\Api\v2\CarController as Version2CarController;
+use App\Http\Controllers\Api\v2\CarController as V2_CarController;
+use App\Http\Controllers\Api\v2\BlogController as V2_BlogController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,12 @@ Route::prefix('v1')->group(function () {
 });
 
 Route::prefix('v2')->group(function () {
-    Route::get('cars', [Version2CarController::class, 'index']);
-    Route::get('cars/randomCars', [Version2CarController::class, 'getRandomCars']);
-    Route::get('cars/{id}', [Version2CarController::class, 'show']);
+    // Car API
+    Route::get('cars', [V2_CarController::class, 'index']);
+    Route::get('cars/randomCars', [V2_CarController::class, 'getRandomCars']);
+    Route::get('cars/{id}', [V2_CarController::class, 'show']);
+
+    // Blog API
+    Route::get('blogs', [V2_BlogController::class, 'index']);
+    Route::get('blogs/{slug}', [V2_BlogController::class, 'show']);
 });
