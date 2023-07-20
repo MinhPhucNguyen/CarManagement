@@ -41,7 +41,7 @@ class BlogController extends Controller
             $uploadPath = 'uploads/blogs/blog-image-header/';
             $extension = $request->file('image')->getClientOriginalExtension();
             $fileName = time() . '.' . $extension;
-            Image::make($request->file('image'))->resize(400, 200)->save(public_path($uploadPath . $fileName));
+            Image::make($request->file('image'))->save(public_path($uploadPath . $fileName));
             $blog->image = $fileName;
         }
 
@@ -80,7 +80,7 @@ class BlogController extends Controller
 
             $extension = $request->file('image')->getClientOriginalExtension();
             $fileName = time() . '.' . $extension;
-            Image::make($request->file('image'))->resize(400, 200)->save(public_path($uploadPath . $fileName));
+            Image::make($request->file('image'))->save(public_path($uploadPath . $fileName));
             $blog->image = $fileName;
         }
 
