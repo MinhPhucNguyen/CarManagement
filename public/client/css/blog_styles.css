@@ -41,7 +41,7 @@
 }
 
 .blog-item h5 {
-    min-height: 80px;
+    max-height: 80px;
     font-size: 22px;
     font-weight: 600;
 }
@@ -77,13 +77,27 @@
 }
 
 .blog-detail-content .content{
-    margin-top: 40px;
+    margin-top: 20px;
+}
+
+.blog-detail-content>strong{
+    color: #1cc88a;
 }
 
 .blog-detail-content .content p{
     margin-bottom: 40px;
 }
 
+.blog-detail-content .content p img{
+    max-width: 800px;
+    max-height: 400px;
+    object-fit: cover;
+}
+
 .blog-detail-content .content h2{
     font-size: 24px;
+}
+
+.blog-title{
+    font-size: 55px;
 }

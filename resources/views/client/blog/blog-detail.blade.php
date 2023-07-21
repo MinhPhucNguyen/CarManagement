@@ -2,9 +2,7 @@
 
 @section('content')
     <div class="blog-page w-100 h-100 bg-white border-top border-bottom">
-        <div class="blog-detail-container">
-
-        </div>
+        <div class="blog-detail-container"></div>
     </div>
 @endsection
 
@@ -22,15 +20,15 @@
                 const blogDetailContainer = document.querySelector('.blog-detail-container');
                 const createdDate = new Date(response.data.created_at);
                 const currentDate = new Date();
-                const timeDifference = currentDate.getTime() - createdDate.getTime();
-                const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-                const dayDisplay = daysAgo == 0 ? "Today" : daysAgo == 1 ? "Yesterday" : `${daysAgo} days ago`; 
+                const timeDistance = currentDate.getTime() - createdDate.getTime();
+                const daysAgo = Math.floor(timeDistance / (1000 * 3600 * 24));
+                const dayDisplay = daysAgo == 0 ? "Today" : daysAgo == 1 ? "Yesterday" : `${daysAgo} days ago`;
 
                 const html = ` 
                 <img src="{{ asset('../../uploads/blogs/blog-image-header/${response.data.image}') }}" alt="" class="main-blog-image">
                                 <div class="blog-detail-content">
                                     <h1>${response.data.title}</h1>
-                                    <strong>Create at: </strong> ${dayDisplay}
+                                    <strong>Create at: </strong> <span>${dayDisplay}</span>  
                                     <div class="content">
                                         ${response.data.content}
                                     </div>

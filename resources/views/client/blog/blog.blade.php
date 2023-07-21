@@ -48,10 +48,10 @@
                 const blogContentInner = document.querySelector('.blog-content-inner');
                 const disc = document.querySelector('.disc');
                 const blog = response.data.map((blog) => {
-                    if (blog.status == 1) {
+                    if (blog.status == 1 ) {
                         return `<a href="/blogs/${blog.slug}" class="blog-item">
                             <div class="blog-img">
-                                <img src="${getBlogImageUrl(blog.image)}" alt="">
+                                <img src="${getBlogImageUrl(blog.image)}" alt="blog-img">
                             </div>
                             <h5>${blog.title}</h5>
                             ${getDisc(blog.content)}

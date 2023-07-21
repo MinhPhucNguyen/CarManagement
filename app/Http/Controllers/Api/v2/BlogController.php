@@ -12,7 +12,7 @@ class BlogController extends Controller
 {
     public function index()
     {
-        return new BlogCollection(Blog::all());
+        return new BlogCollection(Blog::all()->reverse());
     }
 
     public function show($slug)
