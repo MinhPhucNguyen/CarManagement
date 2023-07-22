@@ -4,6 +4,10 @@
     <div class="blog-page w-100 h-100">
         <div class="blog-container">
             <h1 class="blog-title fw-bold">CA<span style="color: #1cc88a">R</span>ENTAL BLOG</h1>
+            <div class="blog-latest">
+                <div class="blog-latest-main"></div>
+                <div class="blog-latest-other"></div>
+            </div>
             <div class="blog-content">
                 <div class="blog-content-inner">
                 </div>
