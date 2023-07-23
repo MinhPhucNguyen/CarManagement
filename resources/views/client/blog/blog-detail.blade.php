@@ -20,8 +20,10 @@
                 const blogDetailContainer = document.querySelector('.blog-detail-container');
                 const createdDate = new Date(response.data.created_at);
                 const currentDate = new Date();
+
                 const timeDistance = currentDate.getTime() - createdDate.getTime();
                 const daysAgo = Math.floor(timeDistance / (1000 * 3600 * 24));
+
                 const dayDisplay = daysAgo == 0 ? "Today" : daysAgo == 1 ? "Yesterday" : `${daysAgo} days ago`;
 
                 const html = ` 
