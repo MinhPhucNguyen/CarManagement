@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\v2\CarCollection;
 use App\Http\Resources\v2\CarResource;
 use App\Models\Car;
+use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
@@ -19,9 +20,10 @@ class CarController extends Controller
         return new CarCollection(Car::inRandomOrder()->take(8)->get());
     }
 
-    public function show($car)
+    public function show(Request $request)
     {
-        $car = Car::where('car_id', $car)->firstOrFail();
+        $carId = $request->input('car_id');
+        $car = Car::findOrFail($carId);
         return new CarResource($car);
     }
 

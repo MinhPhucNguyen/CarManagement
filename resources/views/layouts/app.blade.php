@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="{{ asset('client/css/about_styles.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/blog_styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/css/car_details.css') }}">
 </head>
 
 <body>

@@ -35,8 +35,8 @@
         }
 
         const getImageUrl = (item) => {
-            if (item.car_images.length > 0) {
-                return `{{ asset('${item.car_images[0]}') }}`;
+            if (item.carImages.length > 0) {
+                return `{{ asset('${item.carImages[0]}') }}`;
             }
             return "{{ asset('../../image/car/car_image_test.jpg') }}";
         }
@@ -45,7 +45,8 @@
             .then((response) => {
                 const carList = document.querySelector('.car-list');
                 const carItemHTML = response.data.map((item) => {
-                    return `<a href="/car/${item.car_id}" class="car-item">
+                    const carSlug = (item.brand + '-' + item.carOriginalName + '-' + item.yearOfCar).toLowerCase();
+                    return `<a href="{{url('/car/${carSlug}/${item.carId}')}}" class="car-item">
                     <div class="card">
                         <img src="${getImageUrl(item)}" class="card-img-top" alt="car_image">
                         <div class="card-body">
@@ -53,10 +54,10 @@
                                 <p class="card-text_transmission">${item.transmission == 0 ? 'Automatic' : 'Manual'}</p>
                                 <p class="card-text_delivery">${item.status == 0 ? 'Free Delivery' : 'Car delivery to the place'}</p>
                             </div>
-                            <h5 class="card-title">${item.carname} <i class="fa-solid fa-shield"></i></h5>
+                            <h5 class="card-title">${item.carCustomName} <i class="fa-solid fa-shield"></i></h5>
                             <p class="info">
                                 <i class="fa-solid fa-suitcase-rolling"></i>
-                                <span>${item.number_of_trip} trip</span>
+                                <span>${item.numberOfTrip} trip</span>
                             </p>
                             <div class="car-item-divider"></div>
                             <div class="desc-address-price d-flex justify-content-between align-items-center mt-3">

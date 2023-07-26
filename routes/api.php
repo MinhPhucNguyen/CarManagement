@@ -29,7 +29,7 @@ Route::prefix('v2')->group(function () {
     // Car API
     Route::get('cars', [V2_CarController::class, 'index']);
     Route::get('cars/randomCars', [V2_CarController::class, 'getRandomCars']);
-    Route::get('cars/{id}', [V2_CarController::class, 'show']);
+    Route::get('car/detail', [V2_CarController::class, 'show']);
 
     // Blog API
     Route::get('blogs', [V2_BlogController::class, 'index']);
