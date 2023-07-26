@@ -19,9 +19,9 @@ class CarController extends Controller
         return new CarCollection(Car::inRandomOrder()->take(8)->get());
     }
 
-    public function show($id)
+    public function show($car)
     {
-        $car = Car::find($id);
+        $car = Car::where('car_id', $car)->firstOrFail();
         return new CarResource($car);
     }
 

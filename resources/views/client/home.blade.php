@@ -45,7 +45,7 @@
             .then((response) => {
                 const carList = document.querySelector('.car-list');
                 const carItemHTML = response.data.map((item) => {
-                    return `<div class="car-item">
+                    return `<a href="/car/${item.car_id}" class="car-item">
                     <div class="card">
                         <img src="${getImageUrl(item)}" class="card-img-top" alt="car_image">
                         <div class="card-body">

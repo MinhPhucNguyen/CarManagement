@@ -680,3 +680,6 @@ body {
     margin-top: 43px;
 }
 
+.car-item {
+    text-decoration: none;
+}

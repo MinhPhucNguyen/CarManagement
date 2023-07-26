@@ -152,7 +152,7 @@
                             </div>
                         @empty
                             <tr>
-                                <td colspan="8">No Car Available</td>
+                                <td colspan="11">No Car Available</td>
                             </tr>
                         @endforelse
                     </tbody>

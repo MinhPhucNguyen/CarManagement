@@ -40,22 +40,22 @@
                     <img class="" src="{{ asset('uploads/avatar/' . Auth::user()->avatar) }}" alt="avatar"
                         width="35px" height="35px" style="border-radius: 50%; margin-right: 0">
                     <li class="nav-item dropdown d-inline-block" style="margin-left: 16px">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle text-dark fw-bold" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle text-dark fw-bold" href="#"
+                            role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item  mb-2 text-danger" href="{{ route('logout') }}"
-                                class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#logoutModal">
-                                {{ __('Logout') }}
-                            </a>
                             @if (Auth::user()->role_as == '1')
                                 <a class="dropdown-item   mb-2" href="{{ url('admin/dashboard') }}"
                                     class="btn btn-secondary">
                                     {{ __('Back to Dashboard') }}
                                 </a>
                             @endif
+                            <a class="dropdown-item  mb-2 text-danger" href="{{ route('logout') }}"
+                                class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                                {{ __('Logout') }}
+                            </a>
                         </div>
                         @include('auth.logoutModal')
                     </li>
