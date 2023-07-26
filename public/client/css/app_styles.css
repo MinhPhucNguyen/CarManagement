@@ -14,8 +14,6 @@ body {
     background: #26b480;
 }
 
-
-
 .main.content-container {
     width: 80%;
     margin: 0 auto;
@@ -319,13 +317,11 @@ body {
 
 .card-text_delivery ,
 .card-text_transmission {
-    font-size: 11px;
+    font-size: 12px;
     padding: 5px 10px;
     border-radius: 20px;
     background: #eef7ff;
     margin: 0 10px 8px 0;
-    line-height: 1.2;
-    
 }
 
 .card-text_delivery 

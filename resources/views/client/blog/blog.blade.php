@@ -81,9 +81,9 @@
                     }
 
                     const latestBlog = response.latest_blogs.map((blog) => {
-                        if (blog.status == 1) {
+                        if (blog.status == 1 && response.latest_blogs[0].blog_id != blog.blog_id) {
                             return `
-                            <a href="" class="blog-latest-other-item">
+                            <a href="/blogs/${blog.slug}" class="blog-latest-other-item">
                                 <img src="${getBlogImageUrl(blog.image)}" alt="">
                                 <div class="content">
                                     <h6>${blog.title}</h6>
