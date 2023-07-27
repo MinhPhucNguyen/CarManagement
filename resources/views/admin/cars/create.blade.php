@@ -38,15 +38,6 @@
                         <div class="tab-pane fade show mt-3 active" id="home-tab-pane" role="tabpanel"
                             aria-labelledby="home-tab" tabindex="0">
                             <div class="row">
-                                <div class="col-md-12 mb-3 ">
-                                    <label for="car_name">Car Name</label>
-                                    <input type="text" name="car_name"
-                                        class="form-control @error('car_name') is-invalid  @enderror"
-                                        value="{{ !$errors->has('car_name') ? old('car_name') : '' }}">
-                                    @error('car_name')
-                                        <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="brand">Brand</label>
                                     <select name="brand" class="form-control @error('brand') is-invalid  @enderror"">
@@ -59,6 +50,15 @@
                                         @endforeach
                                     </select>
                                     @error('brand')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4 mb-3 ">
+                                    <label for="car_name">Car Name</label>
+                                    <input type="text" name="car_name"
+                                        class="form-control @error('car_name') is-invalid  @enderror"
+                                        value="{{ !$errors->has('car_name') ? old('car_name') : '' }}">
+                                    @error('car_name')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label for="description">Description</label>
-                                    <textarea type="text" name="description" rows="3"
+                                    <textarea type="text" name="description" rows="3" id="car-description"
                                         class="form-control @error('description') is-invalid  @enderror">{{ !$errors->has('description') ? old('description') : '' }}</textarea>
                                     @error('description')
                                         <small class="text-danger">{{ $message }}</small>
@@ -128,7 +128,8 @@
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label for="transmission">Transmission</label>
-                                    <select name="transmission" class="form-control  @error('transmission') is-invalid  @enderror">
+                                    <select name="transmission"
+                                        class="form-control  @error('transmission') is-invalid  @enderror">
                                         <option value="">--Select Transmission-- </option>
                                         <option value="0">Automatic</option>
                                         <option value="1">Manual</option>
@@ -183,6 +184,20 @@
 @endsection
 
 @push('scripts')
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#car-description'), {
+                ckfinder: {
+                    uploadUrl: '{{ route('ckeditor.upload') . '?_token=' . csrf_token() }}',
+                },
+                fileTools_requestHeaders: {
+                    'X-CSRF-Token': '{{ csrf_token() }}'
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
     <script>
         //Handle display image when input
         const fileInput = document.querySelector(".file-input");

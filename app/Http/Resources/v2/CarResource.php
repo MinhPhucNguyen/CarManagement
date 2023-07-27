@@ -22,8 +22,12 @@ class CarResource extends JsonResource
             'carCustomName' => $this->brand->brand_name . ' '. $this->car_name . ' ' . $this->year,
             'yearOfCar' => $this->year,
             'location' => $this->location,
+            'desc' => $this->description,
             'numberOfTrip' => $this->number_of_trip,
             'transmission' => $this->transmission,
+            'fuel' => $this->fuel,
+            'seat' => $this->seats,
+            'fuelConsumption' => $this->capacity,
             'price' => $this->price,
             'status' => $this->status,
             'carImages' => $this->carImages->map(function($image) {

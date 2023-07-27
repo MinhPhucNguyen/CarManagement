@@ -52,9 +52,8 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <p class="card-text_transmission">${item.transmission == 0 ? 'Automatic' : 'Manual'}</p>
-                                <p class="card-text_delivery">${item.status == 0 ? 'Free Delivery' : 'Car delivery to the place'}</p>
                             </div>
-                            <h5 class="card-title">${item.carCustomName} <i class="fa-solid fa-shield"></i></h5>
+                            <h5 class="card-title text-uppercase">${item.carCustomName} <i class="fa-solid fa-shield"></i></h5>
                             <p class="info">
                                 <i class="fa-solid fa-suitcase-rolling"></i>
                                 <span>${item.numberOfTrip} trip</span>
