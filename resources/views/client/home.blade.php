@@ -8,7 +8,7 @@
     <div id="car-for-you-section">
         <div class="section-container">
             <p class="section-title">
-                Cars for you
+               Xe dành cho bạn
             </p>
             <div class="car-list">
             </div>
@@ -51,7 +51,7 @@
                         <img src="${getImageUrl(item)}" class="card-img-top" alt="car_image">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <p class="card-text_transmission">${item.transmission == 0 ? 'Automatic' : 'Manual'}</p>
+                                <p class="card-text_transmission">${item.transmission == 0 ? 'Số tự động' : 'Số sàn'}</p>
                             </div>
                             <h5 class="card-title text-uppercase">${item.carCustomName} <i class="fa-solid fa-shield"></i></h5>
                             <p class="info">

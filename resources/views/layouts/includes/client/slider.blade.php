@@ -1,7 +1,7 @@
 <div id="featured-places-section">
     <div class="section-container">
         <p class="section-title">
-            Promotions
+            Chương trình khuyến mãi
         </p>
         <div id="carouselExample" class="carousel slide">
             <div class="carousel-inner">

@@ -1,36 +1,36 @@
 <div id="banner-section">
     <div class="banner">
         <div class="banner-title">
-            CARENTAL-WITH YOU ON YOUR JOURNEY
+            CARENTAL-CÙNG BẠN TRÊN MỌI HÀNH TRÌNH
         </div>
         <div class="search-option">
             <div class="option d-flex justify-content-center shadow">
                 <div class="option-item active">
                     <i class="fa-solid fa-car-side"></i>
-                    <span> Self-driving car</span>
+                    <span>Xe tự lái</span>
                 </div>
                 <div class="option-item">
                     <i class="fa-solid fa-user"></i>
-                    <span>Car with driver</span>
+                    <span>Xe có tài xế</span>
                 </div>
             </div>
             <div class="search shadow d-flex">
                 <div class="search-form-item address">
-                    <div class="search-form-title">
+                    <div class="search-form-title fw-bold">
                         <i class="fa-solid fa-location-dot"></i>
-                        <span>Address</span>
+                        <span>Địa chỉ</span>
                     </div>
                     <div class="search-form-choose">
-                        <input type="text" placeholder="Enter car rental location" class="address-input"
+                        <input type="text" placeholder="Nhập địa điểm" class="address-input"
                             value="Hanoi">
                     </div>
                 </div>
                 <div class="search-form-item_divider"></div>
                 <div class="calendar-wrap d-flex">
                     <div class="search-form-item address">
-                        <div class="search-form-title">
+                        <div class="search-form-title fw-bold">
                             <i class="fa-regular fa-calendar"></i>
-                            <span>Start</span>
+                            <span>Bắt đầu</span>
                         </div>
                         <div class="search-form-choose">
                             <input class="calendar-input">
@@ -39,9 +39,9 @@
                     </div>
                     <div class="search-form-item_divider"></div>
                     <div class="search-form-item address">
-                        <div class="search-form-title">
+                        <div class="search-form-title fw-bold">
                             <i class="fa-regular fa-calendar"></i>
-                            <span>End</span>
+                            <span>Kết thúc</span>
                         </div>
                         <div class="search-form-choose">
                             <input class="calendar-input">
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-                <a href="" class="find-car-btn">Find Car</a>
+                <a href="" class="find-car-btn">Tìm xe</a>
             </div>
         </div>
     </div>

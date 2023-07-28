@@ -5,7 +5,7 @@
         <div class="card" style="margin-top: 100px">
             <div class="card-header text-center bg-white">
                 <h3 class="text-dark">
-                    {{ __('Login') }}
+                    {{ __('Đăng nhập') }}
                 </h3>
             </div>
 
@@ -29,12 +29,12 @@
 
                     <div class="form-group row mb-2">
                         <label for="username"
-                            class="col-md-3 col-form-label text-md-right fw-bold">{{ __('Username') }}</label>
+                            class="col-md-3 col-form-label text-md-right fw-bold w-100">{{ __('Tên đăng nhập') }}</label>
 
                         <div class="col-md-12 ">
                             <input id="username" type="text"
                                 class="form-control  @error('username') is-invalid @enderror" name="username"
-                                placeholder="Enter Username" autofocus>
+                                placeholder="Nhập Username" autofocus>
 
                             @error('username')
                                 <span class="invalid-feedback" role="alert">
@@ -46,12 +46,12 @@
 
                     <div class="form-group row mb-1">
                         <label for="password"
-                            class="col-md-3 col-form-label text-md-right fw-bold">{{ __('Password') }}</label>
+                            class="col-md-3 col-form-label text-md-right fw-bold">{{ __('Mật khẩu') }}</label>
 
                         <div class="col-md-12">
                             <input id="password" type="password"
                                 class="form-control @error('password') is-invalid @enderror" name="password"
-                                placeholder="Enter Password" autofocus>
+                                placeholder="Nhập Mật khẩu" autofocus>
 
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -61,21 +61,19 @@
                         </div>
                     </div>
 
-                    <p class="" style="text-align: right"><a href="" style="color: #1cc88a; text-decoration: none">Forgot Password?</a></p>
+                    <p class="" style="text-align: right"><a href="" style="color: #1cc88a; text-decoration: none">Quên Mật khẩu ?</a></p>
 
                     <div class="form-group row mb-3">
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-lg fw-bold text-white login-btn" name="login-btn"
-                               >
-                                {{ __('Login') }}
+                            <button type="submit" class="btn btn-lg fw-bold text-white login-btn" name="login-btn">
+                                {{ __('Đăng nhập') }}
                             </button>
                         </div>
                     </div>
                 </form>
                 <div class="form-group mb-0 d-flex justify-content-center">
-                    <p class="text-secondary">Are you not a member yet?
-                        <a href="{{ route('register') }}" class="fw-bold text-decoration-none" style="color: #1cc88a"> Sign
-                            up now!</a>
+                    <p class="text-secondary">Bạn chưa là thành viên ?
+                        <a href="{{ route('register') }}" class="fw-bold text-decoration-none" style="color: #1cc88a">Đăng ký ngay</a>
                     </p>
                 </div>
                 <hr>

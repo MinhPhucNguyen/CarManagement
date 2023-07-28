@@ -145,11 +145,11 @@ body {
 
 .search-option .search {
     background-color: white;
-    margin: 0 90px;
+    margin: 0 100px;
     padding: 22px;
     border-radius: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .search-form-title {
@@ -216,9 +216,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: bold;
-    margin: 8px 20px;
+    margin: 0 20px;
     margin-right: 0;
     padding: 0 20px;
 }
@@ -349,7 +349,6 @@ body {
 
 .desc-address span {
     color: #8f8e8e;
-    letter-spacing: 1px;
 }
 
 .desc-address i {

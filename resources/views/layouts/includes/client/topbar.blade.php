@@ -12,10 +12,10 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link text-dark btn" href="{{ route('client.about') }}">About</a>
+                    <a class="nav-link text-dark btn" href="{{ route('client.about') }}">Về Chúng tôi</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark btn" href="">Become a car owner</a>
+                    <a class="nav-link text-dark btn" href="">Trờ thành chủ xe</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark btn" href="{{ route('client.blogs') }}">Blog</a>
@@ -27,13 +27,13 @@
                 @guest
                     @if (Route::has('login'))
                         <li class="nav-item m-0">
-                            <a class="nav-link text-dark btn" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link text-dark btn" href="{{ route('login') }}">{{ __('Đăng nhập') }}</a>
                         </li>
                     @endif
 
                     @if (Route::has('register'))
                         <li class="nav-item border border-dark rounded-3">
-                            <a class="nav-link  text-dark btn" href="{{ route('register') }}">{{ __('Sign Up') }}</a>
+                            <a class="nav-link  text-dark btn" href="{{ route('register') }}">{{ __('Đăng ký') }}</a>
                         </li>
                     @endif
                 @else
@@ -49,12 +49,12 @@
                             @if (Auth::user()->role_as == '1')
                                 <a class="dropdown-item   mb-2" href="{{ url('admin/dashboard') }}"
                                     class="btn btn-secondary">
-                                    {{ __('Back to Dashboard') }}
+                                    {{ __('Admin') }}
                                 </a>
                             @endif
                             <a class="dropdown-item  mb-2 text-danger" href="{{ route('logout') }}"
                                 class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#logoutModal">
-                                {{ __('Logout') }}
+                                {{ __('Đăng xuất') }}
                             </a>
                         </div>
                         @include('auth.logoutModal')
