@@ -60,8 +60,8 @@
                             <p class="cost" id="originalPrice"></p>
                         </div>
                         <div class="price-item">
-                            <p>Phí dịch vụ </p>
-                            <p class="cost">100000đ/ngày</p>
+                            <p>Phí dịch vụ</p>
+                            <p class="cost" id="servicesFee">100000đ/ngày</p>
                         </div>
                         <div class="line-page"></div>
                         <div class="price-item mt-3">
@@ -75,7 +75,7 @@
                         <div class="line-page"></div>
                         <div class="price-item total-price">
                             <p>Tổng cộng</p>
-                            <p class="cost"></p>
+                            <p class="cost" id="total"></p>
                         </div>
                         <a href="" class="order-btn w-100">
                             <i class="fa-solid fa-bolt"></i>
@@ -178,22 +178,48 @@
                 const mainImage = document.querySelector('.main_image');
                 const subImage = document.querySelector('.sub_image');
                 const carImagesArr = response.data.carImages;
+
                 const carName = document.querySelector('.group-name h3');
                 carName.textContent = response.data.carCustomName;
+
                 const groupTotal = document.querySelector('.group-total');
                 groupTotal.querySelector('.info').textContent = response.data.numberOfTrip + " Chuyến";
                 groupTotal.querySelector('.address').textContent = response.data.location;
+
                 const tagTransmission = document.querySelector('.tag-transmission');
-                tagTransmission.textContent = response.data.transmission == '0' ? 'Automatic' : 'Manual';
-                document.querySelector('#seat').textContent = response.data.seat + " chỗ";
-                document.querySelector('#transmission').textContent = response.data.transmission == '0' ? 'Automatic' : 'Manual';
-                document.querySelector('#fuel').textContent = response.data.fuel;
+                tagTransmission.textContent = response.data.transmission == '0' ? 'Số tự động' : 'Số sàn';
+
+                const seat = document.querySelector('#seat')
+                seat.textContent = response.data.seat + " chỗ";
+
+                const transmission = document.querySelector('#transmission');
+                transmission.textContent = response.data.transmission == '0' ? 'Số tự động' : 'Số sàn';
+
+                const fuel = document.querySelector('#fuel')
+                fuel.textContent = response.data.fuel;
+
                 document.querySelector('#fuelConsumption').textContent = response.data.fuelConsumption + " lít/100km";
-                document.querySelector('.infor-car-desc .desc').innerHTML = response.data.desc; 
-                document.querySelector('.price h4').textContent = response.data.price + "đ/ngày"; 
+                document.querySelector('.infor-car-desc .desc').innerHTML = response.data.desc;
+                document.querySelector('.price h4').textContent = new Intl.NumberFormat('it-IT', {
+                    style: 'currency',
+                    currency: 'VND'
+                }).format(response.data.price) + "/ngày";
+
+                const servicesFee = document.querySelector('#servicesFee');
+                servicesFee.textContent = new Intl.NumberFormat('it-IT', {
+                    style: 'currency',
+                    currency: 'VND'
+                }).format(100000) + "/ngày";
+
                 document.querySelector('.dropdown-form .dropdown').textContent = response.data.location;
-                document.querySelector('#originalPrice').textContent = response.data.price + "đ/ngày"; 
-                
+                document.querySelector('#originalPrice').textContent = new Intl.NumberFormat('it-IT', {
+                    style: 'currency',
+                    currency: 'VND'
+                }).format(response.data.price) + '/ngày';
+
+                //Calulate total price of bill
+                const total = document.querySelector('#total');
+
                 //Display car image
                 if (carImagesArr[0]) {
                     mainImage.innerHTML =

@@ -15,34 +15,35 @@
         </div>
         <div class="footer-right">
             <div class="item">
-                <p class="main">Policy</p>
+                <p class="main fw-bold">Chính sách</p>
                 <div class="item-sub">
-                    <a href="">Policies and regulations</a>
-                    <a href="">Regulations Operation</a>
-                    <a href="">Information securitys</a>
-                    <a href="">Dispute resolution</a>
+                    <a href="">Chính sách và quy định</a>
+                    <a href="">Quy chế hoạt động</a>
+                    <a href="">Bảo mật thông tin</a>
+                    <a href="">Giải quyết tranh chấp</a>
                 </div>
             </div>
             <div class="item">
-                <p class="main">Find out more</p>
+                <p class="main fw-bold">Tìm hiểu thêm</p>
                 <div class="item-sub">
-                    <a href="">General guidance</a>
-                    <a href="">Car booking guide</a>
-                    <a href="">Payment Guide</a>
+                    <a href="">Hướng dẫn chung</a>
+                    <a href="">Hướng dẫn đặt xe</a>
+                    <a href="">Hướng dẫn thanh toán</a>
+                    <a href="">Hỏi và trả lời</a>
                 </div>
             </div>
             <div class="item">
                 <p class="main mb-4"></p>
                 <div class="item-sub findout">
-                    <a href="">Ask and Answer</a>
+                    <a href="">Về Carental</a>
                     <a href="">Carental Blog</a>
-                    <a href="">Recruitment</a>
+                    <a href="">Tuyển dụng</a>
                 </div>
             </div>
             <div class="item">
-                <p class="main">Partner</p>
+                <p class="main fw-bold">Đối tác</p>
                 <div class="item-sub">
-                    <a href="">Carental car owner registration</a>
+                    <a href="">Đăng ký chủ xe Carental</a>
                 </div>
             </div>
         </div>

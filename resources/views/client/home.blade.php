@@ -65,7 +65,7 @@
                                     <span>${item.location}</span>
                                 </div>
                                 <div class="desc-price">
-                                    ${item.price}K</div>
+                                    ${new Intl.NumberFormat('it-IT', {style: 'currency', currency: 'VND'}).format(item.price)}</div>
                             </div>
                         </div>
                     </div>
