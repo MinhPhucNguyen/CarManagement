@@ -7,15 +7,15 @@
             <div class="logo">
                 CA<span style="color: #1cc88e">R</span>ENTAL
             </div>
-            <h3 class="fs-1 fw-bold mb-4 mt-4">You want to know more
+            <h3 class="fs-1 fw-bold mb-4 mt-4">YBạn muốn biết thêm
                 <br>
-                about Carental?
+                về Carental?
             </h3>
-            <p><strong>Carental</strong> connects customers with car rental needs with thousands of car
-                owners in Ho Chi Minh City, Hanoi
-                and other provinces. Mioto aims to build a civilized & prestigious car user community in Vietnam.</p>
+            <p><strong>Carental</strong> kết nối khách hàng có nhu cầu thuê xe với hàng ngàn chủ xe ô tô ở TPHCM, Hà Nội
+                & các tỉnh thành khác. Mioto hướng đến việc xây dựng cộng đồng người dùng ô tô văn minh & uy tín tại
+                Việt Nam.
             <div class="findout-btn">
-                <a href="" class="btn">Find out more</a>
+                <a href="" class="btn">Tìm hiểu thêm</a>
             </div>
         </div>
     </div>
@@ -27,15 +27,15 @@
             <div class="logo">
                 CA<span style="color: #1cc88e">R</span>ENTAL
             </div>
-            <h3 class="fs-1 fw-bold mb-4 mt-4">You want to give
+            <h3 class="fs-1 fw-bold mb-4 mt-4">Bạn muốn cho
                 <br>
-                car rental?
+                thuê xe?
             </h3>
-            <p>More than 5,000 car owners are effectively renting on Mioto
-                Register to become our partner today to increase your monthly income.</p>
+            <p>Hơn 5,000 chủ xe đang cho thuê hiệu quả trên Mioto
+                Đăng kí trở thành đối tác của chúng tôi ngay hôm nay để gia tăng thu nhập hàng tháng.</p>
             <div class="findout-btn d-flex justify-content-center">
-                <a href="" class="btn btn-outline-dark bg-transparent text-dark" style="margin-right: 20px">Find out now</a>
-                <a href="" class="btn" style="background: #5cb3ff">Car Registration</a>
+                <a href="" class="btn btn-outline-dark bg-transparent text-dark" style="margin-right: 20px">Tìm hiểu ngay</a>
+                <a href="" class="btn" style="background: #5cb3ff">Đăng ký xe</a>
             </div>
         </div>
         <div class="explorer-section_img">

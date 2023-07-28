@@ -1,19 +1,19 @@
 <div id="service-section">
     <div class="section-container">
         <p class="section-title">
-            Service of Ca<span style="color: #1cc88a">r</span>ental
+            Dịch Vụ Của Ca<span style="color: #1cc88a">r</span>ental
         </p>
         <div class="service-container">
             <div class="service-item">
                 <div class="service-item_img">
                     <img src="{{ asset('../../image/services/service_left.png') }}" alt="">
                     <div class="content">
-                        <h2>Car is ready.<br> Start your journey now!</h2>
-                        <p>Drive your favorite car with your own hands
+                        <h2>Xe đã sẵn sàng.<br>Bắt đầu hành trình ngay!</h2>
+                        <p>Tự tay cầm lái chiếc xe mà bạn yêu thích
                             <br>
-                            make the journey more exciting.
+                            cho hành trình thêm hứng khởi.
                         </p>
-                        <a class="btn" href="">Self-drive car rental</a>
+                        <a class="btn" href="">Thuê xe tự lái</a>
                     </div>
                 </div>
             </div>
@@ -21,12 +21,12 @@
                 <div class="service-item_img">
                     <img src="{{ asset('../../image/services/service_right.png') }}" alt="">
                     <div class="content">
-                        <h2>Your driver has arrived!</h2>
-                        <p>More interesting trip
+                        <h2>Tài xế của bạn đã đến!</h2>
+                        <p>Chuyến đi thêm thú vị
                             <br>
-                            with 5* drivers on Mioto.
+                            cùng các bác tài 5* trên Mioto.
                         </p>
-                        <a class="btn" href="">Car rental with driver</a>
+                        <a class="btn" href="">Thuê xe có tài xế</a>
                     </div>
                 </div>
             </div>
