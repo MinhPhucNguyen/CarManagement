@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2023 at 05:48 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Jul 28, 2023 at 05:48 AM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,10 +29,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `blogs` (
   `blog_id` int(10) UNSIGNED NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `content` longtext NOT NULL,
-  `slug` varchar(255) NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0=unpublish; 1=publish',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -56,7 +56,7 @@ INSERT INTO `blogs` (`blog_id`, `title`, `content`, `slug`, `image`, `status`, `
 
 CREATE TABLE `brands` (
   `brand_id` bigint(20) UNSIGNED NOT NULL,
-  `brand_name` varchar(255) NOT NULL,
+  `brand_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -66,7 +66,10 @@ CREATE TABLE `brands` (
 
 INSERT INTO `brands` (`brand_id`, `brand_name`, `status`) VALUES
 (1, 'HONDA', 0),
-(2, 'VINFAST', 0);
+(2, 'VINFAST', 0),
+(3, 'Toyota', 0),
+(4, 'MORRIS', 0),
+(5, 'MITSUBISHI', 0);
 
 -- --------------------------------------------------------
 
@@ -76,19 +79,19 @@ INSERT INTO `brands` (`brand_id`, `brand_name`, `status`) VALUES
 
 CREATE TABLE `cars` (
   `car_id` bigint(20) UNSIGNED NOT NULL,
-  `car_name` varchar(255) NOT NULL,
-  `price` double(8,2) NOT NULL,
-  `description` text DEFAULT NULL,
+  `car_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` double(10,2) NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `seats` int(11) NOT NULL,
-  `fuel` varchar(255) NOT NULL,
+  `fuel` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `year` int(11) NOT NULL,
   `speed` int(11) NOT NULL,
   `capacity` int(11) NOT NULL,
-  `transmission` varchar(255) NOT NULL COMMENT '0=automatic; 1=manual',
-  `number_of_trip` varchar(255) NOT NULL,
+  `transmission` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '0=automatic; 1=manual',
+  `number_of_trip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `brand_id` bigint(20) UNSIGNED NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 0,
-  `location` varchar(255) NOT NULL,
+  `location` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -98,31 +101,14 @@ CREATE TABLE `cars` (
 --
 
 INSERT INTO `cars` (`car_id`, `car_name`, `price`, `description`, `seats`, `fuel`, `year`, `speed`, `capacity`, `transmission`, `number_of_trip`, `brand_id`, `status`, `location`, `created_at`, `updated_at`) VALUES
-(103, 'c9', 143.95, 'Consequatur nisi et quo. Hic quibusdam omnis aut sed necessitatibus illum soluta vel. Animi sunt et tempora harum.', 10, 'Petrol', 2009, 691, 366, '1', '38', 2, 0, 'West Shannybury', NULL, NULL),
-(104, 'i6', 151.67, 'Repellat rem explicabo reiciendis explicabo sint quibusdam. Illum neque qui ut et. Iusto enim voluptas voluptate necessitatibus.', 7, 'Petrol', 2007, 585, 446, '0', '33', 1, 1, 'Lake Keshaunfurt', NULL, NULL),
-(105, 'c6', 196.49, 'Labore sunt vel molestiae dolorum qui labore. Fugit recusandae sapiente molestiae. Enim exercitationem est quia non. Cupiditate consequuntur veniam qui quisquam enim rerum voluptatibus ipsum.', 9, 'Diesel', 2003, 750, 447, '0', '58', 2, 1, 'West Ben', NULL, NULL),
-(106, 'W6', 178.82, 'Non corrupti maxime doloribus rerum voluptates. Incidunt quod quidem laboriosam sed. Iste ut reiciendis sequi temporibus incidunt et qui.', 7, 'Diesel', 2019, 766, 350, '0', '2', 1, 1, 'Murphymouth', NULL, NULL),
-(107, 'm7', 122.14, 'Nemo et est qui possimus quod. Est qui nesciunt ut tempora harum accusantium qui. Rerum molestiae accusantium possimus. Libero et sit enim amet nesciunt architecto unde.', 7, 'Diesel', 1996, 303, 353, '1', '50', 1, 0, 'Lake Elias', NULL, NULL),
-(108, 'l7', 117.30, 'Iure natus at voluptas autem possimus nemo veniam reprehenderit. Illum minus hic itaque iste officiis voluptas eos. Cumque quibusdam fugit ut ut itaque quo et beatae. Est ex ex aut dolorem dicta eligendi.', 10, 'Diesel', 1981, 678, 378, '1', '76', 1, 0, 'Port Winston', NULL, NULL),
-(109, 'Y3', 118.96, 'Dolor temporibus consequatur maxime rerum. Distinctio quo voluptas nihil dolor ad voluptatem.', 5, 'Diesel', 2012, 569, 480, '1', '6', 1, 0, 'South Jessycafurt', NULL, NULL),
-(110, 'b1', 120.44, 'Officia voluptatem porro magnam quisquam recusandae aspernatur. Ut dolores quia deserunt distinctio praesentium ut et pariatur. Molestiae occaecati voluptatem adipisci nobis consequuntur dolor.', 10, 'Petrol', 2013, 309, 325, '0', '20', 2, 1, 'South Paulaport', NULL, NULL),
-(111, 'h7', 181.20, 'In corporis eaque ratione temporibus rem. Minima dolore esse qui pariatur ut aut. Quia in est neque qui ut ut.', 4, 'Diesel', 1998, 624, 407, '1', '51', 1, 1, 'Schneiderport', NULL, NULL),
-(112, 'u5', 148.73, 'Facere repudiandae ut magni maiores sed optio voluptates. Dolore impedit in illum molestiae cum quam. Ab tenetur qui sed. Perspiciatis consectetur doloremque ipsa debitis et quasi.', 4, 'Petrol', 2020, 773, 461, '1', '13', 1, 1, 'East Candace', NULL, NULL),
-(113, 'J7', 186.81, 'Ut vel qui facere qui. Beatae eveniet unde aut a nostrum ut. Possimus voluptas unde error vel aliquam. A dolorum voluptatem quia distinctio soluta et molestiae.', 7, 'Petrol', 1987, 628, 460, '0', '3', 1, 1, 'Russelport', NULL, NULL),
-(114, 'x4', 119.69, 'Totam id debitis unde. Natus autem autem sit tenetur voluptas nemo. Quasi repellat et enim.', 5, 'Petrol', 2018, 360, 388, '1', '17', 1, 1, 'South Jeffry', NULL, NULL),
-(115, 'J5', 100.91, 'Libero tenetur adipisci porro architecto laudantium accusantium praesentium quaerat. Voluptas molestiae molestias quae quia culpa voluptatibus. Reprehenderit molestias esse dicta quibusdam.', 4, 'Petrol', 1973, 421, 442, '0', '41', 2, 1, 'Lake Troy', NULL, NULL),
-(116, 'i3', 160.31, 'Laboriosam minima quae mollitia in necessitatibus est voluptas. Quae iusto atque ut sit voluptatem aliquid. Quo at et occaecati ipsa.', 10, 'Diesel', 1996, 341, 446, '1', '54', 1, 0, 'North Aprilside', NULL, NULL),
-(117, 'q6', 111.71, 'Illum ut sit dolor sit et quo ut. Quas porro est ad ut illo aliquam.', 8, 'Diesel', 2012, 669, 475, '0', '13', 2, 1, 'Port Berthaburgh', NULL, NULL),
-(118, 'U4', 199.94, 'Quia ratione id ab sit. In eos quia consequatur consequatur. Harum dolorum quo quia quia.', 8, 'Diesel', 1988, 510, 490, '0', '36', 2, 1, 'East Destin', NULL, NULL),
-(119, 'K3', 145.73, 'Suscipit id cum sed rerum autem laudantium quos nihil. Dolor quia itaque et dolore voluptas nihil. Laboriosam accusamus ad rerum cumque minus ut magni.', 8, 'Petrol', 1986, 348, 479, '0', '14', 1, 0, 'New Benjamin', NULL, NULL),
-(120, 'v9', 194.81, 'Consequatur dolorem labore nesciunt quas praesentium. Placeat eligendi enim aut quas corporis voluptatem. Perspiciatis autem voluptatum et. Asperiores illo rerum quibusdam veniam eius vitae a.', 9, 'Petrol', 2014, 681, 374, '0', '72', 1, 1, 'Maudiehaven', NULL, NULL),
-(121, 'O7', 111.38, 'Quasi molestiae dignissimos quis deleniti nihil. Provident nostrum consequatur aut et reiciendis veniam et iusto. Deleniti saepe quisquam ex fugit molestiae.', 7, 'Petrol', 2011, 488, 341, '0', '11', 1, 1, 'Lake Yoshikomouth', NULL, NULL),
-(122, 'S1', 181.20, 'Sunt aliquam explicabo beatae ea sunt sequi autem tenetur. Maxime nihil unde enim at.', 8, 'Petrol', 1970, 453, 413, '1', '56', 2, 1, 'Durganview', NULL, NULL),
-(123, 't1', 167.99, 'Et enim sint consequatur quibusdam ducimus adipisci. Facilis quis porro ratione incidunt nihil deleniti assumenda. Nihil temporibus in accusantium velit. Sed nostrum similique a tempore. Cupiditate earum dolor maxime qui ab porro.', 4, 'Diesel', 2003, 318, 381, '1', '98', 2, 0, 'Port Valentine', NULL, NULL),
-(124, 'f5', 182.04, 'Unde nostrum accusantium accusamus explicabo beatae. Ut debitis consequatur quidem dolores deserunt reiciendis qui. Et et laudantium iure voluptatem ut numquam. Qui eum quo id.', 10, 'Diesel', 2008, 792, 346, '0', '20', 1, 1, 'Port Karson', NULL, NULL),
-(125, 'n3', 194.40, 'Non placeat pariatur quia provident. Quae esse enim minus sit quis. Sed et totam voluptates rerum fugit.', 8, 'Petrol', 1983, 616, 434, '1', '65', 1, 1, 'Burleyfurt', NULL, NULL),
-(126, 'B3', 162.99, 'Modi ut qui illo voluptatem sed voluptatum. Quia eos deserunt aspernatur dolores. Sed a blanditiis tenetur accusantium laboriosam voluptates. Quis placeat voluptas quisquam amet recusandae.', 5, 'Diesel', 2012, 374, 453, '1', '54', 2, 1, 'Wintheisermouth', NULL, NULL),
-(127, 'b6', 170.90, 'Exercitationem expedita sit velit officia. Optio neque quas culpa qui. Magni sed rerum expedita aut itaque facere.', 4, 'Diesel', 1976, 626, 446, '1', '70', 1, 0, 'New Generalmouth', NULL, NULL);
+(129, 'CITY', 650000.00, 'XE HONDA CITY 2014', 4, 'Petrol', 2018, 255, 255, '0', '57', 1, 0, 'Hà Nội', NULL, NULL),
+(130, 'FADIL', 650000.00, '<p>Xe Fadil bản Full, gia đình đi nên sạch sẽ thơm tho.\r\n</p><p>\r\n* Nội thất đẹp, ghế da sang trọng.\r\n</p><p>* Siêu tiết kiệm xăng.\r\n</p><p>* Bản 6 túi khí, có hệ thống cân bằng điện tử, phanh khẩn cấp, 4 thắng đĩa, chống cứng bó phanh.\r\n</p><p>* Khởi hành ngang dốc, kiểm soát lực kéo, ổn định thân xe.</p><p>\r\n* Cảm biến de và camera lùi.\r\n</p><p>* Kết nối Bluetooth, camera hành trình, màn hình Android Auto.</p><p>\r\n* Hệ thống dẫn đường VIETMAP giúp bạn luôn biết được giới hạn tốc độ trên mỗi đoạn đường.</p><p>\r\n* Máy lọc không khí &nbsp;khuếch tán tinh dầu tự nhiên có sẵn trên xe. (ai dễ bị say xe khoái cái này).\r\n Xe nguyên bản với đầy đủ các yếu tố an toàn cho gia đình nhỏ.</p>', 4, 'Diesel', 2019, 250, 6, '0', '69', 2, 0, 'Quận Bình Thạnh, Hồ Chí Minh', NULL, NULL),
+(131, 'CAMRY', 120000.00, '<p>Toyota Camry số tự động đăng ký năm 2018 Xe chạy gia đình, nội thất nguyên bản, sạch sẽ, bảo dưỡng định kỳ thường xuyên, xe được rửa và vệ sinh sạch sẽ trước khi giao cho khách.&nbsp;</p><p>Xe nội thất rộng rãi, máy lạnh tốt, tiện nghi, phù hợp đi gia đình.</p>', 4, 'Petrol', 2018, 500, 9, '0', '14', 3, 0, 'Quận 7, Hồ Chí Minh', NULL, NULL),
+(132, 'VELOZ CROSS', 950000.00, '<p>Xe toyota veloz cross xe moi 2022</p>', 7, 'Petrol', 2022, 522, 7, '0', '52', 3, 0, 'Quận Bình Thạnh, Hồ Chí Minh', NULL, NULL),
+(133, 'LUX SA 2.0', 1499000.00, '<p>VINFAST LUX SA 2.0 2021</p>', 7, 'Petrol', 2021, 250, 8, '0', '1', 2, 0, 'Quận 4, Hồ Chí Minh', NULL, NULL),
+(134, 'GARAGES MG5 LUXURY', 900000.00, '<p>GIAO XE TẬN NƠI - CÓ TÍNH PHÍ LỘ TRÌNH THƯƠNG LƯỢNG MIỄN PHÍ: WI-FI 4G CHIA SẼ THEO XE 4GBPS/ NGÀY &nbsp;</p><p>Xe đã dán thu phí tự động: ETC</p><p>Lưu ý:</p><p>1. Xăng khách tự đổ, chịu trách nhiệm phạt nguội nếu có tương ứng thời gian và lộ trình đã thuê được xác nhận.</p><p>2. Xe đã dán thu phí không dừng ETC, phí sẽ được tính sau khi Hết lộ trình thuê và sẽ được xác nhận đúng theo các trạm mà lộ trình đã đi qua bị trừ phí.</p><p>GIẤY TỜ THUÊ XE:</p><p>1. Giữ photo CMND/ CCCD và GPLX (Đối chiếu kèm bản Gốc)</p><p>2. PassPort hoặc Hộ khẩu hoặc KT3 bản gốc – Giữ lại TÀI SẢN THẾ CHẤP: ·15 triệu (Tiền mặt/ chuyển khoản cho chủ xe khi nhận xe) hoặc Xe máy có giá trị lớn hơn 15%- Xe Ga (Kèm Cavet gốc) trị giá 15tr trở lên</p><p>ĐIỀU KHOẢN:</p><p>1. Giấy tờ thuê xe (Bản gốc) Chấp nhận Passport/ Hộ khẩu HCM/ KT3 HCM/ Hộ khẩu tỉnh – Giữ lại khi nhận xe CMND/ CCCD và GPLX photo kèm Bản gốc đối chiếu – Giữ lại photo khi nhận xe</p><p>2. Tài sản đặt cọc (1 trong 2 hình thức) Xe máy (Giá trị lớn hơn 15tr) kèm Cavet bản gốc; hoặc cộc tiền mặt 15tr qua chuyển khoản hoặc trực tiếp khi nhận xe, số tiền này sẽ hoàn trả lại. (Lưu ý: Nếu làm hư hỏng hay bị phạt nguội thì sẽ căn cứ vào mức độ thực tế để cấn trừ). 3. Phụ thu quá giờ: 70,000 vnđ/ giờ, nếu quá 4 giờ tính bằng giá thuê 1 ngày Vệ sinh khử mùi 100.000 vnđ/ lần nếu Xe quá bẩn, bùn cát, sình lầy, nặng mùi 500,000 vnđ nếu hút thuốc lá trong xe, chở sầu riêng, hải sản nặng mùi, mùi hôi khác, … 4. Quy định khác: Sử dụng xe đúng mục đích và lộ trình Không sử dụng xe thuê vào mục đích phi pháp, trái pháp luật Không sử dụng xe thuê để cầm cố, thế chấp hay làm tổn hại hoặc đánh cắp tài sản hiện có của xe Không hút thuốc, nhả kẹo cao su, xả rác trong xe Không chở hàng quốc cấm hay dễ cháy nổ Không chở hoa quả, thực phẩm nặng mùi trong xe Khi trả xe, nếu xe bẩn hoặc có mùi trong xe, khách vui lòng vệ sinh xe sạch sẽ hoặc gửi phụ thu phí vệ sinh xe sạch sẽ. Lưu ý: Nếu có vấn đề gì ảnh hưởng tới xe trong suốt quá trình xử dụng, hãy liên hệ Chủ xe ngay. Trân trọng cảm ơn, Chúc quý khách có những chuyến đi tuyệt vời !</p>', 4, 'Petrol', 2022, 500, 5, '0', '66', 4, 0, 'Quận 7, Hồ Chí Minh', NULL, NULL),
+(135, 'XPANDER', 1120000.00, '<p>MITSUBISHI XPANDER 2022</p>', 7, 'Petrol', 2022, 250, 7, '0', '11', 5, 0, 'Quận 7, Hồ Chí Minh', NULL, NULL),
+(136, 'FADIL', 680000.00, '<p>Xe fadil date 02/2022, rất mới và đẹp.&nbsp;</p><p>Phù hợp nhiều nhu cầu của nhiều đối tượng khác nhau.</p><p>- Xe có thu phí tự động không lo bị phạt khi đi cao tốc HN-HP.</p><p>- Đèn bi pha x-light V20, bi gầm sáng vàng phá sương thoải mái đi đêm.</p><p>- Đầu android có luôn sim 4g tốc độ cao.</p><p>- Dán film 3m xịn bao mát mẻ, riêng tư, thoải mái</p><p>- Xe thơm tho sạch sẽ, vệ sinh đều.</p><p>Thích hợp cho anh chị em đi dã ngoại, về quê hay đi công việc xa gần.</p><p>&nbsp;Anh chị em có nhu cầu hãy book ngay nào.</p>', 4, 'Petrol', 2022, 500, 7, '0', '66', 2, 0, 'Quận Bà Đình, Hà Nội', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -133,10 +119,48 @@ INSERT INTO `cars` (`car_id`, `car_name`, `price`, `description`, `seats`, `fuel
 CREATE TABLE `car_images` (
   `image_id` bigint(20) UNSIGNED NOT NULL,
   `car_id` bigint(20) UNSIGNED NOT NULL,
-  `image` varchar(255) NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `car_images`
+--
+
+INSERT INTO `car_images` (`image_id`, `car_id`, `image`, `created_at`, `updated_at`) VALUES
+(10, 129, 'uploads/products/16903660451.jpg', '2023-07-26 10:07:25', '2023-07-26 10:07:25'),
+(11, 129, 'uploads/products/16903660452.jpg', '2023-07-26 10:07:25', '2023-07-26 10:07:25'),
+(12, 129, 'uploads/products/16903660453.jpg', '2023-07-26 10:07:25', '2023-07-26 10:07:25'),
+(13, 129, 'uploads/products/16903660454.jpg', '2023-07-26 10:07:26', '2023-07-26 10:07:26'),
+(15, 130, 'uploads/products/16904589001.jpg', '2023-07-27 11:55:00', '2023-07-27 11:55:00'),
+(16, 130, 'uploads/products/16904589002.jpg', '2023-07-27 11:55:00', '2023-07-27 11:55:00'),
+(17, 130, 'uploads/products/16904589003.jpg', '2023-07-27 11:55:01', '2023-07-27 11:55:01'),
+(18, 130, 'uploads/products/16904589014.jpg', '2023-07-27 11:55:01', '2023-07-27 11:55:01'),
+(19, 131, 'uploads/products/16904604751.jpg', '2023-07-27 12:21:15', '2023-07-27 12:21:15'),
+(20, 131, 'uploads/products/16904604752.jpg', '2023-07-27 12:21:15', '2023-07-27 12:21:15'),
+(21, 131, 'uploads/products/16904604753.jpg', '2023-07-27 12:21:15', '2023-07-27 12:21:15'),
+(22, 131, 'uploads/products/16904604754.jpg', '2023-07-27 12:21:15', '2023-07-27 12:21:15'),
+(23, 132, 'uploads/products/16904608841.jpg', '2023-07-27 12:28:04', '2023-07-27 12:28:04'),
+(24, 132, 'uploads/products/16904608842.jpg', '2023-07-27 12:28:04', '2023-07-27 12:28:04'),
+(25, 132, 'uploads/products/16904608843.jpg', '2023-07-27 12:28:04', '2023-07-27 12:28:04'),
+(26, 132, 'uploads/products/16904608844.jpg', '2023-07-27 12:28:04', '2023-07-27 12:28:04'),
+(27, 133, 'uploads/products/16904654231.jpg', '2023-07-27 13:43:43', '2023-07-27 13:43:43'),
+(28, 133, 'uploads/products/16904654232.jpg', '2023-07-27 13:43:43', '2023-07-27 13:43:43'),
+(29, 133, 'uploads/products/16904654233.jpg', '2023-07-27 13:43:43', '2023-07-27 13:43:43'),
+(30, 133, 'uploads/products/16904654234.jpg', '2023-07-27 13:43:43', '2023-07-27 13:43:43'),
+(31, 134, 'uploads/products/16904657021.jpg', '2023-07-27 13:48:22', '2023-07-27 13:48:22'),
+(32, 134, 'uploads/products/16904657022.jpg', '2023-07-27 13:48:22', '2023-07-27 13:48:22'),
+(33, 134, 'uploads/products/16904657023.jpg', '2023-07-27 13:48:22', '2023-07-27 13:48:22'),
+(34, 134, 'uploads/products/16904657024.jpg', '2023-07-27 13:48:22', '2023-07-27 13:48:22'),
+(35, 135, 'uploads/products/16904658281.jpg', '2023-07-27 13:50:28', '2023-07-27 13:50:28'),
+(36, 135, 'uploads/products/16904658282.jpg', '2023-07-27 13:50:28', '2023-07-27 13:50:28'),
+(37, 135, 'uploads/products/16904658283.jpg', '2023-07-27 13:50:28', '2023-07-27 13:50:28'),
+(38, 135, 'uploads/products/16904658284.jpg', '2023-07-27 13:50:28', '2023-07-27 13:50:28'),
+(39, 136, 'uploads/products/16904692381.jpg', '2023-07-27 14:47:18', '2023-07-27 14:47:18'),
+(40, 136, 'uploads/products/16904692382.jpg', '2023-07-27 14:47:18', '2023-07-27 14:47:18'),
+(41, 136, 'uploads/products/16904692383.jpg', '2023-07-27 14:47:18', '2023-07-27 14:47:18'),
+(42, 136, 'uploads/products/16904692384.jpg', '2023-07-27 14:47:18', '2023-07-27 14:47:18');
 
 -- --------------------------------------------------------
 
@@ -146,11 +170,11 @@ CREATE TABLE `car_images` (
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) NOT NULL,
-  `connection` text NOT NULL,
-  `queue` text NOT NULL,
-  `payload` longtext NOT NULL,
-  `exception` longtext NOT NULL,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -162,7 +186,7 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -190,8 +214,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -203,11 +227,11 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `token` varchar(64) NOT NULL,
-  `abilities` text DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -222,20 +246,20 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
-  `firstname` varchar(255) NOT NULL,
-  `lastname` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
+  `firstname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lastname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `gender` tinyint(4) NOT NULL COMMENT '0=female, 1=male',
-  `email` varchar(255) NOT NULL,
-  `phone` tinytext NOT NULL,
-  `address` varchar(255) NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` tinytext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `confirm_password` varchar(255) NOT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `confirm_password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `avatar` varchar(255) NOT NULL DEFAULT 'default.jpg',
+  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'default.jpg',
   `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0=inactive, 1=active',
   `role_as` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0=user, 1=admin'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -349,19 +373,19 @@ ALTER TABLE `blogs`
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `brand_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `brand_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `cars`
 --
 ALTER TABLE `cars`
-  MODIFY `car_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `car_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
 
 --
 -- AUTO_INCREMENT for table `car_images`
 --
 ALTER TABLE `car_images`
-  MODIFY `image_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `image_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
