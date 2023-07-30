@@ -65,15 +65,17 @@ class CarController extends Controller
             'seats' => $validatedData['seats'],
             'fuel' => $validatedData['fuel'],
             'year' => $validatedData['year'],
+            'status' => $request->status ? '1' : '0',
+            'delivery_enable' => $request->delivery_enable ? '1' : '0',
             'speed' => $validatedData['speed'],
-            'capacity' => $validatedData['capacity'],
+            'fuel_consumption' => $validatedData['fuel_consumption'],
             'transmission' => $validatedData['transmission'],
             'location' => $validatedData['location'],
             'number_of_trip' => $validatedData['trip'],
             'brand_id' => $validatedData['brand'],
         ]);
 
-        // dd($car->car_id);
+        // dd($car);
 
         if ($request->hasFile('image')) {
             $uploadsPath = 'uploads/products/';
@@ -117,7 +119,9 @@ class CarController extends Controller
                 'fuel' => $validatedData['fuel'],
                 'year' => $validatedData['year'],
                 'speed' => $validatedData['speed'],
-                'capacity' => $validatedData['capacity'],
+                'status' => $request->status ? '1' : '0',
+                'delivery_enable' => $request->delivery_enable ? '1' : '0',
+                'fuel_consumption' => $validatedData['fuel_consumption'],
                 'transmission' => $validatedData['transmission'],
                 'location' => $validatedData['location'],
                 'number_of_trip' => $validatedData['trip'],

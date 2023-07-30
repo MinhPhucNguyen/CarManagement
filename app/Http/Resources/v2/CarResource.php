@@ -27,11 +27,16 @@ class CarResource extends JsonResource
             'transmission' => $this->transmission,
             'fuel' => $this->fuel,
             'seat' => $this->seats,
-            'fuelConsumption' => $this->capacity,
+            'fuelConsumption' => $this->fuel_consumption,
             'price' => $this->price,
             'status' => $this->status,
+            'delivery_enable' => $this->delivery_enable,
             'carImages' => $this->carImages->map(function($image) {
-                return $image->image;
+                return [
+                    'imageId' => $image->image_id,
+                    'imagePath' => $image->image,
+                    'carId' => $image->car_id,
+                ];
             }),
         ];
     }

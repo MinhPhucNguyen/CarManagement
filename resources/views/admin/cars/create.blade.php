@@ -80,6 +80,20 @@
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="status">Status</label>
+                                    <div> 
+                                        <input type="checkbox" name="status" value="1">
+                                        <label for="status">Visibility</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="delivery_enable">Delivery</label>
+                                    <div> 
+                                        <input type="checkbox" name="delivery_enable" value="1">
+                                        <label for="delivery_enable">Enable</label>
+                                    </div>
+                                </div>
                                 <div class="col-md-12 mb-3">
                                     <label for="description">Description</label>
                                     <textarea type="text" name="description" rows="3" id="car-description"
@@ -118,11 +132,11 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    <label for="capacity">Capacity (cc)</label>
-                                    <input type="text" name="capacity"
-                                        class="form-control @error('capacity') is-invalid  @enderror"
-                                        value="{{ !$errors->has('capacity') ? old('capacity') : '' }}">
-                                    @error('capacity')
+                                    <label for="fuel_consumption">Fuel Consumption (/100km)</label>
+                                    <input type="text" name="fuel_consumption"
+                                        class="form-control @error('fuel_consumption') is-invalid  @enderror"
+                                        value="{{ !$errors->has('fuel_consumption') ? old('fuel_consumption') : '' }}">
+                                    @error('fuel_consumption')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>

@@ -68,10 +68,11 @@
                             <th class="text-center">Price (per day)</th>
                             <th class="text-center">Seats</th>
                             <th class="text-center">Fuel</th>
-                            <th class="text-center">Capacity</th>
+                            <th class="text-center">Fuel Consumption</th>
                             <th class="text-center">Transmission</th>
                             <th class="text-center">Location</th>
                             <th class="text-center">Trip</th>
+                            <th class="text-center">Status</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -87,10 +88,11 @@
                                 <td class="text-center">{{ $car->price }}</td>
                                 <td class="text-center">{{ $car->seats }}</td>
                                 <td class="text-center">{{ $car->fuel }}</td>
-                                <td class="text-center">{{ $car->capacity }}</td>
+                                <td class="text-center">{{ $car->fuel_consumption }}</td>
                                 <td class="text-center">{{ $car->transmission == 0 ? 'Automatic' : 'Manual' }}</td>
                                 <td class="text-center">{{ $car->location }}</td>
                                 <td class="text-center">{{ $car->number_of_trip }}</td>
+                                <td class="text-center">{{ $car->status == '1' ? 'Visibility' : 'Unvisibility' }}</td>
                                 <td class="text-center">
                                     <div class="dropdown">
                                         <button class="btn btn-success dropdown-toggle" type="button"
@@ -152,7 +154,7 @@
                             </div>
                         @empty
                             <tr>
-                                <td colspan="11">No Car Available</td>
+                                <td colspan="12">No Car Available</td>
                             </tr>
                         @endforelse
                     </tbody>

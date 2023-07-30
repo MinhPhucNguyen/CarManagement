@@ -129,6 +129,7 @@
     color: #1cc88a;
 }
 
+.tag-delivery,
 .tag-transmission {
     padding: 6px 14px;
     border-radius: 20px;
@@ -137,9 +138,9 @@
     font-weight: bold;
 }
 
-.car-detail-sidebar {
-    float: right;
-    width: 32%;
+.tag-delivery{
+    margin-left: 10px;
+    background: #fce0d3;
 }
 
 .infor-car-desc {
@@ -169,12 +170,15 @@
 
 .infor-car-desc .desc {
     color: #7c7c7c;
+    position: relative;
 }
 
 .car-detail-sidebar {
+    float: right;
+    width: 32%;
     background-color: #f7fbff;
     padding: 16px 24px;
-    border-radius: 10px;
+    border-radius: 20px;
     border: 1px solid #e7e7e7;
 }
 
@@ -303,6 +307,30 @@
     display: inline-block;
 }
 
-.calendar-input{
-    padding: 0;
+.read-more {
+    color: #1cc88a;
+    cursor: pointer;
+}
+
+.read-more i{
+    margin-left: 5px;
+}
+
+.hide {
+    max-height: 186px;
+    overflow: hidden;
+}
+
+.desc.gradient::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: linear-gradient(hsla(0, 0%, 100%, 0), #fff);
+}
+
+.desc.no-before::before {
+    display: none;
 }

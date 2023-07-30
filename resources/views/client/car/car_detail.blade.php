@@ -26,6 +26,7 @@
                     </div>
                     <div class="group-tag">
                         <span class="tag-transmission"></span>
+                        <span class="tag-delivery">Giao xe tận nơi</span>
                     </div>
                 </div>
             </div>
@@ -38,14 +39,14 @@
                         <div class="form-item">
                             <label for="">Nhận xe</label>
                             <div class="form-choose">
-                                <input class="calendar-input">
+                                <input class="calendar-input-time fw-bold border-0" id="st-time">
                             </div>
                         </div>
                         <div class="line"></div>
                         <div class="form-item">
                             <label for="">Trả xe</label>
                             <div class="form-choose">
-                                <input class="calendar-input">
+                                <input class="calendar-input-time fw-bold border-0" id="nd-time">
                             </div>
                         </div>
                     </div>
@@ -66,7 +67,7 @@
                         <div class="line-page"></div>
                         <div class="price-item mt-3">
                             <p>Tổng phí thuê xe</p>
-                            <p class="cost"></p>
+                            <p class="cost" id="total"></p>
                         </div>
                         <div class="promotion">
                             <div class="promotion-icon"><i class="fa-solid fa-ticket"></i></div>
@@ -123,8 +124,10 @@
                 <div class="infor-car-desc">
                     <h6>Mô tả</h6>
                     <div class="desc"></div>
+                    <div class="read-more fw-bold d-flex align-items-center">
+                    </div>
                 </div>
-                <div class="line-page"></div>
+                <div class="line-page mt-4"></div>
                 <div class="infor-car-desc">
                     <h6>Các tiện nghi khác</h6>
                     <div class=""></div>
@@ -152,14 +155,24 @@
 
 @push('app-scripts')
     <script>
-        const calendarInput = document.querySelectorAll('.calendar-input');
-        flatpickr(calendarInput, {
+        const calendarInputStartTime = document.querySelectorAll('#st-time');
+        flatpickr(calendarInputStartTime, {
             enableTime: true,
-            dateFormat: "d/m/Y    H:i",
+            dateFormat: "d/m/Y      H:i",
             altInput: true,
-            altFormat: "d/m/Y    H:i",
+            altFormat: "d/m/Y       H:i",
             allowInput: true,
             defaultDate: `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}   ${new Date().getHours()}:${new Date().getMinutes()}`,
+        });
+
+        const calendarInputEndTime = document.querySelectorAll('#nd-time');
+        flatpickr(calendarInputEndTime, {
+            enableTime: true,
+            dateFormat: "d/m/Y      H:i",
+            altInput: true,
+            altFormat: "d/m/Y       H:i",
+            allowInput: true,
+            defaultDate: `${new Date().getDate() + 1}/${new Date().getMonth() + 1}/${new Date().getFullYear()}   ${new Date().getHours()}:${new Date().getMinutes()}`,
         });
     </script>
 
@@ -178,63 +191,93 @@
                 const mainImage = document.querySelector('.main_image');
                 const subImage = document.querySelector('.sub_image');
                 const carImagesArr = response.data.carImages;
-
                 const carName = document.querySelector('.group-name h3');
+                const groupTotal = document.querySelector('.group-total');
+                const tagTransmission = document.querySelector('.tag-transmission');
+                const tagDelivery = document.querySelector('.tag-delivery');
+                const seat = document.querySelector('#seat');
+                const transmission = document.querySelector('#transmission');
+                const fuel = document.querySelector('#fuel');
+                const desc = document.querySelector('.infor-car-desc .desc');
+                const servicesFee = document.querySelector('#servicesFee');
+                const total = document.querySelector('#total');
+                const readMore = document.querySelector('.read-more');
+
                 carName.textContent = response.data.carCustomName;
 
-                const groupTotal = document.querySelector('.group-total');
                 groupTotal.querySelector('.info').textContent = response.data.numberOfTrip + " Chuyến";
+
                 groupTotal.querySelector('.address').textContent = response.data.location;
 
-                const tagTransmission = document.querySelector('.tag-transmission');
                 tagTransmission.textContent = response.data.transmission == '0' ? 'Số tự động' : 'Số sàn';
 
-                const seat = document.querySelector('#seat')
+                response.data.delivery_enable == '1' ? '' : tagDelivery.style.display = 'none';
+
                 seat.textContent = response.data.seat + " chỗ";
 
-                const transmission = document.querySelector('#transmission');
                 transmission.textContent = response.data.transmission == '0' ? 'Số tự động' : 'Số sàn';
 
-                const fuel = document.querySelector('#fuel')
                 fuel.textContent = response.data.fuel;
 
                 document.querySelector('#fuelConsumption').textContent = response.data.fuelConsumption + " lít/100km";
-                document.querySelector('.infor-car-desc .desc').innerHTML = response.data.desc;
+
+                desc.innerHTML = response.data.desc;
+                if (desc.offsetHeight > 186) {
+                    readMore.textContent = "Đọc thêm...";
+                    desc.classList.add('hide');
+                    desc.classList.add('gradient');
+                    readMore.addEventListener('click', function() {
+                        desc.classList.toggle('hide');
+                        if (desc.classList.contains('hide')) {
+                            desc.classList.remove('no-before');
+                            readMore.textContent = "Đọc thêm...";
+                        } else {
+                            desc.classList.add('no-before');
+                            readMore.innerHTML = `Thu gọn  <i class="fa-solid fa-angle-up"></i></div>`;
+                        }
+                    })
+                }
+
                 document.querySelector('.price h4').textContent = new Intl.NumberFormat('it-IT', {
                     style: 'currency',
                     currency: 'VND'
                 }).format(response.data.price) + "/ngày";
 
-                const servicesFee = document.querySelector('#servicesFee');
                 servicesFee.textContent = new Intl.NumberFormat('it-IT', {
                     style: 'currency',
                     currency: 'VND'
                 }).format(100000) + "/ngày";
 
                 document.querySelector('.dropdown-form .dropdown').textContent = response.data.location;
+
                 document.querySelector('#originalPrice').textContent = new Intl.NumberFormat('it-IT', {
                     style: 'currency',
                     currency: 'VND'
                 }).format(response.data.price) + '/ngày';
 
                 //Calulate total price of bill
-                const total = document.querySelector('#total');
+                const totalPrice = response.data.price + 100000;
+                total.innerHTML = new Intl.NumberFormat('it-IT', {
+                    style: 'currency',
+                    currency: 'VND'
+                }).format(totalPrice) + ' <small>X</small> 1 ngày';
 
                 //Display car image
                 if (carImagesArr[0]) {
                     mainImage.innerHTML =
                         ` <div class="cover_car_image">
-                             <img src="{{ asset('${carImagesArr[0]}') }}" alt="${response.data.carCustomName}">
+                             <img src="{{ asset('${carImagesArr[0].imagePath}') }}" alt="${response.data.carCustomName}">
                         </div>`
                 }
                 //get 3 sub item of an array
                 const newCarImageArr = carImagesArr.slice(1, 4);
                 const carImageHtml = newCarImageArr.map((item) => {
                     return `<div class="cover_car_image">
-                        <img src="{{ asset('${item}') }}" alt="car_image">
+                        <img src="{{ asset('${item.imagePath}') }}" alt="car_image">
                     </div>`
                 })
                 subImage.innerHTML = carImageHtml.join('');
+
             })
             .catch((err) => {
                 alert(err);

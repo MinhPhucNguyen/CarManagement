@@ -29,7 +29,7 @@ class CarFormRequest extends FormRequest
             'fuel' => 'required',
             'year' => 'required',
             'speed' => 'required',
-            'capacity' => 'required',
+            'fuel_consumption' => 'required',
             'transmission' => 'required',
             'location' => 'required',
             'trip' => 'required',

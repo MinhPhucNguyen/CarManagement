@@ -49,8 +49,11 @@
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Action</h6>
-                    <a class="collapse-item" href="{{ url('admin/cars') }}">
+                <a class="collapse-item" href="{{ url('admin/cars') }}">
                     <span class="ml-3">Car List</span>
+                </a>
+                <a class="collapse-item" href="{{route('feature')}}">
+                    <span class="ml-3">Features</span>
                 </a>
             </div>
         </div>
@@ -64,7 +67,7 @@
     </li>
 
     <li class="nav-item border-bottom">
-        <a class="nav-link fw-bold text-dark" href="{{route('blogs.index')}}">
+        <a class="nav-link fw-bold text-dark" href="{{ route('blogs.index') }}">
             <i class="fa-solid fa-square-rss"></i>
             <span>Blog</span>
         </a>

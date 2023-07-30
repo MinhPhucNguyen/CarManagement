@@ -15,10 +15,12 @@ class Car extends Model
         'description',
         'price',
         'seats',
+        'status',
         'fuel',
         'year',
         'speed',
-        'capacity',
+        'fuel_consumption',
+        'delivery_enable',
         'transmission',
         'location',
         'number_of_trip',
@@ -36,5 +38,9 @@ class Car extends Model
 
     public function carImages(){
         return $this->hasMany(CarImage::class, 'car_id');
+    }
+
+    public function features(){
+        return $this->belongsToMany(Feature::class);
     }
 }

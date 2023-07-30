@@ -8,7 +8,7 @@
     <div id="car-for-you-section">
         <div class="section-container">
             <p class="section-title">
-               Xe dành cho bạn
+                Xe dành cho bạn
             </p>
             <div class="car-list">
             </div>
@@ -36,7 +36,7 @@
 
         const getImageUrl = (item) => {
             if (item.carImages.length > 0) {
-                return `{{ asset('${item.carImages[0]}') }}`;
+                return `{{ asset('${item.carImages[0].imagePath}') }}`;
             }
             return "{{ asset('../../image/car/car_image_test.jpg') }}";
         }
@@ -45,31 +45,35 @@
             .then((response) => {
                 const carList = document.querySelector('.car-list');
                 const carItemHTML = response.data.map((item) => {
-                    const carSlug = (item.brand + '-' + item.carOriginalName + '-' + item.yearOfCar).toLowerCase();
-                    return `<a href="{{url('/car/${carSlug}/${item.carId}')}}" class="car-item">
-                    <div class="card">
-                        <img src="${getImageUrl(item)}" class="card-img-top" alt="car_image">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <p class="card-text_transmission">${item.transmission == 0 ? 'Số tự động' : 'Số sàn'}</p>
-                            </div>
-                            <h5 class="card-title text-uppercase">${item.carCustomName} <i class="fa-solid fa-shield"></i></h5>
-                            <p class="info">
-                                <i class="fa-solid fa-suitcase-rolling"></i>
-                                <span>${item.numberOfTrip} trip</span>
-                            </p>
-                            <div class="car-item-divider"></div>
-                            <div class="desc-address-price d-flex justify-content-between align-items-center mt-3">
-                                <div class="desc-address">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <span>${item.location}</span>
+                    const carSlug = (item.brand + '-' + item.carOriginalName + '-' + item.yearOfCar)
+                        .toLowerCase();
+                    if (item.status == '1') {
+                        return `<a href="{{ url('/car/${carSlug}/${item.carId}') }}" class="car-item">
+                        <div class="card">
+                            <img src="${getImageUrl(item)}" class="card-img-top" alt="car_image">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <p class="card-text_transmission">${item.transmission == 0 ? 'Số tự động' : 'Số sàn'}</p>
+                                    ${item.delivery_enable == 1 ? '<p class="card-text_delivery">Giao xe tận nơi</p>' : ''}
                                 </div>
-                                <div class="desc-price">
-                                    ${new Intl.NumberFormat('it-IT', {style: 'currency', currency: 'VND'}).format(item.price)}</div>
+                                <h5 class="card-title text-uppercase">${item.carCustomName} <i class="fa-solid fa-shield"></i></h5>
+                                <p class="info">
+                                    <i class="fa-solid fa-suitcase-rolling"></i>
+                                    <span>${item.numberOfTrip} trip</span>
+                                </p>
+                                <div class="car-item-divider"></div>
+                                <div class="desc-address-price d-flex justify-content-between align-items-center mt-3">
+                                    <div class="desc-address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>${item.location}</span>
+                                    </div>
+                                    <div class="desc-price">
+                                        ${new Intl.NumberFormat('it-IT', {style: 'currency', currency: 'VND'}).format(item.price)}</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>`;
+                    </div>`;
+                    }
                 });
                 carList.innerHTML = carItemHTML.join('');
             })

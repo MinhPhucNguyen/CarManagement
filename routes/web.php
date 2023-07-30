@@ -39,13 +39,6 @@ Route::post('/register', [SignUpController::class, 'register']);
 //Logout
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
-//Client Route
-Route::get('about', [AboutController::class, 'index'])->name('client.about');
-Route::get('blogs', [App\Http\Controllers\BlogController::class, 'index'])->name('client.blogs');
-Route::get('blogs/{slug}', [App\Http\Controllers\BlogController::class, 'show'])->name('client.blogs.show');
-
-Route::get('car/{carSlug}/{id}', [App\Http\Controllers\CarController::class, 'show'])->name('car.show');
-
 //Admin Route
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index']);
@@ -67,6 +60,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
 
     // Brand Routes
     Route::get('brand', App\Http\Livewire\Admin\Brand\Index::class)->name('brand');
+    //Feature Routes
+    Route::get('feature', App\Http\Livewire\Admin\Feature\Index::class)->name('feature');
 
     // Car Routes
     Route::controller(CarController::class)->group(function () {
@@ -92,3 +87,11 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::delete('/blogs/{id}', 'destroy')->name('blogs.destroy'); 
     });
 });
+
+
+//Client Route
+Route::get('about', [AboutController::class, 'index'])->name('client.about');
+Route::get('blogs', [App\Http\Controllers\BlogController::class, 'index'])->name('client.blogs');
+Route::get('blogs/{slug}', [App\Http\Controllers\BlogController::class, 'show'])->name('client.blogs.show');
+
+Route::get('car/{carSlug}/{id}', [App\Http\Controllers\CarController::class, 'show'])->name('car.show');
