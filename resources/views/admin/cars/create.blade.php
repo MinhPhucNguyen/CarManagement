@@ -18,11 +18,18 @@
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link text-success fw-bold active" id="home-tab" data-bs-toggle="tab"
-                                data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane"
+                                data-bs-target="#car-tab-pane" type="button" role="tab" aria-controls="car-tab-pane"
                                 aria-selected="true">
                                 <i class="fa-solid fa-circle-info mr-1"></i>
                                 Car Detail
                             </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link text-success fw-bold" id="profile-tab" data-bs-toggle="tab"
+                                data-bs-target="#feature-tab-pane" type="button" role="tab"
+                                aria-controls="feature-tab-pane" aria-selected="false">
+                                <i class="fa-solid fa-list"></i>
+                                Features</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link text-success fw-bold" id="profile-tab" data-bs-toggle="tab"
@@ -35,7 +42,7 @@
                     <div class="tab-content" id="myTabContent">
 
                         {{-- Tab Add Car Detail --}}
-                        <div class="tab-pane fade show mt-3 active" id="home-tab-pane" role="tabpanel"
+                        <div class="tab-pane fade show mt-3 active" id="car-tab-pane" role="tabpanel"
                             aria-labelledby="home-tab" tabindex="0">
                             <div class="row">
                                 <div class="col-md-4 mb-3">
@@ -82,14 +89,14 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="status">Status</label>
-                                    <div> 
+                                    <div>
                                         <input type="checkbox" name="status" value="1">
                                         <label for="status">Visibility</label>
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="delivery_enable">Delivery</label>
-                                    <div> 
+                                    <div>
                                         <input type="checkbox" name="delivery_enable" value="1">
                                         <label for="delivery_enable">Enable</label>
                                     </div>
@@ -169,6 +176,16 @@
                                     @error('location')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Tab Add Car Feature --}}
+                        <div class="tab-pane fade mt-3" id="feature-tab-pane" role="tabpanel"
+                            aria-labelledby="image-tab" tabindex="0">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+
                                 </div>
                             </div>
                         </div>
