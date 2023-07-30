@@ -7,6 +7,7 @@ use App\Http\Requests\CarFormRequest;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\CarImage;
+use App\Models\Feature;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -48,8 +49,9 @@ class CarController extends Controller
 
     public function create()
     {
+        $features = Feature::all();
         $brands = Brand::all();
-        return view('admin.cars.create', compact('brands'));
+        return view('admin.cars.create', compact('brands', 'features'));
     }
 
     public function store(CarFormRequest $request)
@@ -93,7 +95,7 @@ class CarController extends Controller
                     'image' => $finalImagePathName,
                 ]);
             }
-        } 
+        }
         return redirect('admin/cars')->with('message', 'Car Created Successfully');
     }
 

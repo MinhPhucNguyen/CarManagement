@@ -311,3 +311,30 @@ input[type="radio"]:checked {
     object-fit: cover;
     border-radius: 20px;
 }
+
+/* FEATURE TAB */
+.features-list {
+    width: 100%;
+}
+
+.features-list .feature-item {
+    padding: 10px 20px;
+    border-radius: 30px;
+    background-color: #f1f1f1;
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 8px;
+    margin-bottom: 10px;
+}
+
+.features-list .feature-item:hover{
+    background-color: #37ecaa49;
+    transition: 0.3s all ease-in-out;
+    box-shadow: #1cc8898e 0px 0px 15px 0px;
+}
+
+.feature-chose{
+    background-color: #1cc889d2 !important;
+    font-weight: bold;
+    color: white !important;
+}

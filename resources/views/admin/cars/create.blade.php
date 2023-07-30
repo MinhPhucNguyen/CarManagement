@@ -21,7 +21,7 @@
                                 data-bs-target="#car-tab-pane" type="button" role="tab" aria-controls="car-tab-pane"
                                 aria-selected="true">
                                 <i class="fa-solid fa-circle-info mr-1"></i>
-                                Car Detail
+                                Car Details
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
@@ -185,7 +185,12 @@
                             aria-labelledby="image-tab" tabindex="0">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-
+                                    <h5 class="mb-4">Features</h5>
+                                    <div class="features-list">
+                                        @foreach ($features as $feature)
+                                            <div class="feature-item">{{ $feature->name }}</div>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -195,13 +200,13 @@
                             tabindex="0">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="image">Upload Car Images</label>
+                                    <h5 class="mb-4">Upload Car Images</h5>
                                     <input type="file" multiple name="image[]"
                                         class="form-control file-input @error('image') is-invalid  @enderror">
                                     @error('image')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
-                                    <div class="display_image">
+                                    <div class="display_image mb-4">
                                     </div>
                                 </div>
                             </div>
@@ -216,6 +221,10 @@
 
 @push('scripts')
     <script>
+        const featureItem = document.querySelectorAll(".feature-item");
+    </script>
+
+    <script>
         ClassicEditor
             .create(document.querySelector('#car-description'), {
                 ckfinder: {
@@ -229,6 +238,7 @@
                 console.error(error);
             });
     </script>
+    
     <script>
         //Handle display image when input
         const fileInput = document.querySelector(".file-input");
