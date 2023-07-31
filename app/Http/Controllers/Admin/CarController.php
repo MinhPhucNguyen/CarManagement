@@ -56,6 +56,7 @@ class CarController extends Controller
 
     public function store(CarFormRequest $request)
     {
+        // dd($request);
         $validatedData = $request->validated();
 
         $brand = Brand::find($validatedData['brand']);
@@ -78,6 +79,12 @@ class CarController extends Controller
         ]);
 
         // dd($car);
+        // dd($request->features);
+        if ($request->featureIds != NULL) {
+            $featureIdChose = explode(',', $request->featureIds); //convert string to array
+            // dd($featureIdChose);
+            $car->features()->attach($featureIdChose);
+        }
 
         if ($request->hasFile('image')) {
             $uploadsPath = 'uploads/products/';
@@ -102,8 +109,16 @@ class CarController extends Controller
     public function edit($car_id)
     {
         $brands = Brand::all();
-        $car = Car::find($car_id);
-        return view('admin.cars.edit', compact('brands', 'car'));
+        $features = Feature::all();
+        $car = Car::where('car_id', $car_id)->first();
+        $featuresOfTheCar = $car->features;
+
+        $featuresOfTheCarIds = []; //create an array to store feature ids of the car
+        foreach ($featuresOfTheCar as $feature) {
+            array_push($featuresOfTheCarIds, $feature->id); //push feature id to array
+        }
+
+        return view('admin.cars.edit', compact('brands', 'car', 'features', 'featuresOfTheCarIds'));
     }
 
     public function update(CarFormRequest $request, $car_id)
@@ -129,6 +144,24 @@ class CarController extends Controller
                 'number_of_trip' => $validatedData['trip'],
                 'brand_id' => $validatedData['brand'],
             ]);
+
+            $featuresOfTheCar = $car->features; //get feature stored in database
+            $featuresOfTheCarIds = []; //create an array to store feature ids of the car
+            foreach ($featuresOfTheCar as $feature) {
+                array_push($featuresOfTheCarIds, (string) $feature->id);
+            }
+            // dd($featuresOfTheCarIds);
+            if ($request->has('featureIds')) {
+                $featureIdChose = explode(',', $request->featureIds); //convert string to array, and get from request
+                // dd($featureIdChose);
+                foreach ($featureIdChose as $featureEdit) {
+                    if (!collect($featuresOfTheCarIds)->contains($featureEdit) && $featureEdit != NULL) { //use collection 
+                        $featuresOfTheCarIds = collect([$featuresOfTheCarIds, $featureIdChose])->collapse();
+                        // dd($featuresOfTheCarIds);
+                    }
+                }
+                $car->features()->sync($featuresOfTheCarIds);
+            } 
 
             if ($request->hasFile('image')) {
                 $uploadsPath = 'uploads/products/';

@@ -28,6 +28,13 @@
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link text-success fw-bold" id="profile-tab" data-bs-toggle="tab"
+                                data-bs-target="#feature-tab-pane" type="button" role="tab"
+                                aria-controls="feature-tab-pane" aria-selected="false">
+                                <i class="fa-solid fa-list"></i>
+                                Features</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link text-success fw-bold" id="profile-tab" data-bs-toggle="tab"
                                 data-bs-target="#image-tab-pane" type="button" role="tab"
                                 aria-controls="image-tab-pane" aria-selected="false">
                                 <i class="fa-solid fa-image mr-1"></i>
@@ -180,6 +187,24 @@
                             </div>
                         </div>
 
+                        {{-- Tab Add Car Feature --}}
+                        <div class="tab-pane fade mt-3" id="feature-tab-pane" role="tabpanel"
+                            aria-labelledby="image-tab" tabindex="0">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <h5 class="mb-4">Features</h5>
+                                    <div class="features-list">
+                                        @foreach ($features as $feature)
+                                            <div id="{{ $feature->id }}" name="features" {{-- use laravel collection --}}
+                                                class="feature-item {{ collect($featuresOfTheCarIds)->contains($feature->id) ? 'feature-chose' : '' }}">
+                                                {{ $feature->name }}</div>
+                                        @endforeach
+                                        <input type="hidden" name="featureIds" class="featuresChose">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         {{-- Tab Add Car Images --}}
                         <div class="tab-pane fade mt-3" id="image-tab-pane" role="tabpanel" aria-labelledby="image-tab"
                             tabindex="0">
@@ -222,6 +247,30 @@
 @endsection
 
 @push('scripts')
+    <script>
+        const featureItem = document.querySelectorAll(".feature-item");
+        const featuresChoseInput = document.querySelector(".featuresChose");
+        const featuresChose = [];
+
+        featureItem.forEach((item) => {
+            item.addEventListener('click', function() {
+                item.classList.toggle('feature-chose');
+
+                const featureId = item.getAttribute('id');
+                // console.log(featureId);
+                if (item.classList.contains('feature-chose')) {
+                    featuresChose.push(featureId); //thêm featureId vào featuresChose
+                } else {
+                    const index = featuresChose.indexOf(
+                        featureId); //tìm index của feature đã thêm vào featuresChose
+                    featuresChose.splice(index, 1); //xóa feature đó khỏi featuresChose
+                }
+                // console.log(featuresChose);
+                featuresChoseInput.value = featuresChose.join(','); //thêm các featureId đã chọn vào input
+            })
+        })
+    </script>
+
     <script>
         ClassicEditor
             .create(document.querySelector('#car-description'), {

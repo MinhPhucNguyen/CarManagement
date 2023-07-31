@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 28, 2023 at 05:48 AM
+-- Generation Time: Jul 31, 2023 at 03:18 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -86,7 +86,8 @@ CREATE TABLE `cars` (
   `fuel` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `year` int(11) NOT NULL,
   `speed` int(11) NOT NULL,
-  `capacity` int(11) NOT NULL,
+  `fuel_consumption` double(8,2) DEFAULT NULL,
+  `delivery_enable` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0=disable; 1=enable',
   `transmission` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '0=automatic; 1=manual',
   `number_of_trip` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `brand_id` bigint(20) UNSIGNED NOT NULL,
@@ -100,15 +101,43 @@ CREATE TABLE `cars` (
 -- Dumping data for table `cars`
 --
 
-INSERT INTO `cars` (`car_id`, `car_name`, `price`, `description`, `seats`, `fuel`, `year`, `speed`, `capacity`, `transmission`, `number_of_trip`, `brand_id`, `status`, `location`, `created_at`, `updated_at`) VALUES
-(129, 'CITY', 650000.00, 'XE HONDA CITY 2014', 4, 'Petrol', 2018, 255, 255, '0', '57', 1, 0, 'Hà Nội', NULL, NULL),
-(130, 'FADIL', 650000.00, '<p>Xe Fadil bản Full, gia đình đi nên sạch sẽ thơm tho.\r\n</p><p>\r\n* Nội thất đẹp, ghế da sang trọng.\r\n</p><p>* Siêu tiết kiệm xăng.\r\n</p><p>* Bản 6 túi khí, có hệ thống cân bằng điện tử, phanh khẩn cấp, 4 thắng đĩa, chống cứng bó phanh.\r\n</p><p>* Khởi hành ngang dốc, kiểm soát lực kéo, ổn định thân xe.</p><p>\r\n* Cảm biến de và camera lùi.\r\n</p><p>* Kết nối Bluetooth, camera hành trình, màn hình Android Auto.</p><p>\r\n* Hệ thống dẫn đường VIETMAP giúp bạn luôn biết được giới hạn tốc độ trên mỗi đoạn đường.</p><p>\r\n* Máy lọc không khí &nbsp;khuếch tán tinh dầu tự nhiên có sẵn trên xe. (ai dễ bị say xe khoái cái này).\r\n Xe nguyên bản với đầy đủ các yếu tố an toàn cho gia đình nhỏ.</p>', 4, 'Diesel', 2019, 250, 6, '0', '69', 2, 0, 'Quận Bình Thạnh, Hồ Chí Minh', NULL, NULL),
-(131, 'CAMRY', 120000.00, '<p>Toyota Camry số tự động đăng ký năm 2018 Xe chạy gia đình, nội thất nguyên bản, sạch sẽ, bảo dưỡng định kỳ thường xuyên, xe được rửa và vệ sinh sạch sẽ trước khi giao cho khách.&nbsp;</p><p>Xe nội thất rộng rãi, máy lạnh tốt, tiện nghi, phù hợp đi gia đình.</p>', 4, 'Petrol', 2018, 500, 9, '0', '14', 3, 0, 'Quận 7, Hồ Chí Minh', NULL, NULL),
-(132, 'VELOZ CROSS', 950000.00, '<p>Xe toyota veloz cross xe moi 2022</p>', 7, 'Petrol', 2022, 522, 7, '0', '52', 3, 0, 'Quận Bình Thạnh, Hồ Chí Minh', NULL, NULL),
-(133, 'LUX SA 2.0', 1499000.00, '<p>VINFAST LUX SA 2.0 2021</p>', 7, 'Petrol', 2021, 250, 8, '0', '1', 2, 0, 'Quận 4, Hồ Chí Minh', NULL, NULL),
-(134, 'GARAGES MG5 LUXURY', 900000.00, '<p>GIAO XE TẬN NƠI - CÓ TÍNH PHÍ LỘ TRÌNH THƯƠNG LƯỢNG MIỄN PHÍ: WI-FI 4G CHIA SẼ THEO XE 4GBPS/ NGÀY &nbsp;</p><p>Xe đã dán thu phí tự động: ETC</p><p>Lưu ý:</p><p>1. Xăng khách tự đổ, chịu trách nhiệm phạt nguội nếu có tương ứng thời gian và lộ trình đã thuê được xác nhận.</p><p>2. Xe đã dán thu phí không dừng ETC, phí sẽ được tính sau khi Hết lộ trình thuê và sẽ được xác nhận đúng theo các trạm mà lộ trình đã đi qua bị trừ phí.</p><p>GIẤY TỜ THUÊ XE:</p><p>1. Giữ photo CMND/ CCCD và GPLX (Đối chiếu kèm bản Gốc)</p><p>2. PassPort hoặc Hộ khẩu hoặc KT3 bản gốc – Giữ lại TÀI SẢN THẾ CHẤP: ·15 triệu (Tiền mặt/ chuyển khoản cho chủ xe khi nhận xe) hoặc Xe máy có giá trị lớn hơn 15%- Xe Ga (Kèm Cavet gốc) trị giá 15tr trở lên</p><p>ĐIỀU KHOẢN:</p><p>1. Giấy tờ thuê xe (Bản gốc) Chấp nhận Passport/ Hộ khẩu HCM/ KT3 HCM/ Hộ khẩu tỉnh – Giữ lại khi nhận xe CMND/ CCCD và GPLX photo kèm Bản gốc đối chiếu – Giữ lại photo khi nhận xe</p><p>2. Tài sản đặt cọc (1 trong 2 hình thức) Xe máy (Giá trị lớn hơn 15tr) kèm Cavet bản gốc; hoặc cộc tiền mặt 15tr qua chuyển khoản hoặc trực tiếp khi nhận xe, số tiền này sẽ hoàn trả lại. (Lưu ý: Nếu làm hư hỏng hay bị phạt nguội thì sẽ căn cứ vào mức độ thực tế để cấn trừ). 3. Phụ thu quá giờ: 70,000 vnđ/ giờ, nếu quá 4 giờ tính bằng giá thuê 1 ngày Vệ sinh khử mùi 100.000 vnđ/ lần nếu Xe quá bẩn, bùn cát, sình lầy, nặng mùi 500,000 vnđ nếu hút thuốc lá trong xe, chở sầu riêng, hải sản nặng mùi, mùi hôi khác, … 4. Quy định khác: Sử dụng xe đúng mục đích và lộ trình Không sử dụng xe thuê vào mục đích phi pháp, trái pháp luật Không sử dụng xe thuê để cầm cố, thế chấp hay làm tổn hại hoặc đánh cắp tài sản hiện có của xe Không hút thuốc, nhả kẹo cao su, xả rác trong xe Không chở hàng quốc cấm hay dễ cháy nổ Không chở hoa quả, thực phẩm nặng mùi trong xe Khi trả xe, nếu xe bẩn hoặc có mùi trong xe, khách vui lòng vệ sinh xe sạch sẽ hoặc gửi phụ thu phí vệ sinh xe sạch sẽ. Lưu ý: Nếu có vấn đề gì ảnh hưởng tới xe trong suốt quá trình xử dụng, hãy liên hệ Chủ xe ngay. Trân trọng cảm ơn, Chúc quý khách có những chuyến đi tuyệt vời !</p>', 4, 'Petrol', 2022, 500, 5, '0', '66', 4, 0, 'Quận 7, Hồ Chí Minh', NULL, NULL),
-(135, 'XPANDER', 1120000.00, '<p>MITSUBISHI XPANDER 2022</p>', 7, 'Petrol', 2022, 250, 7, '0', '11', 5, 0, 'Quận 7, Hồ Chí Minh', NULL, NULL),
-(136, 'FADIL', 680000.00, '<p>Xe fadil date 02/2022, rất mới và đẹp.&nbsp;</p><p>Phù hợp nhiều nhu cầu của nhiều đối tượng khác nhau.</p><p>- Xe có thu phí tự động không lo bị phạt khi đi cao tốc HN-HP.</p><p>- Đèn bi pha x-light V20, bi gầm sáng vàng phá sương thoải mái đi đêm.</p><p>- Đầu android có luôn sim 4g tốc độ cao.</p><p>- Dán film 3m xịn bao mát mẻ, riêng tư, thoải mái</p><p>- Xe thơm tho sạch sẽ, vệ sinh đều.</p><p>Thích hợp cho anh chị em đi dã ngoại, về quê hay đi công việc xa gần.</p><p>&nbsp;Anh chị em có nhu cầu hãy book ngay nào.</p>', 4, 'Petrol', 2022, 500, 7, '0', '66', 2, 0, 'Quận Bà Đình, Hà Nội', NULL, NULL);
+INSERT INTO `cars` (`car_id`, `car_name`, `price`, `description`, `seats`, `fuel`, `year`, `speed`, `fuel_consumption`, `delivery_enable`, `transmission`, `number_of_trip`, `brand_id`, `status`, `location`, `created_at`, `updated_at`) VALUES
+(129, 'CITY', 650000.00, '<p>XE HONDA CITY 2014</p>', 4, 'Petrol', 2018, 255, 255.00, 0, '0', '57', 1, 1, 'Hà Nội', NULL, NULL),
+(130, 'FADIL', 650000.00, '<p>Xe Fadil bản Full, gia đình đi nên sạch sẽ thơm tho.</p><p>* Nội thất đẹp, ghế da sang trọng.</p><p>* Siêu tiết kiệm xăng.</p><p>* Bản 6 túi khí, có hệ thống cân bằng điện tử, phanh khẩn cấp, 4 thắng đĩa, chống cứng bó phanh.</p><p>* Khởi hành ngang dốc, kiểm soát lực kéo, ổn định thân xe.</p><p>* Cảm biến de và camera lùi.</p><p>* Kết nối Bluetooth, camera hành trình, màn hình Android Auto.</p><p>* Hệ thống dẫn đường VIETMAP giúp bạn luôn biết được giới hạn tốc độ trên mỗi đoạn đường.</p><p>* Máy lọc không khí &nbsp;khuếch tán tinh dầu tự nhiên có sẵn trên xe. (ai dễ bị say xe khoái cái này). Xe nguyên bản với đầy đủ các yếu tố an toàn cho gia đình nhỏ.</p>', 4, 'Diesel', 2019, 250, 6.00, 0, '0', '69', 2, 1, 'Quận Bình Thạnh, Hồ Chí Minh', NULL, NULL),
+(131, 'CAMRY', 120000.00, '<p>Toyota Camry số tự động đăng ký năm 2018 Xe chạy gia đình, nội thất nguyên bản, sạch sẽ, bảo dưỡng định kỳ thường xuyên, xe được rửa và vệ sinh sạch sẽ trước khi giao cho khách.&nbsp;</p><p>Xe nội thất rộng rãi, máy lạnh tốt, tiện nghi, phù hợp đi gia đình.</p>', 4, 'Petrol', 2018, 500, 9.00, 0, '0', '14', 3, 1, 'Quận 7, Hồ Chí Minh', NULL, NULL),
+(132, 'VELOZ CROSS', 950000.00, '<p>Xe toyota veloz cross xe moi 2022</p>', 7, 'Petrol', 2022, 522, 7.00, 0, '0', '52', 3, 1, 'Quận Bình Thạnh, Hồ Chí Minh', NULL, NULL),
+(133, 'LUX SA 2.0', 1499000.00, '<p>VINFAST LUX SA 2.0 2021</p>', 7, 'Petrol', 2021, 250, 8.00, 0, '0', '1', 2, 1, 'Quận 4, Hồ Chí Minh', NULL, NULL),
+(134, 'GARAGES MG5 LUXURY', 900000.00, '<p>GIAO XE TẬN NƠI - CÓ TÍNH PHÍ LỘ TRÌNH THƯƠNG LƯỢNG MIỄN PHÍ: WI-FI 4G CHIA SẼ THEO XE 4GBPS/ NGÀY &nbsp;</p><p>Xe đã dán thu phí tự động: ETC</p><p>Lưu ý:</p><p>1. Xăng khách tự đổ, chịu trách nhiệm phạt nguội nếu có tương ứng thời gian và lộ trình đã thuê được xác nhận.</p><p>2. Xe đã dán thu phí không dừng ETC, phí sẽ được tính sau khi Hết lộ trình thuê và sẽ được xác nhận đúng theo các trạm mà lộ trình đã đi qua bị trừ phí.</p><p>GIẤY TỜ THUÊ XE:</p><p>1. Giữ photo CMND/ CCCD và GPLX (Đối chiếu kèm bản Gốc)</p><p>2. PassPort hoặc Hộ khẩu hoặc KT3 bản gốc – Giữ lại TÀI SẢN THẾ CHẤP: ·15 triệu (Tiền mặt/ chuyển khoản cho chủ xe khi nhận xe) hoặc Xe máy có giá trị lớn hơn 15%- Xe Ga (Kèm Cavet gốc) trị giá 15tr trở lên</p><p>ĐIỀU KHOẢN:</p><p>1. Giấy tờ thuê xe (Bản gốc) Chấp nhận Passport/ Hộ khẩu HCM/ KT3 HCM/ Hộ khẩu tỉnh – Giữ lại khi nhận xe CMND/ CCCD và GPLX photo kèm Bản gốc đối chiếu – Giữ lại photo khi nhận xe</p><p>2. Tài sản đặt cọc (1 trong 2 hình thức) Xe máy (Giá trị lớn hơn 15tr) kèm Cavet bản gốc; hoặc cộc tiền mặt 15tr qua chuyển khoản hoặc trực tiếp khi nhận xe, số tiền này sẽ hoàn trả lại. (Lưu ý: Nếu làm hư hỏng hay bị phạt nguội thì sẽ căn cứ vào mức độ thực tế để cấn trừ). 3. Phụ thu quá giờ: 70,000 vnđ/ giờ, nếu quá 4 giờ tính bằng giá thuê 1 ngày Vệ sinh khử mùi 100.000 vnđ/ lần nếu Xe quá bẩn, bùn cát, sình lầy, nặng mùi 500,000 vnđ nếu hút thuốc lá trong xe, chở sầu riêng, hải sản nặng mùi, mùi hôi khác, … 4. Quy định khác: Sử dụng xe đúng mục đích và lộ trình Không sử dụng xe thuê vào mục đích phi pháp, trái pháp luật Không sử dụng xe thuê để cầm cố, thế chấp hay làm tổn hại hoặc đánh cắp tài sản hiện có của xe Không hút thuốc, nhả kẹo cao su, xả rác trong xe Không chở hàng quốc cấm hay dễ cháy nổ Không chở hoa quả, thực phẩm nặng mùi trong xe Khi trả xe, nếu xe bẩn hoặc có mùi trong xe, khách vui lòng vệ sinh xe sạch sẽ hoặc gửi phụ thu phí vệ sinh xe sạch sẽ. Lưu ý: Nếu có vấn đề gì ảnh hưởng tới xe trong suốt quá trình xử dụng, hãy liên hệ Chủ xe ngay. Trân trọng cảm ơn, Chúc quý khách có những chuyến đi tuyệt vời !</p>', 4, 'Petrol', 2022, 500, 5.00, 0, '0', '66', 4, 1, 'Quận 7, Hồ Chí Minh', NULL, NULL),
+(135, 'XPANDER', 1120000.00, '<p>MITSUBISHI XPANDER 2022</p>', 7, 'Petrol', 2022, 250, 7.00, 0, '0', '11', 5, 1, 'Quận 7, Hồ Chí Minh', NULL, NULL),
+(136, 'FADIL', 680000.00, '<p>Xe fadil date 02/2022, rất mới và đẹp.&nbsp;</p><p>Phù hợp nhiều nhu cầu của nhiều đối tượng khác nhau.</p><p>- Xe có thu phí tự động không lo bị phạt khi đi cao tốc HN-HP.</p><p>- Đèn bi pha x-light V20, bi gầm sáng vàng phá sương thoải mái đi đêm.</p><p>- Đầu android có luôn sim 4g tốc độ cao.</p><p>- Dán film 3m xịn bao mát mẻ, riêng tư, thoải mái</p><p>- Xe thơm tho sạch sẽ, vệ sinh đều.</p><p>Thích hợp cho anh chị em đi dã ngoại, về quê hay đi công việc xa gần.</p><p>&nbsp;Anh chị em có nhu cầu hãy book ngay nào.</p>', 4, 'Petrol', 2022, 500, 7.00, 0, '0', '66', 2, 1, 'Quận Bà Đình, Hà Nội', NULL, NULL),
+(144, 'CITY', 800000.00, '<p>HONDA CITY 2017</p>', 4, 'Petrol', 2017, 250, 7.00, 1, '0', '69', 1, 1, 'Quận Hai Bà Trưng, Hà Nội', NULL, NULL),
+(162, 'CITY', 650000.00, '<p>HONDA CITY</p>', 7, 'Petrol', 2022, 250, 7.00, 0, '0', '20', 1, 1, 'Quận Hai Bà Trưng, Hà Nội', NULL, NULL),
+(163, 'V8', 33.00, '<p>HELLOO</p>', 4, 'Diesel', 2023, 250, 7.00, 1, '0', '66', 2, 1, 'Quận 7, Hồ Chí Minh', NULL, NULL),
+(165, 'BNW i8', 33.00, '<p>ádasdas</p>', 4, 'Petrol', 2655, 250, 7.00, 0, '0', '57', 2, 1, 'Quận 7, Hồ Chí Minh', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `car_feature`
+--
+
+CREATE TABLE `car_feature` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `car_id` bigint(20) UNSIGNED NOT NULL,
+  `feature_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `car_feature`
+--
+
+INSERT INTO `car_feature` (`id`, `car_id`, `feature_id`) VALUES
+(12, 162, 2),
+(13, 162, 5),
+(14, 162, 7),
+(35, 165, 5),
+(36, 165, 4),
+(37, 165, 2);
 
 -- --------------------------------------------------------
 
@@ -160,7 +189,11 @@ INSERT INTO `car_images` (`image_id`, `car_id`, `image`, `created_at`, `updated_
 (39, 136, 'uploads/products/16904692381.jpg', '2023-07-27 14:47:18', '2023-07-27 14:47:18'),
 (40, 136, 'uploads/products/16904692382.jpg', '2023-07-27 14:47:18', '2023-07-27 14:47:18'),
 (41, 136, 'uploads/products/16904692383.jpg', '2023-07-27 14:47:18', '2023-07-27 14:47:18'),
-(42, 136, 'uploads/products/16904692384.jpg', '2023-07-27 14:47:18', '2023-07-27 14:47:18');
+(42, 136, 'uploads/products/16904692384.jpg', '2023-07-27 14:47:18', '2023-07-27 14:47:18'),
+(47, 144, 'uploads/products/16906457151.jpg', '2023-07-29 15:48:35', '2023-07-29 15:48:35'),
+(48, 144, 'uploads/products/16906457152.jpg', '2023-07-29 15:48:35', '2023-07-29 15:48:35'),
+(49, 144, 'uploads/products/16906457153.jpg', '2023-07-29 15:48:35', '2023-07-29 15:48:35'),
+(50, 144, 'uploads/products/16906457491.jpg', '2023-07-29 15:49:09', '2023-07-29 15:49:09');
 
 -- --------------------------------------------------------
 
@@ -177,6 +210,33 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `features`
+--
+
+CREATE TABLE `features` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `logo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `features`
+--
+
+INSERT INTO `features` (`id`, `name`, `logo`) VALUES
+(2, 'Bản đồ', NULL),
+(4, 'Cảm biến lốp', NULL),
+(5, 'Khe cắm USB', NULL),
+(7, 'Bluetooth', NULL),
+(8, 'Cam 360', NULL),
+(9, 'Cam hành trình', NULL),
+(10, 'Cam lùi', NULL),
+(11, 'Lốp dự phòng', NULL),
+(12, 'Định vị GPS', NULL);
 
 -- --------------------------------------------------------
 
@@ -205,7 +265,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (15, '2023_05_13_015911_add_details_to_users_table', 7),
 (18, '2023_07_16_033253_create_locations_table', 9),
 (22, '2023_07_16_031238_add_details_to_cars_table', 10),
-(27, '2023_07_16_112959_create_blogs_table', 11);
+(27, '2023_07_16_112959_create_blogs_table', 11),
+(32, '2023_07_29_161501_rename_columns_to_cars_table', 12),
+(34, '2023_07_29_230851_create_features_table', 13),
+(36, '2023_07_30_001953_create_car_feature_table', 14);
 
 -- --------------------------------------------------------
 
@@ -318,6 +381,14 @@ ALTER TABLE `cars`
   ADD KEY `cars_brand_id_foreign` (`brand_id`);
 
 --
+-- Indexes for table `car_feature`
+--
+ALTER TABLE `car_feature`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `car_feature_car_id_foreign` (`car_id`),
+  ADD KEY `car_feature_feature_id_foreign` (`feature_id`);
+
+--
 -- Indexes for table `car_images`
 --
 ALTER TABLE `car_images`
@@ -330,6 +401,12 @@ ALTER TABLE `car_images`
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `features`
+--
+ALTER TABLE `features`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -379,13 +456,19 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `cars`
 --
 ALTER TABLE `cars`
-  MODIFY `car_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `car_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
+
+--
+-- AUTO_INCREMENT for table `car_feature`
+--
+ALTER TABLE `car_feature`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `car_images`
 --
 ALTER TABLE `car_images`
-  MODIFY `image_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `image_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -394,10 +477,16 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `features`
+--
+ALTER TABLE `features`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -420,6 +509,13 @@ ALTER TABLE `users`
 --
 ALTER TABLE `cars`
   ADD CONSTRAINT `cars_brand_id_foreign` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`brand_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `car_feature`
+--
+ALTER TABLE `car_feature`
+  ADD CONSTRAINT `car_feature_car_id_foreign` FOREIGN KEY (`car_id`) REFERENCES `cars` (`car_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `car_feature_feature_id_foreign` FOREIGN KEY (`feature_id`) REFERENCES `features` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `car_images`

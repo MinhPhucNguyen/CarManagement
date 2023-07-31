@@ -16,6 +16,6 @@ class Feature extends Model
     protected $fillable = ['id', 'name', 'logo'];
 
     public function cars(){
-        return $this->belongsToMany(Car::class);
+        return $this->belongsToMany(Car::class, 'car_feature');
     }
 }

@@ -188,8 +188,10 @@
                                     <h5 class="mb-4">Features</h5>
                                     <div class="features-list">
                                         @foreach ($features as $feature)
-                                            <div class="feature-item">{{ $feature->name }}</div>
+                                            <div id="{{ $feature->id }}" name="features" class="feature-item">
+                                                {{ $feature->name }}</div>
                                         @endforeach
+                                        <input type="hidden" name="featureIds" class="featuresChose">
                                     </div>
                                 </div>
                             </div>
@@ -222,6 +224,24 @@
 @push('scripts')
     <script>
         const featureItem = document.querySelectorAll(".feature-item");
+        const featuresChoseInput = document.querySelector(".featuresChose");
+        const featuresChose = [];
+        featureItem.forEach((item) => {
+            item.addEventListener('click', function() {
+                item.classList.toggle('feature-chose');
+
+                const featureId = item.getAttribute('id');
+                // console.log(featureId);
+                if (item.classList.contains('feature-chose')) {
+                    featuresChose.push(featureId); //thêm featureId vào featuresChose
+                } else {
+                    const index = featuresChose.indexOf(featureId); //tìm index của feature đã thêm vào featuresChose
+                    featuresChose.splice(index, 1); //xóa feature đó khỏi featuresChose
+                }
+                // console.log(featuresChose);
+                featuresChoseInput.value = featuresChose.join(','); //thêm các featureId đã chọn vào input
+            })
+        })
     </script>
 
     <script>
@@ -238,7 +258,7 @@
                 console.error(error);
             });
     </script>
-    
+
     <script>
         //Handle display image when input
         const fileInput = document.querySelector(".file-input");
