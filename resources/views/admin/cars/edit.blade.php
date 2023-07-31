@@ -196,10 +196,11 @@
                                     <div class="features-list">
                                         @foreach ($features as $feature)
                                             <div id="{{ $feature->id }}" name="features" {{-- use laravel collection --}}
-                                                class="feature-item {{ collect($featuresOfTheCarIds)->contains($feature->id) ? 'feature-chose' : '' }}">
+                                                class="feature-item {{ collect($featuresOfTheCar)->contains($feature->id) ? 'feature-chose' : '' }}">
                                                 {{ $feature->name }}</div>
                                         @endforeach
-                                        <input type="hidden" name="featureIds" class="featuresChose">
+                                        <input type="hidden" name="featureIdsChose" class="featuresChose">
+                                        <input type="hidden" name="featureIdsRemove" class="featuresRemove">
                                     </div>
                                 </div>
                             </div>
@@ -250,7 +251,9 @@
     <script>
         const featureItem = document.querySelectorAll(".feature-item");
         const featuresChoseInput = document.querySelector(".featuresChose");
+        const featuresRemoveInput = document.querySelector(".featuresRemove");
         const featuresChose = [];
+        const featuresRemove = [];
 
         featureItem.forEach((item) => {
             item.addEventListener('click', function() {
@@ -260,13 +263,18 @@
                 // console.log(featureId);
                 if (item.classList.contains('feature-chose')) {
                     featuresChose.push(featureId); //thêm featureId vào featuresChose
+                    const index = featuresRemove.indexOf(
+                        featureId) //tìm index của feature đã xóa vào featuresChose
+                    featuresRemove.splice(index, 1); //xóa feature đó khỏi featuresRemove
                 } else {
                     const index = featuresChose.indexOf(
                         featureId); //tìm index của feature đã thêm vào featuresChose
                     featuresChose.splice(index, 1); //xóa feature đó khỏi featuresChose
+                    featuresRemove.push(featureId) //thêm index của feature đã xóa vào featuresRemove   
                 }
                 // console.log(featuresChose);
                 featuresChoseInput.value = featuresChose.join(','); //thêm các featureId đã chọn vào input
+                featuresRemoveInput.value = featuresRemove.join(','); //thêm các featureId đã xóa vào input
             })
         })
     </script>

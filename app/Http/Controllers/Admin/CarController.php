@@ -111,14 +111,9 @@ class CarController extends Controller
         $brands = Brand::all();
         $features = Feature::all();
         $car = Car::where('car_id', $car_id)->first();
-        $featuresOfTheCar = $car->features;
+        $featuresOfTheCar = $car->features->pluck('id')->toArray();
 
-        $featuresOfTheCarIds = []; //create an array to store feature ids of the car
-        foreach ($featuresOfTheCar as $feature) {
-            array_push($featuresOfTheCarIds, $feature->id); //push feature id to array
-        }
-
-        return view('admin.cars.edit', compact('brands', 'car', 'features', 'featuresOfTheCarIds'));
+        return view('admin.cars.edit', compact('brands', 'car', 'features', 'featuresOfTheCar'));
     }
 
     public function update(CarFormRequest $request, $car_id)
@@ -145,23 +140,29 @@ class CarController extends Controller
                 'brand_id' => $validatedData['brand'],
             ]);
 
-            $featuresOfTheCar = $car->features; //get feature stored in database
-            $featuresOfTheCarIds = []; //create an array to store feature ids of the car
-            foreach ($featuresOfTheCar as $feature) {
-                array_push($featuresOfTheCarIds, (string) $feature->id);
-            }
-            // dd($featuresOfTheCarIds);
-            if ($request->has('featureIds')) {
-                $featureIdChose = explode(',', $request->featureIds); //convert string to array, and get from request
-                // dd($featureIdChose);
+            //Handle update feature
+            $featuresOfTheCar = $car->features->pluck('id')->toArray(); //get feature stored in database
+            $featuresOfTheCarIds = [];
+            $featureIdRemove = explode(',', $request->featureIdsRemove);
+            if ($request->has('featureIdsChose')) {
+                $featureIdChose = explode(',', $request->featureIdsChose); //trả về một mảng các featureId được chọn, sử dụng explode('ký tự phân cách', 'chuỗi phân cách') để chuyển chuỗi trả về do $request->featureIdsChose thành mảng
+                dd($featureIdChose);
                 foreach ($featureIdChose as $featureEdit) {
-                    if (!collect($featuresOfTheCarIds)->contains($featureEdit) && $featureEdit != NULL) { //use collection 
-                        $featuresOfTheCarIds = collect([$featuresOfTheCarIds, $featureIdChose])->collapse();
-                        // dd($featuresOfTheCarIds);
+                    if (!collect($featuresOfTheCar)->contains($featureEdit) && $featureEdit != NULL) { //use collection 
+                        $featuresOfTheCarIds = collect([$featuresOfTheCar, $featureIdChose])->collapse();
+                    } else {
+                        $featuresOfTheCarIds = $featuresOfTheCar;
                     }
                 }
                 $car->features()->sync($featuresOfTheCarIds);
-            } 
+
+                //xóa feature đã lưu trong database
+                foreach ($featuresOfTheCarIds as $featureId) {
+                    if (in_array($featureId, $featureIdRemove)) { //nếu $featuteId có trong mảng $featureIdRemove
+                        $car->features()->detach($featureId);
+                    }
+                }
+            }
 
             if ($request->hasFile('image')) {
                 $uploadsPath = 'uploads/products/';
