@@ -146,7 +146,6 @@ class CarController extends Controller
             $featureIdRemove = explode(',', $request->featureIdsRemove);
             if ($request->has('featureIdsChose')) {
                 $featureIdChose = explode(',', $request->featureIdsChose); //trả về một mảng các featureId được chọn, sử dụng explode('ký tự phân cách', 'chuỗi phân cách') để chuyển chuỗi trả về do $request->featureIdsChose thành mảng
-                dd($featureIdChose);
                 foreach ($featureIdChose as $featureEdit) {
                     if (!collect($featuresOfTheCar)->contains($featureEdit) && $featureEdit != NULL) { //use collection 
                         $featuresOfTheCarIds = collect([$featuresOfTheCar, $featureIdChose])->collapse();
