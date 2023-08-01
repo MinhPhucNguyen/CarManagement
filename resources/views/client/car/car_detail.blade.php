@@ -149,8 +149,58 @@
                         Trân trọng cảm ơn, chúc quý khách hàng có những chuyến đi tuyệt vời !
                     </pre>
                 </div>
+                <div class="infor-car-desc">
+                    <h6>Chính sách hủy chuyến</h6>
+                    <div class="cancel-policy w-100">
+                        <div class="column title">
+                            <div class="column-item">Thời điểm hủy chuyển</div>
+                            <div class="column-item">Khách thuê hủy chuyển</div>
+                            <div class="column-item">Chủ xe hủy chuyển</div>
+                        </div>
+                        <div class="column">
+                            <div class="column-item case">Trong vòng 1h sau đặt cọc</div>
+                            <div class="column-item">
+                                <i class="fa-solid fa-circle-check"></i>
+                                <div>Hoàn tiền 100%</div>
+                            </div>
+                            <div class="column-item">
+                                <i class="fa-solid fa-circle-check"></i>
+                                <div>Không đền cọc</div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="column-item case">Trước Chuyến Đi >7 Ngày</div>
+                            <div class="column-item">
+                                <i class="fa-solid fa-circle-check"></i>
+                                <div>Hoàn tiền 70%</div>
+                            </div>
+                            <div class="column-item">
+                                <i class="fa-solid fa-circle-check"></i>
+                                <div>Trước Chuyến Đi >7 Ngày</div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="column-item case">Trong Vòng 7 Ngày Trước Chuyến Đi</div>
+                            <div class="column-item">
+                                <i class="fa-solid fa-circle-xmark"></i>
+                                <div>Không hoàn tiền</div>
+                            </div>
+                            <div class="column-item">
+                                <i class="fa-solid fa-circle-xmark"></i>
+                                <div>Đền cọc 100%</div>
+                            </div>
+                        </div>
+                        <div class="note">
+                            <p>* Khách thuê không nhận xe sẽ không được hoàn cọc</p>
+                            <p>* Chủ xe không giao xe sẽ đền 100% tiền cọc</p>
+                            <p>* Tiền cọc sẽ được hoàn trả trong vòng 1-3 ngày làm việc</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 @endsection
 

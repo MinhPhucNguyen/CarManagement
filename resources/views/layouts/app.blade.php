@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="{{ asset('client/css/about_styles.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/blog_styles.css') }}">
     <link rel="stylesheet" href="{{ asset('client/css/car_details.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/css/account_styles.css') }}">
 </head>
 
 <body>

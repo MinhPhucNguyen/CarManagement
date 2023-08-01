@@ -43,14 +43,7 @@
                             <img src="{{ asset('../../image/slider/slider1.jpg') }}" class="d-block w-100"
                                 alt="...">
                         </div>
-                        <div class="promotion-item-image d-inline-block">
-                            <img src="{{ asset('../../image/banner/banner_img.jpg') }}" class="d-block w-100"
-                                alt="...">
-                        </div>
-                        <div class="promotion-item-image d-inline-block">
-                            <img src="{{ asset('../../image/slider/slider2.jpg') }}" class="d-block w-100"
-                                alt="...">
-                        </div>
+                     
                     </div>
                 </div>
             </div>

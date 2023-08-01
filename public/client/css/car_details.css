@@ -135,7 +135,7 @@
     border-radius: 20px;
     background-color: #eef7ff;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .tag-delivery {
@@ -171,6 +171,7 @@
 .infor-car-desc .desc {
     color: #7c7c7c;
     position: relative;
+    font-size: 17px;
 }
 
 .car-detail-sidebar {
@@ -300,7 +301,7 @@
 
 .infor-car-desc pre {
     font-family: "Roboto", sans-serif;
-    font-size: 16px;
+    font-size: 17px;
     color: #7c7c7c;
     text-align: left;
     white-space: pre-line;
@@ -310,6 +311,7 @@
 .read-more {
     color: #1cc88a;
     cursor: pointer;
+    font-size: 17px;
 }
 
 .read-more i {
@@ -343,4 +345,57 @@
     font-weight: 500;
     margin-right: 10px;
     margin-bottom: 14px;
+}
+
+.cancel-policy .column:not(:first-child) {
+    border-top: 0;
+}
+
+.column {
+    border: 1px solid #e7e7e7;
+    display: flex;
+}
+
+.column .column-item {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.column .column-item i {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.column .column-item .fa-circle-xmark {
+    color: rgb(255, 64, 64);
+}
+
+.column .column-item .fa-circle-check {
+    color: #1cc88a;
+}
+
+.column.title {
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: capitalize;
+    border-radius: 12px 12px 0 0;
+}
+
+.column .column-item:not(:first-child) {
+    border-left: 1px solid #e7e7e7;
+}
+
+.column-item.case {
+    text-transform: capitalize;
+}
+
+.cancel-policy .note{
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    color: #7c7c7c;
 }
