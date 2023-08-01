@@ -130,7 +130,8 @@
                 <div class="line-page mt-4"></div>
                 <div class="infor-car-desc">
                     <h6>Các tiện nghi khác</h6>
-                    <div class=""></div>
+                    <div class="feature w-50">
+                    </div>
                 </div>
                 <div class="line-page"></div>
                 <div class="infor-car-desc">
@@ -158,21 +159,21 @@
         const calendarInputStartTime = document.querySelectorAll('#st-time');
         flatpickr(calendarInputStartTime, {
             enableTime: true,
-            dateFormat: "d/m/Y      H:i",
+            dateFormat: "d/m/Y H:i",
             altInput: true,
-            altFormat: "d/m/Y       H:i",
+            altFormat: "d/m/Y H:i",
             allowInput: true,
-            defaultDate: `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}   ${new Date().getHours()}:${new Date().getMinutes()}`,
+            defaultDate: `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()} ${new Date().getHours()}:${new Date().getMinutes()}`,
         });
 
         const calendarInputEndTime = document.querySelectorAll('#nd-time');
         flatpickr(calendarInputEndTime, {
             enableTime: true,
-            dateFormat: "d/m/Y      H:i",
+            dateFormat: "d/m/Y  H:i",
             altInput: true,
-            altFormat: "d/m/Y       H:i",
+            altFormat: "d/m/Y   H:i",
             allowInput: true,
-            defaultDate: `${new Date().getDate() + 1}/${new Date().getMonth() + 1}/${new Date().getFullYear()}   ${new Date().getHours()}:${new Date().getMinutes()}`,
+            defaultDate: `${new Date().getDate() + 1}/${new Date().getMonth() + 1}/${new Date().getFullYear()} ${new Date().getHours()}:${new Date().getMinutes()}`,
         });
     </script>
 
@@ -202,6 +203,7 @@
                 const servicesFee = document.querySelector('#servicesFee');
                 const total = document.querySelector('#total');
                 const readMore = document.querySelector('.read-more');
+                const carFeature = document.querySelector('.feature');
 
                 carName.textContent = response.data.carCustomName;
 
@@ -218,6 +220,15 @@
                 transmission.textContent = response.data.transmission == '0' ? 'Số tự động' : 'Số sàn';
 
                 fuel.textContent = response.data.fuel;
+
+                if (response.data.features.length == 0) {
+                    carFeature.innerHTML = `<div style="color: #7c7c7c">*Không có tiện nghi khác</div>`;
+                } else {
+                    carFeature.innerHTML = response.data.features.map((feature) => {
+                        return `<div class="feature-item">${feature.featureName}</div>`;
+                    }).join('');
+
+                }
 
                 document.querySelector('#fuelConsumption').textContent = response.data.fuelConsumption + " lít/100km";
 

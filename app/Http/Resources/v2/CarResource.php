@@ -19,7 +19,7 @@ class CarResource extends JsonResource
             'carId' => $this->car_id,
             'brand' => $this->brand->brand_name,
             'carOriginalName' => $this->car_name,
-            'carCustomName' => $this->brand->brand_name . ' '. $this->car_name . ' ' . $this->year,
+            'carCustomName' => $this->brand->brand_name . ' ' . $this->car_name . ' ' . $this->year,
             'yearOfCar' => $this->year,
             'location' => $this->location,
             'desc' => $this->description,
@@ -31,13 +31,16 @@ class CarResource extends JsonResource
             'price' => $this->price,
             'status' => $this->status,
             'delivery_enable' => $this->delivery_enable,
-            'carImages' => $this->carImages->map(function($image) {
-                return [
-                    'imageId' => $image->image_id,
-                    'imagePath' => $image->image,
-                    'carId' => $image->car_id,
-                ];
-            }),
+            'carImages' => $this->carImages->map(fn ($image) => [
+                'imageId' => $image->image_id,
+                'imagePath' => $image->image,
+                'carId' => $image->car_id,
+            ]),
+            'features' => $this->features->map(fn ($feature) => [
+                'featureId' => $feature->id,
+                'featureLogo' => $feature->logo,
+                'featureName' => $feature->name,
+            ]),
         ];
     }
 }

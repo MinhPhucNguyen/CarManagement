@@ -10,8 +10,7 @@
             <p class="section-title">
                 Xe dành cho bạn
             </p>
-            <div class="car-list">
-            </div>
+            <div class="car-list"></div>
         </div>
     </div>
 
@@ -63,8 +62,9 @@
                                 </p>
                                 <div class="car-item-divider"></div>
                                 <div class="desc-address-price d-flex justify-content-between align-items-center mt-3">
-                                    <div class="desc-address">
-                                        <i class="fa-solid fa-location-dot"></i>
+                                    <div class="desc-address d-flex">
+                                        <div class="d-flex align-items-center justify-content-center"> <i
+                                            class="fa-solid fa-location-dot"></i></div>
                                         <span>${item.location}</span>
                                     </div>
                                     <div class="desc-price">
@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>`;
+                    </a>`;
                     }
                 });
                 carList.innerHTML = carItemHTML.join('');
