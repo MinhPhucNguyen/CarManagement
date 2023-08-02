@@ -8,33 +8,32 @@
             <div class="sidebar-account">
                 <div class="title fw-bold fs-2 mb-4">Xin chào bạn!</div>
                 <div class="sidebar ">
-                    <a class="sidebar-item" aria-current="page" href="/account" onclick="routeToTabs(event, '/account')">
+                    <a class="sidebar-item" rel="page" href="/account">
                         <i class="fa-solid fa-user"></i>
                         <p>Tài khoản của tôi</p>
                     </a>
-                    <a class="sidebar-item" href="/myfavs" onclick="routeToTabs(event, '/myfavs')">
+                    <a class="sidebar-item" rel="page" href="/myfavs">
                         <i class="fa-solid fa-heart"></i>
                         <p>Xe yêu thích</p>
                     </a>
-                    <a class="sidebar-item" href="/resetpw" onclick="routeToTabs(event, '/resetpw')">
+                    <a class="sidebar-item" rel="page" href="/resetpw">
                         <i class="fa-solid fa-lock"></i>
                         <p>Đổi mật khẩu</p>
                     </a>
                     @if (Auth::user()->role_as == '1')
-                        <a class="sidebar-item " href="{{ url('admin/dashboard') }}" class=" sidebar-item">
+                        <a class="sidebar-item " href="admin/dashboard" class=" sidebar-item">
                             <i class="fa-solid fa-user-gear"></i>
                             <p>{{ __('Admin') }}</p>
                         </a>
                     @endif
-                    <a href="{{ route('logout') }}" class="sidebar-item text-danger" data-bs-toggle="modal"
-                        data-bs-target="#logoutModal">
+                    <a href="/logout" class="sidebar-item text-danger" data-bs-toggle="modal" data-bs-target="#logoutModal">
                         <i class="fa-solid fa-arrow-left"></i>
                         <p>{{ __('Đăng xuất') }}</p>
                     </a>
                 </div>
             </div>
             <div id="account-content">
-                @include('client.account.account_content')
+                @yield('account-content', view('client.account.account_content'))
             </div>
         </div>
     </div>
@@ -42,27 +41,45 @@
 
 @push('app-scripts')
     <script>
-        const routeToTabs = (event, url) => {
-            event.preventDefault();
+        const ajax = (url, callback) => {
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("GET", url, true);
+            xhttp.onload = () => {
+                if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
+                    const response = xhttp.responseText; //dữ liệu trả vè từ ajax
 
-            const xhttp = new window.XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    if (url === '/account') {
-                        const tempContainer = document.createElement('div');
-                        tempContainer.innerHTML = this.responseText;
+                    const tempContainer = document.createElement('div');
+                    tempContainer.innerHTML = response;
+                    const accountContentElement = tempContainer.querySelector('#account-content'); //lấy account-content từ dữ liệu trả về
 
-                        const accountContentElement = tempContainer.querySelector("#account-content");
-                        document.querySelector("#account-content").innerHTML = accountContentElement.innerHTML;
-                    } else {
-                        document.querySelector("#account-content").innerHTML = this.responseText;
-                    }
-                    console.log(document.querySelector('#account-content').innerHTML);
+                    callback(accountContentElement); //gọi hàm callback và truyền vào accountContentElement
                 }
             };
-            window.history.pushState({}, "", url);
-            xhttp.open("GET", url, true);
             xhttp.send();
         }
+
+        const sidebarItem = document.querySelectorAll('.sidebar-item[rel=page]');
+        sidebarItem.forEach(item => {
+            item.addEventListener("click", (e) => {
+                e.preventDefault();
+
+                const url = item.getAttribute('href');
+
+                ajax(url, (data) => { //data là accountContentElement
+                    document.querySelector('#account-content').innerHTML = data.innerHTML;
+                });
+
+                if (url != window.location.href) { //nếu url khác với url hiện tại thì pushState để thay đổi url 
+                    window.history.pushState({}, "", url); //thay đổi url
+                }
+                return false;
+            });
+        });
+
+        window.addEventListener("popstate", () => {
+            ajax(window.location.pathname, (data) => {
+                document.querySelector('#account-content').innerHTML = data.innerHTML;
+            });
+        });
     </script>
 @endpush
