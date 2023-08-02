@@ -38,7 +38,7 @@
                     @endif
                 @else
                     <a class="text-dark fw-bold text-decoration-none d-flex align-items-center justify-content-center"
-                        href="{{ route('client.account') }}">
+                        href="{{ url('/account') }}">
                         <img class="" src="{{ asset('uploads/avatar/' . Auth::user()->avatar) }}" alt="avatar"
                             width="40px" height="40px" style="border-radius: 50%; margin-right: 15px">
                         {{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}

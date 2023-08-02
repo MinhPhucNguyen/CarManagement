@@ -95,4 +95,9 @@ Route::get('about', [AboutController::class, 'index'])->name('client.about');
 Route::get('blogs', [App\Http\Controllers\BlogController::class, 'index'])->name('client.blogs');
 Route::get('blogs/{slug}', [App\Http\Controllers\BlogController::class, 'show'])->name('client.blogs.show');
 Route::get('car/{carSlug}/{id}', [App\Http\Controllers\CarController::class, 'show'])->name('car.show');
-Route::get('account', [UserController::class, 'showAccount'])->name('client.account');
+
+Route::controller(UserController::class)->group(function () {
+    Route::get('account', 'showAccount')->name('client.account');
+    Route::get('myfavs', 'showMyFavs')->name('client.myfavs');
+    Route::get('resetpw', 'showResetPw')->name('client.resetpw');
+});
