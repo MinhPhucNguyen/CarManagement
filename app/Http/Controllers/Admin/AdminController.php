@@ -11,7 +11,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 
 
-class UserController extends Controller
+class AdminController extends Controller
 {
     protected $uploadsAvatarPath = 'uploads/avatar/';
     protected $defaultImage = 'default.jpg';

@@ -43,7 +43,6 @@
                             width="40px" height="40px" style="border-radius: 50%; margin-right: 15px">
                         {{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}
                     </a>
-                    @include('auth.logoutModal')
                 @endguest
             </ul>
         </div>

@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers\Admin\BlogController;
@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\SignUpController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Mail\MailController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +47,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::post('send_email', [MailController::class, 'sendEmail'])->name('sendEmail');
 
     // User Routes
-    Route::controller(UserController::class)->group(function () {
+    Route::controller(AdminController::class)->group(function () {
         Route::get('users', 'index');
         Route::get('users/{users}/show', 'show')->name('users.show');
         Route::get('users/create', 'create')->name('users.create');
@@ -84,7 +85,7 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
         Route::post('blogs', 'store')->name('blogs.store');
         Route::get('blogs/{id}/edit', 'edit')->name('blogs.edit');
         Route::put('blogs/{id}', 'update')->name('blogs.update');
-        Route::delete('/blogs/{id}', 'destroy')->name('blogs.destroy'); 
+        Route::delete('/blogs/{id}', 'destroy')->name('blogs.destroy');
     });
 });
 
@@ -94,4 +95,4 @@ Route::get('about', [AboutController::class, 'index'])->name('client.about');
 Route::get('blogs', [App\Http\Controllers\BlogController::class, 'index'])->name('client.blogs');
 Route::get('blogs/{slug}', [App\Http\Controllers\BlogController::class, 'show'])->name('client.blogs.show');
 Route::get('car/{carSlug}/{id}', [App\Http\Controllers\CarController::class, 'show'])->name('car.show');
-Route::get('account', [App\Http\Controllers\UserController::class, 'showAccount'])->name('client.account');
+Route::get('account', [UserController::class, 'showAccount'])->name('client.account');
