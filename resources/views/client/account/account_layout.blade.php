@@ -8,15 +8,15 @@
             <div class="sidebar-account">
                 <div class="title fw-bold fs-2 mb-4">Xin chào bạn!</div>
                 <div class="sidebar ">
-                    <a class="sidebar-item" aria-current="page" href="/account" onclick="routeToAccount(event)">
+                    <a class="sidebar-item" aria-current="page" href="/account" onclick="routeToTabs(event, '/account')">
                         <i class="fa-solid fa-user"></i>
                         <p>Tài khoản của tôi</p>
                     </a>
-                    <a class="sidebar-item" href="/myfavs" onclick="routeToMyFavs(event)">
+                    <a class="sidebar-item" href="/myfavs" onclick="routeToTabs(event, '/myfavs')">
                         <i class="fa-solid fa-heart"></i>
                         <p>Xe yêu thích</p>
                     </a>
-                    <a class="sidebar-item" href="/resetpw">
+                    <a class="sidebar-item" href="/resetpw" onclick="routeToTabs(event, '/resetpw')">
                         <i class="fa-solid fa-lock"></i>
                         <p>Đổi mật khẩu</p>
                     </a>
@@ -42,36 +42,26 @@
 
 @push('app-scripts')
     <script>
-        const routeToMyFavs = (event) => {
+        const routeToTabs = (event, url) => {
             event.preventDefault();
-            const xhttp = new XMLHttpRequest();
+
+            const xhttp = new window.XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    document.querySelector("#account-content").innerHTML = this.responseText;
+                    if (url === '/account') {
+                        const tempContainer = document.createElement('div');
+                        tempContainer.innerHTML = this.responseText;
+
+                        const accountContentElement = tempContainer.querySelector("#account-content");
+                        document.querySelector("#account-content").innerHTML = accountContentElement.innerHTML;
+                    } else {
+                        document.querySelector("#account-content").innerHTML = this.responseText;
+                    }
+                    console.log(document.querySelector('#account-content').innerHTML);
                 }
-            }
-            history.pushState({}, '', '/myfavs');
-            xhttp.open('GET', '/myfavs', true);
-            xhttp.send();
-        }
-
-
-        const routeToAccount = (event) => {
-            event.preventDefault();
-            const xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    const tempContent = document.createElement('div');
-                    tempContent.innerHTML = this.responseText; //dữ liệu trả về từ controller
-
-                    //get content in account-content
-                    const accountContentElement = tempContent.querySelector('#account-content');
-
-                    document.querySelector("#account-content").innerHTML = accountContentElement.innerHTML;
-                }
-            }
-            history.pushState({}, '', '/account');
-            xhttp.open('GET', "/account", true);
+            };
+            window.history.pushState({}, "", url);
+            xhttp.open("GET", url, true);
             xhttp.send();
         }
     </script>
