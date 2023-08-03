@@ -41,26 +41,28 @@
 
 @push('app-scripts')
     <script>
-        const ajax = (url, callback) => {
+        const useAjax = (url, callback) => {
             const xhttp = new XMLHttpRequest();
-            xhttp.open("GET", url, true);
             xhttp.onload = () => {
                 if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
                     const response = xhttp.responseText; //dữ liệu trả vè từ ajax
 
                     const tempContainer = document.createElement('div');
                     tempContainer.innerHTML = response;
-                    const accountContentElement = tempContainer.querySelector('#account-content'); //lấy account-content từ dữ liệu trả về
+                    const accountContentElement = tempContainer.querySelector(
+                    '#account-content'); //lấy account-content từ dữ liệu trả về
 
                     callback(accountContentElement); //gọi hàm callback và truyền vào accountContentElement
                 }
             };
+            xhttp.open("GET", url, true);
             xhttp.send();
         }
 
         const sidebarItem = document.querySelectorAll('.sidebar-item[rel=page]');
         sidebarItem.forEach(item => {
-            item.pathname == window.location.pathname ? item.classList.add('active') : null; //nếu pathname của item == pathname của window thì thêm class active
+            item.pathname == window.location.pathname ? item.classList.add('active') :
+            null; //nếu pathname của item == pathname của window thì thêm class active
             item.addEventListener("click", (e) => {
                 e.preventDefault();
                 sidebarItem.forEach(item => {
@@ -70,11 +72,12 @@
 
                 const url = item.getAttribute('href');
 
-                ajax(url, (data) => { //data là accountContentElement
+                useAjax(url, (data) => { //data là accountContentElement
                     document.querySelector('#account-content').innerHTML = data.innerHTML;
                 });
 
-                if (url != window.location.href) { //nếu url khác với url hiện tại thì pushState để thay đổi url 
+                if (url != window.location
+                    .href) { //nếu url khác với url hiện tại thì pushState để thay đổi url 
                     window.history.pushState({}, "", url); //thay đổi url
                 }
                 return false;

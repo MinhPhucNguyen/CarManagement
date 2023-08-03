@@ -8,7 +8,7 @@ class UserController extends Controller
 {
     public function showAccount()
     {
-        return view('client.account.account_layout');
+        return view('client.account.account_content');
     }
 
     public function showMyFavs()
