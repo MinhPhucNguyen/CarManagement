@@ -35,24 +35,3 @@
         </div>
     </div>
 @endsection
-
-@push('app-scripts')
-    <script>
-        const showPasswordIcons = document.querySelectorAll('.fa-eye-slash');
-        showPasswordIcons.forEach(item => {
-            item.addEventListener('click', () => {
-                const input = item
-                .previousElementSibling; //previousElementSibling trả lại thẻ input phía trước của item
-                if (input.type === "password") {
-                    input.type = "text";
-                    item.classList.remove('fa-eye-slash');
-                    item.classList.add('fa-eye');
-                } else {
-                    input.type = "password";
-                    item.classList.remove('fa-eye');
-                    item.classList.add('fa-eye-slash');
-                }
-            })
-        });
-    </script>
-@endpush

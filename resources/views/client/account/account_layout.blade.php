@@ -51,7 +51,6 @@
         const div = sidebarSticky.previousElementSibling;
         window.addEventListener('scroll', () => {
             const windowHeight = window.scrollY;
-            console.log(windowHeight);
             if (windowHeight > 200 && windowHeight < 992) {
                 sidebarSticky.style.position = 'fixed';
                 sidebarSticky.style.top = '18px';

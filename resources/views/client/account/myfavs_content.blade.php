@@ -12,16 +12,3 @@
     </div>
 @endsection
 
-@push('app-scripts')
-    <script>
-        const tabModeItems = document.querySelectorAll('.tab-mode-item');
-        tabModeItems.forEach(item => {
-            item.addEventListener('click', () => {
-                tabModeItems.forEach(item => {
-                    item.classList.remove('active');
-                })
-                item.classList.add('active');
-            })
-        });
-    </script>
-@endpush
