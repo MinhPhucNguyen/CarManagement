@@ -50,8 +50,7 @@
 
                     const tempContainer = document.createElement('div');
                     tempContainer.innerHTML = response;
-                    const accountContentElement = tempContainer.querySelector(
-                        '#account-content'); //lấy account-content từ dữ liệu trả về
+                    const accountContentElement = tempContainer.querySelector('#account-content'); //lấy account-content từ dữ liệu trả về
 
                     callback(accountContentElement); //gọi hàm callback và truyền vào accountContentElement
                 }
@@ -61,12 +60,9 @@
 
         const sidebarItem = document.querySelectorAll('.sidebar-item[rel=page]');
         sidebarItem.forEach(item => {
-
             item.pathname == window.location.pathname ? item.classList.add('active') : null; //nếu pathname của item == pathname của window thì thêm class active
-
             item.addEventListener("click", (e) => {
                 e.preventDefault();
-
                 sidebarItem.forEach(item => {
                     item.classList.remove('active');
                 })
