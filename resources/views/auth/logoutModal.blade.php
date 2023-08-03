@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-dark">
-                <h6 class="text-dark text-center">Bạn có chắc chắn muốn đăng xuất?</h6>
+                <h6 class="text-dark text-center fs-5">Bạn có chắc chắn muốn đăng xuất?</h6>
             </div>
             <div class="modal-footer w-100">
                 <form action="{{ route('logout') }}" method="POST" class="w-100">

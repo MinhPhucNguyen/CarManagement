@@ -16,8 +16,8 @@ class UserController extends Controller
         return view('client.account.myfavs_content');
     }
 
-    public function showResetPw()
+    public function showChangePw()
     {
-        return view('client.account.resetpw_content');
+        return view('client.account.changepw_content');
     }
 }

@@ -99,5 +99,5 @@ Route::get('car/{carSlug}/{id}', [App\Http\Controllers\CarController::class, 'sh
 Route::controller(UserController::class)->group(function () {
     Route::get('account', 'showAccount')->name('client.account');
     Route::get('myfavs', 'showMyFavs')->name('client.myfavs');
-    Route::get('resetpw', 'showResetPw')->name('client.resetpw');
+    Route::get('changepw', 'showChangePw')->name('client.changepw');
 });
