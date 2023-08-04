@@ -140,7 +140,7 @@
             </div>
             <div class="info-license">
                 <div class="lincense-title">Hình ảnh</div>
-                <div class="license-upload w-100 h-100">    
+                <div class="license-upload w-100 h-100">
                     <i class="fa-solid fa-cloud-arrow-up fs-2"></i>
                     <p>Chọn hình ảnh giấy phép</p>
                 </div>
@@ -154,4 +154,10 @@
 @endsection
 
 @push('app-scripts')
+    <script>
+        const avatarContainer = document.querySelector('.avatar-container');
+        avatarContainer.addEventListener('click', () => {
+            console.log(avatarContainer);
+        })
+    </script>
 @endpush
