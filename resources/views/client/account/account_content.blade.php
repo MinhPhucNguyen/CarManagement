@@ -1,11 +1,14 @@
 @extends('client.account.account_layout')
 
 @section('account-content')
+    @include('layouts.includes.modal.modal_avatar_upload')
+    @include('layouts.includes.modal.modal_edit')
+
     <div class="content-item user-profile">
         <div class="content-title d-flex align-items-center justify-content-between">
             <div class="title-edit d-flex align-items-center">
                 <h5 class="fs-3 mb-0">Thông tin tài khoản</h5>
-                <div class="wrap-edit-btn">
+                <div class="wrap-edit-btn edit-account-btn">
                     <i class="fa-solid fa-pen"></i>
                 </div>
             </div>
@@ -23,7 +26,7 @@
                     </div>
                 </div>
                 <h6 class="user-fullname">
-                    Minh Phúc Nguyễn
+                    FULLNAME
                 </h6>
                 <div class="note">Tham gia: <span>18/05/2023</span></div>
                 <div class="trip-class">
@@ -56,7 +59,7 @@
                         </div>
                         <div class="name">
                             Thêm số điện thoại
-                            <div class="wrap-edit-btn">
+                            <div class="wrap-edit-btn add-phone-number-btn">
                                 <i class="fa-solid fa-pen"></i>
                             </div>
                         </div>
@@ -71,7 +74,7 @@
                         </div>
                         <div class="name">
                             minhphuc.nguyen1609@gmail.com
-                            <div class="wrap-edit-btn">
+                            <div class="wrap-edit-btn update-email-btn">
                                 <i class="fa-solid fa-pen"></i>
                             </div>
                         </div>
@@ -156,8 +159,30 @@
 @push('app-scripts')
     <script>
         const avatarContainer = document.querySelector('.avatar-container');
+        const editAccountBtn = document.querySelector('.edit-account-btn');
+        const addPhoneNumberBtn = document.querySelector('.add-phone-number-btn');
+        const updateEmailBtn = document.querySelector('.update-email-btn');
+
         avatarContainer.addEventListener('click', () => {
-            console.log(avatarContainer);
+            const avatarModal = new bootstrap.Modal(document.querySelector('#avatarModal'));
+            avatarModal.show();
+        })
+
+        editAccountBtn.addEventListener('click', () => {
+            const editAccountModal = new bootstrap.Modal(document.querySelector('#editAccountModal'));
+            editAccountModal.show();
+        })
+
+        addPhoneNumberBtn.addEventListener('click', () => {
+            const addPhoneNumberModal = new bootstrap.Modal(document.querySelector(
+                '#addPhoneNumberModal'));
+            addPhoneNumberModal.show();
+        })
+
+        updateEmailBtn.addEventListener('click', () => {
+            const updateEmailModal = new bootstrap.Modal(document.querySelector(
+                '#updateEmailModal'));
+            updateEmailModal.show();
         })
     </script>
 @endpush

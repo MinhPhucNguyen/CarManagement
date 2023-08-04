@@ -29,7 +29,7 @@
                                     <p>{{ __('Admin') }}</p>
                                 </a>
                             @endif
-                            <a href="/logout" class="sidebar-item text-danger" data-bs-toggle="modal"
+                            <a href="{{ route('logout') }}" class="sidebar-item text-danger" data-bs-toggle="modal"
                                 data-bs-target="#logoutModal">
                                 <i class="fa-solid fa-arrow-left"></i>
                                 <p>{{ __('Đăng xuất') }}</p>
@@ -70,7 +70,6 @@
     <script>
         const ajax = (url, callback) => {
             const xhttp = new XMLHttpRequest();
-            xhttp.open("GET", url, true);
             xhttp.onload = () => {
                 if (xhttp.readyState === XMLHttpRequest.DONE && xhttp.status === 200) {
                     const response = xhttp.responseText; //dữ liệu trả vè từ ajax
@@ -83,8 +82,50 @@
                     callback(accountContentElement); //gọi hàm callback và truyền vào accountContentElement
                 }
             };
+            xhttp.open("GET", url, true);
             xhttp.send();
         }
+
+        const accountScripts = () => {
+            const avatarContainer = document.querySelector(".avatar-container");
+            const chooseAvatarBtn = document.querySelector(".choose-avatar-btn");
+            const inputUploadAvatar = document.querySelector("input[name=ip_upload_avatar]");
+            const editAccountBtn = document.querySelector('.edit-account-btn');
+            const addPhoneNumberBtn = document.querySelector('.add-phone-number-btn');
+            const updateEmailBtn = document.querySelector('.update-email-btn');
+
+            if (avatarContainer) {
+                avatarContainer.addEventListener("click", () => {
+                    const avatarModal = new bootstrap.Modal(
+                        document.querySelector("#avatarModal")
+                    );
+                    avatarModal.show();
+                });
+
+                chooseAvatarBtn.addEventListener("click", () => {
+                    inputUploadAvatar.click();
+                });
+            }
+
+            if (editAccountBtn) {
+                editAccountBtn.addEventListener('click', () => {
+                    const editAccountModal = new bootstrap.Modal(document.querySelector('#editAccountModal'));
+                    editAccountModal.show();
+                })
+
+                addPhoneNumberBtn.addEventListener('click', () => {
+                    const addPhoneNumberModal = new bootstrap.Modal(document.querySelector(
+                        '#addPhoneNumberModal'));
+                    addPhoneNumberModal.show();
+                })
+
+                updateEmailBtn.addEventListener('click', () => {
+                    const updateEmailModal = new bootstrap.Modal(document.querySelector(
+                        '#updateEmailModal'));
+                    updateEmailModal.show();
+                })
+            }
+        };
 
         const myFavsScripts = () => {
             //EVENTS FOR MYFAVS CONTENT
@@ -142,6 +183,7 @@
                 ajax(url, (data) => { //data là accountContentElement
                     document.querySelector('#account-content').innerHTML = data.innerHTML;
 
+                    accountScripts();
                     myFavsScripts();
                     changePWScripts();
                 });

@@ -453,3 +453,17 @@ input::-ms-clear {
     background-color: #26b480;
     transition: all 0.2s ease-in-out;
 }
+
+/* AVATAR MODAL */
+/* .btn:hover {
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+} */
+
+/* EDIT ACCOUNT MODAL */
+.custom-input .wrap-input .select_gender {
+    background: transparent;
+    color: black;
+    font-size: 18px;
+    outline: none;
+    cursor: pointer;
+}
