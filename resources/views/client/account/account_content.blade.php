@@ -146,13 +146,17 @@
                 <div class="license-upload w-100 h-100">
                     <i class="fa-solid fa-cloud-arrow-up fs-2"></i>
                     <p>Chọn hình ảnh giấy phép</p>
+                    <input type="file" class="d-none" name="license-upload-input">
                 </div>
             </div>
         </div>
     </div>
     <div class="content-item">
         <h5 class="fs-3">Giới thiệu bạn mới</h5>
-        <p class="mb-0">Tìm hiểu chi tiết chương trình</p>
+        <p class="mb-0 d-flex align-items-center">Tìm hiểu chi tiết chương trình <i
+                class="fa-solid fa-question border border-1 d-flex align-items-center justify-content-center"
+                style="font-size: 10px; border-radius: 50%; margin-left:5px; width: 20px; height: 20px; cursor: pointer;"></i>
+        </p>
     </div>
 @endsection
 
@@ -162,6 +166,8 @@
         const editAccountBtn = document.querySelector('.edit-account-btn');
         const addPhoneNumberBtn = document.querySelector('.add-phone-number-btn');
         const updateEmailBtn = document.querySelector('.update-email-btn');
+        const licenseUpload = document.querySelector('.license-upload');
+        const licenseUploadInput = document.querySelector('input[name=license-upload-input]');
 
         avatarContainer.addEventListener('click', () => {
             const avatarModal = new bootstrap.Modal(document.querySelector('#avatarModal'));
@@ -183,6 +189,10 @@
             const updateEmailModal = new bootstrap.Modal(document.querySelector(
                 '#updateEmailModal'));
             updateEmailModal.show();
+        })
+
+        licenseUpload.addEventListener('click', () => {
+            licenseUploadInput.click();
         })
     </script>
 @endpush

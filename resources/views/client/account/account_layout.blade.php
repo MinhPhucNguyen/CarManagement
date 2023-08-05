@@ -93,6 +93,7 @@
             const editAccountBtn = document.querySelector('.edit-account-btn');
             const addPhoneNumberBtn = document.querySelector('.add-phone-number-btn');
             const updateEmailBtn = document.querySelector('.update-email-btn');
+            const licenseUploadInput = document.querySelector('input[name=license-upload-input]');
 
             if (avatarContainer) {
                 avatarContainer.addEventListener("click", () => {
@@ -123,6 +124,10 @@
                     const updateEmailModal = new bootstrap.Modal(document.querySelector(
                         '#updateEmailModal'));
                     updateEmailModal.show();
+                })
+
+                licenseUpload.addEventListener('click', () => {
+                    licenseUploadInput.click();
                 })
             }
         };
