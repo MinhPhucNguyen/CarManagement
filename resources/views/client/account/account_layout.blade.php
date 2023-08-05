@@ -23,12 +23,18 @@
                                 <i class="fa-solid fa-lock"></i>
                                 <p>Đổi mật khẩu</p>
                             </a>
-                            @if (Auth::user()->role_as == '1')
-                                <a class="sidebar-item " href="admin/dashboard" class=" sidebar-item">
-                                    <i class="fa-solid fa-user-gear"></i>
-                                    <p>{{ __('Admin') }}</p>
-                                </a>
-                            @endif
+                            @auth
+                                @if (Auth::user()->role_as == '1' && Auth::user()->role_as != null)
+                                    <a class="sidebar-item " href="admin/dashboard" class=" sidebar-item">
+                                        <i class="fa-solid fa-user-gear"></i>
+                                        <p>{{ __('Admin') }}</p>
+                                    </a>
+                                @endif
+                            @else
+                                <div class="text-center">
+                                    <h1 class="fs-1 text-uppercase">Hết phiên làm việc</h1>
+                                </div>
+                            @endauth
                             <a href="{{ route('logout') }}" class="sidebar-item text-danger" data-bs-toggle="modal"
                                 data-bs-target="#logoutModal">
                                 <i class="fa-solid fa-arrow-left"></i>
