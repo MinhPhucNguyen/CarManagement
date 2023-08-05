@@ -30,10 +30,6 @@
                                         <p>{{ __('Admin') }}</p>
                                     </a>
                                 @endif
-                            @else
-                                <div class="text-center">
-                                    <h1 class="fs-1 text-uppercase">Hết phiên làm việc</h1>
-                                </div>
                             @endauth
                             <a href="{{ route('logout') }}" class="sidebar-item text-danger" data-bs-toggle="modal"
                                 data-bs-target="#logoutModal">

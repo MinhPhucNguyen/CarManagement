@@ -8,34 +8,13 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\SignUpRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Traits\HttpResponses;
+use Exception;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth:api', ['except' => ['login', 'register']]);
-    // }
-
-    // public function login(LoginRequest $request)
-    // {
-    //     if (!$token = Auth::attempt($request->only('username', 'password'))) {
-    //         return response()->json(['error' => 'Unauthorized'], 401);
-    //     }
-
-    //     $redirectUrl = Auth::user()->role_as == '1' ? '/admin/dashboard' : '/home';
-    //     return $this->createNewToken($token)->withRedirect($redirectUrl);
-    // }
-
-    // protected function createNewToken($token)
-    // {
-    //     return response()->json([
-    //         'access_token' => $token,
-    //         'token_type' => 'bearer',
-    //         'expires_in' => auth()->factory()->getTTL() * 60,
-    //         'user' => Auth::user(),
-    //     ]);
-    // }
+    use HttpResponses;
 
     public function __construct()
     {
@@ -62,14 +41,34 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        if (Auth::attempt($request->only('username', 'password'))) {
-            if (Auth::user()->role_as == '1') {
-                return redirect('/admin/dashboard')->with('success', 'Welcome to Dashboard Page');
-            } else if (Auth::user()->role_as == '0') {
-                return redirect('/home')->with('success', 'Welcome to Home Page');
+        try {
+            $request->validated($request->all());
+            $credentials = $request->only('username', 'password');
+
+            if (!Auth::attempt($credentials)) {
+                return $this->error('', 'Tên đăng nhập hoặc mật khẩu không chính xác!', 401);
             }
-        } else {
-            return redirect('/login')->withErrors(['login_error' => 'Username or password is incorrect!'])->withInput();
+
+            $user = User::where('username', $request->username)->first();
+
+            if (!Hash::check($request->password, $user->password)) {
+                return $this->error('', 'Tên đăng nhập hoặc mật khẩu không chính xác!', 401);
+            }
+            if ($user->role_as == '1') {
+                return $this->success([
+                    'user' => $user,
+                    'token' => $user->createToken('API Token of ' . $user->username)->plainTextToken,
+                ], 'Đăng nhập thành công');
+            }
+            else if($user->role_as == '0'){
+                return $this->success([
+                    'user' => $user,
+                    'token' => $user->createToken('API Token of' . $user->username)->plainTextToken,
+                ], 'Đănh nhâp thành công');
+            }
+
+        } catch (Exception $error) {
+            return $this->error('', 'Có lỗi xảy ra', 500);
         }
     }
 
