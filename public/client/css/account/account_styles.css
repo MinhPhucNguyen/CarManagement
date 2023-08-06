@@ -1,7 +1,7 @@
-input::-ms-reveal,
+/* input::-ms-reveal,
 input::-ms-clear {
     display: none;
-}
+} */
 
 .account-section {
     background-color: #f6f6f6;

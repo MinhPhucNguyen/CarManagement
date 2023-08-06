@@ -5,34 +5,22 @@
         <div class="card">
             <div class="card-header text-center bg-white">
                 <h3 class="text-dark">
-                    {{ __('Đăng ký') }}
+                    Đăng ký
                 </h3>
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ route('register') }}" class="row">
+                <form method="POST" class="row" id="register-form">
                     @csrf
                     <div class="form-group col-md-6 mb-2">
-                        <label for="firstname" class="col-form-label text-md-right fw-bold">{{ __('Tên') }}</label>
+                        <label for="firstname" class="col-form-label text-md-right fw-bold">Tên</label>
                         <div class="col-md-12 ">
-                            <input type="text" class="form-control  @error('username') is-invalid @enderror"
-                                name="firstname" value="{{ !$errors->has('firstname') ? old('firstname') : '' }}">
-                            @error('firstname')
-                                <span class="invalid-feedback" role="alert">
-                                    <small>{{ $message }}</small>
-                                </span>
-                            @enderror
+                            <input type="text" class="form-control " name="firstname" id="firstname">
                         </div>
                     </div>
                     <div class="form-group col-md-6 mb-2">
-                        <label for="lastname" class=" col-form-label text-md-right fw-bold">{{ __('Họ') }}</label>
+                        <label for="lastname" class=" col-form-label text-md-right fw-bold">Họ</label>
                         <div class="col-md-12 ">
-                            <input type="text" class="form-control  @error('lastname') is-invalid @enderror"
-                                name="lastname" value="{{ !$errors->has('lastname') ? old('lastname') : '' }}">
-                            @error('lastname')
-                                <span class="invalid-feedback" role="alert">
-                                    <small>{{ $message }}</small>
-                                </span>
-                            @enderror
+                            <input type="text" class="form-control" name="lastname" id="lastname">
                         </div>
                     </div>
                     <div class="form-group mb-2">
@@ -54,102 +42,55 @@
                         </div>
                     </div>
                     <div class="form-group mb-2">
-                        <label for="username"
-                            class="col-md-3 col-form-label text-md-right fw-bold">{{ __('Tên đăng nhập') }}</label>
-
+                        <label for="username" class="col-md-3 col-form-label text-md-right fw-bold">Tên đăng nhập</label>
                         <div class="col-md-12 ">
-                            <input id="username" type="text"
-                                class="form-control  @error('username') is-invalid @enderror" name="username"
-                                value="{{ !$errors->has('username') ? old('username') : '' }}">
-                            @error('username')
-                                <span class="invalid-feedback" role="alert">
-                                    <small>{{ $message }}</small>
-                                </span>
-                            @enderror
+                            <input id="username" type="text" class="form-control  " name="username">
                         </div>
                     </div>
 
                     <div class="form-group  mb-2">
-                        <label for="email"
-                            class="col-md-3 col-form-label text-md-right fw-bold">{{ __('Email') }}</label>
+                        <label for="email" class="col-md-3 col-form-label text-md-right fw-bold">Email</label>
                         <div class="col-md-12 ">
-                            <input id="email" type="text" class="form-control  @error('email') is-invalid @enderror"
-                                name="email" value="{{ !$errors->has('email') ? old('email') : '' }}">
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <small>{{ $message }}</small>
-                                </span>
-                            @enderror
+                            <input id="email" type="text" class="form-control" name="email">
                         </div>
                     </div>
 
                     <div class="form-group  mb-2">
-                        <label for="phone"
-                            class="col-md-3 col-form-label text-md-right fw-bold">{{ __('Số điện thoại') }}</label>
+                        <label for="phone" class="col-md-3 col-form-label text-md-right fw-bold">Số điện thoại</label>
 
                         <div class="col-md-12 ">
-                            <input id="phone" type="text" class="form-control  @error('phone') is-invalid @enderror"
-                                name="phone" value="{{ !$errors->has('phone') ? old('phone') : '' }}">
-                            @error('phone')
-                                <span class="invalid-feedback" role="alert">
-                                    <small>{{ $message }}</small>
-                                </span>
-                            @enderror
+                            <input id="phone" type="text" class="form-control" name="phone">
                         </div>
                     </div>
                     <div class="form-group  mb-2">
-                        <label for="address"
-                            class="col-md-3 col-form-label text-md-right fw-bold">{{ __('Địa chỉ') }}</label>
+                        <label for="address" class="col-md-3 col-form-label text-md-right fw-bold">Địa chỉ</label>
 
                         <div class="col-md-12 ">
-                            <input id="address" type="text"
-                                class="form-control  @error('address') is-invalid @enderror" name="address"
-                                value="{{ !$errors->has('address') ? old('address') : '' }}">
-                            @error('address')
-                                <span class="invalid-feedback" role="alert">
-                                    <small>{{ $message }}</small>
-                                </span>
-                            @enderror
+                            <input id="address" type="text" class="form-control  " name="address">
                         </div>
                     </div>
 
                     <div class="form-group  mb-2">
-                        <label for="password"
-                            class="col-md-3 col-form-label text-md-right fw-bold">{{ __('Mật khẩu') }}</label>
+                        <label for="password" class="col-md-3 col-form-label text-md-right fw-bold">Mật khẩu</label>
 
                         <div class="col-md-12">
-                            <input id="password" type="password"
-                                class="form-control  @error('password') is-invalid @enderror" name="password"
-                                value="{{ !$errors->has('password') ? old('password') : '' }}">
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <small>{{ $message }}</small>
-                                </span>
-                            @enderror
+                            <input id="password" type="password" class="form-control" name="password">
                         </div>
                     </div>
 
                     <div class="form-group  mb-4">
-                        <label for="confirm_password"
-                            class="col-md-6 col-form-label text-md-right fw-bold">{{ __('Nhập lại mật khẩu') }}</label>
+                        <label for="confirm_password" class="col-md-6 col-form-label text-md-right fw-bold">Nhập lại mật
+                            khẩu</label>
 
                         <div class="col-md-12">
-                            <input id="confirm_password" type="password"
-                                class="form-control  @error('confirm_password') is-invalid @enderror"
-                                name="confirm_password" 
-                                value="{{ !$errors->has('confirm_password') ? old('confirm_password') : '' }}">
-                            @error('confirm_password')
-                                <span class="invalid-feedback" role="alert">
-                                    <small>{{ $message }}</small>
-                                </span>
-                            @enderror
+                            <input id="confirm_password" type="password" class="form-control " name="confirm_password">
                         </div>
                     </div>
                     <div class="form-group  mb-2">
                         <div class="col-md-12">
                             <button type="submit" class="btn btn-lg fw-bold text-white mb-4 signup-btn"
                                 name="register-btn">
-                                {{ __('Đăng ký') }}
+                                Đăng ký
                             </button>
                         </div>
                     </div>
@@ -160,3 +101,61 @@
         </div>
     </div>
 @endsection
+
+@push('app-scripts')
+    <script>
+        const register = async (userData) => {
+            try {
+                const response = await fetch("http://127.0.0.1:8000/api/register", {
+                    method: "POST",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                    },
+                    body: JSON.stringify(userData),
+                });
+
+                if (response.status === 200) {
+                    const data = await response.json();
+                    return data;
+                } else {
+                    return response.json()
+                        .then((error) => {
+                            throw new Error(error.message);
+                        });
+                }
+            } catch (error) {
+                alert(error);
+            }
+        };
+
+        const registerForm = document.querySelector('#register-form');
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const userData = {
+                firstname: document.querySelector('#firstname').value,
+                lastname: document.querySelector('#lastname').value,
+                gender: document.querySelector('input[name="gender"]:checked').value,
+                username: document.querySelector('#username').value,
+                email: document.querySelector('#email').value,
+                phone: document.querySelector('#phone').value,
+                address: document.querySelector('#address').value,
+                password: document.querySelector('#password').value,
+                confirm_password: document.querySelector('#confirm_password').value,
+            };
+
+            await register(userData)
+                .then((response) => {
+                    window.location.href = "/login";
+                })
+                .catch((error) => {
+                    if (error.message !== "Đăng ký thành công" && error.message !==
+                        "*Please enter your firstname (and 8 more errors)") {
+                        alert(error.message);
+                    }
+                });
+        });
+    </script>
+@endpush

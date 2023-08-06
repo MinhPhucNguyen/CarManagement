@@ -49,7 +49,8 @@
     @if (strpos(Request::url(), 'login') === false && strpos(Request::url(), 'register') === false)
         @include('layouts.includes.client.footer')
     @endif
-
+    
+    {{-- <script src="{{ asset('assets/js/auth.js') }}"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery-3.6.4.min.js') }}"></script>

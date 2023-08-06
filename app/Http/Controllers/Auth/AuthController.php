@@ -46,27 +46,19 @@ class AuthController extends Controller
             $credentials = $request->only('username', 'password');
 
             if (!Auth::attempt($credentials)) {
-                return $this->error('', 'Tên đăng nhập hoặc mật khẩu không chính xác!', 401);
+                return $this->error('', '*Tên đăng nhập hoặc mật khẩu không chính xác!', 401);
             }
 
             $user = User::where('username', $request->username)->first();
 
             if (!Hash::check($request->password, $user->password)) {
-                return $this->error('', 'Tên đăng nhập hoặc mật khẩu không chính xác!', 401);
-            }
-            if ($user->role_as == '1') {
-                return $this->success([
-                    'user' => $user,
-                    'token' => $user->createToken('API Token of ' . $user->username)->plainTextToken,
-                ], 'Đăng nhập thành công');
-            }
-            else if($user->role_as == '0'){
-                return $this->success([
-                    'user' => $user,
-                    'token' => $user->createToken('API Token of' . $user->username)->plainTextToken,
-                ], 'Đănh nhâp thành công');
+                return $this->error('', '*Tên đăng nhập hoặc mật khẩu không chính xác!', 401);
             }
 
+            return $this->success([
+                'user' => $user,
+                'token' => $user->createToken('API Token of ' . $user->username)->plainTextToken,
+            ], 'Đăng nhập thành công');
         } catch (Exception $error) {
             return $this->error('', 'Có lỗi xảy ra', 500);
         }
@@ -74,21 +66,29 @@ class AuthController extends Controller
 
     public function register(SignUpRequest $request)
     {
-        $validatedData = $request->validated();
+        try {
+            $validatedData = $request->validated();
 
-        $user = User::create([
-            'firstname' => $validatedData['firstname'],
-            'lastname' => $validatedData['lastname'],
-            'username' => $validatedData['username'],
-            'gender' => $validatedData['gender'],
-            'email' => $validatedData['email'],
-            'phone' => $validatedData['phone'],
-            'address' => $validatedData['address'],
-            'password' => Hash::make(trim($validatedData['password'])),
-            'confirm_password' => $validatedData['confirm_password'] == $validatedData['password'] ? 'true' : 'false',
-        ]);
+            $user = User::create([
+                'firstname' => $validatedData['firstname'],
+                'lastname' => $validatedData['lastname'],
+                'username' => $validatedData['username'],
+                'gender' => $validatedData['gender'],
+                'email' => $validatedData['email'],
+                'phone' => $validatedData['phone'],
+                'address' => $validatedData['address'],
+                'password' => Hash::make(trim($validatedData['password'])),
+                'confirm_password' => $validatedData['confirm_password'] == $validatedData['password'] ? 'true' : 'false',
+            ]);
 
-        return redirect('/login')->with('success', 'Register successfully! Please login');
+            return $this->success([
+                'user' => $user,
+                'token' => $user->createToken('API Token of ' . $user->username)->plainTextToken,
+            ], "Đăng ký thành công");
+
+        } catch (Exception $error) {
+            return $this->error('', 'Có lỗi xảy ra', 500);
+        }
     }
 
     public function logout()

@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
 
@@ -32,13 +32,13 @@ Route::prefix('v1')->group(function () {
 
 Route::prefix('v2')->group(function () {
 
-    Route::middleware('auth:sanctum')->group(function () {
-        
-        // Car API
-        Route::get('cars', [V2_CarController::class, 'index']);
-        Route::get('cars/randomCars', [V2_CarController::class, 'getRandomCars']);
-        Route::get('car/detail', [V2_CarController::class, 'show']);
-    });
+    // Car API
+    Route::get('cars', [V2_CarController::class, 'index']);
+    Route::get('cars/randomCars', [V2_CarController::class, 'getRandomCars']);
+    Route::get('car/detail', [V2_CarController::class, 'show']);
+
+    // Route::middleware('auth:sanctum')->group(function () {
+    // });
 
     // Blog API
     Route::get('blogs', [V2_BlogController::class, 'index']);
