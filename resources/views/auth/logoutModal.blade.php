@@ -10,12 +10,10 @@
                 <h6 class="text-dark text-center fs-5 mt-4">Bạn có chắc chắn muốn đăng xuất?</h6>
             </div>
             <div class="modal-footer w-100">
-                <form action="{{ route('logout') }}" method="POST" class="w-100">
+                <form id="logout-form" method="POST" class="w-100">
                     @csrf
-                    {{-- <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Đóng</button> --}}
-                    <button type="submit" class="btn btn-danger fw-bold w-100 p-3 border-0 fs-5"
-                        style="background: #1cc88a">Đăng
-                        xuất</button>
+                    <button type="submit" id="logout-btn" class="btn btn-danger fw-bold w-100 p-3 border-0 fs-5"
+                        style="background: #1cc88a">Đăng xuất</button>
                 </form>
             </div>
         </div>

@@ -18,13 +18,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
 
 Route::prefix('v1')->group(function () {
     Route::apiResource('cars', CarController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
@@ -36,9 +39,6 @@ Route::prefix('v2')->group(function () {
     Route::get('cars', [V2_CarController::class, 'index']);
     Route::get('cars/randomCars', [V2_CarController::class, 'getRandomCars']);
     Route::get('car/detail', [V2_CarController::class, 'show']);
-
-    // Route::middleware('auth:sanctum')->group(function () {
-    // });
 
     // Blog API
     Route::get('blogs', [V2_BlogController::class, 'index']);

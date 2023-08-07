@@ -16,13 +16,13 @@ class AuthController extends Controller
 {
     use HttpResponses;
 
-    public function __construct()
-    {
-        // $this->middleware('auth');
-        $this->middleware('guest')->except('logout');
-        // Middleware ('guest') đảm bảo rằng yêu cầu đăng ký chỉ được xử lý nếu người dùng không đăng nhập,
-        // nếu đã đăng nhập thì chuyển tối trang chủ
-    }
+    // public function __construct()
+    // {
+    //     // $this->middleware('auth');
+    //     $this->middleware('guest')->except('logout');
+    //     // Middleware ('guest') đảm bảo rằng yêu cầu đăng ký chỉ được xử lý nếu người dùng không đăng nhập,
+    //     // nếu đã đăng nhập thì chuyển tối trang chủ
+    // }
 
     public function username()
     {
@@ -85,7 +85,6 @@ class AuthController extends Controller
                 'user' => $user,
                 'token' => $user->createToken('API Token of ' . $user->username)->plainTextToken,
             ], "Đăng ký thành công");
-
         } catch (Exception $error) {
             return $this->error('', 'Có lỗi xảy ra', 500);
         }
@@ -93,7 +92,10 @@ class AuthController extends Controller
 
     public function logout()
     {
-        Auth::logout();
-        return redirect('/login');
+        Auth::user()->tokens()->delete();
+
+        return $this->success([
+            'message' => "Đăng xuất thành công",
+        ]);
     }
 }

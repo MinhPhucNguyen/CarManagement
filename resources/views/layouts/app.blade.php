@@ -49,12 +49,32 @@
     @if (strpos(Request::url(), 'login') === false && strpos(Request::url(), 'register') === false)
         @include('layouts.includes.client.footer')
     @endif
-    
+
     {{-- <script src="{{ asset('assets/js/auth.js') }}"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery-3.6.4.min.js') }}"></script>
     @stack('app-scripts')
+    <script>
+        const updateNavbar = () => {
+            const authenticationContainer = document.querySelector('.authentication-container');
+            const loginBtn = document.querySelector('#login-btn');
+            const registerBtn = document.querySelector('#register-btn');
+            const userInfo = document.querySelector('#user-info');
+
+            if (localStorage.getItem('auth_token')) {
+                authenticationContainer.innerHTML =
+                    `<a id="user-info"
+                    class="text-dark fw-bold text-decoration-none"
+                    href="{{ url('/account') }}">
+                    <img class="" src="" alt="avatar" width="40px"
+                        height="40px" style="border-radius: 50%; margin-right: 15px">
+                    Admin
+                </a>`
+            }
+        }
+        updateNavbar();
+    </script>
 </body>
 
 </html>

@@ -680,3 +680,14 @@ body {
 .car-item {
     text-decoration: none;
 }
+
+
+.authentication-container{
+    display: flex;
+}
+
+#user-info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

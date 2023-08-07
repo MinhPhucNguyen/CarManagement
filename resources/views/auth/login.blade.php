@@ -11,7 +11,7 @@
                     @csrf
                     <div class="form-group row mb-2">
                         <label for="username" class="col-md-3 col-form-label text-md-right fw-bold w-100">Tên
-                            đăngnhập</label>
+                            đăng nhập</label>
                         <div class="col-md-12 ">
                             <input id="username" type="text" class="form-control" name="username"
                                 placeholder="Nhập tên đăng nhập" autofocus>
@@ -46,7 +46,7 @@
 @endsection
 
 @push('app-scripts')
-    <script>
+    <script> 
         const login = async (username, password) => {
             try {
                 const response = await fetch("http://127.0.0.1:8000/api/login", {
@@ -62,17 +62,17 @@
                     }),
                 });
 
-                if (response.status === 200) {
+                if (response.ok) {
                     const data = await response.json();
                     return data;
                 } else {
                     return response.json()
-                        .then((error) => {
-                            throw new Error(error.message);
+                        .then((data) => {
+                            throw new Error(data.message);
                         });
                 }
             } catch (error) {
-                alert(error)
+                throw new Error("Có lỗi xảy ra");
             }
         }
 
@@ -86,6 +86,8 @@
                 .then((response) => {
                     const user = response.data.user;
                     const userRole_as = user.role_as;
+                    updateNavbar(user);
+                    localStorage.setItem("auth_token", response.data.token);
                     if (userRole_as === 1) {
                         window.location.href = "admin/dashboard";
                     } else if (userRole_as === 0) {
@@ -96,8 +98,6 @@
                     if (error.message !== "Đăng nhập thành công" && error.message !==
                         "*Vui lòng nhập tên đăng nhập (and 1 more error)") {
                         alert(error.message);
-                    } else if (error.message === "*Vui lòng nhập tên đăng nhập (and 1 more error)") {
-                        alert("*Vui lòng nhập thông tin đăng nhập");
                     }
                 });
         });

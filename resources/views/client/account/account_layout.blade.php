@@ -25,14 +25,13 @@
                             </a>
                             @auth
                                 @if (Auth::user()->role_as == '1' && Auth::user()->role_as != null)
-                                    <a class="sidebar-item " href="admin/dashboard" class=" sidebar-item">
+                                    <a class="sidebar-item " href="admin/dashboard">
                                         <i class="fa-solid fa-user-gear"></i>
                                         <p>{{ __('Admin') }}</p>
                                     </a>
                                 @endif
                             @endauth
-                            <a href="{{ route('logout') }}" class="sidebar-item text-danger" data-bs-toggle="modal"
-                                data-bs-target="#logoutModal">
+                            <a class="sidebar-item text-danger" data-bs-toggle="modal" data-bs-target="#logoutModal">
                                 <i class="fa-solid fa-arrow-left"></i>
                                 <p>{{ __('Đăng xuất') }}</p>
                             </a>
@@ -48,6 +47,32 @@
 @endsection
 
 @push('app-scripts')
+    <script>
+        const logoutForm = document.querySelector('#logout-form');
+        logoutForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                const response = await fetch("http://127.0.0.1:8000/api/logout", {
+                    method: "POST",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute(
+                            'content'),
+                        "Authorization": "Bearer " + localStorage.getItem("auth_token"),
+                    },
+                });
+
+                if (response.ok) {
+                    localStorage.removeItem('auth_token');
+                    window.location.href = "/login";
+                }
+            } catch (error) {
+                alert(error);
+            }
+        })
+    </script>
+
     <script>
         const sidebarSticky = document.querySelector('.sidebar-sticky');
         const div = sidebarSticky.previousElementSibling;

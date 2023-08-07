@@ -33,11 +33,6 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 //Register
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 
-//Logout
-// Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-
 //Admin Route
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');

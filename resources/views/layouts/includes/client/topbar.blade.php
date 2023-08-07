@@ -24,26 +24,17 @@
                     <span class="nav-item-border "></span>
                 </li>
                 <!-- Authentication Links -->
-                @guest
-                    @if (Route::has('login'))
-                        <li class="nav-item m-0">
-                            <a class="nav-link text-dark btn" href="{{ route('login') }}">{{ __('Đăng nhập') }}</a>
-                        </li>
-                    @endif
 
-                    @if (Route::has('register'))
-                        <li class="nav-item border border-dark rounded-3">
-                            <a class="nav-link  text-dark btn" href="{{ route('register') }}">{{ __('Đăng ký') }}</a>
-                        </li>
-                    @endif
-                @else
-                    <a class="text-dark fw-bold text-decoration-none d-flex align-items-center justify-content-center"
-                        href="{{ url('/account') }}">
-                        <img class="" src="{{ asset('uploads/avatar/' . Auth::user()->avatar) }}" alt="avatar"
-                            width="40px" height="40px" style="border-radius: 50%; margin-right: 15px">
-                        {{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}
-                    </a>
-                @endguest
+
+                <div class="authentication-container">
+                    <li id="login-btn" class="nav-item m-0">
+                        <a class="nav-link text-dark btn" href="{{ route('login') }}">Đăng nhập</a>
+                    </li>
+
+                    <li id="register-btn" class="nav-item border border-dark rounded-3">
+                        <a class="nav-link  text-dark btn" href="{{ route('register') }}">Đăng ký</a>
+                    </li>
+                </div>
             </ul>
         </div>
     </div>

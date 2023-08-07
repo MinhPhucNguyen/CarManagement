@@ -7,7 +7,7 @@ trait HttpResponses
     protected function success($data, $message = null, $status = 200)
     {
         return response()->json([
-            'status' => $status,
+            'status' => "Request thành công",
             'message' => $message,
             'data' => $data,
         ], $status);
@@ -16,7 +16,7 @@ trait HttpResponses
     protected function error($data, $message = null, $status)
     {
         return response()->json([
-            'status' => $status,
+            'status' => "Request thất bại",
             'message' => $message,
             'data' => $data,
         ], $status);
