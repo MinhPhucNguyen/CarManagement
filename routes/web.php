@@ -27,9 +27,9 @@ use App\Http\Controllers\UserController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+//Sử dụng guest để nếu người dùng đã đăng nhập thì không thể truy cập vào trang login và register
 // Login
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-
 //Register
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 
