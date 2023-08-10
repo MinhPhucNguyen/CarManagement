@@ -47,7 +47,7 @@
 @endsection
 
 @push('app-scripts')
-    <script>
+    {{-- <script>
         const logoutForm = document.querySelector('#logout-form');
         logoutForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -71,7 +71,7 @@
                 alert(error);
             }
         })
-    </script>
+    </script> --}}
 
     <script>
         const sidebarSticky = document.querySelector('.sidebar-sticky');
