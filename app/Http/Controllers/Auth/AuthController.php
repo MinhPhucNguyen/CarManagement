@@ -92,10 +92,13 @@ class AuthController extends Controller
 
     public function logout()
     {
-        Auth::user()->tokens()->delete();
+        // Auth::user()->tokens()->delete();
 
-        return $this->success([
-            'message' => "Đăng xuất thành công",
-        ]);
+        // return $this->success([
+        //     'message' => "Đăng xuất thành công",
+        // ]);
+
+        Auth::logout();
+        return redirect()->route('login');
     }
 }
