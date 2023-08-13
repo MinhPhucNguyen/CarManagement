@@ -13,6 +13,11 @@ class CarImage extends Model
     protected $primaryKey = 'image_id';
     protected $fillable = ['image_id', 'car_id', 'image'];
 
+    public function cars()
+    {
+        return $this->belongsTo(Car::class, 'car_id');
+    }
+
     public function getImageAttribute($value)
     {
         return Storage::url('carimages/' . $value);

@@ -32,7 +32,7 @@ class CarResource extends JsonResource
             'price' => $this->price,
             'status' => $this->status,
             'delivery_enable' => $this->delivery_enable,
-            'carImages' => CarImage::get()->map(fn ($image) => [
+            'carImages' => $this->carImages->map(fn ($image) => [
                 'imageId' => $image->image_id,
                 'imagePath' => $image->image,
                 'carId' => $image->car_id,
