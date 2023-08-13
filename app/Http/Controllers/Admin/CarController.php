@@ -10,6 +10,7 @@ use App\Models\CarImage;
 use App\Models\Feature;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
 {
@@ -87,19 +88,17 @@ class CarController extends Controller
         }
 
         if ($request->hasFile('image')) {
-            $uploadsPath = 'uploads/products/';
             // dd($request->file('image')); return an array 
 
             $i = 1;
             foreach ($request->file('image') as $imageFile) {
                 $extension = $imageFile->getClientOriginalExtension(); //get extension of image (jpg, png,...)
                 $fileName = time() . $i++ . '.' . $extension; //set new file name for image
-                $imageFile->move($uploadsPath, $fileName); //move $fileName is new filename for $imageFile to $uploadsPath
-                $finalImagePathName = $uploadsPath . $fileName;
+                $imageFile->storeAs('carimages', $fileName);
 
                 $car->carImages()->create([
                     'car_id' => $car->car_id,
-                    'image' => $finalImagePathName,
+                    'image' => $fileName,
                 ]);
             }
         }
@@ -164,19 +163,17 @@ class CarController extends Controller
             }
 
             if ($request->hasFile('image')) {
-                $uploadsPath = 'uploads/products/';
                 // dd($request->file('image')); return an array 
 
                 $i = 1;
                 foreach ($request->file('image') as $imageFile) {
                     $extension = $imageFile->getClientOriginalExtension(); //get extension of image (jpg, png,...)
                     $fileName = time() . $i++ . '.' . $extension; //set new file name for image
-                    $imageFile->move($uploadsPath, $fileName); //move $fileName is new filename for $imageFile to $uploadsPath
-                    $finalImagePathName = $uploadsPath . $fileName;
+                    $imageFile->storeAs('carimages', $fileName);
 
                     $car->carImages()->create([
                         'car_id' => $car->car_id,
-                        'image' => $finalImagePathName,
+                        'image' => $fileName,
                     ]);
                 }
             }
@@ -189,8 +186,10 @@ class CarController extends Controller
     public function destroyImage(int $car_image_id)
     {
         $carImage = CarImage::find($car_image_id);
-        if (File::exists($carImage->image)) {
-            File::delete($carImage->image);
+        $imageUrl = parse_url($carImage->image, PHP_URL_PATH); //Chuyển đổi URL thành đường dẫn tương đối trong đĩa lưu trữ 
+        $imagePath = ltrim($imageUrl, '/storage'); //bỏ đi storage/ trong đường dẫn
+        if (Storage::disk('public')->exists($imagePath)) {
+            Storage::disk('public')->delete($imagePath);
         }
         $carImage->delete();
         return redirect()->back()->with('message', 'Car Image Deleted successfully');
@@ -201,8 +200,10 @@ class CarController extends Controller
         $car = Car::find($car_id);
         if ($car->carImages()) {
             foreach ($car->carImages as $image) {
-                if (File::exists($image->image)) {
-                    File::delete($image->image);
+                $imageUrl = parse_url($image->image, PHP_URL_PATH); //Chuyển đổi URL thành đường dẫn tương đối trong đĩa lưu trữ
+                $imagePath = ltrim($imageUrl, '/storage'); //bỏ đi storage/ trong đường dẫn
+                if (Storage::disk('public')->exists($imagePath)) {
+                    Storage::disk('public')->delete($imagePath);
                 }
             }
         }

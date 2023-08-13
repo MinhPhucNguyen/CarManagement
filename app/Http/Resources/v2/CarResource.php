@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\v2;
 
+use App\Models\CarImage;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -31,7 +32,7 @@ class CarResource extends JsonResource
             'price' => $this->price,
             'status' => $this->status,
             'delivery_enable' => $this->delivery_enable,
-            'carImages' => $this->carImages->map(fn ($image) => [
+            'carImages' => CarImage::get()->map(fn ($image) => [
                 'imageId' => $image->image_id,
                 'imagePath' => $image->image,
                 'carId' => $image->car_id,
