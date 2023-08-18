@@ -200,8 +200,6 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
 @endsection
 
 @push('app-scripts')

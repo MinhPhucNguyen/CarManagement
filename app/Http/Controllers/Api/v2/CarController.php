@@ -22,7 +22,7 @@ class CarController extends Controller
 
     public function show(Request $request)
     {
-        $carId = $request->input('car_id');
+        $carId = $request->input('car_id'); //thêm input car_id vào đương dẫn url để lấy id
         $car = Car::findOrFail($carId);
         return new CarResource($car);
     }

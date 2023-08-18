@@ -38,10 +38,9 @@ class BlogController extends Controller
         $blog->status = $request->status ? '1' : '0';
 
         if ($request->hasFile('image')) {
-            $uploadPath = 'uploads/blogs/blog-image-header/';
             $extension = $request->file('image')->getClientOriginalExtension();
             $fileName = time() . '.' . $extension;
-            Image::make($request->file('image'))->save(public_path($uploadPath . $fileName));
+            Image::make($request->file('image'))->storeAs('blogimages', $fileName);
             $blog->image = $fileName;
         }
 
