@@ -75,7 +75,7 @@
 
         //Hiện ảnh đã thêm vào csdl
         @if ($blog->image)
-            image.src = '{{ asset('uploads/blogs/blog-image-header/' . $blog->image) }}';
+            image.src = '{{ asset($blog->image) }}';
             blogImageContainer.appendChild(image);
             blogImageIcon.style.display = 'none';
         @endif

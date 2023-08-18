@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -40,7 +41,7 @@ class BlogController extends Controller
         if ($request->hasFile('image')) {
             $extension = $request->file('image')->getClientOriginalExtension();
             $fileName = time() . '.' . $extension;
-            Image::make($request->file('image'))->storeAs('blogimages', $fileName);
+            $request->file('image')->storeAs('blogimages', $fileName);
             $blog->image = $fileName;
         }
 
@@ -71,15 +72,16 @@ class BlogController extends Controller
         $blog->status = $request->status ? '1' : '0';
 
         if ($request->hasFile('image')) {
-            $uploadPath = 'uploads/blogs/blog-image-header/';
-
-            if ($blog->image && File::exists(public_path($uploadPath . $blog->image))) {
-                File::delete(public_path($uploadPath . $blog->image));
+            if ($blog->image) {
+                $imageUrl = parse_url($blog->image, PHP_URL_PATH);
+                $imagePath = ltrim($imageUrl, '/storage'); //bỏ đi storage/ trong đường dẫn
+                if (Storage::disk('public')->exists($imagePath)) {
+                    Storage::disk('public')->delete($imagePath);
+                }
             }
-
             $extension = $request->file('image')->getClientOriginalExtension();
             $fileName = time() . '.' . $extension;
-            Image::make($request->file('image'))->save(public_path($uploadPath . $fileName));
+            ($request->file('image')->storeAs('blogimages', $fileName));
             $blog->image = $fileName;
         }
 
@@ -90,10 +92,13 @@ class BlogController extends Controller
 
     public function destroy(int $id)
     {
-        $uploadPath = 'uploads/blogs/blog-image-header/';
         $blog = Blog::find($id);
-        if ($blog->image && File::exists(public_path($uploadPath . $blog->image))) {
-            File::delete(public_path($uploadPath . $blog->image));
+        if ($blog->image) {
+            $imageUrl = parse_url($blog->image, PHP_URL_PATH);
+            $imagePath = ltrim($imageUrl, '/storage'); //bỏ đi storage/ trong đường dẫn
+            if (Storage::disk('public')->exists($imagePath)) {
+                Storage::disk('public')->delete($imagePath);
+            }
         }
         $blog->delete();
         return redirect(route('blogs.index'))->with('message', 'Delete Blog Successfully');
