@@ -28,9 +28,13 @@ class MailController extends Controller
 
         try {
             Mail::to($emailData['emailTo'])->send(new SendEmails($emailData));
-            return redirect()->back()->with('message', 'Mail has been sent to ' . $emailData['emailTo']);
+            return response()->json([
+                'message' => 'Mail has been sent to ' . $emailData['emailTo'] . ' successfully!',
+            ], 200);
         } catch (Exception $e) {
-            return redirect()->back()->with('error', "Send Email Failed");
+            return response()->json([
+                'message' => 'Send Email Failed',
+            ], 404);
         }
     }
 }

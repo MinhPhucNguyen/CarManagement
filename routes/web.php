@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ImageUploadController;
 use App\Http\Controllers\Auth\AuthController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Mail\MailController;
@@ -27,7 +28,6 @@ use App\Http\Controllers\UserController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-//Sử dụng guest để nếu người dùng đã đăng nhập thì không thể truy cập vào trang login và register
 // Login
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 //Register
@@ -36,7 +36,8 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 //Admin Route
-Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function () {
+// ->middleware(['auth', 'isAdmin'])
+Route::prefix('admin')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('search', [SearchController::class, 'search'])->name('admin.search');
     Route::post('send_email', [MailController::class, 'sendEmail'])->name('sendEmail');

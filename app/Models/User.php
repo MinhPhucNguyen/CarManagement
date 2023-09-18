@@ -3,15 +3,18 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Support\Facades\Storage;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use  HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -24,6 +27,7 @@ class User extends Authenticatable
         'lastname',
         'username',
         'gender',
+        'birth',
         'email',
         'phone',
         'address',
@@ -31,9 +35,11 @@ class User extends Authenticatable
         'confirm_password',
         'avatar',
         'status',
-        'role_as'
+        'role_as',
+        'email_verified_at'
     ];
 
+    protected $appends = ['fullname']; //appends là thuộc tính của eloquent giúp thêm thuộc tính mới vào model nhưng không cần thêm vào trong database
     protected $primaryKey = 'id';
 
     /**
@@ -54,5 +60,33 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'role_as' => 'int',
     ];
+
+    public function avatar(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => asset(Storage::url('avatar/' . $value) ?? 'avatar/default.jpg'),
+        );
+    }
+
+    public function getFullnameAttribute()
+    {
+        return $this->lastname . ' ' . $this->firstname;
+    }
+
+
+    public function scopeSearch($query, $search)
+    {
+        $search = "%$search%";
+
+        $query->where(function ($query) use ($search) {
+            $query->where('username', 'like', $search)
+                ->orWhere('firstname', 'like', $search)
+                ->orWhere('lastname', 'like', $search)
+                ->orWhere('email', 'like', $search)
+                ->orWhere('phone', 'like', $search)
+                ->orWhere('address', 'like', $search);
+        });
+    }
 }

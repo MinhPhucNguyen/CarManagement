@@ -5,7 +5,7 @@ namespace App\Http\Resources\v2;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class CarCollection extends ResourceCollection
+class UserCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -16,7 +16,7 @@ class CarCollection extends ResourceCollection
     {
         // return parent::toArray($request);
         return [
-            'cars' => $this->collection,
+            'users' => $this->collection,
         ];
     }
 }

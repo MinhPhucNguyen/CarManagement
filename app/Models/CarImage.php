@@ -20,6 +20,6 @@ class CarImage extends Model
 
     public function getImageAttribute($value)
     {
-        return Storage::url('carimages/' . $value);
+        return Storage::url('carimages/' . $this->car_id . '/' . $value);
     }
 }

@@ -64,7 +64,6 @@ class SignUpRequest extends FormRequest
             ],
             'password' => [
                 'required',
-                'string',
                 'min:8',
                 'regex:/^(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/',
                 'unique:users,password',
@@ -72,7 +71,7 @@ class SignUpRequest extends FormRequest
             'confirm_password' => [
                 'required',
                 'string',
-                'same:password'
+                'same:password',
             ]
         ];
     }
@@ -88,28 +87,28 @@ class SignUpRequest extends FormRequest
             'lastname.regex' => '*Họ không được chứa ký tự đặc biệt',
             'username.required' => '*Vui lòng nhập tên đăng nhập',
             'username.string' => '*Tên đăng nhập phải là ký tự',
-            'username.unique' => '*Tên đăng nhập đã tồn tại. Vui lòng nhập tên đăng nhập khác',
+            'username.unique' => '*Tên đăng nhập đã tồn tại.',
             'username.min' => '*Tên đăng nhập phải có độ dài ít nhất là 5 ký tự và dài nhất là 30 ký tự',
             'username.max' => '*Tên đăng nhập phải có độ dài ít nhất là 5 ký tự và dài nhất là 30 ký tự',
             'username.regex' => '*Tên đăng nhập phải bắt đầu bằng ký tự, không bắt đầu bằng số và chứa ký tự đặc biệt',
             'gender.required' => '*Vui lòng chọn giới tính',
             'email.required' => '*Vui lòng nhập email',
-            'email.email' => '*Email không hợp lệ. Vui lòng nhập lại',
-            'email.unique' => '*Email đã tồn tại. Vui lòng nhập email mới',
+            'email.email' => '*Email không hợp lệ.',
+            'email.unique' => '*Email đã tồn tại. ',
             'phone.required' => '*Vui lòng nhập số điện thoại',
             'phone.regex' => '*Số điện thoại nhập vào không hợp lệ',
             'phone.min' => '*Số điện thoại phải có độ dài là 10 ký tự',
             'phone.max' => '*Số điện thoại phải có độ dài là 10 ký tự',
-            'phone.unique' => '*Số điện thoại đã tồn tại. Vui lòng nhập số điện thoại khác',
+            'phone.unique' => '*Số điện thoại đã tồn tại.',
             'address.required' => '*Vui lòng nhập địa chỉ',
             'address.regex' => '*Địa chỉ không hợp lệ',
             'address.max' => '*Địa chỉ không hợp lệ',
             'password.required' => '*Vui lòng nhập mật khẩu',
             'password.min' => '*Mật khẩu phải có độ dài ít nhất là 8 ký tự',
-            'password.unique' => '*Mật khẩu đã tồn tại. Vui lòng nhập mật khẩu khác',
+            'password.unique' => '*Mật khẩu đã tồn tại.',
             'password.regex' => '*Mật khẩu phải có ít nhất 1 ký tự hoa, 1 ký tự thường, 1 số và 1 ký tự đặc biệt',
             'confirm_password.required' => '*Vui lòng nhập lại mật khẩu',
-            'confirm_password.same:password' => '*Mật khẩu nhập lại không khớp',
+            'confirm_password.same' => '*Mật khẩu nhập lại không khớp',
         ];
     }
 }

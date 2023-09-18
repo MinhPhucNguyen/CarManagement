@@ -22,18 +22,18 @@ class CarFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'car_name' => 'required',
-            'price' => 'required',
+            'car_name' => 'required|string',
+            'price' => 'required|numeric',
             'description' => 'nullable',
-            'seats' => 'required',
+            'seats' => 'required|numeric',
             'fuel' => 'required',
-            'year' => 'required',
-            'speed' => 'required',
+            'year' => 'required|numeric',
+            'speed' => 'required|numeric',
             'fuel_consumption' => 'required',
             'transmission' => 'required',
             'location' => 'required',
-            'trip' => 'required',
-            'brand' => 'required',
+            'number_of_trip' => 'required|numeric',
+            'brand_id' => 'required',
             'image' => 'nullable',
         ];
     }

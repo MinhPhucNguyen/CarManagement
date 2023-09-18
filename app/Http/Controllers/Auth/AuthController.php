@@ -3,102 +3,71 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\SignUpRequest;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Traits\HttpResponses;
-use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    use HttpResponses;
-
-    // public function __construct()
-    // {
-    //     // $this->middleware('auth');
-    //     $this->middleware('guest')->except('logout');
-    //     // Middleware ('guest') đảm bảo rằng yêu cầu đăng ký chỉ được xử lý nếu người dùng không đăng nhập,
-    //     // nếu đã đăng nhập thì chuyển tối trang chủ
-    // }
-
-    public function username()
-    {
-        return 'username';
-    }
-
-    public function showLoginForm()
-    {
-        return view('auth.login');
-    }
-
-    public function showRegisterForm()
-    {
-        return view('auth.signup');
-    }
-
     public function login(LoginRequest $request)
     {
-        try {
-            $request->validated($request->all());
-            $credentials = $request->only('username', 'password');
-
-            if (!Auth::attempt($credentials)) {
-                return $this->error('', '*Tên đăng nhập hoặc mật khẩu không chính xác!', 401);
-            }
-
-            $user = User::where('username', $request->username)->first();
-
-            if (!Hash::check($request->password, $user->password)) {
-                return $this->error('', '*Tên đăng nhập hoặc mật khẩu không chính xác!', 401);
-            }
-
-            return $this->success([
-                'user' => $user,
-                'token' => $user->createToken('API Token of ' . $user->username)->plainTextToken,
-            ], 'Đăng nhập thành công');
-        } catch (Exception $error) {
-            return $this->error('', 'Có lỗi xảy ra', 500);
+        $credentials = $request->only('email', 'password');
+        if (!Auth::attempt($credentials)) {
+            return response()->json([
+                'errors' => 'Email hoặc mật khẩu không chính xác'
+            ], 401);
         }
+
+        $user = User::where('email', $request->email)->first();
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return response()->json([
+                'errors' => 'Email hoặc mật khẩu không chính xác'
+            ], 401);
+        }
+
+        return response()->json([
+            'message' => 'Đăng nhập thành công',
+            'user' => $user,
+            'token' => $user->createToken('API Token of ' . $user->username)->accessToken,
+        ], 200);
+    }
+
+    public function getUserInfo(Request $request)
+    {
+        return response()->json($request->user('api'));
     }
 
     public function register(SignUpRequest $request)
     {
-        try {
-            $validatedData = $request->validated();
+        $validatedData = $request->validated();
+        $user = User::create([
+            'firstname' => $validatedData['firstname'],
+            'lastname' => $validatedData['lastname'],
+            'username' => $validatedData['username'],
+            'gender' => $validatedData['gender'],
+            'email' => $validatedData['email'],
+            'phone' => $validatedData['phone'],
+            'address' => $validatedData['address'],
+            'password' => Hash::make(trim($validatedData['password'])),
+            'confirm_password' => $validatedData['confirm_password'] == $validatedData['password'] ? 'true' : 'false',
+        ]);
 
-            $user = User::create([
-                'firstname' => $validatedData['firstname'],
-                'lastname' => $validatedData['lastname'],
-                'username' => $validatedData['username'],
-                'gender' => $validatedData['gender'],
-                'email' => $validatedData['email'],
-                'phone' => $validatedData['phone'],
-                'address' => $validatedData['address'],
-                'password' => Hash::make(trim($validatedData['password'])),
-                'confirm_password' => $validatedData['confirm_password'] == $validatedData['password'] ? 'true' : 'false',
-            ]);
-
-            return $this->success([
-                'user' => $user,
-                'token' => $user->createToken('API Token of ' . $user->username)->plainTextToken,
-            ], "Đăng ký thành công");
-        } catch (Exception $error) {
-            return $this->error('', 'Có lỗi xảy ra', 500);
-        }
+        return response()->json([
+            'success' => 'Đăng ký thành công',
+            'user' => $user,
+            'token' => $user->createToken('API Token of ' . $user->username)->accessToken,
+        ], 200);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        // Auth::user()->tokens()->delete();
-
-        // return $this->success([
-        //     'message' => "Đăng xuất thành công",
-        // ]);
-
-        Auth::logout();
-        return redirect()->route('login');
+        $token = $request->user('api')->token();
+        $token->revoke();
+        return response()->json([
+            'message' => 'Đăng xuất thành công'
+        ], 200);
     }
 }
