@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Notifications\VerifyNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -75,7 +76,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->lastname . ' ' . $this->firstname;
     }
 
-
     public function scopeSearch($query, $search)
     {
         $search = "%$search%";
@@ -88,5 +88,10 @@ class User extends Authenticatable implements MustVerifyEmail
                 ->orWhere('phone', 'like', $search)
                 ->orWhere('address', 'like', $search);
         });
+    }
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new VerifyNotification());
     }
 }

@@ -28,7 +28,7 @@ class VerificationController extends Controller
         //hasVerifiedEmail() là một phương thức của trait MustVerifyEmail để kiểm tra xem user đã xác thực email hay chưa
         if ($user->hasVerifiedEmail()) {
             return response()->json([
-                'message' => 'Email đã được xác thực'
+                'message' => 'Email đã được xác thực.'
             ], 200);
         }
 
@@ -39,7 +39,24 @@ class VerificationController extends Controller
         }
 
         return response()->json([
-            'message' => 'Xác thực email thành công'
+            'message' => 'Xác thực email thành công.'
         ], 200);
+    }
+
+    public function resendVerificationEmail(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'Không tìm thấy email.'
+            ], 404);
+        }
+
+        $user->sendEmailVerificationNotification();
+
+        return response()->json([
+            'message' => 'Vui lòng kiểm tra email của bạn.'
+        ]);
     }
 }
