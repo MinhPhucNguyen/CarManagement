@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\v2\FeatureController;
 use App\Http\Controllers\Api\v2\ProfileController;
 use App\Http\Controllers\Api\v2\UploadImageController;
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Mail\MailController;
 use Illuminate\Support\Facades\Route;
@@ -94,7 +94,7 @@ Route::prefix('v2')->group(function () {
     /**
      * TODO: RESET PASSWORD
      */
-    Route::patch('users/{id}/reset-password', [ResetPasswordController::class, 'resetPassword']);
+    Route::post('users/{id}/change-password', [ChangePasswordController::class, 'changePassword']);
 
     /**
      * TODO: API for Public Page

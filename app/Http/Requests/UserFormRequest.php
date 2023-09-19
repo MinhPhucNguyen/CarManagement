@@ -70,10 +70,6 @@ class UserFormRequest extends FormRequest
             ];
             $rules['password'] = 'sometimes|nullable|string|min:8|regex:/^(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/|unique:users';
             $rules['confirm_password'] = 'sometimes|nullable|string|same:password';
-            $rules['old_pw'] =
-                'sometimes|nullable|string|min:8|regex:/^(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/|unique:users';
-            $rules['new_pw'] = 'sometimes|nullable|string|min:8|regex:/^(?=.{10,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$/|unique:users';
-            $rules['confirm_new_pw'] = 'sometimes|nullable|string|same:new_pw';
         } else {
             $rules['email'] =  [
                 'required',

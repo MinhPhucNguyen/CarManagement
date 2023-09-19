@@ -44,12 +44,11 @@ class VerifyNotification extends Notification
         //$url sau khi được tạo ra sẽ có dạng http://localhost:3000/verify-email?id=1&hash=123456789
 
         return (new MailMessage)
-            ->greeting('Xác thực thông tin!')
-            ->line('Xin chào ' . $notifiable->email . '!')
-            ->line('Chào mừng bạn đến với ứng dụng thuê xe của chúng tôi. Vui lòng bấm nút bên dưới để xác thực địa chỉ email của bạn.')
-            ->action('XÁC THỰC EMAIL', $url)
-            ->line('Cảm ơn,')
-            ->line('CARENTAL');
+            ->subject('CARENTAL - Xác thực thông tin!')
+            ->view('emails.email_verify', [
+                'url' => $url,
+                'email' => $notifiable->email,
+            ]);
     }
 
     /**
