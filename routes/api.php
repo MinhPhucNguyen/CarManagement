@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\v2\ProfileController;
 use App\Http\Controllers\Api\v2\UploadImageController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Mail\MailController;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +37,9 @@ Route::controller(AuthController::class)->group(function () {
     Route::middleware('auth:api')->post('/logout', 'logout');
 });
 Route::get('/email-verification', [VerificationController::class, 'verify'])->name('verification.verify');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail']);
+Route::post('/reset-password', [ResetPasswordController::class, 'reset']);
+
 
 Route::prefix('v2')->group(function () {
 
@@ -87,17 +92,17 @@ Route::prefix('v2')->group(function () {
     });
 
     /**
-     *  TODO: Change Avatar
+     *  TODO: CHANGE AVATAR
      */
     Route::post('users/{id}/update-avatar', [ProfileController::class, 'updateAvatar']);
 
     /**
      * TODO: RESET PASSWORD
      */
-    Route::post('users/{id}/change-password', [ChangePasswordController::class, 'changePassword']);
+    Route::middleware('auth:api')->post('users/{id}/change-password', [ChangePasswordController::class, 'changePassword']);
 
     /**
-     * TODO: API for Public Page
+     * TODO: API FOR PUBLIC PAGE
      */
     //User API
     Route::controller(UserController::class)->group(function () {

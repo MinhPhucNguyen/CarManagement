@@ -17,14 +17,14 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
         if (!Auth::attempt($credentials)) {
             return response()->json([
-                'errors' => 'Email hoặc mật khẩu không chính xác'
+                'errors' => 'Email hoặc mật khẩu không chính xác.'
             ], 401);
         }
 
         $user = User::where('email', $request->email)->first();
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
-                'errors' => 'Email hoặc mật khẩu không chính xác'
+                'errors' => 'Email hoặc mật khẩu không chính xác.'
             ], 401);
         }
 
@@ -56,7 +56,7 @@ class AuthController extends Controller
         ]);
 
         return response()->json([
-            'success' => 'Đăng ký thành công',
+            'success' => 'Đăng ký thành công.',
             'user' => $user,
             'token' => $user->createToken('API Token of ' . $user->username)->accessToken,
         ], 200);
@@ -67,7 +67,7 @@ class AuthController extends Controller
         $token = $request->user('api')->token();
         $token->revoke();
         return response()->json([
-            'message' => 'Đăng xuất thành công'
+            'message' => 'Đăng xuất thành công.'
         ], 200);
     }
 }
