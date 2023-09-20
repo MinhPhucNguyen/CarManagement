@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\SocialAuthController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Mail\MailController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,8 @@ Route::controller(AuthController::class)->group(function () {
 Route::get('/email-verification', [VerificationController::class, 'verify'])->name('verification.verify');
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail']);
 Route::post('/reset-password', [ResetPasswordController::class, 'reset']);
+Route::get('/authorize/{provider}/redirect', [SocialAuthController::class, 'redirectToProvider']);
+Route::get('/authorize/{provider}/callback', [SocialAuthController::class, 'handleProviderCallback']);
 
 
 Route::prefix('v2')->group(function () {

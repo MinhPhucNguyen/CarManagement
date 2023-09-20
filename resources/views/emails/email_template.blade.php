@@ -27,7 +27,7 @@
             </div>
 
             <div style="margin-top: 30px">
-                <p style="margin-bottom: 10px; font-size: 14px">Nếu bạn có bất
+                <p style="margin-bottom: 10px; font-size: 14px">*Nếu bạn có bất
                     kỳ vấn đề nào, vui lòng gửi email cho chúng tôi </p>
 
             </div>

@@ -14,16 +14,14 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             // $table->string('firstname')->after('id');
             // $table->string('lastname')->after('firstname');
-            // $table->tinyInteger('gender')->comment('0=female, 1=male')->after('username');
+            $table->tinyInteger('gender')->comment('0=female, 1=male')->after('username')->nullable();
             // $table->tinyText('phone')->after('email');
             // $table->string('address')->after('phone');
             // $table->string('avatar')->default('default.jpg');
             // $table->tinyInteger('status')->default('0')->comment('0=inactive, 1=active');
             // $table->tinyInteger('role_as')->default('0')->comment('0=user, 1=admin');
             // $table->string('confirm_password')->after('password');
-
-            $table->string('fullname')->after('lastname')->default('');
-            $table->date('birth')->after('gender')->nullable();
+            // $table->date('birth')->after('gender')->nullable();
         });
     }
 
@@ -34,13 +32,12 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             // $table->dropColumn('address');
+            $table->dropColumn('gender');
             // $table->dropColumn('avatar');
             // $table->dropColumn('status');
             // $table->dropColumn('role_as');
             // $table->dropColumn('confirm_password');
-
-             $table->dropColumn('fullname');
-            $table->dropColumn('birth');
+            // $table->dropColumn('birth');
         });
     }
 };

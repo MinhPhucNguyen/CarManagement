@@ -36,7 +36,7 @@
                         href="{{ $resetPasswordUrl }}">ĐẶT LẠI MẬT KHẨU</a>
                 </div>
                 <p>
-                    Nếu bạn không yêu cầu đặt lại mật khẩu mới, vui lòng bỏ qua email này.
+                    *Nếu bạn không yêu cầu đặt lại mật khẩu mới, vui lòng bỏ qua email này.
                 </p>
                 <p style="margin-top: 30px; font-weight: bold">
                     Cảm ơn!,
