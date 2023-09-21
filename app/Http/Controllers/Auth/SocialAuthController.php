@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\SocialAccount;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -23,28 +24,30 @@ class SocialAuthController extends Controller
     {
         //stateless() có tác dụng để không lưu lại trạng thái của user sau khi đăng nhập xong
         $user = Socialite::driver($provider)->stateless()->user();
-
         if (!$user) {
             dd('Failed');
         }
 
         //Lấy ra user trong database nếu có email trùng với email của social trả về
         //Nếu không có thì tạo mới user trong database
-        $appUser = User::where('email', $user->getEmail())->first();
+        $appUser = User::where('email', $user->email)->first();
 
         if (!$appUser) {
             //Nếu không có người dùng thì tạo mới và thêm provider;
             $appUser
                 = User::create([
-                    'firstname' => $user->user['given_name'],
-                    'lastname' => $user->user['family_name'],
+                    'firstname' => isset($user->user['given_name']) ? $user->user['given_name'] : '',
+                    'lastname' => isset($user->user['family_name']) ? $user->user['family_name'] : '',
                     'username' => $user->user['name'],
-                    'gender' => isset($user->user['gender']) ? $user->user['gender'] : null,
+                    'gender' => isset($user->user['gender']) ? $user->user['gender'] : 1,
                     'email' =>  $user->user['email'],
                     'phone' => '',
                     'address' => '',
+                    'email_verified_at' => isset($user->user['email_verified']) ? now() : null,
+                    'avatar' => 'default.jpg',
                     'password' => Str::random(8),
                     'confirm_password' => 'true',
+                    'role_as' => 0,
                 ]);
 
             $socialAccount = SocialAccount::create([

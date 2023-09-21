@@ -129,11 +129,15 @@ class UserController extends Controller
 
         if ($request->fullname) {
             $fullname = explode(' ', trim($request->fullname));
-            $firstname = array_pop($fullname);
-            $lastname = implode(' ', $fullname);
-
-            $user->firstname = trim($firstname);
-            $user->lastname = trim($lastname);
+            if ($fullname >= 2) {
+                $lastname = $fullname[0];
+                $firstname = implode(' ', array_slice($fullname, 1));
+            } else {
+                $lastname = $fullname[0];
+                $firstname = '';
+            }
+            $user->lastname = $lastname;
+            $user->firstname = $firstname;
         }
         $user->gender = $request->gender;
         $user->birth = date('Y-m-d', strtotime($request->birth));
