@@ -12,7 +12,8 @@ use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\SocialAuthController;
-use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\Auth\EmailVerificationController;
+use App\Http\Controllers\Auth\PhoneVerificationController;
 use App\Http\Controllers\Mail\MailController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +38,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/register', 'register');
     Route::middleware('auth:api')->post('/logout', 'logout');
 });
-Route::get('/email-verification', [VerificationController::class, 'verify'])->name('verification.verify');
+Route::get('/email-verification', [EmailVerificationController::class, 'verify'])->name('verification.verify');
+Route::get('/phone-verification', [PhoneVerificationController::class, 'verify']);
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail']);
 Route::post('/reset-password', [ResetPasswordController::class, 'reset']);
 Route::get('/authorize/{provider}/redirect', [SocialAuthController::class, 'redirectToProvider']);
@@ -113,6 +115,7 @@ Route::prefix('v2')->group(function () {
         Route::patch('users/{id}/update-phone', 'updatePhoneNumber');
         Route::patch('users/{id}/update-email', 'updateEmail');
         Route::post('users/{id}/send-email-verification', 'sendVerificationEmail');
+        Route::post('users/{id}/send-phone-verification', 'sendVerificationPhone');
     });
 
     // Car API

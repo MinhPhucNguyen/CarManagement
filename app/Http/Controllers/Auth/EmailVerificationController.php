@@ -8,7 +8,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
 
-class VerificationController extends Controller
+class EmailVerificationController extends Controller
 {
     public function verify(Request $request)
     {

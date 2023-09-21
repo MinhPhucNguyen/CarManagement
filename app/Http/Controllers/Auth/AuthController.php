@@ -49,7 +49,7 @@ class AuthController extends Controller
             'username' => $validatedData['username'],
             'gender' => $validatedData['gender'],
             'email' => $validatedData['email'],
-            'phone' => $validatedData['phone'],
+            'phone' => '+84' . substr($validatedData['phone'], 1),
             'address' => $validatedData['address'],
             'password' => Hash::make(trim($validatedData['password'])),
             'confirm_password' => $validatedData['confirm_password'] == $validatedData['password'] ? 'true' : 'false',

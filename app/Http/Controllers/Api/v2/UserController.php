@@ -8,6 +8,7 @@ use App\Http\Resources\v2\UserCollection;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Twilio\Rest\Client;
 
 class UserController extends Controller
 {
@@ -64,7 +65,7 @@ class UserController extends Controller
         $user->username = $validatedInputs['username'];
         $user->gender = $request->gender;
         $user->email = $validatedInputs['email'];
-        $user->phone = $validatedInputs['phone'];
+        $user->phone = '+84' . substr($validatedInputs['phone'], 1);
         $user->address = $validatedInputs['address'];
         $user->password = Hash::make(trim($validatedInputs['password']));
         $user->confirm_password = $validatedInputs['password'] == $validatedInputs['confirm_password'] ? 'true' : 'false';
@@ -91,7 +92,7 @@ class UserController extends Controller
             $user->gender = $request->gender;
             $user->username = $validatedData['username'];
             $user->email = $validatedData['email'];
-            $user->phone = $validatedData['phone'];
+            $user->phone = '+84' . substr($validatedData['phone'], 1);
             $user->address = $validatedData['address'];
             $user->role_as = $validatedData['role_as'];
 
@@ -158,7 +159,8 @@ class UserController extends Controller
             ], 404);
         }
 
-        $user->phone = $validatedData['phone'];
+        $user->phone = '+84' . substr($validatedData['phone'], 1);
+        $user->phone_is_verified = 0;
         $user->update();
         return response()->json([
             'message' => "Cập nhật số điện thoại thành công."
@@ -188,7 +190,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         if (!$user) {
             return response()->json([
-                'message' => "User not found"
+                'message' => "Không tìm thấy người dùng"
             ], 404);
         }
 
@@ -196,6 +198,30 @@ class UserController extends Controller
 
         return response()->json([
             'message' => "Gửi email xác thực thành công."
+        ], 200);
+    }
+
+    public function sendVerificationPhone(int $id)
+    {
+        $user = User::findOrFail($id);
+        if (!$user) {
+            return response()->json([
+                'message' => "Không tìm thấy người dùng"
+            ], 404);
+        }
+
+        $token = env('TWILIO_AUTH_TOKEN');
+        $twilio_sid = env('TWILIO_SID');
+        $twilio_verify_sid = env('TWILIO_VERIFY_SID');
+        //Client() có 2 tham số là sid và token với sid là username và token là password để đăng nhập vào tài khoản Twilio
+        $twilio = new Client($twilio_sid, $token);
+        //create() tạo một verification với 2 tham số là số điện thoại và channel là sms
+        $twilio->verify->v2->services($twilio_verify_sid)
+            ->verifications
+            ->create($user->phone, "sms"); //->services($twilio_verify_sid) lấy ra service 
+
+        return response()->json([
+            'message' => "Đã gửi mã OTP đến tin nhắn."
         ], 200);
     }
 

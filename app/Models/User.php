@@ -37,7 +37,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'avatar',
         'status',
         'role_as',
-        'email_verified_at'
+        'email_verified_at',
+        'phone_is_verified',
     ];
 
     protected $appends = ['fullname']; //appends là thuộc tính của eloquent giúp thêm thuộc tính mới vào model nhưng không cần thêm vào trong database
