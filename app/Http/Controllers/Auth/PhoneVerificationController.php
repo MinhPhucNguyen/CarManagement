@@ -12,7 +12,6 @@ class PhoneVerificationController extends Controller
 {
     public function verify(Request $request)
     {
-
         $token = env('TWILIO_AUTH_TOKEN');
         $twilio_sid = env('TWILIO_SID');
         $twilio_verify_sid = env('TWILIO_VERIFY_SID');
@@ -36,8 +35,7 @@ class PhoneVerificationController extends Controller
 
         if ($user->phone_is_verified) {
             return response()->json([
-                // 'message' => "Số điện thoại đã được xác thực.",
-                'message' => "da duoc xac thuc"
+                'message' => "Số điện thoại đã được xác thực.",
             ], 404);
         }
 
@@ -45,16 +43,15 @@ class PhoneVerificationController extends Controller
             $user->phone_is_verified = 1;
             $user->update();
             return response()->json([
-                // 'message' => "Số điện thoại xác thực thành công."
-                'message' => "thanh cong."
+                'message' => "Số điện thoại xác thực thành công."
             ], 200);
         } else if ($verification_check->status === 'expired') {
             return response()->json([
-                'message' => "ma OTP het han"
+                'message' => "Mã OTP đã hết hạn"
             ], 400);
         } else {
             return response()->json([
-                'message' => "ma khong dung"
+                'message' => "Mã không đúng"
             ], 400);
         }
     }

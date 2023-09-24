@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Twilio\Rest\Client;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -155,7 +156,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         if (!$user) {
             return response()->json([
-                'message' => "User not found"
+                'message' => "Không tìm thấy người dùng."
             ], 404);
         }
 
@@ -163,7 +164,7 @@ class UserController extends Controller
         $user->phone_is_verified = 0;
         $user->update();
         return response()->json([
-            'message' => "Cập nhật số điện thoại thành công."
+            'message' => "Cập nhật thành công."
         ], 200);
     }
 
@@ -173,7 +174,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         if (!$user) {
             return response()->json([
-                'message' => "User not found"
+                'message' => "Không tìm thấy người dùng."
             ], 404);
         }
 
@@ -201,12 +202,29 @@ class UserController extends Controller
         ], 200);
     }
 
+    public function verificationNow(Request $request)
+    {
+        $modifiedPhoneNumber  = '+84' . substr($request->phone, 1);
+        $user = User::where('phone', $modifiedPhoneNumber)->first();
+
+        if (!$user) {
+            return response()->json([
+                'message' => "Không tìm thấy người dùng."
+            ], 404);
+        }
+
+        return response()->json([
+            'message' => "Hệ thống sẽ gửi tin nhắn chứa mã xác thực đến số điện thoại của bạn: ",
+            'phone' =>  $request->phone
+        ], 200);
+    }
+
     public function sendVerificationPhone(int $id)
     {
         $user = User::findOrFail($id);
         if (!$user) {
             return response()->json([
-                'message' => "Không tìm thấy người dùng"
+                'message' => "Không tìm thấy người dùng."
             ], 404);
         }
 
@@ -219,9 +237,9 @@ class UserController extends Controller
         $twilio->verify->v2->services($twilio_verify_sid)
             ->verifications
             ->create($user->phone, "sms"); //->services($twilio_verify_sid) lấy ra service 
-
         return response()->json([
-            'message' => "Đã gửi mã OTP đến tin nhắn."
+            'message' => "Nhập 6 chữ số OTP được gửi đến số điện thoại: ",
+            'phone' => preg_replace('/^\+84/', '0', $user->phone) //thay thế +84 thành số 0 
         ], 200);
     }
 

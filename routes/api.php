@@ -116,6 +116,7 @@ Route::prefix('v2')->group(function () {
         Route::patch('users/{id}/update-email', 'updateEmail');
         Route::post('users/{id}/send-email-verification', 'sendVerificationEmail');
         Route::post('users/{id}/send-phone-verification', 'sendVerificationPhone');
+        Route::post('users/verification-now', 'verificationNow');
     });
 
     // Car API

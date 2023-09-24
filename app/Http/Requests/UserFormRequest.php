@@ -64,7 +64,7 @@ class UserFormRequest extends FormRequest
             ];
             $rules['phone'] = [
                 $isUpdate ? 'sometimes' : 'required',
-                'nullable',
+                // 'nullable',
                 'min:10',
                 'max:10',
                 Rule::unique('users', 'phone')->ignore($id)
