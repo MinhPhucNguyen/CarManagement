@@ -243,6 +243,10 @@ class UserController extends Controller
         ], 200);
     }
 
+
+    /**
+     * TODO: DELETE USER AND ACCOUNT
+     */
     public function deleteUser(int $id)
     {
         $user = User::findOrFail($id);

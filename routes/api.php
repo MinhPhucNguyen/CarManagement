@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\v2\UserController;
 use App\Http\Controllers\Api\v2\CarController;
 use App\Http\Controllers\Api\v2\BlogController as V2_BlogController;
 use App\Http\Controllers\Api\v2\BrandController;
+use App\Http\Controllers\Api\v2\DeleteAccountController;
 use App\Http\Controllers\Api\v2\FeatureController;
 use App\Http\Controllers\Api\v2\ProfileController;
 use App\Http\Controllers\Api\v2\UploadImageController;
@@ -118,6 +119,7 @@ Route::prefix('v2')->group(function () {
         Route::post('users/{id}/send-phone-verification', 'sendVerificationPhone');
         Route::post('users/verification-now', 'verificationNow');
     });
+    Route::delete('users/{id}/delete-account', [DeleteAccountController::class, 'deleteAccount']);
 
     // Car API
     Route::get('cars', [CarController::class, 'index']);
