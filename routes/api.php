@@ -119,7 +119,7 @@ Route::prefix('v2')->group(function () {
         Route::post('users/{id}/send-phone-verification', 'sendVerificationPhone');
         Route::post('users/verification-now', 'verificationNow');
     });
-    Route::delete('users/{id}/delete-account', [DeleteAccountController::class, 'deleteAccount']);
+    Route::middleware('auth:api')->delete('users/{id}/delete-account', [DeleteAccountController::class, 'deleteAccount']);
 
     // Car API
     Route::get('cars', [CarController::class, 'index']);

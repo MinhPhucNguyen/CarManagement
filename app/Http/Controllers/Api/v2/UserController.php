@@ -228,15 +228,17 @@ class UserController extends Controller
             ], 404);
         }
 
+        $twilio_account_sid = env('TWILIO_ACCOUNT_SID');
         $token = env('TWILIO_AUTH_TOKEN');
-        $twilio_sid = env('TWILIO_SID');
         $twilio_verify_sid = env('TWILIO_VERIFY_SID');
         //Client() có 2 tham số là sid và token với sid là username và token là password để đăng nhập vào tài khoản Twilio
-        $twilio = new Client($twilio_sid, $token);
-        //create() tạo một verification với 2 tham số là số điện thoại và channel là sms
+        $twilio = new Client($twilio_account_sid, $token);
+        // create() tạo một verification với 2 tham số là số điện thoại và channel là sms
         $twilio->verify->v2->services($twilio_verify_sid)
             ->verifications
-            ->create($user->phone, "sms"); //->services($twilio_verify_sid) lấy ra service 
+            ->create($user->phone, 'sms'); //->services($twilio_verify_sid) lấy ra service 
+
+
         return response()->json([
             'message' => "Nhập 6 chữ số OTP được gửi đến số điện thoại: ",
             'phone' => preg_replace('/^\+84/', '0', $user->phone) //thay thế +84 thành số 0 

@@ -12,19 +12,6 @@ class PhoneVerificationController extends Controller
 {
     public function verify(Request $request)
     {
-        $token = env('TWILIO_AUTH_TOKEN');
-        $twilio_sid = env('TWILIO_SID');
-        $twilio_verify_sid = env('TWILIO_VERIFY_SID');
-
-        $twilio = new Client($twilio_sid, $token);
-
-        $verification_check = $twilio->verify->v2->services($twilio_verify_sid)
-            ->verificationChecks
-            ->create([
-                'to' => $request->phone,
-                'code' => $request->otp
-            ]);
-
         $user = User::where('phone', $request->phone)->first();
 
         if (!$user) {
@@ -39,7 +26,20 @@ class PhoneVerificationController extends Controller
             ], 404);
         }
 
-        if ($verification_check->valid) {
+        $token = env('TWILIO_AUTH_TOKEN');
+        $twilio_account_sid = env('TWILIO_ACCOUNT_SID');
+        $twilio_verify_sid = env('TWILIO_VERIFY_SID');
+
+        $twilio = new Client($twilio_account_sid, $token);
+
+        $verification_check = $twilio->verify->v2->services($twilio_verify_sid)
+            ->verificationChecks
+            ->create([
+                'to' => $request->phone,
+                'code' => trim($request->otp)
+            ]);
+
+        if ($verification_check->valid && $verification_check->status === 'approved') {
             $user->phone_is_verified = 1;
             $user->update();
             return response()->json([
@@ -47,11 +47,11 @@ class PhoneVerificationController extends Controller
             ], 200);
         } else if ($verification_check->status === 'expired') {
             return response()->json([
-                'message' => "Mã OTP đã hết hạn"
+                'message' => "Mã OTP đã hết hạn."
             ], 400);
         } else {
             return response()->json([
-                'message' => "Mã không đúng"
+                'message' => "Mã không đúng."
             ], 400);
         }
     }

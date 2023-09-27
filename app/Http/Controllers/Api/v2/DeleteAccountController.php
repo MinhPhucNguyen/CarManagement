@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Api\v2;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DeleteAccountController extends Controller
 {
-    public function deleteAccount(Request $request)
+    public function deleteAccount(int $id)
     {
-        $user = $request->user();
+        $user = User::findOrFail($id);
         $user->delete();
         return response()->json(
             [
