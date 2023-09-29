@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('cars', function (Blueprint $table) {
-            $table->string('transmission')->comment('0=automatic; 1=manual')->after('capacity');
-            $table->string('number_of_trip')->after('transmission');
-            $table->tinyInteger('status')->default(0);
-            $table->string('location');
-            $table->timestamps();
+            // $table->string('transmission')->comment('0=automatic; 1=manual')->after('capacity');
+            // $table->string('number_of_trip')->after('transmission');
+            // $table->tinyInteger('status')->default(0);
+            // $table->string('location');
+            // $table->string('delivery_enable');
+            // $table->timestamps();
         });
     }
 

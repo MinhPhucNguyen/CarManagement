@@ -49,7 +49,7 @@ Route::get('/authorize/{provider}/callback', [SocialAuthController::class, 'hand
 
 Route::prefix('v2')->group(function () {
 
-    Route::middleware('auth:api')->prefix('admin')->group(function () {
+    Route::prefix('admin')->group(function () {
         Route::post('send-email', [MailController::class, 'sendEmail']);
 
         Route::controller(UserController::class)->group(function () {
