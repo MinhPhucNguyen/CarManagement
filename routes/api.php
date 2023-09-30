@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\v2\BlogController as V2_BlogController;
 use App\Http\Controllers\Api\v2\BrandController;
 use App\Http\Controllers\Api\v2\DeleteAccountController;
 use App\Http\Controllers\Api\v2\FeatureController;
+use App\Http\Controllers\Api\v2\FavoriteController;
 use App\Http\Controllers\Api\v2\ProfileController;
 use App\Http\Controllers\Api\v2\UploadImageController;
 use App\Http\Controllers\Auth\AuthController;
@@ -119,7 +120,15 @@ Route::prefix('v2')->group(function () {
         Route::post('users/{id}/send-phone-verification', 'sendVerificationPhone');
         Route::post('users/verification-now', 'verificationNow');
     });
+
+    //Delete account
     Route::middleware('auth:api')->delete('users/{id}/delete-account', [DeleteAccountController::class, 'deleteAccount']);
+
+    //Favorite car
+    Route::middleware('auth:api')->controller(FavoriteController::class)->group(function () {
+        Route::get('fav/favorite-cars', 'favoriteCars');
+        Route::post('fav/add-car/{carId}', 'addCar');
+    });
 
     // Car API
     Route::get('cars', [CarController::class, 'index']);

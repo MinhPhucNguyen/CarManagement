@@ -46,6 +46,11 @@ class Car extends Model
         return $this->belongsToMany(Feature::class, 'car_feature', 'car_id', 'feature_id');
     }
 
+    public function favoriteByUser()
+    {
+        return $this->belongsToMany(User::class, 'favorites', 'car_id', 'user_id');
+    }
+
     public function scopeSearch($query, $search) //scopeName là local scope trong laravel giúp định nghĩa các truy vấn
     {
         $search = "%$search%";

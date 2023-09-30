@@ -105,4 +105,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return  $this->hasMany(SocialAccount::class);
     }
+
+    public function favoriteCars()
+    {
+        //belongsToMany có 4 tham số: model, bảng trung gian, khóa ngoại của model hiện tại, khóa ngoại của model liên kết
+        return $this->belongsToMany(Car::class, 'favorites', 'user_id', 'car_id');
+    }
 }
