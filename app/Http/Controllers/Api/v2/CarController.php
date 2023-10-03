@@ -17,7 +17,7 @@ class CarController extends Controller
 {
     public function index()
     {
-        $paginate = 5;
+        $paginate = 10;
 
         $filter_by_brand = request('filter_by_brand');
         $filter_by_fuel = request('filter_by_fuel');

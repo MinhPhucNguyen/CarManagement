@@ -128,6 +128,7 @@ Route::prefix('v2')->group(function () {
     Route::middleware('auth:api')->controller(FavoriteController::class)->group(function () {
         Route::get('fav/favorite-cars', 'favoriteCars');
         Route::post('fav/add-car/{carId}', 'addCar');
+        Route::post('fav/remove-car/{carId}', 'removeCar');
     });
 
     // Car API

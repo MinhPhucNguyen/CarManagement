@@ -38,4 +38,13 @@ class FavoriteController extends Controller
             'message' => 'Đã thêm vào danh sách yêu thích.'
         ], 200);
     }
+
+    public function removeCar(int $carId)
+    {
+        $user = auth()->user();
+        $user->favoriteCars()->detach($carId); //detach để xóa khỏi bảng trung gian của user và car
+        return response()->json([
+            'message' => 'Đã xóa khỏi danh sách yêu thích.'
+        ], 200);
+    }
 }
