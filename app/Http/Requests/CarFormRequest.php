@@ -35,6 +35,9 @@ class CarFormRequest extends FormRequest
             'number_of_trip' => 'required|numeric',
             'brand_id' => 'required',
             'image' => 'nullable',
+            'rental_periods.*.id' => 'required',
+            'rental_periods.*.from' => 'required',
+            'rental_periods.*.to' => 'required',
         ];
     }
 }

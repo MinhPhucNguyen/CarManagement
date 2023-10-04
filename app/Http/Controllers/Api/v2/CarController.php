@@ -10,6 +10,7 @@ use App\Models\Brand;
 use App\Models\Car;
 use App\Models\CarImage;
 use App\Models\Feature;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -64,10 +65,15 @@ class CarController extends Controller
         return new CarResource($car);
     }
 
+    function formatDate($dateString)
+    {
+        $date = DateTime::createFromFormat('d/m/Y', $dateString);
+        return $date->format('Y-m-d');
+    }
+
     public function store(CarFormRequest $request)
     {
         $validatedData = $request->validated();
-
         $brand = Brand::findOrFail($validatedData['brand_id']);
 
         $car = $brand->cars()->create([
@@ -87,6 +93,33 @@ class CarController extends Controller
             'brand_id' => $validatedData['brand_id'],
         ]);
 
+        /**
+         * TODO: Save rental periods
+         */
+        if ($request->rental_periods) {
+            foreach ($request->rental_periods as $period) {
+                $startDateTimeParts = explode(' ', $period['from']); //trả về mảng chứa các phần tử của chuỗi
+                $endDateTimeParts = explode(' ', $period['to']);
+
+                $startDate = $this->formatDate($startDateTimeParts[0]);
+                $startTime = $startDateTimeParts[count($startDateTimeParts) - 1];
+
+                $endDate = $this->formatDate($endDateTimeParts[0]);
+                $endTime = $endDateTimeParts[count($endDateTimeParts) - 1];
+
+                $car->carRentalTimes()->create([
+                    'start_date' => $startDate,
+                    'start_time' => $startTime,
+                    'end_date' => $endDate,
+                    'end_time' => $endTime,
+                    'is_active' => 1,
+                ]);
+            }
+        }
+
+        /**
+         * TODO: Save features
+         */
         if ($request->featuresId) {
             foreach ($request->featuresId as $featureId) {
                 $feature = Feature::find($featureId);
@@ -94,6 +127,9 @@ class CarController extends Controller
             }
         }
 
+        /**
+         * TODO: Save images
+         */
         if ($request->hasFile('car_images')) {
             $i = 1;
             foreach ($request->file('car_images') as $imageFile) {

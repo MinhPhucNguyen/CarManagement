@@ -66,4 +66,9 @@ class Car extends Model
                 });
         });
     }
+
+    public function carRentalTimes()
+    {
+        return $this->hasMany(CarRentalTime::class, 'car_id');
+    }
 }
