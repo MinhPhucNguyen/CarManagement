@@ -15,6 +15,8 @@ class UserController extends Controller
 {
     public function index()
     {
+        $paginate = 10;
+
         $selected_role = request('selected_role', 'all');
 
         $search = request('search', '');
@@ -40,12 +42,12 @@ class UserController extends Controller
                     $query->orderBy($sort_field, $sort_direction);
                 }
             })
-            ->paginate(10);
+            ->paginate($paginate);
 
         return new UserCollection($getAllUsers);
     }
 
-    public function getUserById(int $id)
+    public function getUserById($id)
     {
         $user = User::findOrFail($id);
         return response()->json(

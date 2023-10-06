@@ -67,8 +67,8 @@ class Car extends Model
         });
     }
 
-    public function carRentalTimes()
+    public function carRentalPeriods()
     {
-        return $this->hasMany(CarRentalTime::class, 'car_id');
+        return $this->hasMany(CarRentalPeriod::class, 'car_id');
     }
 }

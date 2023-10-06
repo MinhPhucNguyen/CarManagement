@@ -55,8 +55,8 @@ Route::prefix('v2')->group(function () {
 
         Route::controller(UserController::class)->group(function () {
             Route::get('users', 'index');
-            Route::get('users/{id}', 'getUserById');
             Route::get('users/all', 'selectAllUser');
+            Route::get('users/{id}', 'getUserById');
             Route::post('users/create', 'createUser');
             Route::put('users/{id}/edit', 'editUser');
             Route::delete('users/{id}/delete', 'deleteUser');
@@ -132,9 +132,11 @@ Route::prefix('v2')->group(function () {
     });
 
     // Car API
-    Route::get('cars', [CarController::class, 'index']);
-    Route::get('cars/randomCars', [CarController::class, 'getRandomCars']);
-    Route::get('car/detail', [CarController::class, 'show']);
+    Route::controller(CarController::class)->group(function () {
+        Route::get('cars', 'index');
+        Route::get('cars/randomCars', 'getRandomCars');
+        Route::get('car/detail', 'show');
+    });
 
     // Blog API
     Route::get('blogs', [V2_BlogController::class, 'index']);

@@ -4,17 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
-class CarRentalTime extends Model
+class CarRentalPeriod extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'car_id',
-        'start_date',
-        'start_time',
-        'end_date',
-        'end_time',
+        'start_datetime',
+        'end_datetime',
         'is_active',
     ];
 

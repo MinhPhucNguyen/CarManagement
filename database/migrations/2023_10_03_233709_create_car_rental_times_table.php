@@ -14,10 +14,8 @@ return new class extends Migration
         Schema::create('car_rental_times', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedBigInteger('car_id');
-            $table->date('start_date');
-            $table->time('start_time');
-            $table->date('end_date');
-            $table->time('end_time');
+            $table->dateTime('start_datetime');
+            $table->dateTime('end_datetime');
             $table->boolean('is_active')->default(true)->comment('0=inactive, 1=active');
             $table->timestamps();
 

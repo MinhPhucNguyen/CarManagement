@@ -67,8 +67,8 @@ class CarController extends Controller
 
     function formatDate($dateString)
     {
-        $date = DateTime::createFromFormat('d/m/Y', $dateString);
-        return $date->format('Y-m-d');
+        $date = DateTime::createFromFormat('d/m/Y H:i', $dateString);
+        return $date->format('Y-m-d H:i:s');
     }
 
     public function store(CarFormRequest $request)
@@ -98,20 +98,12 @@ class CarController extends Controller
          */
         if ($request->rental_periods) {
             foreach ($request->rental_periods as $period) {
-                $startDateTimeParts = explode(' ', $period['from']); //trả về mảng chứa các phần tử của chuỗi
-                $endDateTimeParts = explode(' ', $period['to']);
+                $startDateTime = $this->formatDate($period['from']);
+                $endDateTime = $this->formatDate($period['to']);
 
-                $startDate = $this->formatDate($startDateTimeParts[0]);
-                $startTime = $startDateTimeParts[count($startDateTimeParts) - 1];
-
-                $endDate = $this->formatDate($endDateTimeParts[0]);
-                $endTime = $endDateTimeParts[count($endDateTimeParts) - 1];
-
-                $car->carRentalTimes()->create([
-                    'start_date' => $startDate,
-                    'start_time' => $startTime,
-                    'end_date' => $endDate,
-                    'end_time' => $endTime,
+                $car->carRentalPeriods()->create([
+                    'start_datetime' => $startDateTime,
+                    'end_datetime' => $endDateTime,
                     'is_active' => 1,
                 ]);
             }
@@ -150,11 +142,19 @@ class CarController extends Controller
 
     public function edit(int $id)
     {
-        $car = Car::with('carImages')->where('car_id', $id)->first();
+        $car = Car::with('carImages', 'carRentalPeriods')->where('car_id', $id)->first();
+
+        if (!$car) {
+            return response()->json([
+                'message' => 'Car not found'
+            ], 404);
+        }
+
         $featuresId = $car->features->pluck('id')->toArray();
+
         return response()->json([
             'car' => $car,
-            'featuresId' => $featuresId
+            'featuresId' => $featuresId,
         ], 200);
     }
 
@@ -186,6 +186,18 @@ class CarController extends Controller
             'number_of_trip' => $validatedData['number_of_trip'],
             'brand_id' => $validatedData['brand_id'],
         ]);
+
+        if ($request->rental_periods) {
+            $car->carRentalPeriods()->delete();
+            foreach ($request->rental_periods as $period) {
+                //updateOrCreate để tạo mới hoặc cập nhật nếu đã tồn tại
+                $car->carRentalPeriods()->updateOrCreate([
+                    'start_datetime' => $period['from'],
+                    'end_datetime' => $period['to'],
+                    'is_active' => 1,
+                ]);
+            }
+        }
 
         if ($request->featuresId) {
             $car->features()->detach();
