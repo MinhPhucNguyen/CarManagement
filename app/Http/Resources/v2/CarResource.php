@@ -43,9 +43,9 @@ class CarResource extends JsonResource
                 'featureName' => $feature->name,
             ]),
             'carRentalPeriods' => $this->carRentalPeriods->map(fn ($period) => [
-                'id' => $period->id,
-                'from' => $period->start_date . ' ' . $period->start_time,
-                'to' => $period->end_date . ' ' . $period->end_time,
+                'periodId' => $period->id,
+                'startDate' => $period->start_datetime,
+                'endDate' => $period->end_datetime,
             ]),
         ];
     }

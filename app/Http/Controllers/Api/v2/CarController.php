@@ -14,6 +14,9 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+//Collection để trả về một tập hợp các resource (dữ liệu) trong một mảng
+//Resource để trả về một resource (dữ liệu) duy nhất
+
 class CarController extends Controller
 {
     public function index()

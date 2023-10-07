@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\v2\DeleteAccountController;
 use App\Http\Controllers\Api\v2\FeatureController;
 use App\Http\Controllers\Api\v2\FavoriteController;
 use App\Http\Controllers\Api\v2\ProfileController;
+use App\Http\Controllers\Api\v2\SearchCarController;
 use App\Http\Controllers\Api\v2\UploadImageController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ChangePasswordController;
@@ -97,6 +98,11 @@ Route::prefix('v2')->group(function () {
         });
         Route::post('upload', [UploadImageController::class, 'uploadImage']);
     });
+
+    /**
+     * TODO: SEARCH CAR
+     */
+    Route::get('search-filter-car', [SearchCarController::class, 'searchCar']);
 
     /**
      *  TODO: CHANGE AVATAR
