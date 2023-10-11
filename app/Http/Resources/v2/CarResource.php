@@ -27,7 +27,7 @@ class CarResource extends JsonResource
             'numberOfTrip' => $this->number_of_trip,
             'transmission' => $this->transmission,
             'fuel' => $this->fuel,
-            'seat' => $this->seats,
+            'seats' => $this->seats,
             'fuelConsumption' => $this->fuel_consumption,
             'price' => $this->price,
             'status' => $this->status,

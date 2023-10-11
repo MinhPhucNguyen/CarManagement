@@ -85,7 +85,7 @@ Route::prefix('v2')->group(function () {
         Route::controller(BrandController::class)->group(function () {
             Route::get('brands', 'index');
             Route::post('brands/create', 'create');
-            Route::put('brands/{id}/update', 'update');
+            Route::post('brands/{id}/update', 'update');
             Route::delete('brands/{id}/delete', 'delete');
         });
 
@@ -102,7 +102,7 @@ Route::prefix('v2')->group(function () {
     /**
      * TODO: SEARCH CAR
      */
-    Route::get('search-filter-car', [SearchCarController::class, 'searchCar']);
+    Route::post('search-filter-car', [SearchCarController::class, 'searchCar']);
 
     /**
      *  TODO: CHANGE AVATAR
