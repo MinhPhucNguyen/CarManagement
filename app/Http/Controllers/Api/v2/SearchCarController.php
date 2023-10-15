@@ -8,6 +8,8 @@ use App\Models\Car;
 use Illuminate\Http\Request;
 use DateTime;
 
+use function PHPSTORM_META\type;
+
 class SearchCarController extends Controller
 {
     function formatDate($dateString)
@@ -25,6 +27,11 @@ class SearchCarController extends Controller
         $delivery = request('delivery');
         $transmission = request('transmission');
         $fuel = request('fuel');
+        $priceRange = request('priceRange');
+        $seatRange = request('seatRange');
+        $yearRange = request('yearRange');
+        $features = request('features');
+        $fuelConsumptionRange = request('fuelConsumptionRange');
 
         //with() trong laravel để eager loading giúp tăng tốc độ truy vấn, tránh lỗi N+1 query 
         $searchResult = Car::where('location', 'like', "%$location%")
@@ -58,6 +65,28 @@ class SearchCarController extends Controller
                     $query->where('fuel', $fuel);
                 }
                 $query->get();
+            })
+            ->when($features, function ($query) use ($features) {
+                if (count($features) > 0) {
+                    $query->whereHas('features', function ($subquery) use ($features) {
+                        $subquery->whereIn('feature_id', $features);
+                    });
+                }
+            })
+            ->when($fuelConsumptionRange, function ($query) use ($fuelConsumptionRange) {
+                $query->where('fuel_consumption', '<=', $fuelConsumptionRange['fuelConsumption']);
+            })
+            ->when($priceRange, function ($query) use ($priceRange) {
+                $query->where('price', '>=', $priceRange['min'])
+                    ->where('price', '<=', $priceRange['max']);
+            })
+            ->when($seatRange, function ($query) use ($seatRange) {
+                $query->where('seats', '>=', $seatRange['min'])
+                    ->where('seats', '<=', $seatRange['max']);
+            })
+            ->when($yearRange, function ($query) use ($yearRange) {
+                $query->where('year', '>=', $yearRange['min'])
+                    ->where('year', '<=', $yearRange['max']);
             })
             ->get();
 
